@@ -673,33 +673,228 @@ class CommercialEvaluator(VLLMEvaluator):
         return self._evaluate_generative(benchmark_items, benchmark_name, "gen", timestamp)
 
     # ──────────────────────────────────────────────────────────────────────────
-    # Batch dispatch
+    # Batch state persistence (resume after PBS job restart)
+    # ──────────────────────────────────────────────────────────────────────────
+
+    def _batch_state_path(self, benchmark_name: str) -> Path:
+        return (
+            Path(self.results_dir) / self.model_name / ".batches" / f"{benchmark_name}.json"
+        )
+
+    def _save_batch_state(self, benchmark_name: str, state: dict) -> None:
+        path = self._batch_state_path(benchmark_name)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with open(path, "w") as f:
+            json.dump(state, f, indent=2)
+        print(f"  [{benchmark_name}] Batch state saved → {path}")
+
+    def _load_batch_state(self, benchmark_name: str) -> Optional[dict]:
+        path = self._batch_state_path(benchmark_name)
+        if not path.exists():
+            return None
+        with open(path) as f:
+            state = json.load(f)
+        print(f"  [{benchmark_name}] Resuming from saved batch state: {state.get('batch_id')}")
+        return state
+
+    def _delete_batch_state(self, benchmark_name: str) -> None:
+        path = self._batch_state_path(benchmark_name)
+        try:
+            path.unlink()
+        except FileNotFoundError:
+            pass
+
+    # ──────────────────────────────────────────────────────────────────────────
+    # Parallel batch evaluation (submit all benchmarks at once, poll together)
+    # ──────────────────────────────────────────────────────────────────────────
+
+    def evaluate_benchmarks_parallel(
+        self,
+        benchmarks: list,
+        max_samples: Optional[int] = None,
+        check_existing: bool = True,
+        timestamp: Optional[str] = None,
+    ) -> dict:
+        """
+        Submit every gen benchmark as a batch simultaneously, then poll all
+        concurrently until each one completes.  Returns
+        ``{benchmark_name: results_dict}``.
+
+        This is dramatically faster than calling ``evaluate_benchmark`` in a
+        loop because batch processing time is dominated by the slowest single
+        batch — not the sum of all batch times.
+        """
+        import time
+
+        # ── Phase 1: submit all batches without waiting ──────────────────────
+        pending: dict = {}  # benchmark_name -> submission metadata
+
+        for benchmark_name in benchmarks:
+            if BENCHMARK_FORMATS.get(benchmark_name, "mcq") != "gen":
+                print(f"  Skipping {benchmark_name} — MCQ not supported for commercial models.")
+                continue
+
+            try:
+                items = list(load_benchmark(benchmark_name))
+            except Exception as exc:
+                print(f"  Error loading {benchmark_name}: {exc}")
+                continue
+
+            if max_samples:
+                items = items[:max_samples]
+            if not items:
+                print(f"  No samples for {benchmark_name} — skipping.")
+                continue
+
+            if check_existing:
+                inf_file = (
+                    Path(self.results_dir) / self.model_name / "inference"
+                    / f"{benchmark_name}.jsonl"
+                )
+                if inf_file.exists():
+                    print(f"  Skipping {benchmark_name} — inference file already exists.")
+                    continue
+
+            bench_prompt = self.benchmark_system_prompts.get(benchmark_name)
+            effective_prompt = (
+                self.system_prompt if self.system_prompt is not None else bench_prompt
+            )
+            answer_tag = self.benchmark_answer_tags.get(benchmark_name)
+
+            try:
+                saved = self._load_batch_state(benchmark_name)
+                if saved:
+                    # Resume: reuse existing batch, skip re-submission.
+                    pending[benchmark_name] = {"items": items, "answer_tag": answer_tag, **saved}
+                elif self.provider == "openai":
+                    info = self._submit_openai_batch(items, benchmark_name, effective_prompt)
+                    state = {"batch_id": info["batch_id"], "file_id": info["file_id"]}
+                    self._save_batch_state(benchmark_name, state)
+                    pending[benchmark_name] = {"items": items, "answer_tag": answer_tag, **state}
+                else:
+                    batch_id = self._submit_anthropic_batch(items, benchmark_name, effective_prompt)
+                    state = {"batch_id": batch_id}
+                    self._save_batch_state(benchmark_name, state)
+                    pending[benchmark_name] = {"items": items, "answer_tag": answer_tag, **state}
+            except Exception as exc:
+                print(f"  Error submitting {benchmark_name}: {exc}")
+                continue
+
+        if not pending:
+            return {}
+
+        print(f"\n{'='*60}")
+        print(f"All {len(pending)} batch(es) submitted. Polling every {self.poll_interval}s…")
+        print(f"{'='*60}\n")
+
+        # ── Phase 2: poll all concurrently until every batch finishes ────────
+        results: dict = {}
+        while pending:
+            time.sleep(self.poll_interval)
+            completed = []
+            for bench, info in list(pending.items()):
+                try:
+                    if self.provider == "openai":
+                        batch = self.client.batches.retrieve(info["batch_id"])
+                        rc = batch.request_counts
+                        print(
+                            f"  [{bench}] {info['batch_id']}  status={batch.status}  "
+                            f"completed={rc.completed}/{rc.total}  failed={rc.failed}"
+                        )
+                        results_by_id = self._try_collect_openai_batch(
+                            info["batch_id"], info["file_id"]
+                        )
+                    else:
+                        batch = self.client.messages.batches.retrieve(info["batch_id"])
+                        rc = batch.request_counts
+                        print(
+                            f"  [{bench}] {info['batch_id']}  "
+                            f"status={batch.processing_status}  "
+                            f"succeeded={rc.succeeded}  errored={rc.errored}  "
+                            f"processing={rc.processing}"
+                        )
+                        results_by_id = self._try_collect_anthropic_batch(info["batch_id"])
+                except Exception as exc:
+                    print(f"  Error checking {bench}: {exc}")
+                    continue
+
+                if results_by_id is not None:
+                    results[bench] = self._process_batch_results(
+                        info["items"], results_by_id,
+                        info["answer_tag"], bench, "gen", timestamp,
+                    )
+                    self._delete_batch_state(bench)
+                    completed.append(bench)
+                    print(f"  ✓ {bench} done ({len(results_by_id)} results)")
+
+            for bench in completed:
+                del pending[bench]
+
+        return results
+
+    # ──────────────────────────────────────────────────────────────────────────
+    # Single-benchmark dispatch (used by evaluate_benchmark)
     # ──────────────────────────────────────────────────────────────────────────
 
     def _evaluate_generative(self, items, benchmark_name, setting=None, timestamp=None):
+        """Submit one batch and block until it completes."""
+        import time
         bench_prompt = self.benchmark_system_prompts.get(benchmark_name)
         effective_prompt = self.system_prompt if self.system_prompt is not None else bench_prompt
         answer_tag = self.benchmark_answer_tags.get(benchmark_name)
 
         if self.provider == "openai":
-            results_by_id = self._run_openai_batch(items, benchmark_name, effective_prompt)
+            saved = self._load_batch_state(benchmark_name)
+            if saved:
+                info = saved
+            else:
+                info = self._submit_openai_batch(items, benchmark_name, effective_prompt)
+                self._save_batch_state(benchmark_name, {"batch_id": info["batch_id"], "file_id": info["file_id"]})
+            results_by_id = None
+            while results_by_id is None:
+                time.sleep(self.poll_interval)
+                batch = self.client.batches.retrieve(info["batch_id"])
+                rc = batch.request_counts
+                print(
+                    f"  [{info['batch_id']}] status={batch.status}  "
+                    f"completed={rc.completed}/{rc.total}  failed={rc.failed}"
+                )
+                results_by_id = self._try_collect_openai_batch(
+                    info["batch_id"], info["file_id"]
+                )
         else:
-            results_by_id = self._run_anthropic_batch(items, benchmark_name, effective_prompt)
+            saved = self._load_batch_state(benchmark_name)
+            if saved:
+                batch_id = saved["batch_id"]
+            else:
+                batch_id = self._submit_anthropic_batch(items, benchmark_name, effective_prompt)
+                self._save_batch_state(benchmark_name, {"batch_id": batch_id})
+            results_by_id = None
+            while results_by_id is None:
+                time.sleep(self.poll_interval)
+                batch = self.client.messages.batches.retrieve(batch_id)
+                rc = batch.request_counts
+                print(
+                    f"  [{batch_id}] status={batch.processing_status}  "
+                    f"succeeded={rc.succeeded}  errored={rc.errored}  "
+                    f"processing={rc.processing}"
+                )
+                results_by_id = self._try_collect_anthropic_batch(batch_id)
 
+        self._delete_batch_state(benchmark_name)
         return self._process_batch_results(
             items, results_by_id, answer_tag, benchmark_name, setting, timestamp
         )
 
     # ──────────────────────────────────────────────────────────────────────────
-    # OpenAI batch
+    # OpenAI: submit (non-blocking) + collect (non-blocking)
     # ──────────────────────────────────────────────────────────────────────────
 
-    def _run_openai_batch(self, items, benchmark_name: str, effective_prompt: Optional[str]) -> dict:
-        import tempfile, time
+    def _submit_openai_batch(self, items, benchmark_name: str, effective_prompt: Optional[str]) -> dict:
+        """Upload requests and create a batch. Returns {batch_id, file_id} immediately."""
+        import tempfile
 
         max_tokens = 8192 if self.thinking else 256
-
-        # Build JSONL request list
         batch_requests = []
         for item in items:
             prefix, _gt, _, sample_id = item[:4]
@@ -714,12 +909,11 @@ class CommercialEvaluator(VLLMEvaluator):
                 "body": {
                     "model": self.model_id,
                     "messages": messages,
-                    "max_tokens": max_tokens,
+                    "max_completion_tokens": max_tokens,
                     "temperature": 0.0,
                 },
             })
 
-        # Write to a temp file and upload
         with tempfile.NamedTemporaryFile(
             mode="w", suffix=".jsonl", delete=False, prefix=f"pacute_{benchmark_name}_"
         ) as f:
@@ -727,36 +921,35 @@ class CommercialEvaluator(VLLMEvaluator):
                 f.write(json.dumps(req) + "\n")
             tmp_path = f.name
 
-        print(f"  Uploading {len(batch_requests)} requests to OpenAI Files API…")
-        with open(tmp_path, "rb") as f:
-            file_obj = self.client.files.create(file=f, purpose="batch")
+        print(f"  [{benchmark_name}] Uploading {len(batch_requests)} requests…")
+        with open(tmp_path, "rb") as fh:
+            file_obj = self.client.files.create(file=fh, purpose="batch")
 
-        # Create batch
         batch = self.client.batches.create(
             input_file_id=file_obj.id,
             endpoint="/v1/chat/completions",
             completion_window="24h",
             metadata={"benchmark": benchmark_name, "model": self.model_name},
         )
-        print(f"  Batch created: {batch.id}  (polling every {self.poll_interval}s)")
+        print(f"  [{benchmark_name}] Batch submitted: {batch.id}")
+        return {"batch_id": batch.id, "file_id": file_obj.id}
 
-        # Poll until done
+    def _try_collect_openai_batch(self, batch_id: str, file_id: str) -> Optional[dict]:
+        """
+        Non-blocking check.  Returns ``results_by_id`` dict when the batch is
+        done, or ``None`` if it is still processing.
+        Raises ``RuntimeError`` for failed/expired/cancelled batches.
+        """
+        batch = self.client.batches.retrieve(batch_id)
         terminal = {"completed", "failed", "expired", "cancelled"}
-        while batch.status not in terminal:
-            time.sleep(self.poll_interval)
-            batch = self.client.batches.retrieve(batch.id)
-            rc = batch.request_counts
-            print(
-                f"  [{batch.id}] status={batch.status}  "
-                f"completed={rc.completed}  failed={rc.failed}  total={rc.total}"
-            )
+        if batch.status not in terminal:
+            return None
 
         if batch.status != "completed":
             raise RuntimeError(
-                f"OpenAI batch {batch.id} ended with non-successful status: {batch.status}"
+                f"OpenAI batch {batch_id} ended with status: {batch.status}"
             )
 
-        # Parse output JSONL
         output_text = self.client.files.content(batch.output_file_id).text
         results_by_id: dict = {}
         for line in output_text.strip().splitlines():
@@ -769,24 +962,20 @@ class CommercialEvaluator(VLLMEvaluator):
                 print(f"  Warning: request {cid} failed: {obj['response']}")
                 results_by_id[cid] = ""
 
-        # Clean up uploaded file
         try:
-            self.client.files.delete(file_obj.id)
+            self.client.files.delete(file_id)
         except Exception:
             pass
 
         return results_by_id
 
     # ──────────────────────────────────────────────────────────────────────────
-    # Anthropic batch
+    # Anthropic: submit (non-blocking) + collect (non-blocking)
     # ──────────────────────────────────────────────────────────────────────────
 
-    def _run_anthropic_batch(self, items, benchmark_name: str, effective_prompt: Optional[str]) -> dict:
-        import time
-
+    def _submit_anthropic_batch(self, items, benchmark_name: str, effective_prompt: Optional[str]) -> str:
+        """Create an Anthropic message batch. Returns the batch_id immediately."""
         max_tokens = 8192 if self.thinking else 256
-
-        # Build request list
         requests = []
         for item in items:
             prefix, _gt, _, sample_id = item[:4]
@@ -797,30 +986,24 @@ class CommercialEvaluator(VLLMEvaluator):
             }
             if effective_prompt:
                 params["system"] = effective_prompt
+            requests.append({"custom_id": str(sample_id), "params": params})
 
-            requests.append({
-                "custom_id": str(sample_id),
-                "params": params,
-            })
-
-        print(f"  Submitting {len(requests)} requests to Anthropic Message Batches API…")
+        print(f"  [{benchmark_name}] Submitting {len(requests)} requests…")
         batch = self.client.messages.batches.create(requests=requests)
-        print(f"  Batch created: {batch.id}  (polling every {self.poll_interval}s)")
+        print(f"  [{benchmark_name}] Batch submitted: {batch.id}")
+        return batch.id
 
-        # Poll until ended
-        while batch.processing_status != "ended":
-            time.sleep(self.poll_interval)
-            batch = self.client.messages.batches.retrieve(batch.id)
-            rc = batch.request_counts
-            print(
-                f"  [{batch.id}] status={batch.processing_status}  "
-                f"succeeded={rc.succeeded}  errored={rc.errored}  "
-                f"processing={rc.processing}"
-            )
+    def _try_collect_anthropic_batch(self, batch_id: str) -> Optional[dict]:
+        """
+        Non-blocking check.  Returns ``results_by_id`` dict when
+        ``processing_status == "ended"``, or ``None`` otherwise.
+        """
+        batch = self.client.messages.batches.retrieve(batch_id)
+        if batch.processing_status != "ended":
+            return None
 
-        # Retrieve results by streaming
         results_by_id: dict = {}
-        for result in self.client.messages.batches.results(batch.id):
+        for result in self.client.messages.batches.results(batch_id):
             cid = result.custom_id
             if result.result.type == "succeeded":
                 text = result.result.message.content[0].text or ""

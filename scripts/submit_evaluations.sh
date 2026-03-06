@@ -15,6 +15,7 @@
 #   --port <n>             vLLM server port (default: auto)
 #   --queue <q>            PBS queue (default: AISG_debug)
 #   --walltime <hh:mm:ss>  Job walltime (default: 12:00:00)
+#   --filter <pattern>    Only submit models whose name contains <pattern>
 #   --dry-run              Print qsub commands without submitting
 
 set -euo pipefail
@@ -44,6 +45,7 @@ VLLM_PORT=""
 PBS_QUEUE="AISG_debug"
 WALLTIME="12:00:00"
 SINGLE_MODELS=()
+FILTER=""
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -63,6 +65,7 @@ while [[ $# -gt 0 ]]; do
         --queue)       PBS_QUEUE="$2"; shift ;;
         --walltime)    WALLTIME="$2"; shift ;;
         --model)       SINGLE_MODELS+=("$2"); shift ;;
+        --filter)      FILTER="$2"; shift ;;
         *) echo "Unknown option: $1" >&2; exit 1 ;;
     esac
     shift
@@ -103,11 +106,25 @@ for name in data.get('models', {}):
 fi
 
 # ── GPU heuristic ─────────────────────────────────────────────────────────────
+# Extracts the largest "NNb" or "NNN" token from the model path/name as a
+# parameter count (in billions), then maps it to a GPU count via ranges:
+#   >= 120B → 8 GPUs  |  >= 27B → 4 GPUs  |  >= 7B → 2 GPUs  |  else → 1 GPU
 gpus_for_model() {
     local model_id="$1"
-    if   echo "$model_id" | grep -qiE "(120b|122b|397b|685b|deepseek.v3|deepseek.r1)"; then echo 8
-    elif echo "$model_id" | grep -qiE "[-_](27|32|33|35|70|72)[bB]"; then echo 4
-    elif echo "$model_id" | grep -qiE "[-_](7|8|9|12|14|20|21)[bB]"; then echo 2
+    local size_b
+    # Extract the largest numeric value followed by b/B (e.g. 70b, 235B, 3.5b)
+    size_b=$(echo "$model_id" | grep -oiE '[0-9]+(\.[0-9]+)?b' \
+               | sed 's/[bB]$//' \
+               | awk 'BEGIN{m=0} {if($1+0>m) m=$1+0} END{print m}')
+    # Fallback: plain integers in the path (e.g. deepseek-v3 has no explicit Nb)
+    if [[ -z "$size_b" || "$size_b" == "0" ]]; then
+        size_b=$(echo "$model_id" | grep -oE '[0-9]+' \
+                   | awk 'BEGIN{m=0} {if($1+0>m) m=$1+0} END{print m}')
+    fi
+    size_b=${size_b:-0}
+    if   awk "BEGIN{exit !($size_b >= 120)}"; then echo 8
+    elif awk "BEGIN{exit !($size_b >= 27)}";  then echo 4
+    elif awk "BEGIN{exit !($size_b >= 7)}";   then echo 2
     else echo 1
     fi
 }
@@ -139,6 +156,15 @@ pbs_vars() {
     [[ -n "$BENCHMARKS" ]]  && vars="${vars},BENCHMARKS=${BENCHMARKS}"
     echo "$vars"
 }
+
+# ── Apply --filter ───────────────────────────────────────────────────────────
+if [[ -n "$FILTER" ]]; then
+    FILTERED=()
+    for m in "${ALL_MODELS[@]}"; do
+        [[ "$m" == *"$FILTER"* ]] && FILTERED+=("$m")
+    done
+    ALL_MODELS=("${FILTERED[@]}")
+fi
 
 # ── Create log directory ──────────────────────────────────────────────────────
 mkdir -p "$LOGS_PATH"

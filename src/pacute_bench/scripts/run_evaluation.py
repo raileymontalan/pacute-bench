@@ -278,20 +278,36 @@ def main() -> None:
 
             model_results: dict = {}
 
-            for bench in benchmarks_for_model:
-                try:
-                    results = evaluator.evaluate_benchmark(
-                        benchmark_name=bench,
-                        max_samples=args.max_samples,
-                        check_existing=not args.overwrite,
-                        timestamp=timestamp,
-                    )
-                except Exception as e:
-                    import traceback
-                    print(f"ERROR on {bench}: {e}")
-                    traceback.print_exc()
-                    continue
+            if provider:
+                # Commercial models: submit all batches at once, poll concurrently.
+                bench_results = evaluator.evaluate_benchmarks_parallel(
+                    benchmarks_for_model,
+                    max_samples=args.max_samples,
+                    check_existing=not args.overwrite,
+                    timestamp=timestamp,
+                )
+                benches_to_save = bench_results.items()
+            else:
+                # vLLM models: sequential (server handles one model at a time).
+                _seq_results = {}
+                for bench in benchmarks_for_model:
+                    try:
+                        res = evaluator.evaluate_benchmark(
+                            benchmark_name=bench,
+                            max_samples=args.max_samples,
+                            check_existing=not args.overwrite,
+                            timestamp=timestamp,
+                        )
+                    except Exception as e:
+                        import traceback
+                        print(f"ERROR on {bench}: {e}")
+                        traceback.print_exc()
+                        continue
+                    if res and not res.get("skipped"):
+                        _seq_results[bench] = res
+                benches_to_save = _seq_results.items()
 
+            for bench, results in benches_to_save:
                 if not results or results.get("skipped"):
                     continue
 

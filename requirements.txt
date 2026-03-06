@@ -1,6 +1,6 @@
 # Core ML / inference
 torch>=2.5
-transformers>=4.50
+transformers>=5.3
 openai>=1.30
 anthropic>=0.40
 vllm>=0.15.0

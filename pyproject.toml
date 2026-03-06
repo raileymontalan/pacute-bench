@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pacute-bench"
+version = "0.1.0"
+description = "End-to-end evaluation suite for Filipino morphology benchmarks"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+dependencies = [
+    "torch>=2.5",
+    "transformers>=4.50",
+    "openai>=1.30",
+    "anthropic>=0.40",
+    "pandas>=2.0",
+    "openpyxl>=3.1",
+    "python-Levenshtein>=0.25",
+    "tqdm>=4.65",
+    "pyyaml>=6.0",
+    "numpy>=2.0",
+    "datasets>=2.20",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.scripts]
+pacute-generate = "pacute_bench.scripts.generate_benchmarks:main"
+pacute-eval = "pacute_bench.scripts.run_evaluation:main"

@@ -1,0 +1,41 @@
+# Commercial model configurations for evaluation via batch APIs.
+# Both OpenAI and Anthropic offer 50% cost reduction through batch processing.
+# MCQ benchmarks are NOT supported — only generative (-gen) benchmarks are run.
+#
+# Required environment variables:
+#   OPENAI_API_KEY     — for provider: openai
+#   ANTHROPIC_API_KEY  — for provider: anthropic
+
+models:
+  # ============================================================================
+  # OpenAI
+  # ============================================================================
+  gpt-5.4:
+    path: gpt-5.4
+    type: it
+    provider: openai
+
+  gpt-5:
+    path: gpt-5
+    type: it
+    provider: openai
+
+  gpt-5-mini:
+    path: gpt-5-mini
+    type: it
+    provider: openai
+
+
+  # ============================================================================
+  # Anthropic
+  # ============================================================================
+
+  claude-sonnet-4-6:
+    path: claude-sonnet-4-6
+    type: it
+    provider: anthropic
+
+  claude-haiku-4-5:
+    path: claude-haiku-4-5
+    type: it
+    provider: anthropic

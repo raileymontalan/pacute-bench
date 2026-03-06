@@ -1,0 +1,23 @@
+# Core ML / inference
+torch>=2.5
+transformers>=4.50
+openai>=1.30
+anthropic>=0.40
+vllm>=0.15.0
+
+# Data
+pandas>=2.0
+openpyxl>=3.1
+numpy>=2.0
+datasets>=2.20
+
+# String similarity
+python-Levenshtein>=0.25
+
+# Misc
+tqdm>=4.65
+pyyaml>=6.0
+
+# Dev / testing (optional)
+# pytest>=8.0
+# pytest-asyncio>=0.23

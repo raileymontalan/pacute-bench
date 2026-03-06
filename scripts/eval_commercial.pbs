@@ -1,0 +1,47 @@
+#!/bin/bash
+# PBS job script — evaluate a single commercial model (OpenAI/Anthropic) via batch API.
+# No GPU required. Submits all requests as a batch, then polls until complete.
+# Do NOT run directly; submit via scripts/submit_evaluations.sh --commercial-only.
+#
+# Required PBS variable (pass with qsub -v):
+#   MODEL_NAME   Key from configs/models_commercial.yaml  (e.g. claude-opus-4-6)
+#
+# Optional PBS variables:
+#   OVERWRITE    "true" to re-run benchmarks that already have results
+#   MAX_SAMPLES  Integer to cap samples per benchmark (default: all)
+
+#PBS -l walltime=26:00:00
+#PBS -j oe
+#PBS -q AISG_debug
+# Note: -o and -e are set dynamically by submit_evaluations.sh
+
+MODEL_NAME="${MODEL_NAME:-claude-sonnet-4-6}"
+OVERWRITE="${OVERWRITE:-false}"
+MAX_SAMPLES="${MAX_SAMPLES:-}"
+BENCHMARKS="${BENCHMARKS:-}"
+
+set -euo pipefail
+
+: "${PROJECT_ROOT:?PROJECT_ROOT must be set (pass via qsub -v)}"
+cd "$PROJECT_ROOT"
+
+source "$PROJECT_ROOT/.env"
+mkdir -p "$LOGS_PATH"
+
+source "$VENV_PATH/bin/activate"
+uv pip install -e "$PROJECT_ROOT" --quiet
+
+echo "Running commercial evaluation for $MODEL_NAME…"
+
+EXTRA_FLAGS=""
+[[ "$OVERWRITE"  == "true" ]] && EXTRA_FLAGS="$EXTRA_FLAGS --overwrite"
+[[ -n "$MAX_SAMPLES" ]]       && EXTRA_FLAGS="$EXTRA_FLAGS --max-samples $MAX_SAMPLES"
+[[ -n "$BENCHMARKS" ]]        && EXTRA_FLAGS="$EXTRA_FLAGS --benchmarks ${BENCHMARKS//,/ }"
+
+python3 -m pacute_bench.scripts.run_evaluation \
+    --models "$MODEL_NAME" \
+    --model-config configs/models_commercial.yaml \
+    --output-dir "$LOGS_PATH" \
+    $EXTRA_FLAGS
+
+echo "Done: $MODEL_NAME"

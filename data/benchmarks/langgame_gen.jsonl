@@ -1,0 +1,1000 @@
+{"question": "The available choices are: [ how, method, need, very]. Which word contains 't'? Answer:", "answer": " method", "id": "langgame_gen_00000"}
+{"question": "Which of the available option words contains 'o'? The available option words are: [ too, tail, lead, chick]. Answer:", "answer": " too", "id": "langgame_gen_00001"}
+{"question": "What choice ends with 't'? The available option words are: [ slow, coat, cross, talk]. Answer:", "answer": " coat", "id": "langgame_gen_00002"}
+{"question": "Which option has the most letter 'h's? The possible option strings: [ shell, through, bell, love]. Answer:", "answer": " through", "id": "langgame_gen_00003"}
+{"question": "Which of the available options has the most letter 'c's? These are the available options: [ pull, clock, dress, color]. Answer:", "answer": " clock", "id": "langgame_gen_00004"}
+{"question": "The possible choices are: [ skin, cool, write, dollar]. Which of the possible choices starts with 'co'? Answer:", "answer": " cool", "id": "langgame_gen_00005"}
+{"question": "Which of the possible choices has the most letter 'g's? The possible choices are: [ seem, written, separate, egg]. Answer:", "answer": " egg", "id": "langgame_gen_00006"}
+{"question": "These are the option words: [ fact, him, end, hat]. Which of the option words contains 'e'? Answer:", "answer": " end", "id": "langgame_gen_00007"}
+{"question": "The available option strings are: [ also, continue, safe, cry]. Which string ends with 'fe'? Answer:", "answer": " safe", "id": "langgame_gen_00008"}
+{"question": "What string contains 'bit'? The options: [ receive, basic, bit, nation]. Answer:", "answer": " bit", "id": "langgame_gen_00009"}
+{"question": "Which of the possible option strings starts with 'sno'? These are the possible option strings: [ forest, hot, snow, soft]. Answer:", "answer": " snow", "id": "langgame_gen_00010"}
+{"question": "Which  is the shortest? The available option words: [ on, contain, receive, rather]. Answer:", "answer": " on", "id": "langgame_gen_00011"}
+{"question": "The available option strings: [ country, are, dictionary, clothe]. What string is the shortest? Answer:", "answer": " are", "id": "langgame_gen_00012"}
+{"question": "These are the possible choices: [ receive, pick, an, skin]. What word is the longest? Answer:", "answer": " receive", "id": "langgame_gen_00013"}
+{"question": "Which of the option words has the most letter 'f's? The option words are: [ offer, their, clean, success]. Answer:", "answer": " offer", "id": "langgame_gen_00014"}
+{"question": "The option words are: [ deal, heat, provide, eye]. Which option string is the longest? Answer:", "answer": " provide", "id": "langgame_gen_00015"}
+{"question": "The possible choices are: [ support, go, own, list]. What option is the longest? Answer:", "answer": " support", "id": "langgame_gen_00016"}
+{"question": "What option word contains 'e'? The possible option words: [ start, your, now, select]. Answer:", "answer": " select", "id": "langgame_gen_00017"}
+{"question": "What string contains 'rea'? These are the choices: [ spread, soft, bell, lake]. Answer:", "answer": " spread", "id": "langgame_gen_00018"}
+{"question": "The option words are: [ more, front, spread, energy]. Which option contains 'a'? Answer:", "answer": " spread", "id": "langgame_gen_00019"}
+{"question": "What choice starts with 'sla'? These are the possible option words: [ slave, allow, joy, general]. Answer:", "answer": " slave", "id": "langgame_gen_00020"}
+{"question": "These are the available option words: [ several, seven, it, corner]. What  contains 'o'? Answer:", "answer": " corner", "id": "langgame_gen_00021"}
+{"question": "These are the available option words: [ fall, as, lady, oil]. Which of the available option words starts with 'la'? Answer:", "answer": " lady", "id": "langgame_gen_00022"}
+{"question": "The choices: [ sell, roll, during, bad]. What option word contains 'ba'? Answer:", "answer": " bad", "id": "langgame_gen_00023"}
+{"question": "The available options: [ send, practice, sea, fall]. Which of the available options contains 'sea'? Answer:", "answer": " sea", "id": "langgame_gen_00024"}
+{"question": "The available options: [ meet, scale, smell, glad]. What option has the most letter 'l's? Answer:", "answer": " smell", "id": "langgame_gen_00025"}
+{"question": "The possible option strings: [ leave, great, record, finish]. Which word ends with 'at'? Answer:", "answer": " great", "id": "langgame_gen_00026"}
+{"question": "These are the choices: [ grass, finish, gray, collect]. Which of the choices starts with 'f'? Answer:", "answer": " finish", "id": "langgame_gen_00027"}
+{"question": "The possible option strings: [ been, require, big, ice]. Which of the possible option strings is the longest? Answer:", "answer": " require", "id": "langgame_gen_00028"}
+{"question": "What string ends with 't'? These are the option words: [ mountain, direct, stone, finger]. Answer:", "answer": " direct", "id": "langgame_gen_00029"}
+{"question": "The possible option words: [ near, book, evening, type]. What option string is the longest? Answer:", "answer": " evening", "id": "langgame_gen_00030"}
+{"question": "The possible choices are: [ station, gas, pull, cow]. Which word is the longest? Answer:", "answer": " station", "id": "langgame_gen_00031"}
+{"question": "Which word starts with 'wa'? The available option strings: [ special, paragraph, water, reply]. Answer:", "answer": " water", "id": "langgame_gen_00032"}
+{"question": "Which option is the longest? The choices are: [ boat, see, together, and]. Answer:", "answer": " together", "id": "langgame_gen_00033"}
+{"question": "These are the option words: [ finger, but, yellow, then]. Which of the option words ends with 'ow'? Answer:", "answer": " yellow", "id": "langgame_gen_00034"}
+{"question": "These are the options: [ decimal, excite, mine, window]. What string contains 'ndo'? Answer:", "answer": " window", "id": "langgame_gen_00035"}
+{"question": "What string ends with 's'? These are the available option strings: [ born, event, dress, voice]. Answer:", "answer": " dress", "id": "langgame_gen_00036"}
+{"question": "Which string has the most letter 'l's? The option strings are: [ rest, wall, color, company]. Answer:", "answer": " wall", "id": "langgame_gen_00037"}
+{"question": "These are the options: [ bit, supply, engine, value]. Which word has the most letter 'p's? Answer:", "answer": " supply", "id": "langgame_gen_00038"}
+{"question": "Which option string is the longest? The possible options: [ dear, than, hold, receive]. Answer:", "answer": " receive", "id": "langgame_gen_00039"}
+{"question": "The choices: [ thick, take, yet, shine]. Which  ends with 't'? Answer:", "answer": " yet", "id": "langgame_gen_00040"}
+{"question": "These are the option strings: [ several, past, tube, hour]. Which of the option strings is the longest? Answer:", "answer": " several", "id": "langgame_gen_00041"}
+{"question": "Which of the available choices is the longest? The available choices are: [ village, moon, big, milk]. Answer:", "answer": " village", "id": "langgame_gen_00042"}
+{"question": "These are the possible option words: [ numeral, age, collect, operate]. Which choice is the shortest? Answer:", "answer": " age", "id": "langgame_gen_00043"}
+{"question": "These are the possible option strings: [ position, make, match, five]. What string contains 'po'? Answer:", "answer": " position", "id": "langgame_gen_00044"}
+{"question": "What option ends with 'e'? The options are: [ excite, glass, men, metal]. Answer:", "answer": " excite", "id": "langgame_gen_00045"}
+{"question": "Which option string is the shortest? The possible option words are: [ hundred, simple, but, toward]. Answer:", "answer": " but", "id": "langgame_gen_00046"}
+{"question": "The possible choices are: [ meet, allow, eat, populate]. What  has the most letter 'p's? Answer:", "answer": " populate", "id": "langgame_gen_00047"}
+{"question": "Which choice ends with 'dow'? The available option strings are: [ took, window, in, bar]. Answer:", "answer": " window", "id": "langgame_gen_00048"}
+{"question": "Which string is the shortest? The possible option words: [ has, several, captain, answer]. Answer:", "answer": " has", "id": "langgame_gen_00049"}
+{"question": "What  is the shortest? The options are: [ for, century, change, section]. Answer:", "answer": " for", "id": "langgame_gen_00050"}
+{"question": "The possible choices are: [ season, crowd, could, skin]. Which  has the most letter 's's? Answer:", "answer": " season", "id": "langgame_gen_00051"}
+{"question": "The options are: [ leg, reason, weight, bottom]. Which option is the shortest? Answer:", "answer": " leg", "id": "langgame_gen_00052"}
+{"question": "The choices: [ my, with, write, get]. Which  starts with 'wri'? Answer:", "answer": " write", "id": "langgame_gen_00053"}
+{"question": "The possible choices are: [ teach, happen, arm, seem]. What option string has the most letter 'e's? Answer:", "answer": " seem", "id": "langgame_gen_00054"}
+{"question": "Which of the possible choices starts with 'r'? These are the possible choices: [ rail, connect, up, their]. Answer:", "answer": " rail", "id": "langgame_gen_00055"}
+{"question": "The option strings: [ hurry, fun, dictionary, fall]. What word has the most letter 'l's? Answer:", "answer": " fall", "id": "langgame_gen_00056"}
+{"question": "The available choices are: [ property, would, thought, put]. Which of the available choices has the most letter 'h's? Answer:", "answer": " thought", "id": "langgame_gen_00057"}
+{"question": "The option words are: [ happen, consider, day, weather]. What choice is the shortest? Answer:", "answer": " day", "id": "langgame_gen_00058"}
+{"question": "Which of the available choices is the shortest? These are the available choices: [ plural, tie, parent, paragraph]. Answer:", "answer": " tie", "id": "langgame_gen_00059"}
+{"question": "These are the options: [ river, what, draw, fat]. Which of the options contains 'dra'? Answer:", "answer": " draw", "id": "langgame_gen_00060"}
+{"question": "Which of the possible option strings ends with 'not'? The possible option strings: [ not, except, special, wing]. Answer:", "answer": " not", "id": "langgame_gen_00061"}
+{"question": "The possible choices are: [ design, together, bat, branch]. Which of the possible choices is the shortest? Answer:", "answer": " bat", "id": "langgame_gen_00062"}
+{"question": "The available options: [ sign, blood, full, else]. Which option string contains 'g'? Answer:", "answer": " sign", "id": "langgame_gen_00063"}
+{"question": "Which of the possible option words has the most letter 'e's? The possible option words are: [ teeth, charge, value, picture]. Answer:", "answer": " teeth", "id": "langgame_gen_00064"}
+{"question": "What option string contains 'ffe'? These are the available option strings: [ work, glad, offer, lost]. Answer:", "answer": " offer", "id": "langgame_gen_00065"}
+{"question": "The possible option strings are: [ hand, block, rock, gun]. What choice starts with 'ro'? Answer:", "answer": " rock", "id": "langgame_gen_00066"}
+{"question": "Which of the possible option words contains 'fin'? These are the possible option words: [ mile, fine, forward, want]. Answer:", "answer": " fine", "id": "langgame_gen_00067"}
+{"question": "Which of the option words starts with 'oth'? The option words are: [ compare, other, go, appear]. Answer:", "answer": " other", "id": "langgame_gen_00068"}
+{"question": "What option word contains 'cto'? The possible options: [ doctor, paragraph, nor, man]. Answer:", "answer": " doctor", "id": "langgame_gen_00069"}
+{"question": "Which option has the most letter 'c's? The available options are: [ sound, brown, chance, determine]. Answer:", "answer": " chance", "id": "langgame_gen_00070"}
+{"question": "What word is the shortest? The choices are: [ change, engine, success, new]. Answer:", "answer": " new", "id": "langgame_gen_00071"}
+{"question": "Which of the possible options contains 'was'? The possible options are: [ was, wall, chick, call]. Answer:", "answer": " was", "id": "langgame_gen_00072"}
+{"question": "These are the choices: [ music, clock, put, excite]. Which choice ends with 't'? Answer:", "answer": " put", "id": "langgame_gen_00073"}
+{"question": "The possible choices: [ was, represent, window, depend]. Which option is the shortest? Answer:", "answer": " was", "id": "langgame_gen_00074"}
+{"question": "What word contains 'rst'? The available choices are: [ first, foot, all, tone]. Answer:", "answer": " first", "id": "langgame_gen_00075"}
+{"question": "Which of the options has the most letter 'a's? These are the options: [ such, area, made, nose]. Answer:", "answer": " area", "id": "langgame_gen_00076"}
+{"question": "Which option string is the shortest? The available option words: [ twenty, bad, opposite, repeat]. Answer:", "answer": " bad", "id": "langgame_gen_00077"}
+{"question": "Which option word has the most letter 'r's? The available options: [ allow, island, west, proper]. Answer:", "answer": " proper", "id": "langgame_gen_00078"}
+{"question": "The possible option strings are: [ tie, land, guide, deep]. What option string starts with 'gui'? Answer:", "answer": " guide", "id": "langgame_gen_00079"}
+{"question": "What string contains 'bad'? These are the available option words: [ stream, jump, bad, special]. Answer:", "answer": " bad", "id": "langgame_gen_00080"}
+{"question": "The possible option strings: [ check, please, add, clothe]. What choice contains 'clo'? Answer:", "answer": " clothe", "id": "langgame_gen_00081"}
+{"question": "The possible choices are: [ has, city, silver, bright]. Which of the possible choices ends with 'ht'? Answer:", "answer": " bright", "id": "langgame_gen_00082"}
+{"question": "Which of the option strings starts with 'pro'? The option strings are: [ material, day, ten, provide]. Answer:", "answer": " provide", "id": "langgame_gen_00083"}
+{"question": "What option word ends with 'lie'? The available option strings: [ prepare, lie, nothing, brother]. Answer:", "answer": " lie", "id": "langgame_gen_00084"}
+{"question": "Which string contains 'esi'? These are the available option strings: [ thought, design, these, guide]. Answer:", "answer": " design", "id": "langgame_gen_00085"}
+{"question": "The available choices are: [ gray, face, work, control]. Which option word is the longest? Answer:", "answer": " control", "id": "langgame_gen_00086"}
+{"question": "Which of the possible choices starts with 'f'? The possible choices are: [ who, total, offer, felt]. Answer:", "answer": " felt", "id": "langgame_gen_00087"}
+{"question": "Which of the possible choices has the most letter 'e's? The possible choices: [ present, among, shout, hour]. Answer:", "answer": " present", "id": "langgame_gen_00088"}
+{"question": "What string contains 'e'? These are the option words: [ page, straight, broad, foot]. Answer:", "answer": " page", "id": "langgame_gen_00089"}
+{"question": "What word is the shortest? These are the option words: [ believe, led, particular, forward]. Answer:", "answer": " led", "id": "langgame_gen_00090"}
+{"question": "The possible option words are: [ require, period, course, continent]. Which of the possible option words has the most letter 'n's? Answer:", "answer": " continent", "id": "langgame_gen_00091"}
+{"question": "Which of the possible choices is the longest? These are the possible choices: [ noon, represent, iron, I]. Answer:", "answer": " represent", "id": "langgame_gen_00092"}
+{"question": "The option words are: [ clear, radio, natural, took]. What option ends with 'l'? Answer:", "answer": " natural", "id": "langgame_gen_00093"}
+{"question": "What  ends with 'n'? These are the possible choices: [ port, cow, separate, skin]. Answer:", "answer": " skin", "id": "langgame_gen_00094"}
+{"question": "Which of the available option words is the longest? The available option words are: [ and, yes, yard, require]. Answer:", "answer": " require", "id": "langgame_gen_00095"}
+{"question": "What option word is the longest? The choices are: [ probable, four, ran, help]. Answer:", "answer": " probable", "id": "langgame_gen_00096"}
+{"question": "These are the available choices: [ among, summer, found, down]. Which option contains 'ou'? Answer:", "answer": " found", "id": "langgame_gen_00097"}
+{"question": "What option contains 'ea'? The available choices are: [ eat, single, slip, sell]. Answer:", "answer": " eat", "id": "langgame_gen_00098"}
+{"question": "The option strings: [ original, ran, are, cow]. Which choice is the longest? Answer:", "answer": " original", "id": "langgame_gen_00099"}
+{"question": "Which  is the shortest? The possible option words are: [ hot, continent, hundred, solution]. Answer:", "answer": " hot", "id": "langgame_gen_00100"}
+{"question": "Which option word has the most letter 'g's? The available choices are: [ power, area, language, men]. Answer:", "answer": " language", "id": "langgame_gen_00101"}
+{"question": "These are the possible option words: [ supply, repeat, trip, million]. Which word ends with 'on'? Answer:", "answer": " million", "id": "langgame_gen_00102"}
+{"question": "Which option string contains 'ne'? The available option strings: [ search, heard, done, lot]. Answer:", "answer": " done", "id": "langgame_gen_00103"}
+{"question": "The option words are: [ show, choose, happy, element]. Which of the option words contains 'app'? Answer:", "answer": " happy", "id": "langgame_gen_00104"}
+{"question": "The possible option words: [ again, full, fill, dollar]. What  starts with 'ful'? Answer:", "answer": " full", "id": "langgame_gen_00105"}
+{"question": "The possible choices: [ solution, straight, between, hat]. What option string is the shortest? Answer:", "answer": " hat", "id": "langgame_gen_00106"}
+{"question": "Which option is the shortest? The choices: [ settle, solution, century, up]. Answer:", "answer": " up", "id": "langgame_gen_00107"}
+{"question": "What option word has the most letter 'l's? The available option words are: [ insect, father, especially, string]. Answer:", "answer": " especially", "id": "langgame_gen_00108"}
+{"question": "Which of the available option strings is the shortest? The available option strings are: [ produce, particular, yet, winter]. Answer:", "answer": " yet", "id": "langgame_gen_00109"}
+{"question": "Which of the choices contains 'eld'? These are the choices: [ seed, way, plural, held]. Answer:", "answer": " held", "id": "langgame_gen_00110"}
+{"question": "The possible choices are: [ brother, else, wild, spot]. Which option string starts with 'b'? Answer:", "answer": " brother", "id": "langgame_gen_00111"}
+{"question": "These are the options: [ hill, collect, natural, block]. Which  has the most letter 'a's? Answer:", "answer": " natural", "id": "langgame_gen_00112"}
+{"question": "What word has the most letter 'i's? The possible option strings: [ liquid, sure, system, lead]. Answer:", "answer": " liquid", "id": "langgame_gen_00113"}
+{"question": "Which option starts with 'whe'? The option strings: [ new, garden, cell, where]. Answer:", "answer": " where", "id": "langgame_gen_00114"}
+{"question": "What  is the shortest? The available options are: [ support, bad, station, nothing]. Answer:", "answer": " bad", "id": "langgame_gen_00115"}
+{"question": "Which of the available option words is the shortest? The available option words are: [ she, season, surprise, imagine]. Answer:", "answer": " she", "id": "langgame_gen_00116"}
+{"question": "Which choice has the most letter 'w's? These are the available option words: [ next, thus, heart, window]. Answer:", "answer": " window", "id": "langgame_gen_00117"}
+{"question": "The available option strings are: [ corner, danger, water, control]. Which string starts with 'd'? Answer:", "answer": " danger", "id": "langgame_gen_00118"}
+{"question": "These are the option strings: [ stood, think, a, sleep]. Which of the option strings starts with 'a'? Answer:", "answer": " a", "id": "langgame_gen_00119"}
+{"question": "Which choice ends with 'll'? The possible option strings: [ quotient, study, favor, small]. Answer:", "answer": " small", "id": "langgame_gen_00120"}
+{"question": "The possible option words: [ out, quick, laugh, help]. Which of the possible option words starts with 'q'? Answer:", "answer": " quick", "id": "langgame_gen_00121"}
+{"question": "The possible option words: [ correct, why, create, bottom]. What option string is the shortest? Answer:", "answer": " why", "id": "langgame_gen_00122"}
+{"question": "These are the available option words: [ job, page, loud, nothing]. Which of the available option words is the longest? Answer:", "answer": " nothing", "id": "langgame_gen_00123"}
+{"question": "The possible options are: [ captain, log, sight, cover]. Which string ends with 'er'? Answer:", "answer": " cover", "id": "langgame_gen_00124"}
+{"question": "These are the choices: [ you, energy, for, fish]. Which option string starts with 'ene'? Answer:", "answer": " energy", "id": "langgame_gen_00125"}
+{"question": "The option strings are: [ divide, map, machine, use]. Which option string starts with 'use'? Answer:", "answer": " use", "id": "langgame_gen_00126"}
+{"question": "The choices are: [ too, base, eight, water]. Which of the choices ends with 'e'? Answer:", "answer": " base", "id": "langgame_gen_00127"}
+{"question": "Which choice is the shortest? The options are: [ bed, consider, bright, continent]. Answer:", "answer": " bed", "id": "langgame_gen_00128"}
+{"question": "What string contains 'ow'? These are the available option words: [ ocean, should, now, bird]. Answer:", "answer": " now", "id": "langgame_gen_00129"}
+{"question": "The option strings: [ dark, far, take, nothing]. What option is the longest? Answer:", "answer": " nothing", "id": "langgame_gen_00130"}
+{"question": "The possible option strings: [ opposite, search, believe, verb]. What  ends with 'ch'? Answer:", "answer": " search", "id": "langgame_gen_00131"}
+{"question": "The available choices are: [ draw, so, spread, sky]. What string contains 'so'? Answer:", "answer": " so", "id": "langgame_gen_00132"}
+{"question": "What option contains 'r'? These are the available option words: [ horse, climb, again, egg]. Answer:", "answer": " horse", "id": "langgame_gen_00133"}
+{"question": "Which option word ends with 'ult'? The available option strings are: [ the, ring, result, as]. Answer:", "answer": " result", "id": "langgame_gen_00134"}
+{"question": "Which word is the longest? The options: [ had, particular, rest, life]. Answer:", "answer": " particular", "id": "langgame_gen_00135"}
+{"question": "Which option string contains 'n'? The possible option words: [ fear, chance, case, crowd]. Answer:", "answer": " chance", "id": "langgame_gen_00136"}
+{"question": "The available choices: [ experience, bar, prove, exercise]. Which choice ends with 've'? Answer:", "answer": " prove", "id": "langgame_gen_00137"}
+{"question": "Which of the options is the shortest? The options: [ instant, differ, history, men]. Answer:", "answer": " men", "id": "langgame_gen_00138"}
+{"question": "Which choice starts with 'g'? The available options: [ blue, nose, string, gather]. Answer:", "answer": " gather", "id": "langgame_gen_00139"}
+{"question": "The available choices are: [ me, noon, join, decimal]. Which word is the longest? Answer:", "answer": " decimal", "id": "langgame_gen_00140"}
+{"question": "The available option words are: [ gave, by, soft, best]. What option word ends with 'ft'? Answer:", "answer": " soft", "id": "langgame_gen_00141"}
+{"question": "Which  contains 'too'? These are the option strings: [ where, track, tool, settle]. Answer:", "answer": " tool", "id": "langgame_gen_00142"}
+{"question": "What word ends with 'ck'? These are the choices: [ flower, search, check, noise]. Answer:", "answer": " check", "id": "langgame_gen_00143"}
+{"question": "Which option word is the shortest? The available options: [ should, rather, weather, day]. Answer:", "answer": " day", "id": "langgame_gen_00144"}
+{"question": "What option string contains 'n'? These are the available option words: [ check, air, need, how]. Answer:", "answer": " need", "id": "langgame_gen_00145"}
+{"question": "These are the available option words: [ shell, held, above, break]. What  ends with 'eak'? Answer:", "answer": " break", "id": "langgame_gen_00146"}
+{"question": "Which choice contains 'g'? The option words: [ general, tree, third, century]. Answer:", "answer": " general", "id": "langgame_gen_00147"}
+{"question": "These are the choices: [ meet, won't, boat, cost]. What word ends with ''t'? Answer:", "answer": " won't", "id": "langgame_gen_00148"}
+{"question": "Which  is the shortest? The option words are: [ now, rather, trouble, forest]. Answer:", "answer": " now", "id": "langgame_gen_00149"}
+{"question": "Which of the options has the most letter 'd's? These are the options: [ bell, low, dad, hair]. Answer:", "answer": " dad", "id": "langgame_gen_00150"}
+{"question": "The available options: [ warm, does, substance, why]. Which of the available options is the longest? Answer:", "answer": " substance", "id": "langgame_gen_00151"}
+{"question": "These are the option words: [ quite, property, though, corner]. What  has the most letter 'h's? Answer:", "answer": " though", "id": "langgame_gen_00152"}
+{"question": "The choices are: [ happen, division, garden, my]. Which of the choices is the shortest? Answer:", "answer": " my", "id": "langgame_gen_00153"}
+{"question": "Which string starts with 'f'? The possible option strings: [ just, box, far, strong]. Answer:", "answer": " far", "id": "langgame_gen_00154"}
+{"question": "The choices: [ more, special, market, rule]. What  contains 'mor'? Answer:", "answer": " more", "id": "langgame_gen_00155"}
+{"question": "What string contains 'ec'? The choices are: [ seven, measure, age, decimal]. Answer:", "answer": " decimal", "id": "langgame_gen_00156"}
+{"question": "Which option contains 'l'? The option strings are: [ animal, true, teach, indicate]. Answer:", "answer": " animal", "id": "langgame_gen_00157"}
+{"question": "These are the option words: [ then, wind, experience, tiny]. What word is the longest? Answer:", "answer": " experience", "id": "langgame_gen_00158"}
+{"question": "Which of the available option strings ends with 'fun'? The available option strings are: [ fun, direct, imagine, populate]. Answer:", "answer": " fun", "id": "langgame_gen_00159"}
+{"question": "The possible option words are: [ surprise, way, chair, cow]. What option word contains 'ai'? Answer:", "answer": " chair", "id": "langgame_gen_00160"}
+{"question": "Which of the available option words is the shortest? These are the available option words: [ to, bought, ground, summer]. Answer:", "answer": " to", "id": "langgame_gen_00161"}
+{"question": "These are the possible option strings: [ connect, less, wide, phrase]. What word has the most letter 'c's? Answer:", "answer": " connect", "id": "langgame_gen_00162"}
+{"question": "The options are: [ necessary, grew, milk, won't]. Which option word has the most letter 's's? Answer:", "answer": " necessary", "id": "langgame_gen_00163"}
+{"question": "Which option string is the shortest? The available choices are: [ little, season, problem, see]. Answer:", "answer": " see", "id": "langgame_gen_00164"}
+{"question": "Which of the possible option words is the shortest? These are the possible option words: [ use, dictionary, circle, industry]. Answer:", "answer": " use", "id": "langgame_gen_00165"}
+{"question": "Which option ends with 'ind'? The available option words are: [ heavy, thought, do, wind]. Answer:", "answer": " wind", "id": "langgame_gen_00166"}
+{"question": "The possible option strings: [ choose, certain, bed, create]. Which  is the shortest? Answer:", "answer": " bed", "id": "langgame_gen_00167"}
+{"question": "Which of the choices is the longest? These are the choices: [ far, thought, was, pair]. Answer:", "answer": " thought", "id": "langgame_gen_00168"}
+{"question": "Which option string starts with 'c'? These are the possible option words: [ clear, farm, read, rock]. Answer:", "answer": " clear", "id": "langgame_gen_00169"}
+{"question": "Which of the possible choices is the longest? The possible choices: [ like, compare, bell, gold]. Answer:", "answer": " compare", "id": "langgame_gen_00170"}
+{"question": "Which of the possible option words has the most letter 'c's? The possible option words are: [ girl, practice, type, flow]. Answer:", "answer": " practice", "id": "langgame_gen_00171"}
+{"question": "These are the possible option words: [ spend, quick, suit, their]. What option string starts with 'th'? Answer:", "answer": " their", "id": "langgame_gen_00172"}
+{"question": "What choice has the most letter 'e's? The possible choices are: [ now, shop, measure, travel]. Answer:", "answer": " measure", "id": "langgame_gen_00173"}
+{"question": "These are the possible options: [ I, unit, die, sentence]. Which string is the longest? Answer:", "answer": " sentence", "id": "langgame_gen_00174"}
+{"question": "Which of the options contains 'i'? The options: [ show, place, yes, receive]. Answer:", "answer": " receive", "id": "langgame_gen_00175"}
+{"question": "The options: [ once, help, lost, material]. Which of the options is the longest? Answer:", "answer": " material", "id": "langgame_gen_00176"}
+{"question": "What option string ends with 'ild'? These are the options: [ had, block, lake, wild]. Answer:", "answer": " wild", "id": "langgame_gen_00177"}
+{"question": "The choices are: [ ship, power, thin, sat]. What option word contains 'hip'? Answer:", "answer": " ship", "id": "langgame_gen_00178"}
+{"question": "What choice has the most letter 'g's? The possible option words: [ king, chance, language, mine]. Answer:", "answer": " language", "id": "langgame_gen_00179"}
+{"question": "Which of the available option words ends with 'g'? The available option words: [ short, long, fraction, size]. Answer:", "answer": " long", "id": "langgame_gen_00180"}
+{"question": "These are the possible choices: [ expect, soldier, for, division]. Which of the possible choices is the shortest? Answer:", "answer": " for", "id": "langgame_gen_00181"}
+{"question": "These are the option strings: [ written, his, smile, fill]. Which of the option strings ends with 'l'? Answer:", "answer": " fill", "id": "langgame_gen_00182"}
+{"question": "The options are: [ six, whether, want, skin]. What option string is the longest? Answer:", "answer": " whether", "id": "langgame_gen_00183"}
+{"question": "Which of the possible option strings is the shortest? The possible option strings are: [ way, colony, length, problem]. Answer:", "answer": " way", "id": "langgame_gen_00184"}
+{"question": "Which choice starts with 'sug'? These are the option strings: [ sail, suggest, plant, sell]. Answer:", "answer": " suggest", "id": "langgame_gen_00185"}
+{"question": "Which option word ends with 'on'? The options are: [ don't, too, cow, motion]. Answer:", "answer": " motion", "id": "langgame_gen_00186"}
+{"question": "What option string ends with 'lso'? The options: [ hill, also, iron, clean]. Answer:", "answer": " also", "id": "langgame_gen_00187"}
+{"question": "These are the option words: [ once, determine, win, ever]. Which option string ends with 'n'? Answer:", "answer": " win", "id": "langgame_gen_00188"}
+{"question": "Which string is the longest? The available choices: [ her, sent, brother, body]. Answer:", "answer": " brother", "id": "langgame_gen_00189"}
+{"question": "Which word ends with 'st'? The possible options are: [ describe, discuss, suggest, chief]. Answer:", "answer": " suggest", "id": "langgame_gen_00190"}
+{"question": "What  starts with 'oc'? The available options are: [ course, third, may, ocean]. Answer:", "answer": " ocean", "id": "langgame_gen_00191"}
+{"question": "Which of the available choices contains 'ote'? The available choices: [ go, note, position, captain]. Answer:", "answer": " note", "id": "langgame_gen_00192"}
+{"question": "These are the choices: [ wing, lie, moment, weight]. Which choice ends with 'ing'? Answer:", "answer": " wing", "id": "langgame_gen_00193"}
+{"question": "These are the available option words: [ valley, tail, heavy, early]. Which of the available option words starts with 'e'? Answer:", "answer": " early", "id": "langgame_gen_00194"}
+{"question": "Which of the option strings is the longest? The option strings are: [ type, just, decimal, job]. Answer:", "answer": " decimal", "id": "langgame_gen_00195"}
+{"question": "The possible choices are: [ consider, final, bar, cost]. Which of the possible choices starts with 'f'? Answer:", "answer": " final", "id": "langgame_gen_00196"}
+{"question": "The option words are: [ form, meat, book, weather]. Which string is the longest? Answer:", "answer": " weather", "id": "langgame_gen_00197"}
+{"question": "Which of the available option words has the most letter 'l's? The available option words: [ whether, triangle, call, meant]. Answer:", "answer": " call", "id": "langgame_gen_00198"}
+{"question": "Which of the available option strings is the shortest? The available option strings are: [ connect, who, depend, afraid]. Answer:", "answer": " who", "id": "langgame_gen_00199"}
+{"question": "These are the possible choices: [ war, before, begin, lake]. What string ends with 'ar'? Answer:", "answer": " war", "id": "langgame_gen_00200"}
+{"question": "These are the possible option words: [ sugar, thank, time, dark]. Which of the possible option words ends with 'ime'? Answer:", "answer": " time", "id": "langgame_gen_00201"}
+{"question": "The possible options are: [ paper, hold, cent, decimal]. What word has the most letter 'p's? Answer:", "answer": " paper", "id": "langgame_gen_00202"}
+{"question": "Which word is the longest? The option strings are: [ edge, hair, hat, fraction]. Answer:", "answer": " fraction", "id": "langgame_gen_00203"}
+{"question": "Which  has the most letter 'g's? The available option strings: [ egg, natural, has, organ]. Answer:", "answer": " egg", "id": "langgame_gen_00204"}
+{"question": "The possible option words: [ send, or, came, property]. What option is the longest? Answer:", "answer": " property", "id": "langgame_gen_00205"}
+{"question": "The possible option strings: [ locate, nature, represent, foot]. What word has the most letter 'o's? Answer:", "answer": " foot", "id": "langgame_gen_00206"}
+{"question": "The option strings are: [ together, in, moment, single]. Which of the option strings is the shortest? Answer:", "answer": " in", "id": "langgame_gen_00207"}
+{"question": "These are the available choices: [ made, clock, letter, me]. What string starts with 'let'? Answer:", "answer": " letter", "id": "langgame_gen_00208"}
+{"question": "What  contains 'n'? The option strings are: [ until, wave, select, quart]. Answer:", "answer": " until", "id": "langgame_gen_00209"}
+{"question": "Which of the options ends with 'y'? The options are: [ dream, pretty, chair, wheel]. Answer:", "answer": " pretty", "id": "langgame_gen_00210"}
+{"question": "The available choices: [ since, forward, process, has]. Which of the available choices contains 'has'? Answer:", "answer": " has", "id": "langgame_gen_00211"}
+{"question": "Which of the possible option strings is the shortest? The possible option strings are: [ column, sudden, die, toward]. Answer:", "answer": " die", "id": "langgame_gen_00212"}
+{"question": "Which of the possible option strings contains 'th'? The possible option strings: [ word, stick, be, thus]. Answer:", "answer": " thus", "id": "langgame_gen_00213"}
+{"question": "What option word ends with 'in'? These are the possible option words: [ hat, family, certain, at]. Answer:", "answer": " certain", "id": "langgame_gen_00214"}
+{"question": "Which string ends with 'e'? The possible options are: [ bone, rest, quick, result]. Answer:", "answer": " bone", "id": "langgame_gen_00215"}
+{"question": "The available choices: [ for, both, own, know]. What option string starts with 'bo'? Answer:", "answer": " both", "id": "langgame_gen_00216"}
+{"question": "What  is the longest? The available options are: [ been, push, way, special]. Answer:", "answer": " special", "id": "langgame_gen_00217"}
+{"question": "Which option word has the most letter 'u's? The possible choices: [ surprise, and, usual, apple]. Answer:", "answer": " usual", "id": "langgame_gen_00218"}
+{"question": "These are the possible option strings: [ cat, wood, neighbor, mind]. Which choice is the longest? Answer:", "answer": " neighbor", "id": "langgame_gen_00219"}
+{"question": "These are the possible choices: [ large, small, during, there]. What word starts with 'sm'? Answer:", "answer": " small", "id": "langgame_gen_00220"}
+{"question": "Which of the available options has the most letter 'i's? The available options: [ mother, bird, dictionary, wish]. Answer:", "answer": " dictionary", "id": "langgame_gen_00221"}
+{"question": "What option string ends with 'n'? These are the option words: [ size, wall, post, sudden]. Answer:", "answer": " sudden", "id": "langgame_gen_00222"}
+{"question": "Which word has the most letter 'w's? These are the possible options: [ window, air, third, night]. Answer:", "answer": " window", "id": "langgame_gen_00223"}
+{"question": "The possible choices are: [ try, sister, every, pose]. Which option word contains 'o'? Answer:", "answer": " pose", "id": "langgame_gen_00224"}
+{"question": "The available options: [ section, though, get, measure]. Which of the available options is the shortest? Answer:", "answer": " get", "id": "langgame_gen_00225"}
+{"question": "Which option word starts with 'r'? The option strings: [ rest, team, process, call]. Answer:", "answer": " rest", "id": "langgame_gen_00226"}
+{"question": "The possible choices are: [ after, wide, form, carry]. Which of the possible choices ends with 'ter'? Answer:", "answer": " after", "id": "langgame_gen_00227"}
+{"question": "These are the available option words: [ course, any, consider, station]. Which option is the shortest? Answer:", "answer": " any", "id": "langgame_gen_00228"}
+{"question": "Which choice is the longest? These are the possible option words: [ any, song, stretch, back]. Answer:", "answer": " stretch", "id": "langgame_gen_00229"}
+{"question": "Which  is the shortest? These are the option words: [ act, length, garden, spread]. Answer:", "answer": " act", "id": "langgame_gen_00230"}
+{"question": "The possible option strings: [ character, master, old, modern]. Which of the possible option strings is the shortest? Answer:", "answer": " old", "id": "langgame_gen_00231"}
+{"question": "Which of the choices is the shortest? The choices are: [ system, arm, govern, describe]. Answer:", "answer": " arm", "id": "langgame_gen_00232"}
+{"question": "What option word starts with 'fro'? The possible option strings: [ front, lead, desert, and]. Answer:", "answer": " front", "id": "langgame_gen_00233"}
+{"question": "Which of the option words has the most letter 'a's? The option words: [ question, particular, from, visit]. Answer:", "answer": " particular", "id": "langgame_gen_00234"}
+{"question": "These are the option words: [ flow, off, red, block]. Which of the option words contains 'ff'? Answer:", "answer": " off", "id": "langgame_gen_00235"}
+{"question": "Which of the possible choices contains 'er'? The possible choices are: [ yes, bone, order, me]. Answer:", "answer": " order", "id": "langgame_gen_00236"}
+{"question": "These are the options: [ wear, wish, pull, triangle]. Which string is the longest? Answer:", "answer": " triangle", "id": "langgame_gen_00237"}
+{"question": "The possible option words are: [ last, day, happy, deep]. Which option word contains 't'? Answer:", "answer": " last", "id": "langgame_gen_00238"}
+{"question": "Which word ends with 'e'? The available choices: [ course, every, any, much]. Answer:", "answer": " course", "id": "langgame_gen_00239"}
+{"question": "Which of the available choices ends with 't'? The available choices are: [ steel, lake, don't, arrive]. Answer:", "answer": " don't", "id": "langgame_gen_00240"}
+{"question": "The options: [ body, grass, held, bring]. Which of the options contains 'a'? Answer:", "answer": " grass", "id": "langgame_gen_00241"}
+{"question": "Which option is the longest? The option words: [ fraction, job, feel, give]. Answer:", "answer": " fraction", "id": "langgame_gen_00242"}
+{"question": "What option word ends with 'e'? These are the possible option strings: [ method, look, rich, life]. Answer:", "answer": " life", "id": "langgame_gen_00243"}
+{"question": "Which option ends with 'age'? The choices are: [ age, tail, dark, told]. Answer:", "answer": " age", "id": "langgame_gen_00244"}
+{"question": "The option words are: [ card, condition, above, black]. What choice ends with 'e'? Answer:", "answer": " above", "id": "langgame_gen_00245"}
+{"question": "Which word ends with 'id'? The possible options are: [ organ, been, did, double]. Answer:", "answer": " did", "id": "langgame_gen_00246"}
+{"question": "These are the available option strings: [ yet, require, play, arm]. What  is the longest? Answer:", "answer": " require", "id": "langgame_gen_00247"}
+{"question": "The options: [ dress, take, hot, fit]. What option string contains 'ot'? Answer:", "answer": " hot", "id": "langgame_gen_00248"}
+{"question": "What word is the longest? The possible option words: [ subtract, rich, area, fair]. Answer:", "answer": " subtract", "id": "langgame_gen_00249"}
+{"question": "What word contains 'n'? These are the option words: [ bank, thus, wheel, clock]. Answer:", "answer": " bank", "id": "langgame_gen_00250"}
+{"question": "Which option is the longest? The choices are: [ as, book, yard, hundred]. Answer:", "answer": " hundred", "id": "langgame_gen_00251"}
+{"question": "The possible option words: [ power, probable, several, whose]. What option starts with 'pow'? Answer:", "answer": " power", "id": "langgame_gen_00252"}
+{"question": "The available options: [ nation, pattern, rub, effect]. Which option string is the shortest? Answer:", "answer": " rub", "id": "langgame_gen_00253"}
+{"question": "Which of the options starts with 'cro'? The options: [ spend, came, crowd, imagine]. Answer:", "answer": " crowd", "id": "langgame_gen_00254"}
+{"question": "The available options: [ why, bed, instant, once]. Which of the available options is the longest? Answer:", "answer": " instant", "id": "langgame_gen_00255"}
+{"question": "Which of the possible options starts with 'se'? These are the possible options: [ steam, rose, seem, star]. Answer:", "answer": " seem", "id": "langgame_gen_00256"}
+{"question": "These are the options: [ solution, believe, salt, forward]. What option string has the most letter 'r's? Answer:", "answer": " forward", "id": "langgame_gen_00257"}
+{"question": "The possible option words: [ voice, example, sign, fall]. Which word starts with 'vo'? Answer:", "answer": " voice", "id": "langgame_gen_00258"}
+{"question": "Which option word is the shortest? The possible options: [ nation, symbol, out, method]. Answer:", "answer": " out", "id": "langgame_gen_00259"}
+{"question": "What option word starts with 'v'? The options: [ figure, open, vowel, direct]. Answer:", "answer": " vowel", "id": "langgame_gen_00260"}
+{"question": "These are the option strings: [ govern, molecule, place, provide]. What choice has the most letter 'e's? Answer:", "answer": " molecule", "id": "langgame_gen_00261"}
+{"question": "The available options are: [ talk, numeral, thought, hear]. Which choice ends with 'ral'? Answer:", "answer": " numeral", "id": "langgame_gen_00262"}
+{"question": "Which string ends with 'ial'? The available option strings are: [ toward, told, slip, special]. Answer:", "answer": " special", "id": "langgame_gen_00263"}
+{"question": "Which word starts with 'al'? These are the possible options: [ low, push, won't, always]. Answer:", "answer": " always", "id": "langgame_gen_00264"}
+{"question": "What option has the most letter 'u's? The option words are: [ usual, among, who, pick]. Answer:", "answer": " usual", "id": "langgame_gen_00265"}
+{"question": "These are the possible option words: [ self, round, follow, wood]. Which option word contains 'rou'? Answer:", "answer": " round", "id": "langgame_gen_00266"}
+{"question": "These are the option words: [ boat, look, oh, position]. Which of the option words is the longest? Answer:", "answer": " position", "id": "langgame_gen_00267"}
+{"question": "The option words: [ box, get, neighbor, leg]. Which of the option words is the longest? Answer:", "answer": " neighbor", "id": "langgame_gen_00268"}
+{"question": "The possible options are: [ safe, interest, rope, poor]. Which of the possible options is the longest? Answer:", "answer": " interest", "id": "langgame_gen_00269"}
+{"question": "Which string ends with 'ion'? These are the available choices: [ position, few, eye, poor]. Answer:", "answer": " position", "id": "langgame_gen_00270"}
+{"question": "The available option strings: [ wait, general, suit, side]. Which of the available option strings is the longest? Answer:", "answer": " general", "id": "langgame_gen_00271"}
+{"question": "Which of the available choices is the longest? These are the available choices: [ put, with, may, include]. Answer:", "answer": " include", "id": "langgame_gen_00272"}
+{"question": "The options: [ office, and, heavy, fair]. Which of the options ends with 'avy'? Answer:", "answer": " heavy", "id": "langgame_gen_00273"}
+{"question": "What word has the most letter 'l's? These are the possible choices: [ hole, milk, shall, should]. Answer:", "answer": " shall", "id": "langgame_gen_00274"}
+{"question": "Which option string contains 'pas'? These are the possible choices: [ prove, loud, duck, pass]. Answer:", "answer": " pass", "id": "langgame_gen_00275"}
+{"question": "Which of the available option strings contains 'mos'? These are the available option strings: [ often, is, enemy, most]. Answer:", "answer": " most", "id": "langgame_gen_00276"}
+{"question": "What word starts with 'tir'? The choices are: [ warm, fear, rope, tire]. Answer:", "answer": " tire", "id": "langgame_gen_00277"}
+{"question": "Which of the choices ends with 'nce'? These are the choices: [ experience, sky, chair, symbol]. Answer:", "answer": " experience", "id": "langgame_gen_00278"}
+{"question": "Which of the available choices is the shortest? The available choices are: [ row, planet, equate, condition]. Answer:", "answer": " row", "id": "langgame_gen_00279"}
+{"question": "Which of the possible options ends with 'hot'? The possible options are: [ hot, slow, talk, will]. Answer:", "answer": " hot", "id": "langgame_gen_00280"}
+{"question": "What word starts with 'sp'? These are the possible option words: [ speak, electric, race, next]. Answer:", "answer": " speak", "id": "langgame_gen_00281"}
+{"question": "What choice ends with 'if'? The option words are: [ state, remember, door, if]. Answer:", "answer": " if", "id": "langgame_gen_00282"}
+{"question": "The choices: [ seed, language, above, stay]. Which of the choices starts with 'ab'? Answer:", "answer": " above", "id": "langgame_gen_00283"}
+{"question": "These are the options: [ grow, wood, off, interest]. Which option string is the longest? Answer:", "answer": " interest", "id": "langgame_gen_00284"}
+{"question": "These are the available option strings: [ long, together, push, went]. Which of the available option strings is the longest? Answer:", "answer": " together", "id": "langgame_gen_00285"}
+{"question": "Which option has the most letter 'a's? The available option strings: [ mark, particular, ride, rock]. Answer:", "answer": " particular", "id": "langgame_gen_00286"}
+{"question": "The available options: [ also, live, while, hundred]. What option word has the most letter 'd's? Answer:", "answer": " hundred", "id": "langgame_gen_00287"}
+{"question": "The options: [ remember, rub, together, example]. Which of the options is the shortest? Answer:", "answer": " rub", "id": "langgame_gen_00288"}
+{"question": "Which of the available choices is the shortest? The available choices: [ engine, map, parent, weather]. Answer:", "answer": " map", "id": "langgame_gen_00289"}
+{"question": "These are the possible option strings: [ came, discuss, can, fear]. What string is the longest? Answer:", "answer": " discuss", "id": "langgame_gen_00290"}
+{"question": "The possible options: [ since, sense, charge, laugh]. Which of the possible options ends with 'se'? Answer:", "answer": " sense", "id": "langgame_gen_00291"}
+{"question": "What string has the most letter 'g's? The available choices are: [ slow, language, spend, rule]. Answer:", "answer": " language", "id": "langgame_gen_00292"}
+{"question": "Which of the possible choices is the shortest? The possible choices are: [ children, search, of, street]. Answer:", "answer": " of", "id": "langgame_gen_00293"}
+{"question": "The available option words are: [ reason, charge, man, clothe]. What  is the shortest? Answer:", "answer": " man", "id": "langgame_gen_00294"}
+{"question": "The option words: [ went, work, several, bright]. Which choice ends with 'ork'? Answer:", "answer": " work", "id": "langgame_gen_00295"}
+{"question": "The available options: [ far, saw, leg, experiment]. Which of the available options is the longest? Answer:", "answer": " experiment", "id": "langgame_gen_00296"}
+{"question": "The option strings are: [ develop, east, play, equate]. Which of the option strings contains 's'? Answer:", "answer": " east", "id": "langgame_gen_00297"}
+{"question": "The available option words: [ by, air, knew, carry]. Which option string ends with 'w'? Answer:", "answer": " knew", "id": "langgame_gen_00298"}
+{"question": "Which of the option words ends with 'e'? The option words: [ oxygen, eat, those, car]. Answer:", "answer": " those", "id": "langgame_gen_00299"}
+{"question": "The available option words: [ single, school, in, stream]. Which of the available option words is the shortest? Answer:", "answer": " in", "id": "langgame_gen_00300"}
+{"question": "The option words: [ as, busy, half, require]. Which of the option words is the longest? Answer:", "answer": " require", "id": "langgame_gen_00301"}
+{"question": "Which of the available option words starts with 't'? The available option words are: [ during, men, train, hunt]. Answer:", "answer": " train", "id": "langgame_gen_00302"}
+{"question": "Which  is the shortest? The available choices are: [ key, twenty, spring, consider]. Answer:", "answer": " key", "id": "langgame_gen_00303"}
+{"question": "What option word has the most letter 'e's? The choices are: [ gentle, any, multiply, study]. Answer:", "answer": " gentle", "id": "langgame_gen_00304"}
+{"question": "These are the possible choices: [ home, material, and, it]. What  is the longest? Answer:", "answer": " material", "id": "langgame_gen_00305"}
+{"question": "Which option word is the longest? These are the options: [ take, soil, cool, paragraph]. Answer:", "answer": " paragraph", "id": "langgame_gen_00306"}
+{"question": "Which of the available choices is the longest? These are the available choices: [ much, original, age, sail]. Answer:", "answer": " original", "id": "langgame_gen_00307"}
+{"question": "Which option word starts with 'tri'? The possible options: [ triangle, again, draw, through]. Answer:", "answer": " triangle", "id": "langgame_gen_00308"}
+{"question": "The options: [ jump, straight, forest, above]. Which option has the most letter 't's? Answer:", "answer": " straight", "id": "langgame_gen_00309"}
+{"question": "The available choices are: [ more, snow, cut, short]. What  ends with 'rt'? Answer:", "answer": " short", "id": "langgame_gen_00310"}
+{"question": "Which of the choices ends with 'ew'? The choices: [ eat, told, new, plural]. Answer:", "answer": " new", "id": "langgame_gen_00311"}
+{"question": "The option strings are: [ rock, receive, grass, protect]. Which choice ends with 'k'? Answer:", "answer": " rock", "id": "langgame_gen_00312"}
+{"question": "The choices are: [ station, free, base, no]. What string is the longest? Answer:", "answer": " station", "id": "langgame_gen_00313"}
+{"question": "Which of the possible choices is the longest? The possible choices are: [ cry, war, body, imagine]. Answer:", "answer": " imagine", "id": "langgame_gen_00314"}
+{"question": "Which option string is the longest? These are the options: [ salt, fish, city, describe]. Answer:", "answer": " describe", "id": "langgame_gen_00315"}
+{"question": "The available options are: [ square, hundred, key, figure]. Which of the available options is the shortest? Answer:", "answer": " key", "id": "langgame_gen_00316"}
+{"question": "The possible choices are: [ gentle, perhaps, strange, it]. Which option is the shortest? Answer:", "answer": " it", "id": "langgame_gen_00317"}
+{"question": "These are the available option strings: [ neck, his, fish, practice]. Which of the available option strings is the longest? Answer:", "answer": " practice", "id": "langgame_gen_00318"}
+{"question": "The available choices: [ sun, colony, told, an]. Which word starts with 'su'? Answer:", "answer": " sun", "id": "langgame_gen_00319"}
+{"question": "Which of the available option words starts with 'go'? These are the available option words: [ small, master, govern, stone]. Answer:", "answer": " govern", "id": "langgame_gen_00320"}
+{"question": "These are the available option strings: [ print, word, bread, leg]. Which of the available option strings ends with 'ord'? Answer:", "answer": " word", "id": "langgame_gen_00321"}
+{"question": "These are the option strings: [ age, company, final, pitch]. Which of the option strings starts with 'ag'? Answer:", "answer": " age", "id": "langgame_gen_00322"}
+{"question": "These are the option words: [ press, front, differ, division]. Which string has the most letter 'f's? Answer:", "answer": " differ", "id": "langgame_gen_00323"}
+{"question": "These are the available options: [ fast, wheel, should, broad]. Which choice ends with 'ld'? Answer:", "answer": " should", "id": "langgame_gen_00324"}
+{"question": "Which choice starts with 'de'? The available option words are: [ decide, cover, on, material]. Answer:", "answer": " decide", "id": "langgame_gen_00325"}
+{"question": "The available choices are: [ trouble, poor, few, root]. What  is the longest? Answer:", "answer": " trouble", "id": "langgame_gen_00326"}
+{"question": "The available choices: [ sign, bad, path, stretch]. Which choice contains 'g'? Answer:", "answer": " sign", "id": "langgame_gen_00327"}
+{"question": "The possible option words: [ connect, north, only, fact]. What option contains 'y'? Answer:", "answer": " only", "id": "langgame_gen_00328"}
+{"question": "Which  has the most letter 'b's? The available options are: [ drive, inch, baby, high]. Answer:", "answer": " baby", "id": "langgame_gen_00329"}
+{"question": "The option strings: [ stick, game, shout, try]. Which option string ends with 'try'? Answer:", "answer": " try", "id": "langgame_gen_00330"}
+{"question": "Which of the possible choices starts with 'f'? The possible choices: [ drink, flat, total, chart]. Answer:", "answer": " flat", "id": "langgame_gen_00331"}
+{"question": "Which of the option strings has the most letter 't's? The option strings: [ start, mother, hold, woman]. Answer:", "answer": " start", "id": "langgame_gen_00332"}
+{"question": "The options: [ center, season, notice, wash]. Which of the options contains 'ter'? Answer:", "answer": " center", "id": "langgame_gen_00333"}
+{"question": "Which of the possible choices is the shortest? The possible choices are: [ finger, circle, bed, process]. Answer:", "answer": " bed", "id": "langgame_gen_00334"}
+{"question": "Which word has the most letter 'r's? These are the available options: [ corner, tiny, force, least]. Answer:", "answer": " corner", "id": "langgame_gen_00335"}
+{"question": "Which option word is the longest? These are the possible choices: [ safe, imagine, wild, will]. Answer:", "answer": " imagine", "id": "langgame_gen_00336"}
+{"question": "The possible options: [ notice, opposite, star, thousand]. Which of the possible options ends with 'd'? Answer:", "answer": " thousand", "id": "langgame_gen_00337"}
+{"question": "The option words: [ chart, what, voice, simple]. Which of the option words contains 'wha'? Answer:", "answer": " what", "id": "langgame_gen_00338"}
+{"question": "The option words: [ instrument, rest, prepare, probable]. Which option has the most letter 'b's? Answer:", "answer": " probable", "id": "langgame_gen_00339"}
+{"question": "The options are: [ dark, took, often, her]. Which option string has the most letter 'o's? Answer:", "answer": " took", "id": "langgame_gen_00340"}
+{"question": "The options: [ talk, chance, suffix, believe]. Which of the options ends with 'lk'? Answer:", "answer": " talk", "id": "langgame_gen_00341"}
+{"question": "Which of the choices has the most letter 'd's? The choices: [ woman, hundred, child, pattern]. Answer:", "answer": " hundred", "id": "langgame_gen_00342"}
+{"question": "What string is the longest? These are the choices: [ thousand, week, show, also]. Answer:", "answer": " thousand", "id": "langgame_gen_00343"}
+{"question": "Which choice is the shortest? These are the choices: [ during, suggest, had, travel]. Answer:", "answer": " had", "id": "langgame_gen_00344"}
+{"question": "Which of the option strings starts with 'whi'? The option strings are: [ mix, while, test, final]. Answer:", "answer": " while", "id": "langgame_gen_00345"}
+{"question": "What option word starts with 'mi'? The possible options are: [ mine, new, allow, side]. Answer:", "answer": " mine", "id": "langgame_gen_00346"}
+{"question": "What string ends with 'd'? These are the available option words: [ populate, get, seed, morning]. Answer:", "answer": " seed", "id": "langgame_gen_00347"}
+{"question": "The possible option strings: [ offer, afraid, discuss, separate]. Which of the possible option strings has the most letter 'f's? Answer:", "answer": " offer", "id": "langgame_gen_00348"}
+{"question": "These are the option words: [ suffix, equate, rub, consider]. Which of the option words is the shortest? Answer:", "answer": " rub", "id": "langgame_gen_00349"}
+{"question": "Which word contains 'pp'? These are the available option strings: [ system, supply, done, locate]. Answer:", "answer": " supply", "id": "langgame_gen_00350"}
+{"question": "These are the available options: [ electric, soil, play, nose]. Which of the available options is the longest? Answer:", "answer": " electric", "id": "langgame_gen_00351"}
+{"question": "The possible choices are: [ three, with, problem, kill]. What option has the most letter 'l's? Answer:", "answer": " kill", "id": "langgame_gen_00352"}
+{"question": "These are the available options: [ until, laugh, middle, sheet]. What  ends with 'il'? Answer:", "answer": " until", "id": "langgame_gen_00353"}
+{"question": "The options are: [ come, necessary, again, moment]. Which of the options has the most letter 's's? Answer:", "answer": " necessary", "id": "langgame_gen_00354"}
+{"question": "These are the choices: [ and, port, hole, doctor]. Which of the choices contains 'rt'? Answer:", "answer": " port", "id": "langgame_gen_00355"}
+{"question": "The option strings are: [ chick, teach, correct, whose]. What string starts with 'chi'? Answer:", "answer": " chick", "id": "langgame_gen_00356"}
+{"question": "The choices are: [ the, page, mile, simple]. Which of the choices ends with 'the'? Answer:", "answer": " the", "id": "langgame_gen_00357"}
+{"question": "Which option is the shortest? The option strings are: [ capital, current, cut, number]. Answer:", "answer": " cut", "id": "langgame_gen_00358"}
+{"question": "The possible choices: [ danger, key, fruit, rule]. Which of the possible choices starts with 'ke'? Answer:", "answer": " key", "id": "langgame_gen_00359"}
+{"question": "The possible choices: [ method, machine, yet, million]. What choice is the shortest? Answer:", "answer": " yet", "id": "langgame_gen_00360"}
+{"question": "These are the possible option words: [ machine, card, rock, boat]. What  is the longest? Answer:", "answer": " machine", "id": "langgame_gen_00361"}
+{"question": "What option word contains 'ake'? The available option strings: [ fun, gone, make, apple]. Answer:", "answer": " make", "id": "langgame_gen_00362"}
+{"question": "The option strings: [ path, energy, score, please]. What option string contains 'th'? Answer:", "answer": " path", "id": "langgame_gen_00363"}
+{"question": "The possible option strings: [ pull, hat, example, year]. What word is the longest? Answer:", "answer": " example", "id": "langgame_gen_00364"}
+{"question": "The option strings: [ caught, may, million, character]. What word is the shortest? Answer:", "answer": " may", "id": "langgame_gen_00365"}
+{"question": "These are the possible choices: [ off, winter, reason, neighbor]. Which option string is the shortest? Answer:", "answer": " off", "id": "langgame_gen_00366"}
+{"question": "The available choices: [ arm, box, long, west]. Which  ends with 'est'? Answer:", "answer": " west", "id": "langgame_gen_00367"}
+{"question": "What string has the most letter 'a's? These are the option strings: [ operate, on, language, supply]. Answer:", "answer": " language", "id": "langgame_gen_00368"}
+{"question": "Which of the option words starts with 's'? The option words are: [ stay, our, would, design]. Answer:", "answer": " stay", "id": "langgame_gen_00369"}
+{"question": "The possible option strings are: [ lay, position, roll, seem]. Which option word contains 'e'? Answer:", "answer": " seem", "id": "langgame_gen_00370"}
+{"question": "What option string starts with 'occ'? These are the option words: [ the, occur, did, way]. Answer:", "answer": " occur", "id": "langgame_gen_00371"}
+{"question": "What string ends with 'vel'? These are the option words: [ our, though, travel, clothe]. Answer:", "answer": " travel", "id": "langgame_gen_00372"}
+{"question": "What string contains 'es'? The options are: [ whose, check, roll, interest]. Answer:", "answer": " interest", "id": "langgame_gen_00373"}
+{"question": "These are the available options: [ thought, subtract, wish, ever]. Which string contains 'g'? Answer:", "answer": " thought", "id": "langgame_gen_00374"}
+{"question": "The possible option strings are: [ offer, necessary, colony, feel]. Which of the possible option strings has the most letter 'o's? Answer:", "answer": " colony", "id": "langgame_gen_00375"}
+{"question": "The available option words are: [ decimal, fun, original, little]. What  starts with 'ori'? Answer:", "answer": " original", "id": "langgame_gen_00376"}
+{"question": "The available option strings: [ rope, plant, six, shape]. Which  contains 'ope'? Answer:", "answer": " rope", "id": "langgame_gen_00377"}
+{"question": "These are the available option words: [ list, oxygen, difficult, syllable]. Which word has the most letter 'i's? Answer:", "answer": " difficult", "id": "langgame_gen_00378"}
+{"question": "The possible option strings are: [ sit, molecule, thought, fact]. Which of the possible option strings has the most letter 'h's? Answer:", "answer": " thought", "id": "langgame_gen_00379"}
+{"question": "The possible option words are: [ figure, course, go, twenty]. Which option word is the shortest? Answer:", "answer": " go", "id": "langgame_gen_00380"}
+{"question": "These are the possible option strings: [ common, enter, against, third]. Which option word contains 'mmo'? Answer:", "answer": " common", "id": "langgame_gen_00381"}
+{"question": "The available choices are: [ busy, sun, represent, huge]. What option string is the longest? Answer:", "answer": " represent", "id": "langgame_gen_00382"}
+{"question": "The possible option strings are: [ fraction, interest, as, children]. Which option word is the shortest? Answer:", "answer": " as", "id": "langgame_gen_00383"}
+{"question": "Which choice contains 'oo'? These are the available option strings: [ rose, they, door, stop]. Answer:", "answer": " door", "id": "langgame_gen_00384"}
+{"question": "Which choice starts with 'ri'? The available option words are: [ land, key, keep, rise]. Answer:", "answer": " rise", "id": "langgame_gen_00385"}
+{"question": "These are the possible options: [ twenty, remember, front, grass]. Which word has the most letter 'm's? Answer:", "answer": " remember", "id": "langgame_gen_00386"}
+{"question": "Which of the available option words contains 'les'? The available option words: [ less, flow, caught, eye]. Answer:", "answer": " less", "id": "langgame_gen_00387"}
+{"question": "The possible option strings are: [ chord, usual, life, test]. Which string has the most letter 'u's? Answer:", "answer": " usual", "id": "langgame_gen_00388"}
+{"question": "What option string is the shortest? The available choices: [ age, century, solution, common]. Answer:", "answer": " age", "id": "langgame_gen_00389"}
+{"question": "The available option words are: [ famous, plural, speech, day]. What choice is the shortest? Answer:", "answer": " day", "id": "langgame_gen_00390"}
+{"question": "The option words: [ consonant, busy, family, allow]. Which option string ends with 'w'? Answer:", "answer": " allow", "id": "langgame_gen_00391"}
+{"question": "Which of the possible option strings is the shortest? The possible option strings: [ direct, master, modern, do]. Answer:", "answer": " do", "id": "langgame_gen_00392"}
+{"question": "Which of the possible option words is the shortest? These are the possible option words: [ all, degree, material, between]. Answer:", "answer": " all", "id": "langgame_gen_00393"}
+{"question": "The available option words are: [ trouble, got, way, still]. Which  starts with 's'? Answer:", "answer": " still", "id": "langgame_gen_00394"}
+{"question": "Which of the available option words ends with 'ss'? These are the available option words: [ duck, them, guess, lost]. Answer:", "answer": " guess", "id": "langgame_gen_00395"}
+{"question": "These are the available option strings: [ box, gone, he, coast]. What choice contains 'go'? Answer:", "answer": " gone", "id": "langgame_gen_00396"}
+{"question": "The available choices: [ pay, oil, with, product]. Which of the available choices is the longest? Answer:", "answer": " product", "id": "langgame_gen_00397"}
+{"question": "The possible options are: [ company, window, gentle, gave]. What choice has the most letter 'w's? Answer:", "answer": " window", "id": "langgame_gen_00398"}
+{"question": "Which  contains 'e'? These are the choices: [ dictionary, fight, metal, occur]. Answer:", "answer": " metal", "id": "langgame_gen_00399"}
+{"question": "Which of the choices has the most letter 'e's? These are the choices: [ chair, war, record, these]. Answer:", "answer": " these", "id": "langgame_gen_00400"}
+{"question": "These are the available choices: [ view, black, noise, thought]. Which choice contains 'v'? Answer:", "answer": " view", "id": "langgame_gen_00401"}
+{"question": "Which of the available choices ends with 'd'? These are the available choices: [ enter, contain, process, land]. Answer:", "answer": " land", "id": "langgame_gen_00402"}
+{"question": "Which of the possible choices ends with 'e'? The possible choices are: [ stream, pose, search, mount]. Answer:", "answer": " pose", "id": "langgame_gen_00403"}
+{"question": "These are the available option strings: [ arrange, mix, industry, substance]. Which option string is the shortest? Answer:", "answer": " mix", "id": "langgame_gen_00404"}
+{"question": "The options are: [ control, problem, family, end]. Which of the options ends with 'm'? Answer:", "answer": " problem", "id": "langgame_gen_00405"}
+{"question": "These are the option strings: [ seat, job, enough, store]. What choice ends with 'e'? Answer:", "answer": " store", "id": "langgame_gen_00406"}
+{"question": "These are the choices: [ slip, select, set, car]. Which string starts with 'c'? Answer:", "answer": " car", "id": "langgame_gen_00407"}
+{"question": "These are the possible options: [ expect, teeth, able, beat]. Which option word has the most letter 't's? Answer:", "answer": " teeth", "id": "langgame_gen_00408"}
+{"question": "The available options: [ present, wood, pair, lie]. Which choice has the most letter 'o's? Answer:", "answer": " wood", "id": "langgame_gen_00409"}
+{"question": "The possible options: [ during, who, energy, supply]. Which of the possible options is the shortest? Answer:", "answer": " who", "id": "langgame_gen_00410"}
+{"question": "What option starts with 'q'? The possible options: [ inch, he, quick, think]. Answer:", "answer": " quick", "id": "langgame_gen_00411"}
+{"question": "The option strings: [ fraction, war, finger, winter]. What option is the shortest? Answer:", "answer": " war", "id": "langgame_gen_00412"}
+{"question": "What string starts with 'que'? The choices are: [ question, engine, stick, which]. Answer:", "answer": " question", "id": "langgame_gen_00413"}
+{"question": "These are the possible option words: [ key, brown, science, wonder]. Which of the possible option words ends with 'key'? Answer:", "answer": " key", "id": "langgame_gen_00414"}
+{"question": "Which option word contains 'ld'? The possible option strings: [ wild, road, me, cost]. Answer:", "answer": " wild", "id": "langgame_gen_00415"}
+{"question": "These are the option strings: [ arrive, spring, during, or]. What  is the shortest? Answer:", "answer": " or", "id": "langgame_gen_00416"}
+{"question": "Which of the available choices is the shortest? The available choices: [ may, plural, single, straight]. Answer:", "answer": " may", "id": "langgame_gen_00417"}
+{"question": "The options: [ fact, paragraph, history, better]. Which of the options ends with 't'? Answer:", "answer": " fact", "id": "langgame_gen_00418"}
+{"question": "These are the available choices: [ catch, people, build, street]. Which choice ends with 'ch'? Answer:", "answer": " catch", "id": "langgame_gen_00419"}
+{"question": "Which  starts with 'dad'? These are the options: [ rail, dad, all, climb]. Answer:", "answer": " dad", "id": "langgame_gen_00420"}
+{"question": "Which word contains 'a'? The available option strings are: [ car, copy, both, eye]. Answer:", "answer": " car", "id": "langgame_gen_00421"}
+{"question": "The options are: [ plane, success, lost, four]. What option string ends with 'r'? Answer:", "answer": " four", "id": "langgame_gen_00422"}
+{"question": "These are the available option strings: [ rest, picture, best, sun]. Which of the available option strings is the longest? Answer:", "answer": " picture", "id": "langgame_gen_00423"}
+{"question": "The available choices: [ door, lead, usual, up]. Which of the available choices has the most letter 'u's? Answer:", "answer": " usual", "id": "langgame_gen_00424"}
+{"question": "The possible options: [ back, radio, sound, instrument]. Which option contains 'ad'? Answer:", "answer": " radio", "id": "langgame_gen_00425"}
+{"question": "The choices: [ thank, tree, mine, decide]. What option contains 'ree'? Answer:", "answer": " tree", "id": "langgame_gen_00426"}
+{"question": "These are the available option strings: [ mount, glad, please, since]. Which of the available option strings ends with 't'? Answer:", "answer": " mount", "id": "langgame_gen_00427"}
+{"question": "Which choice is the shortest? The possible choices are: [ excite, tie, experiment, wonder]. Answer:", "answer": " tie", "id": "langgame_gen_00428"}
+{"question": "These are the possible choices: [ bad, decimal, winter, double]. Which option word is the shortest? Answer:", "answer": " bad", "id": "langgame_gen_00429"}
+{"question": "The possible options: [ ice, full, surface, four]. What option string is the longest? Answer:", "answer": " surface", "id": "langgame_gen_00430"}
+{"question": "The possible options: [ sell, and, during, dictionary]. What  has the most letter 'l's? Answer:", "answer": " sell", "id": "langgame_gen_00431"}
+{"question": "Which of the possible option words ends with 'e'? The possible option words: [ don't, wild, map, notice]. Answer:", "answer": " notice", "id": "langgame_gen_00432"}
+{"question": "Which choice contains 'ch'? The possible option strings: [ girl, such, lift, start]. Answer:", "answer": " such", "id": "langgame_gen_00433"}
+{"question": "Which of the choices starts with 'par'? These are the choices: [ those, race, ship, paragraph]. Answer:", "answer": " paragraph", "id": "langgame_gen_00434"}
+{"question": "The available options: [ silent, paragraph, are, believe]. Which option is the shortest? Answer:", "answer": " are", "id": "langgame_gen_00435"}
+{"question": "What string starts with 'c'? The possible option strings are: [ found, teeth, guess, current]. Answer:", "answer": " current", "id": "langgame_gen_00436"}
+{"question": "Which of the available choices ends with 'em'? The available choices are: [ soil, seem, father, chick]. Answer:", "answer": " seem", "id": "langgame_gen_00437"}
+{"question": "These are the available options: [ in, support, win, king]. Which option is the longest? Answer:", "answer": " support", "id": "langgame_gen_00438"}
+{"question": "The possible option strings: [ desert, stretch, row, famous]. Which option is the shortest? Answer:", "answer": " row", "id": "langgame_gen_00439"}
+{"question": "Which of the option strings is the longest? The option strings: [ electric, four, mind, cut]. Answer:", "answer": " electric", "id": "langgame_gen_00440"}
+{"question": "The available choices are: [ low, energy, sudden, level]. What choice ends with 'ow'? Answer:", "answer": " low", "id": "langgame_gen_00441"}
+{"question": "What string is the shortest? The available options are: [ indicate, liquid, happen, you]. Answer:", "answer": " you", "id": "langgame_gen_00442"}
+{"question": "The available option strings are: [ too, gold, object, indicate]. What option word contains 'gol'? Answer:", "answer": " gold", "id": "langgame_gen_00443"}
+{"question": "What option string is the shortest? The choices are: [ quotient, buy, degree, pretty]. Answer:", "answer": " buy", "id": "langgame_gen_00444"}
+{"question": "These are the available option strings: [ several, band, symbol, dog]. Which of the available option strings ends with 'ral'? Answer:", "answer": " several", "id": "langgame_gen_00445"}
+{"question": "These are the possible options: [ suggest, put, master, together]. Which option string is the shortest? Answer:", "answer": " put", "id": "langgame_gen_00446"}
+{"question": "These are the possible options: [ industry, bright, general, pay]. What  is the shortest? Answer:", "answer": " pay", "id": "langgame_gen_00447"}
+{"question": "The options: [ ear, sight, count, book]. Which choice contains 'ar'? Answer:", "answer": " ear", "id": "langgame_gen_00448"}
+{"question": "Which word ends with 'ng'? These are the available options: [ wrong, noun, through, table]. Answer:", "answer": " wrong", "id": "langgame_gen_00449"}
+{"question": "The possible option words: [ perhaps, enough, see, locate]. Which option is the shortest? Answer:", "answer": " see", "id": "langgame_gen_00450"}
+{"question": "These are the option strings: [ death, poem, feel, material]. What option ends with 'em'? Answer:", "answer": " poem", "id": "langgame_gen_00451"}
+{"question": "The possible option strings: [ dry, certain, molecule, choose]. Which  is the shortest? Answer:", "answer": " dry", "id": "langgame_gen_00452"}
+{"question": "The option strings are: [ compare, string, log, settle]. What choice is the shortest? Answer:", "answer": " log", "id": "langgame_gen_00453"}
+{"question": "Which word has the most letter 'r's? These are the available choices: [ week, repeat, record, force]. Answer:", "answer": " record", "id": "langgame_gen_00454"}
+{"question": "The options: [ skill, fig, grow, begin]. Which of the options ends with 'ow'? Answer:", "answer": " grow", "id": "langgame_gen_00455"}
+{"question": "The available option strings: [ told, protect, big, rain]. What choice ends with 'd'? Answer:", "answer": " told", "id": "langgame_gen_00456"}
+{"question": "What option contains 'ri'? These are the possible option words: [ again, bring, whose, dad]. Answer:", "answer": " bring", "id": "langgame_gen_00457"}
+{"question": "What word is the longest? These are the option words: [ yard, sing, off, weather]. Answer:", "answer": " weather", "id": "langgame_gen_00458"}
+{"question": "The available options: [ few, ring, divide, position]. What choice ends with 'e'? Answer:", "answer": " divide", "id": "langgame_gen_00459"}
+{"question": "Which option ends with 't'? The possible options: [ slip, list, slow, smile]. Answer:", "answer": " list", "id": "langgame_gen_00460"}
+{"question": "The available option words are: [ true, flow, through, solution]. Which option string starts with 'flo'? Answer:", "answer": " flow", "id": "langgame_gen_00461"}
+{"question": "Which  contains 'res'? The available option words are: [ dress, observe, are, choose]. Answer:", "answer": " dress", "id": "langgame_gen_00462"}
+{"question": "What string is the longest? The choices are: [ solution, swim, draw, fit]. Answer:", "answer": " solution", "id": "langgame_gen_00463"}
+{"question": "These are the possible choices: [ which, third, original, been]. What  has the most letter 'h's? Answer:", "answer": " which", "id": "langgame_gen_00464"}
+{"question": "What string ends with 'nt'? These are the choices: [ leg, silent, finish, father]. Answer:", "answer": " silent", "id": "langgame_gen_00465"}
+{"question": "Which string contains 'n'? These are the available choices: [ probable, month, him, charge]. Answer:", "answer": " month", "id": "langgame_gen_00466"}
+{"question": "What word is the shortest? The option strings: [ it, system, silver, nothing]. Answer:", "answer": " it", "id": "langgame_gen_00467"}
+{"question": "What option is the longest? The available options: [ wind, original, then, flow]. Answer:", "answer": " original", "id": "langgame_gen_00468"}
+{"question": "What option string starts with 'g'? The available option strings are: [ glass, success, finish, ask]. Answer:", "answer": " glass", "id": "langgame_gen_00469"}
+{"question": "These are the available option strings: [ compare, least, fruit, meat]. What string contains 'eat'? Answer:", "answer": " meat", "id": "langgame_gen_00470"}
+{"question": "The available option strings are: [ settle, bat, experiment, collect]. What word is the shortest? Answer:", "answer": " bat", "id": "langgame_gen_00471"}
+{"question": "The option strings: [ red, up, subtract, huge]. What option is the longest? Answer:", "answer": " subtract", "id": "langgame_gen_00472"}
+{"question": "Which of the possible choices contains 't'? The possible choices are: [ safe, answer, set, dad]. Answer:", "answer": " set", "id": "langgame_gen_00473"}
+{"question": "The available options: [ new, feet, ship, wash]. Which of the available options ends with 'et'? Answer:", "answer": " feet", "id": "langgame_gen_00474"}
+{"question": "Which  starts with 'nu'? The possible options are: [ number, spend, third, touch]. Answer:", "answer": " number", "id": "langgame_gen_00475"}
+{"question": "These are the available choices: [ what, are, instrument, depend]. What option word contains 'str'? Answer:", "answer": " instrument", "id": "langgame_gen_00476"}
+{"question": "The option words are: [ develop, too, danger, subtract]. What option is the shortest? Answer:", "answer": " too", "id": "langgame_gen_00477"}
+{"question": "What option word is the longest? These are the option words: [ discuss, was, cook, hear]. Answer:", "answer": " discuss", "id": "langgame_gen_00478"}
+{"question": "The choices are: [ unit, experience, weight, captain]. Which of the choices starts with 'cap'? Answer:", "answer": " captain", "id": "langgame_gen_00479"}
+{"question": "These are the choices: [ equal, second, front, test]. Which of the choices starts with 'f'? Answer:", "answer": " front", "id": "langgame_gen_00480"}
+{"question": "The possible option strings: [ salt, natural, week, teach]. Which of the possible option strings starts with 'we'? Answer:", "answer": " week", "id": "langgame_gen_00481"}
+{"question": "These are the option strings: [ born, spoke, light, safe]. Which of the option strings contains 'h'? Answer:", "answer": " light", "id": "langgame_gen_00482"}
+{"question": "The possible option strings: [ done, cold, test, figure]. What option word contains 't'? Answer:", "answer": " test", "id": "langgame_gen_00483"}
+{"question": "The choices are: [ thus, ran, art, quart]. Which of the choices ends with 'ran'? Answer:", "answer": " ran", "id": "langgame_gen_00484"}
+{"question": "Which choice has the most letter 'l's? The possible options: [ trip, fig, people, multiply]. Answer:", "answer": " multiply", "id": "langgame_gen_00485"}
+{"question": "These are the available options: [ here, nor, heard, boy]. Which of the available options ends with 'ard'? Answer:", "answer": " heard", "id": "langgame_gen_00486"}
+{"question": "The option words are: [ group, band, blood, clean]. Which of the option words ends with 'oup'? Answer:", "answer": " group", "id": "langgame_gen_00487"}
+{"question": "Which of the possible choices is the shortest? The possible choices are: [ subject, middle, create, add]. Answer:", "answer": " add", "id": "langgame_gen_00488"}
+{"question": "The available option strings are: [ join, sound, week, each]. What option ends with 'eek'? Answer:", "answer": " week", "id": "langgame_gen_00489"}
+{"question": "Which of the options has the most letter 's's? The options are: [ slip, surprise, over, call]. Answer:", "answer": " surprise", "id": "langgame_gen_00490"}
+{"question": "The available choices are: [ each, hear, offer, let]. Which choice contains 't'? Answer:", "answer": " let", "id": "langgame_gen_00491"}
+{"question": "These are the possible choices: [ length, he, especially, famous]. Which word is the shortest? Answer:", "answer": " he", "id": "langgame_gen_00492"}
+{"question": "The available choices are: [ provide, magnet, particular, reach]. What option has the most letter 'a's? Answer:", "answer": " particular", "id": "langgame_gen_00493"}
+{"question": "The available option words are: [ fraction, include, too, friend]. Which of the available option words is the shortest? Answer:", "answer": " too", "id": "langgame_gen_00494"}
+{"question": "The options are: [ meat, neck, success, all]. Which  is the longest? Answer:", "answer": " success", "id": "langgame_gen_00495"}
+{"question": "Which of the option strings has the most letter 'd's? The option strings are: [ start, roll, it, divide]. Answer:", "answer": " divide", "id": "langgame_gen_00496"}
+{"question": "What  has the most letter 't's? The possible options are: [ modern, cotton, allow, can]. Answer:", "answer": " cotton", "id": "langgame_gen_00497"}
+{"question": "Which of the available option strings contains 'b'? These are the available option strings: [ tell, sing, neighbor, shape]. Answer:", "answer": " neighbor", "id": "langgame_gen_00498"}
+{"question": "The possible option strings are: [ protect, pitch, among, captain]. What option has the most letter 't's? Answer:", "answer": " protect", "id": "langgame_gen_00499"}
+{"question": "What word starts with 'sw'? These are the possible options: [ we, present, tail, swim]. Answer:", "answer": " swim", "id": "langgame_gen_00500"}
+{"question": "These are the available option strings: [ plain, continue, shout, happy]. What  contains 'sh'? Answer:", "answer": " shout", "id": "langgame_gen_00501"}
+{"question": "Which option word ends with 't'? The possible options: [ record, share, on, yet]. Answer:", "answer": " yet", "id": "langgame_gen_00502"}
+{"question": "Which option is the shortest? The choices: [ multiply, weather, middle, has]. Answer:", "answer": " has", "id": "langgame_gen_00503"}
+{"question": "These are the choices: [ represent, period, few, clothe]. Which of the choices is the shortest? Answer:", "answer": " few", "id": "langgame_gen_00504"}
+{"question": "Which of the possible choices is the longest? The possible choices are: [ game, said, pair, surface]. Answer:", "answer": " surface", "id": "langgame_gen_00505"}
+{"question": "These are the possible option words: [ mile, that, remember, show]. Which word has the most letter 'm's? Answer:", "answer": " remember", "id": "langgame_gen_00506"}
+{"question": "Which word is the shortest? These are the available option words: [ numeral, wonder, general, can]. Answer:", "answer": " can", "id": "langgame_gen_00507"}
+{"question": "These are the possible choices: [ make, sister, round, town]. What string ends with 'ter'? Answer:", "answer": " sister", "id": "langgame_gen_00508"}
+{"question": "Which word contains 'pr'? The available options: [ prove, separate, allow, the]. Answer:", "answer": " prove", "id": "langgame_gen_00509"}
+{"question": "The possible choices: [ stream, govern, eight, reason]. Which of the possible choices starts with 'go'? Answer:", "answer": " govern", "id": "langgame_gen_00510"}
+{"question": "The possible option words are: [ wing, form, syllable, need]. Which option string is the longest? Answer:", "answer": " syllable", "id": "langgame_gen_00511"}
+{"question": "Which of the options is the longest? The options: [ same, continent, edge, hit]. Answer:", "answer": " continent", "id": "langgame_gen_00512"}
+{"question": "The available options are: [ capital, chief, right, busy]. Which of the available options contains 'ef'? Answer:", "answer": " chief", "id": "langgame_gen_00513"}
+{"question": "Which option string is the shortest? The possible options are: [ surface, current, during, die]. Answer:", "answer": " die", "id": "langgame_gen_00514"}
+{"question": "These are the available option strings: [ but, village, history, nothing]. Which word is the shortest? Answer:", "answer": " but", "id": "langgame_gen_00515"}
+{"question": "Which  is the longest? These are the option words: [ consider, week, mind, form]. Answer:", "answer": " consider", "id": "langgame_gen_00516"}
+{"question": "The possible option words are: [ body, chair, copy, gray]. Which  contains 'gr'? Answer:", "answer": " gray", "id": "langgame_gen_00517"}
+{"question": "Which of the possible options is the shortest? The possible options are: [ key, thought, gentle, opposite]. Answer:", "answer": " key", "id": "langgame_gen_00518"}
+{"question": "Which string is the shortest? These are the option words: [ process, always, dictionary, add]. Answer:", "answer": " add", "id": "langgame_gen_00519"}
+{"question": "Which of the option strings has the most letter 't's? The option strings: [ rock, written, picture, about]. Answer:", "answer": " written", "id": "langgame_gen_00520"}
+{"question": "The options are: [ has, multiply, did, soft]. Which of the options is the longest? Answer:", "answer": " multiply", "id": "langgame_gen_00521"}
+{"question": "What word has the most letter 'd's? The available options are: [ too, war, hundred, white]. Answer:", "answer": " hundred", "id": "langgame_gen_00522"}
+{"question": "The available options: [ bear, compare, spot, fill]. Which of the available options is the longest? Answer:", "answer": " compare", "id": "langgame_gen_00523"}
+{"question": "These are the available choices: [ state, trouble, rub, phrase]. What choice ends with 'se'? Answer:", "answer": " phrase", "id": "langgame_gen_00524"}
+{"question": "The options: [ see, seat, include, hole]. Which option is the longest? Answer:", "answer": " include", "id": "langgame_gen_00525"}
+{"question": "What option word is the longest? These are the option strings: [ call, material, low, here]. Answer:", "answer": " material", "id": "langgame_gen_00526"}
+{"question": "The available options: [ necessary, separate, miss, wire]. Which of the available options contains 'wir'? Answer:", "answer": " wire", "id": "langgame_gen_00527"}
+{"question": "Which of the possible option strings contains 'b'? The possible option strings: [ by, arm, captain, car]. Answer:", "answer": " by", "id": "langgame_gen_00528"}
+{"question": "What  ends with 'od'? The possible options: [ insect, good, sit, thin]. Answer:", "answer": " good", "id": "langgame_gen_00529"}
+{"question": "What option has the most letter 'o's? The possible choices: [ for, won't, consonant, ring]. Answer:", "answer": " consonant", "id": "langgame_gen_00530"}
+{"question": "The option strings are: [ record, road, board, eat]. Which option ends with 'ad'? Answer:", "answer": " road", "id": "langgame_gen_00531"}
+{"question": "These are the choices: [ history, one, six, cow]. Which of the choices is the longest? Answer:", "answer": " history", "id": "langgame_gen_00532"}
+{"question": "The possible choices are: [ blue, hundred, bar, gas]. What option string is the longest? Answer:", "answer": " hundred", "id": "langgame_gen_00533"}
+{"question": "The available options are: [ each, led, station, reach]. Which of the available options contains 'r'? Answer:", "answer": " reach", "id": "langgame_gen_00534"}
+{"question": "Which of the possible choices has the most letter 'c's? The possible choices: [ chance, took, father, like]. Answer:", "answer": " chance", "id": "langgame_gen_00535"}
+{"question": "Which of the available option words is the shortest? These are the available option words: [ distant, did, certain, century]. Answer:", "answer": " did", "id": "langgame_gen_00536"}
+{"question": "Which option starts with 'br'? The choices: [ broad, pass, close, country]. Answer:", "answer": " broad", "id": "langgame_gen_00537"}
+{"question": "Which of the options has the most letter 't's? These are the options: [ pay, pick, continue, thought]. Answer:", "answer": " thought", "id": "langgame_gen_00538"}
+{"question": "Which  ends with 'n'? The available choices are: [ shape, where, even, neck]. Answer:", "answer": " even", "id": "langgame_gen_00539"}
+{"question": "What  has the most letter 'o's? The possible options are: [ forest, stood, snow, dear]. Answer:", "answer": " stood", "id": "langgame_gen_00540"}
+{"question": "The available option words: [ he, sudden, rather, remember]. Which of the available option words is the shortest? Answer:", "answer": " he", "id": "langgame_gen_00541"}
+{"question": "The options: [ bank, instrument, happy, view]. Which word has the most letter 'n's? Answer:", "answer": " instrument", "id": "langgame_gen_00542"}
+{"question": "The available option strings: [ clothe, electric, I, subtract]. Which of the available option strings is the shortest? Answer:", "answer": " I", "id": "langgame_gen_00543"}
+{"question": "The possible option words: [ summer, correct, melody, not]. What string is the shortest? Answer:", "answer": " not", "id": "langgame_gen_00544"}
+{"question": "Which  contains 'ity'? The option strings are: [ fine, city, gas, pretty]. Answer:", "answer": " city", "id": "langgame_gen_00545"}
+{"question": "These are the choices: [ system, compare, lay, liquid]. What option word is the shortest? Answer:", "answer": " lay", "id": "langgame_gen_00546"}
+{"question": "Which option is the shortest? These are the options: [ ten, planet, evening, provide]. Answer:", "answer": " ten", "id": "langgame_gen_00547"}
+{"question": "Which of the available option words is the shortest? The available option words: [ ear, common, expect, similar]. Answer:", "answer": " ear", "id": "langgame_gen_00548"}
+{"question": "What option is the longest? The available option words are: [ produce, way, iron, cent]. Answer:", "answer": " produce", "id": "langgame_gen_00549"}
+{"question": "What choice starts with 'sou'? These are the option words: [ will, young, south, way]. Answer:", "answer": " south", "id": "langgame_gen_00550"}
+{"question": "Which  starts with 'o'? These are the available choices: [ store, cry, noon, of]. Answer:", "answer": " of", "id": "langgame_gen_00551"}
+{"question": "These are the available option strings: [ provide, pose, if, deal]. Which of the available option strings is the longest? Answer:", "answer": " provide", "id": "langgame_gen_00552"}
+{"question": "The available option words are: [ group, even, foot, know]. What choice ends with 'w'? Answer:", "answer": " know", "id": "langgame_gen_00553"}
+{"question": "Which of the available option words has the most letter 'l's? The available option words are: [ prove, score, yellow, often]. Answer:", "answer": " yellow", "id": "langgame_gen_00554"}
+{"question": "The option words: [ about, unit, ride, beauty]. Which option string starts with 'ri'? Answer:", "answer": " ride", "id": "langgame_gen_00555"}
+{"question": "What  is the shortest? The possible options are: [ company, figure, though, tie]. Answer:", "answer": " tie", "id": "langgame_gen_00556"}
+{"question": "Which of the possible option strings starts with 'ear'? The possible option strings are: [ earth, repeat, egg, near]. Answer:", "answer": " earth", "id": "langgame_gen_00557"}
+{"question": "The options are: [ turn, board, party, duck]. Which of the options ends with 'rn'? Answer:", "answer": " turn", "id": "langgame_gen_00558"}
+{"question": "The option words are: [ how, some, syllable, master]. What option string starts with 'ma'? Answer:", "answer": " master", "id": "langgame_gen_00559"}
+{"question": "These are the option words: [ ice, rest, own, similar]. What string is the longest? Answer:", "answer": " similar", "id": "langgame_gen_00560"}
+{"question": "Which of the option words is the longest? These are the option words: [ trouble, has, wear, term]. Answer:", "answer": " trouble", "id": "langgame_gen_00561"}
+{"question": "The choices are: [ toward, industry, key, great]. Which option word ends with 'try'? Answer:", "answer": " industry", "id": "langgame_gen_00562"}
+{"question": "The options: [ between, I, must, made]. What string is the longest? Answer:", "answer": " between", "id": "langgame_gen_00563"}
+{"question": "These are the available choices: [ market, make, suggest, ball]. Which of the available choices contains 'mak'? Answer:", "answer": " make", "id": "langgame_gen_00564"}
+{"question": "Which string starts with 's'? The available options are: [ do, cause, shoe, cook]. Answer:", "answer": " shoe", "id": "langgame_gen_00565"}
+{"question": "Which option word has the most letter 'u's? The choices: [ usual, our, experiment, dance]. Answer:", "answer": " usual", "id": "langgame_gen_00566"}
+{"question": "What choice is the longest? The possible choices: [ gone, whether, step, and]. Answer:", "answer": " whether", "id": "langgame_gen_00567"}
+{"question": "These are the possible options: [ each, mountain, after, same]. Which option contains 'n'? Answer:", "answer": " mountain", "id": "langgame_gen_00568"}
+{"question": "Which of the option strings has the most letter 'r's? The option strings are: [ continue, most, remember, base]. Answer:", "answer": " remember", "id": "langgame_gen_00569"}
+{"question": "The available option strings are: [ surface, gas, time, yet]. Which  is the longest? Answer:", "answer": " surface", "id": "langgame_gen_00570"}
+{"question": "The option strings are: [ base, gray, dad, continent]. Which option is the longest? Answer:", "answer": " continent", "id": "langgame_gen_00571"}
+{"question": "Which of the option words is the longest? These are the option words: [ sat, support, had, mean]. Answer:", "answer": " support", "id": "langgame_gen_00572"}
+{"question": "The possible option strings: [ music, king, whether, front]. What  ends with 't'? Answer:", "answer": " front", "id": "langgame_gen_00573"}
+{"question": "What option is the shortest? The options are: [ bar, dictionary, colony, bright]. Answer:", "answer": " bar", "id": "langgame_gen_00574"}
+{"question": "Which of the possible choices is the longest? The possible choices are: [ dry, told, section, my]. Answer:", "answer": " section", "id": "langgame_gen_00575"}
+{"question": "Which option word is the longest? The available option words: [ general, blue, buy, tool]. Answer:", "answer": " general", "id": "langgame_gen_00576"}
+{"question": "What word is the shortest? The possible option words are: [ modern, experiment, system, dog]. Answer:", "answer": " dog", "id": "langgame_gen_00577"}
+{"question": "These are the option words: [ map, inch, history, often]. Which option string contains 'nch'? Answer:", "answer": " inch", "id": "langgame_gen_00578"}
+{"question": "These are the option strings: [ table, method, two, caught]. Which of the option strings contains 'gh'? Answer:", "answer": " caught", "id": "langgame_gen_00579"}
+{"question": "These are the possible option strings: [ include, it, suggest, happen]. Which word is the shortest? Answer:", "answer": " it", "id": "langgame_gen_00580"}
+{"question": "These are the choices: [ vowel, continue, lift, measure]. What  ends with 'el'? Answer:", "answer": " vowel", "id": "langgame_gen_00581"}
+{"question": "Which string has the most letter 'o's? The options: [ sea, port, poor, push]. Answer:", "answer": " poor", "id": "langgame_gen_00582"}
+{"question": "Which of the option words contains 'win'? The option words are: [ wind, feed, glass, rich]. Answer:", "answer": " wind", "id": "langgame_gen_00583"}
+{"question": "These are the available option strings: [ nation, excite, war, suggest]. Which option is the shortest? Answer:", "answer": " war", "id": "langgame_gen_00584"}
+{"question": "These are the option strings: [ poem, duck, job, window]. What  starts with 'p'? Answer:", "answer": " poem", "id": "langgame_gen_00585"}
+{"question": "The available option words are: [ count, be, million, such]. Which option contains 'unt'? Answer:", "answer": " count", "id": "langgame_gen_00586"}
+{"question": "The possible choices: [ our, poor, act, prepare]. Which word is the longest? Answer:", "answer": " prepare", "id": "langgame_gen_00587"}
+{"question": "Which of the possible options ends with 'ure'? These are the possible options: [ chair, believe, would, nature]. Answer:", "answer": " nature", "id": "langgame_gen_00588"}
+{"question": "What option string starts with 'sta'? These are the available choices: [ no, start, I, simple]. Answer:", "answer": " start", "id": "langgame_gen_00589"}
+{"question": "Which string ends with 'e'? The choices: [ quite, contain, thousand, object]. Answer:", "answer": " quite", "id": "langgame_gen_00590"}
+{"question": "Which  starts with 'oce'? The choices are: [ string, young, ocean, division]. Answer:", "answer": " ocean", "id": "langgame_gen_00591"}
+{"question": "Which option has the most letter 'a's? The possible option strings: [ shell, again, engine, rather]. Answer:", "answer": " again", "id": "langgame_gen_00592"}
+{"question": "Which of the possible option strings starts with 'mel'? The possible option strings: [ life, how, melody, want]. Answer:", "answer": " melody", "id": "langgame_gen_00593"}
+{"question": "Which option word is the longest? These are the possible option strings: [ rest, one, brought, view]. Answer:", "answer": " brought", "id": "langgame_gen_00594"}
+{"question": "What word starts with 'r'? The possible option words: [ tube, reach, market, dictionary]. Answer:", "answer": " reach", "id": "langgame_gen_00595"}
+{"question": "What option string ends with 'k'? The option strings: [ now, milk, form, baby]. Answer:", "answer": " milk", "id": "langgame_gen_00596"}
+{"question": "Which of the possible options is the shortest? The possible options: [ exercise, now, country, distant]. Answer:", "answer": " now", "id": "langgame_gen_00597"}
+{"question": "The available options: [ current, low, depend, soldier]. Which of the available options is the shortest? Answer:", "answer": " low", "id": "langgame_gen_00598"}
+{"question": "What option is the longest? These are the available choices: [ against, fish, team, your]. Answer:", "answer": " against", "id": "langgame_gen_00599"}
+{"question": "The possible choices: [ method, list, team, compare]. Which of the possible choices ends with 're'? Answer:", "answer": " compare", "id": "langgame_gen_00600"}
+{"question": "These are the choices: [ consonant, are, fat, log]. What word is the longest? Answer:", "answer": " consonant", "id": "langgame_gen_00601"}
+{"question": "The possible options: [ numeral, bone, fast, hand]. Which of the possible options is the longest? Answer:", "answer": " numeral", "id": "langgame_gen_00602"}
+{"question": "The option words: [ magnet, sat, degree, perhaps]. Which of the option words is the shortest? Answer:", "answer": " sat", "id": "langgame_gen_00603"}
+{"question": "What string starts with 'pa'? The available option words: [ will, kill, path, turn]. Answer:", "answer": " path", "id": "langgame_gen_00604"}
+{"question": "These are the possible option words: [ tiny, sit, exact, expect]. What word has the most letter 'e's? Answer:", "answer": " expect", "id": "langgame_gen_00605"}
+{"question": "Which of the possible option strings is the longest? The possible option strings: [ substance, let, mind, use]. Answer:", "answer": " substance", "id": "langgame_gen_00606"}
+{"question": "Which of the possible option words has the most letter 'a's? The possible option words: [ wash, captain, brown, shell]. Answer:", "answer": " captain", "id": "langgame_gen_00607"}
+{"question": "The possible choices: [ lie, draw, iron, quotient]. Which of the possible choices is the longest? Answer:", "answer": " quotient", "id": "langgame_gen_00608"}
+{"question": "The option strings: [ top, before, always, multiply]. What choice is the shortest? Answer:", "answer": " top", "id": "langgame_gen_00609"}
+{"question": "Which of the option words has the most letter 'm's? The option words: [ trade, station, moment, like]. Answer:", "answer": " moment", "id": "langgame_gen_00610"}
+{"question": "What string contains 'sy'? The available option strings: [ system, sky, post, milk]. Answer:", "answer": " system", "id": "langgame_gen_00611"}
+{"question": "The option words are: [ must, soldier, ring, trip]. Which string is the longest? Answer:", "answer": " soldier", "id": "langgame_gen_00612"}
+{"question": "Which choice is the shortest? The possible option words are: [ brother, dictionary, own, beauty]. Answer:", "answer": " own", "id": "langgame_gen_00613"}
+{"question": "The option words are: [ yet, after, decide, won't]. Which option ends with 'et'? Answer:", "answer": " yet", "id": "langgame_gen_00614"}
+{"question": "What word contains 'on'? The available choices are: [ probable, don't, gas, said]. Answer:", "answer": " don't", "id": "langgame_gen_00615"}
+{"question": "The available option words are: [ dance, shall, thousand, special]. What string ends with 'all'? Answer:", "answer": " shall", "id": "langgame_gen_00616"}
+{"question": "Which of the available choices contains 't'? The available choices: [ tire, original, wild, colony]. Answer:", "answer": " tire", "id": "langgame_gen_00617"}
+{"question": "Which  is the longest? The possible option words: [ lot, forward, can, rule]. Answer:", "answer": " forward", "id": "langgame_gen_00618"}
+{"question": "Which option ends with 'ugh'? The available option words: [ track, laugh, few, woman]. Answer:", "answer": " laugh", "id": "langgame_gen_00619"}
+{"question": "The possible option strings: [ face, teeth, sudden, twenty]. Which option word ends with 'th'? Answer:", "answer": " teeth", "id": "langgame_gen_00620"}
+{"question": "These are the available option words: [ segment, bat, try, free]. What word is the longest? Answer:", "answer": " segment", "id": "langgame_gen_00621"}
+{"question": "These are the available options: [ join, only, through, fear]. Which option word is the longest? Answer:", "answer": " through", "id": "langgame_gen_00622"}
+{"question": "These are the possible option strings: [ ice, several, change, want]. Which of the possible option strings starts with 'wan'? Answer:", "answer": " want", "id": "langgame_gen_00623"}
+{"question": "What choice is the longest? The available options are: [ warm, five, ask, pattern]. Answer:", "answer": " pattern", "id": "langgame_gen_00624"}
+{"question": "The available choices: [ determine, must, divide, bank]. What choice has the most letter 'd's? Answer:", "answer": " divide", "id": "langgame_gen_00625"}
+{"question": "What choice contains 'ck'? The available option words are: [ yard, clock, learn, you]. Answer:", "answer": " clock", "id": "langgame_gen_00626"}
+{"question": "Which of the choices ends with 've'? The choices: [ at, position, give, paint]. Answer:", "answer": " give", "id": "langgame_gen_00627"}
+{"question": "Which of the available choices contains 're'? These are the available choices: [ question, offer, class, read]. Answer:", "answer": " read", "id": "langgame_gen_00628"}
+{"question": "Which option string starts with 'ap'? The available choices: [ fire, went, plan, apple]. Answer:", "answer": " apple", "id": "langgame_gen_00629"}
+{"question": "The options are: [ lot, slow, electric, kind]. Which of the options is the longest? Answer:", "answer": " electric", "id": "langgame_gen_00630"}
+{"question": "The options are: [ more, together, there, apple]. Which option string ends with 'her'? Answer:", "answer": " together", "id": "langgame_gen_00631"}
+{"question": "Which word is the shortest? These are the available option strings: [ we, rather, season, through]. Answer:", "answer": " we", "id": "langgame_gen_00632"}
+{"question": "The option words are: [ long, poor, though, power]. Which of the option words has the most letter 'h's? Answer:", "answer": " though", "id": "langgame_gen_00633"}
+{"question": "Which word starts with 'dou'? The choices: [ state, yellow, might, double]. Answer:", "answer": " double", "id": "langgame_gen_00634"}
+{"question": "These are the possible options: [ continue, collect, energy, bone]. Which of the possible options has the most letter 'c's? Answer:", "answer": " collect", "id": "langgame_gen_00635"}
+{"question": "The possible choices: [ master, should, current, whether]. What  contains 'n'? Answer:", "answer": " current", "id": "langgame_gen_00636"}
+{"question": "The possible option words: [ noun, lady, voice, bone]. What choice contains 'y'? Answer:", "answer": " lady", "id": "langgame_gen_00637"}
+{"question": "What string starts with 'gam'? The available option strings: [ call, half, game, black]. Answer:", "answer": " game", "id": "langgame_gen_00638"}
+{"question": "The available option words: [ is, sat, grand, cook]. Which of the available option words contains 'o'? Answer:", "answer": " cook", "id": "langgame_gen_00639"}
+{"question": "Which word is the longest? These are the available option words: [ exercise, joy, line, have]. Answer:", "answer": " exercise", "id": "langgame_gen_00640"}
+{"question": "What choice contains 't'? The available option strings: [ stone, sense, our, piece]. Answer:", "answer": " stone", "id": "langgame_gen_00641"}
+{"question": "The available options are: [ king, room, excite, heart]. What choice contains 'ex'? Answer:", "answer": " excite", "id": "langgame_gen_00642"}
+{"question": "Which of the available options is the shortest? The available options are: [ discuss, window, low, crease]. Answer:", "answer": " low", "id": "langgame_gen_00643"}
+{"question": "Which choice has the most letter 'p's? These are the choices: [ proper, usual, decimal, organ]. Answer:", "answer": " proper", "id": "langgame_gen_00644"}
+{"question": "Which of the possible choices starts with 'fee'? These are the possible choices: [ lady, feed, train, question]. Answer:", "answer": " feed", "id": "langgame_gen_00645"}
+{"question": "The option strings are: [ there, natural, have, tone]. What choice starts with 'ha'? Answer:", "answer": " have", "id": "langgame_gen_00646"}
+{"question": "The available option words: [ through, sight, head, hot]. Which option starts with 'hea'? Answer:", "answer": " head", "id": "langgame_gen_00647"}
+{"question": "Which  has the most letter 'b's? The available option strings: [ my, ice, surprise, probable]. Answer:", "answer": " probable", "id": "langgame_gen_00648"}
+{"question": "Which option is the longest? The option strings are: [ natural, duck, beat, word]. Answer:", "answer": " natural", "id": "langgame_gen_00649"}
+{"question": "The option strings are: [ card, search, connect, gray]. What option has the most letter 'n's? Answer:", "answer": " connect", "id": "langgame_gen_00650"}
+{"question": "Which of the option strings starts with 'tr'? The option strings: [ train, cut, group, half]. Answer:", "answer": " train", "id": "langgame_gen_00651"}
+{"question": "The options: [ speak, design, straight, repeat]. What option starts with 'rep'? Answer:", "answer": " repeat", "id": "langgame_gen_00652"}
+{"question": "What option word contains 'gav'? The available choices are: [ fear, gave, thick, law]. Answer:", "answer": " gave", "id": "langgame_gen_00653"}
+{"question": "Which of the possible options contains 't'? The possible options: [ mark, grew, hill, chart]. Answer:", "answer": " chart", "id": "langgame_gen_00654"}
+{"question": "Which of the available option words has the most letter 'r's? The available option words: [ surprise, team, meat, week]. Answer:", "answer": " surprise", "id": "langgame_gen_00655"}
+{"question": "Which of the option words starts with 'w'? The option words are: [ full, salt, whose, rose]. Answer:", "answer": " whose", "id": "langgame_gen_00656"}
+{"question": "Which choice starts with 'm'? The possible option words: [ felt, enter, swim, move]. Answer:", "answer": " move", "id": "langgame_gen_00657"}
+{"question": "What option word has the most letter 'n's? The available options are: [ stop, page, favor, morning]. Answer:", "answer": " morning", "id": "langgame_gen_00658"}
+{"question": "The available options are: [ paper, common, ear, doctor]. What option string has the most letter 'p's? Answer:", "answer": " paper", "id": "langgame_gen_00659"}
+{"question": "Which word contains 'a'? These are the option strings: [ natural, job, these, develop]. Answer:", "answer": " natural", "id": "langgame_gen_00660"}
+{"question": "Which option word is the longest? The possible option words: [ wood, best, test, problem]. Answer:", "answer": " problem", "id": "langgame_gen_00661"}
+{"question": "What choice has the most letter 'u's? These are the possible option strings: [ fast, keep, usual, ball]. Answer:", "answer": " usual", "id": "langgame_gen_00662"}
+{"question": "What string starts with 'cle'? These are the option strings: [ huge, clear, think, low]. Answer:", "answer": " clear", "id": "langgame_gen_00663"}
+{"question": "These are the possible options: [ especially, girl, dictionary, wait]. Which of the possible options starts with 'esp'? Answer:", "answer": " especially", "id": "langgame_gen_00664"}
+{"question": "Which of the options ends with 'ak'? The options are: [ ago, beauty, leg, speak]. Answer:", "answer": " speak", "id": "langgame_gen_00665"}
+{"question": "The available choices: [ care, cross, anger, real]. Which choice ends with 'r'? Answer:", "answer": " anger", "id": "langgame_gen_00666"}
+{"question": "Which option is the longest? These are the possible choices: [ some, does, free, capital]. Answer:", "answer": " capital", "id": "langgame_gen_00667"}
+{"question": "What option word is the shortest? These are the available choices: [ dollar, six, believe, necessary]. Answer:", "answer": " six", "id": "langgame_gen_00668"}
+{"question": "What word is the shortest? The available option strings are: [ person, got, against, window]. Answer:", "answer": " got", "id": "langgame_gen_00669"}
+{"question": "These are the available choices: [ fruit, while, common, occur]. Which choice has the most letter 'm's? Answer:", "answer": " common", "id": "langgame_gen_00670"}
+{"question": "The possible options: [ noon, need, opposite, correct]. What option word ends with 'e'? Answer:", "answer": " opposite", "id": "langgame_gen_00671"}
+{"question": "What option ends with 'k'? The available options: [ truck, send, is, area]. Answer:", "answer": " truck", "id": "langgame_gen_00672"}
+{"question": "These are the available option words: [ low, moment, collect, danger]. What option is the shortest? Answer:", "answer": " low", "id": "langgame_gen_00673"}
+{"question": "Which string contains 'to'? These are the options: [ stone, result, list, gentle]. Answer:", "answer": " stone", "id": "langgame_gen_00674"}
+{"question": "Which of the possible option strings is the shortest? These are the possible option strings: [ village, always, figure, ice]. Answer:", "answer": " ice", "id": "langgame_gen_00675"}
+{"question": "What option word starts with 'en'? The available option strings: [ enemy, clothe, story, able]. Answer:", "answer": " enemy", "id": "langgame_gen_00676"}
+{"question": "The possible choices: [ to, grow, our, product]. What word is the longest? Answer:", "answer": " product", "id": "langgame_gen_00677"}
+{"question": "What option string starts with 'ma'? The possible options: [ minute, picture, bad, map]. Answer:", "answer": " map", "id": "langgame_gen_00678"}
+{"question": "The options: [ even, since, feel, charge]. What option starts with 'sin'? Answer:", "answer": " since", "id": "langgame_gen_00679"}
+{"question": "Which of the available option words contains 'fo'? These are the available option words: [ happen, industry, noun, follow]. Answer:", "answer": " follow", "id": "langgame_gen_00680"}
+{"question": "Which of the available choices has the most letter 'p's? The available choices are: [ same, last, table, property]. Answer:", "answer": " property", "id": "langgame_gen_00681"}
+{"question": "The possible option words are: [ govern, circle, add, discuss]. What option string is the shortest? Answer:", "answer": " add", "id": "langgame_gen_00682"}
+{"question": "Which option string has the most letter 'm's? The choices: [ ready, hat, summer, better]. Answer:", "answer": " summer", "id": "langgame_gen_00683"}
+{"question": "Which option string ends with 'ed'? The available choices are: [ need, shop, third, grew]. Answer:", "answer": " need", "id": "langgame_gen_00684"}
+{"question": "These are the possible option strings: [ seem, deep, rose, problem]. What option is the longest? Answer:", "answer": " problem", "id": "langgame_gen_00685"}
+{"question": "The possible options: [ young, east, dead, men]. Which of the possible options has the most letter 'd's? Answer:", "answer": " dead", "id": "langgame_gen_00686"}
+{"question": "Which string is the longest? The possible options: [ bit, position, tire, ever]. Answer:", "answer": " position", "id": "langgame_gen_00687"}
+{"question": "Which of the available choices starts with 'tur'? The available choices: [ turn, smile, arrange, room]. Answer:", "answer": " turn", "id": "langgame_gen_00688"}
+{"question": "Which of the available options has the most letter 'd's? The available options are: [ small, past, dead, on]. Answer:", "answer": " dead", "id": "langgame_gen_00689"}
+{"question": "Which of the available option words is the longest? The available option words are: [ compare, oil, post, nine]. Answer:", "answer": " compare", "id": "langgame_gen_00690"}
+{"question": "Which  has the most letter 'l's? The choices: [ major, village, noise, rope]. Answer:", "answer": " village", "id": "langgame_gen_00691"}
+{"question": "The possible options are: [ stream, verb, coat, often]. What option ends with 'en'? Answer:", "answer": " often", "id": "langgame_gen_00692"}
+{"question": "Which of the options has the most letter 't's? The options: [ shout, bottom, she, rise]. Answer:", "answer": " bottom", "id": "langgame_gen_00693"}
+{"question": "The possible option words: [ thank, noise, slip, log]. Which of the possible option words contains 'a'? Answer:", "answer": " thank", "id": "langgame_gen_00694"}
+{"question": "What option word starts with 'pla'? These are the possible options: [ plane, until, real, dance]. Answer:", "answer": " plane", "id": "langgame_gen_00695"}
+{"question": "The options: [ few, speak, quart, front]. Which of the options starts with 'fr'? Answer:", "answer": " front", "id": "langgame_gen_00696"}
+{"question": "The possible choices are: [ behind, study, how, suggest]. Which of the possible choices has the most letter 'g's? Answer:", "answer": " suggest", "id": "langgame_gen_00697"}
+{"question": "The available choices: [ down, segment, been, has]. Which of the available choices is the longest? Answer:", "answer": " segment", "id": "langgame_gen_00698"}
+{"question": "The choices: [ art, map, home, branch]. What  contains 'e'? Answer:", "answer": " home", "id": "langgame_gen_00699"}
+{"question": "The option words: [ equate, I, ear, been]. What  contains 'een'? Answer:", "answer": " been", "id": "langgame_gen_00700"}
+{"question": "The option words are: [ valley, under, told, sister]. Which  contains 'lle'? Answer:", "answer": " valley", "id": "langgame_gen_00701"}
+{"question": "What  is the shortest? The options: [ moment, liquid, choose, cut]. Answer:", "answer": " cut", "id": "langgame_gen_00702"}
+{"question": "Which of the option words is the longest? These are the option words: [ probable, nor, me, has]. Answer:", "answer": " probable", "id": "langgame_gen_00703"}
+{"question": "The options are: [ column, friend, verb, step]. Which string starts with 'f'? Answer:", "answer": " friend", "id": "langgame_gen_00704"}
+{"question": "What  is the shortest? The available option words are: [ energy, determine, captain, no]. Answer:", "answer": " no", "id": "langgame_gen_00705"}
+{"question": "Which of the possible option strings is the shortest? The possible option strings: [ experiment, hat, probable, people]. Answer:", "answer": " hat", "id": "langgame_gen_00706"}
+{"question": "The options are: [ low, indicate, short, favor]. Which of the options ends with 'r'? Answer:", "answer": " favor", "id": "langgame_gen_00707"}
+{"question": "The available option strings are: [ pitch, boat, lady, search]. Which option string ends with 'tch'? Answer:", "answer": " pitch", "id": "langgame_gen_00708"}
+{"question": "What word is the shortest? The choices are: [ describe, parent, ice, spread]. Answer:", "answer": " ice", "id": "langgame_gen_00709"}
+{"question": "What option word is the longest? These are the option words: [ day, how, tall, brought]. Answer:", "answer": " brought", "id": "langgame_gen_00710"}
+{"question": "The choices: [ distant, lie, paragraph, invent]. Which of the choices has the most letter 'p's? Answer:", "answer": " paragraph", "id": "langgame_gen_00711"}
+{"question": "These are the possible option words: [ when, much, tree, collect]. What option starts with 'tre'? Answer:", "answer": " tree", "id": "langgame_gen_00712"}
+{"question": "What option string ends with 'ak'? The available option words are: [ pattern, chief, south, break]. Answer:", "answer": " break", "id": "langgame_gen_00713"}
+{"question": "Which option contains 's'? The option words are: [ period, bank, probable, stand]. Answer:", "answer": " stand", "id": "langgame_gen_00714"}
+{"question": "Which of the possible options contains 'ner'? These are the possible options: [ result, receive, energy, measure]. Answer:", "answer": " energy", "id": "langgame_gen_00715"}
+{"question": "The available options: [ as, girl, word, organ]. Which choice ends with 'l'? Answer:", "answer": " girl", "id": "langgame_gen_00716"}
+{"question": "Which option string ends with 'e'? The option words are: [ basic, deal, sense, cell]. Answer:", "answer": " sense", "id": "langgame_gen_00717"}
+{"question": "Which option string ends with 'e'? These are the choices: [ man, grew, fact, rise]. Answer:", "answer": " rise", "id": "langgame_gen_00718"}
+{"question": "These are the options: [ whose, company, brought, think]. What  starts with 'com'? Answer:", "answer": " company", "id": "langgame_gen_00719"}
+{"question": "What  contains 'ei'? These are the available options: [ did, their, arm, name]. Answer:", "answer": " their", "id": "langgame_gen_00720"}
+{"question": "The available option strings: [ matter, captain, row, process]. Which word has the most letter 's's? Answer:", "answer": " process", "id": "langgame_gen_00721"}
+{"question": "Which of the possible option strings has the most letter 'w's? These are the possible option strings: [ chart, will, vary, window]. Answer:", "answer": " window", "id": "langgame_gen_00722"}
+{"question": "These are the available choices: [ count, car, sentence, grow]. Which of the available choices contains 'oun'? Answer:", "answer": " count", "id": "langgame_gen_00723"}
+{"question": "What  is the shortest? The available options are: [ capital, phrase, end, island]. Answer:", "answer": " end", "id": "langgame_gen_00724"}
+{"question": "The available options are: [ past, wide, top, village]. Which option string is the longest? Answer:", "answer": " village", "id": "langgame_gen_00725"}
+{"question": "These are the possible options: [ base, original, cut, swim]. Which choice starts with 'cu'? Answer:", "answer": " cut", "id": "langgame_gen_00726"}
+{"question": "What option contains 'ors'? The possible option strings: [ take, molecule, world, horse]. Answer:", "answer": " horse", "id": "langgame_gen_00727"}
+{"question": "The options: [ office, consider, way, slip]. What option string ends with 'p'? Answer:", "answer": " slip", "id": "langgame_gen_00728"}
+{"question": "What option word is the shortest? The possible options: [ island, his, machine, control]. Answer:", "answer": " his", "id": "langgame_gen_00729"}
+{"question": "The possible option words are: [ against, power, best, excite]. Which of the possible option words has the most letter 'a's? Answer:", "answer": " against", "id": "langgame_gen_00730"}
+{"question": "Which of the available options ends with 'in'? The available options are: [ foot, again, mix, water]. Answer:", "answer": " again", "id": "langgame_gen_00731"}
+{"question": "The available option words: [ clear, went, such, this]. Which of the available option words starts with 's'? Answer:", "answer": " such", "id": "langgame_gen_00732"}
+{"question": "Which word is the shortest? The available choices are: [ behind, go, morning, strong]. Answer:", "answer": " go", "id": "langgame_gen_00733"}
+{"question": "What word has the most letter 'w's? These are the options: [ sat, ocean, window, buy]. Answer:", "answer": " window", "id": "langgame_gen_00734"}
+{"question": "The available choices: [ voice, language, together, plane]. Which option starts with 'lan'? Answer:", "answer": " language", "id": "langgame_gen_00735"}
+{"question": "Which of the available options is the shortest? The available options: [ bad, exercise, segment, soldier]. Answer:", "answer": " bad", "id": "langgame_gen_00736"}
+{"question": "These are the possible option strings: [ consonant, say, produce, answer]. Which option is the shortest? Answer:", "answer": " say", "id": "langgame_gen_00737"}
+{"question": "Which option ends with 'e'? The possible option words: [ east, bright, star, equate]. Answer:", "answer": " equate", "id": "langgame_gen_00738"}
+{"question": "These are the possible choices: [ quite, break, ear, connect]. What option word ends with 'ear'? Answer:", "answer": " ear", "id": "langgame_gen_00739"}
+{"question": "What string starts with 'f'? The available option strings are: [ me, foot, master, tiny]. Answer:", "answer": " foot", "id": "langgame_gen_00740"}
+{"question": "The available option words are: [ glad, moment, toward, could]. Which of the available option words starts with 'to'? Answer:", "answer": " toward", "id": "langgame_gen_00741"}
+{"question": "What option word has the most letter 's's? These are the available option words: [ middle, shell, system, except]. Answer:", "answer": " system", "id": "langgame_gen_00742"}
+{"question": "Which  has the most letter 'i's? The available choices: [ heavy, front, original, soft]. Answer:", "answer": " original", "id": "langgame_gen_00743"}
+{"question": "These are the available options: [ too, which, any, supply]. Which of the available options has the most letter 'p's? Answer:", "answer": " supply", "id": "langgame_gen_00744"}
+{"question": "What string is the shortest? The possible options: [ gentle, govern, energy, cat]. Answer:", "answer": " cat", "id": "langgame_gen_00745"}
+{"question": "The available option words are: [ bed, charge, settle, minute]. Which option word is the shortest? Answer:", "answer": " bed", "id": "langgame_gen_00746"}
+{"question": "These are the options: [ left, present, while, written]. What choice starts with 'pr'? Answer:", "answer": " present", "id": "langgame_gen_00747"}
+{"question": "These are the possible choices: [ most, rail, certain, usual]. Which of the possible choices has the most letter 'u's? Answer:", "answer": " usual", "id": "langgame_gen_00748"}
+{"question": "The possible option words are: [ famous, duck, stay, buy]. What option starts with 's'? Answer:", "answer": " stay", "id": "langgame_gen_00749"}
+{"question": "Which of the option words starts with 'equ'? The option words: [ equal, sign, pick, thank]. Answer:", "answer": " equal", "id": "langgame_gen_00750"}
+{"question": "The possible option words: [ notice, rise, modern, read]. What option contains 's'? Answer:", "answer": " rise", "id": "langgame_gen_00751"}
+{"question": "Which option string starts with 's'? The possible option words are: [ cause, could, discuss, send]. Answer:", "answer": " send", "id": "langgame_gen_00752"}
+{"question": "The option strings: [ since, window, my, depend]. Which of the option strings has the most letter 'd's? Answer:", "answer": " depend", "id": "langgame_gen_00753"}
+{"question": "Which option is the shortest? The possible option strings are: [ original, yes, spring, perhaps]. Answer:", "answer": " yes", "id": "langgame_gen_00754"}
+{"question": "Which of the possible options is the longest? The possible options are: [ mean, or, sand, numeral]. Answer:", "answer": " numeral", "id": "langgame_gen_00755"}
+{"question": "Which of the available options starts with 'r'? The available options: [ milk, result, law, yes]. Answer:", "answer": " result", "id": "langgame_gen_00756"}
+{"question": "These are the available options: [ shoe, lone, foot, like]. Which option contains 'fo'? Answer:", "answer": " foot", "id": "langgame_gen_00757"}
+{"question": "What  has the most letter 'r's? The possible options: [ melody, thus, remember, experience]. Answer:", "answer": " remember", "id": "langgame_gen_00758"}
+{"question": "The possible option strings: [ probable, matter, search, close]. What string has the most letter 'b's? Answer:", "answer": " probable", "id": "langgame_gen_00759"}
+{"question": "What option word contains 'sim'? These are the possible option words: [ until, claim, simple, shout]. Answer:", "answer": " simple", "id": "langgame_gen_00760"}
+{"question": "What  is the longest? These are the option words: [ swim, we, continent, dog]. Answer:", "answer": " continent", "id": "langgame_gen_00761"}
+{"question": "Which word is the longest? These are the possible option strings: [ wait, tall, fish, sentence]. Answer:", "answer": " sentence", "id": "langgame_gen_00762"}
+{"question": "The possible choices: [ oh, slip, original, work]. What option string is the longest? Answer:", "answer": " original", "id": "langgame_gen_00763"}
+{"question": "What  is the longest? These are the possible choices: [ several, cry, that, path]. Answer:", "answer": " several", "id": "langgame_gen_00764"}
+{"question": "What option contains 'ou'? These are the possible option words: [ fit, count, who, care]. Answer:", "answer": " count", "id": "langgame_gen_00765"}
+{"question": "What option string contains 'en'? The available choices are: [ mine, corner, student, root]. Answer:", "answer": " student", "id": "langgame_gen_00766"}
+{"question": "Which of the available choices is the shortest? The available choices are: [ fun, appear, discuss, follow]. Answer:", "answer": " fun", "id": "langgame_gen_00767"}
+{"question": "These are the option strings: [ numeral, whether, supply, coat]. Which option has the most letter 'p's? Answer:", "answer": " supply", "id": "langgame_gen_00768"}
+{"question": "Which option string ends with 'el'? These are the possible choices: [ could, travel, watch, mind]. Answer:", "answer": " travel", "id": "langgame_gen_00769"}
+{"question": "Which of the possible option strings is the longest? These are the possible option strings: [ ear, few, difficult, ever]. Answer:", "answer": " difficult", "id": "langgame_gen_00770"}
+{"question": "The possible options are: [ camp, search, minute, king]. Which choice contains 'sea'? Answer:", "answer": " search", "id": "langgame_gen_00771"}
+{"question": "The possible choices: [ tone, heat, energy, rule]. Which of the possible choices starts with 't'? Answer:", "answer": " tone", "id": "langgame_gen_00772"}
+{"question": "Which  is the shortest? These are the option strings: [ complete, number, family, dog]. Answer:", "answer": " dog", "id": "langgame_gen_00773"}
+{"question": "What choice starts with 'lat'? The possible option words are: [ late, sat, since, feel]. Answer:", "answer": " late", "id": "langgame_gen_00774"}
+{"question": "Which of the possible choices is the shortest? These are the possible choices: [ window, use, probable, success]. Answer:", "answer": " use", "id": "langgame_gen_00775"}
+{"question": "Which choice contains 'i'? These are the option words: [ take, dream, particular, anger]. Answer:", "answer": " particular", "id": "langgame_gen_00776"}
+{"question": "The available options: [ as, spoke, thought, eye]. Which string starts with 'a'? Answer:", "answer": " as", "id": "langgame_gen_00777"}
+{"question": "What choice ends with 't'? These are the available option words: [ be, weather, push, west]. Answer:", "answer": " west", "id": "langgame_gen_00778"}
+{"question": "Which of the possible options is the shortest? These are the possible options: [ discuss, probable, finish, man]. Answer:", "answer": " man", "id": "langgame_gen_00779"}
+{"question": "The possible option words: [ rich, coast, molecule, cotton]. Which of the possible option words has the most letter 'e's? Answer:", "answer": " molecule", "id": "langgame_gen_00780"}
+{"question": "Which of the choices has the most letter 'i's? The choices: [ finish, sail, match, as]. Answer:", "answer": " finish", "id": "langgame_gen_00781"}
+{"question": "These are the possible options: [ quiet, single, four, always]. Which of the possible options starts with 'sin'? Answer:", "answer": " single", "id": "langgame_gen_00782"}
+{"question": "Which option string is the longest? The possible option strings are: [ industry, hour, turn, see]. Answer:", "answer": " industry", "id": "langgame_gen_00783"}
+{"question": "The available option strings are: [ effect, either, set, design]. What choice is the shortest? Answer:", "answer": " set", "id": "langgame_gen_00784"}
+{"question": "Which of the possible option words has the most letter 'n's? The possible option words are: [ fat, camp, engine, was]. Answer:", "answer": " engine", "id": "langgame_gen_00785"}
+{"question": "Which of the options is the shortest? The options are: [ rather, character, design, cry]. Answer:", "answer": " cry", "id": "langgame_gen_00786"}
+{"question": "Which of the option strings is the longest? The option strings: [ instant, ask, old, no]. Answer:", "answer": " instant", "id": "langgame_gen_00787"}
+{"question": "The option strings: [ them, whether, pull, you]. What choice is the longest? Answer:", "answer": " whether", "id": "langgame_gen_00788"}
+{"question": "Which of the option strings ends with 'k'? The option strings: [ ask, vary, keep, quotient]. Answer:", "answer": " ask", "id": "langgame_gen_00789"}
+{"question": "Which of the options has the most letter 'r's? The options: [ kind, skin, river, moon]. Answer:", "answer": " river", "id": "langgame_gen_00790"}
+{"question": "The available options are: [ place, rock, nation, captain]. Which of the available options has the most letter 'n's? Answer:", "answer": " nation", "id": "langgame_gen_00791"}
+{"question": "Which of the choices has the most letter 'h's? These are the choices: [ market, city, break, thought]. Answer:", "answer": " thought", "id": "langgame_gen_00792"}
+{"question": "The option words: [ yet, press, colony, feed]. Which of the option words starts with 'pre'? Answer:", "answer": " press", "id": "langgame_gen_00793"}
+{"question": "Which of the option words starts with 'fel'? The option words are: [ science, modern, pay, fell]. Answer:", "answer": " fell", "id": "langgame_gen_00794"}
+{"question": "What string contains 'te'? The possible options are: [ loud, against, short, indicate]. Answer:", "answer": " indicate", "id": "langgame_gen_00795"}
+{"question": "Which option string has the most letter 'e's? These are the options: [ before, smell, problem, bread]. Answer:", "answer": " before", "id": "langgame_gen_00796"}
+{"question": "Which of the possible options starts with 'thi'? The possible options are: [ thick, spring, spread, friend]. Answer:", "answer": " thick", "id": "langgame_gen_00797"}
+{"question": "The choices: [ noun, collect, dead, if]. What option string is the longest? Answer:", "answer": " collect", "id": "langgame_gen_00798"}
+{"question": "The available option words are: [ ran, interest, cell, her]. Which  is the longest? Answer:", "answer": " interest", "id": "langgame_gen_00799"}
+{"question": "The option strings: [ window, way, reply, color]. Which option string has the most letter 'w's? Answer:", "answer": " window", "id": "langgame_gen_00800"}
+{"question": "These are the possible options: [ engine, letter, finish, die]. Which choice is the shortest? Answer:", "answer": " die", "id": "langgame_gen_00801"}
+{"question": "The option words are: [ paragraph, molecule, expect, war]. What option string is the shortest? Answer:", "answer": " war", "id": "langgame_gen_00802"}
+{"question": "The possible choices are: [ watch, band, total, took]. Which of the possible choices contains 'd'? Answer:", "answer": " band", "id": "langgame_gen_00803"}
+{"question": "The option words: [ occur, atom, shoe, sun]. What option contains 'e'? Answer:", "answer": " shoe", "id": "langgame_gen_00804"}
+{"question": "These are the available option words: [ necessary, operate, black, triangle]. Which option contains 'an'? Answer:", "answer": " triangle", "id": "langgame_gen_00805"}
+{"question": "What word has the most letter 's's? These are the available option strings: [ favor, pass, vary, final]. Answer:", "answer": " pass", "id": "langgame_gen_00806"}
+{"question": "What  has the most letter 't's? The option strings: [ home, corn, clear, matter]. Answer:", "answer": " matter", "id": "langgame_gen_00807"}
+{"question": "The possible option words: [ shoulder, slip, face, were]. Which word is the longest? Answer:", "answer": " shoulder", "id": "langgame_gen_00808"}
+{"question": "Which option is the longest? The available choices: [ one, thousand, that, band]. Answer:", "answer": " thousand", "id": "langgame_gen_00809"}
+{"question": "These are the choices: [ take, power, inch, sister]. Which word ends with 'nch'? Answer:", "answer": " inch", "id": "langgame_gen_00810"}
+{"question": "These are the option strings: [ ready, road, cool, guess]. What option string starts with 'c'? Answer:", "answer": " cool", "id": "langgame_gen_00811"}
+{"question": "Which of the options is the shortest? The options are: [ any, matter, condition, speech]. Answer:", "answer": " any", "id": "langgame_gen_00812"}
+{"question": "These are the possible options: [ insect, separate, our, shoe]. Which  has the most letter 'a's? Answer:", "answer": " separate", "id": "langgame_gen_00813"}
+{"question": "Which choice contains 'gra'? The possible option strings: [ wrong, fear, grand, similar]. Answer:", "answer": " grand", "id": "langgame_gen_00814"}
+{"question": "The option strings are: [ write, present, settle, person]. What option string ends with 'le'? Answer:", "answer": " settle", "id": "langgame_gen_00815"}
+{"question": "The option strings: [ grand, against, see, color]. Which string starts with 'co'? Answer:", "answer": " color", "id": "langgame_gen_00816"}
+{"question": "The option words: [ less, object, deep, under]. Which option string contains 's'? Answer:", "answer": " less", "id": "langgame_gen_00817"}
+{"question": "The option strings: [ die, song, bed, quart]. Which option contains 'be'? Answer:", "answer": " bed", "id": "langgame_gen_00818"}
+{"question": "These are the available options: [ ten, afraid, few, dress]. What word ends with 'ew'? Answer:", "answer": " few", "id": "langgame_gen_00819"}
+{"question": "Which of the possible option words has the most letter 'm's? These are the possible option words: [ busy, common, wheel, copy]. Answer:", "answer": " common", "id": "langgame_gen_00820"}
+{"question": "These are the option words: [ stream, example, hundred, hat]. Which string is the shortest? Answer:", "answer": " hat", "id": "langgame_gen_00821"}
+{"question": "The possible choices: [ cut, then, or, example]. Which of the possible choices is the longest? Answer:", "answer": " example", "id": "langgame_gen_00822"}
+{"question": "The option words are: [ these, snow, dead, caught]. What option has the most letter 'd's? Answer:", "answer": " dead", "id": "langgame_gen_00823"}
+{"question": "Which of the options is the shortest? These are the options: [ insect, hat, collect, hundred]. Answer:", "answer": " hat", "id": "langgame_gen_00824"}
+{"question": "Which option is the longest? The options are: [ saw, yard, fire, connect]. Answer:", "answer": " connect", "id": "langgame_gen_00825"}
+{"question": "What choice is the longest? These are the available option words: [ capital, soft, also, stop]. Answer:", "answer": " capital", "id": "langgame_gen_00826"}
+{"question": "Which of the options starts with 't'? The options are: [ nine, tire, blue, blood]. Answer:", "answer": " tire", "id": "langgame_gen_00827"}
+{"question": "The available option words are: [ nature, special, ear, head]. Which of the available option words starts with 'ea'? Answer:", "answer": " ear", "id": "langgame_gen_00828"}
+{"question": "The available choices are: [ energy, wash, rise, heart]. What option word contains 'ash'? Answer:", "answer": " wash", "id": "langgame_gen_00829"}
+{"question": "Which string is the shortest? The possible option strings are: [ silent, syllable, my, expect]. Answer:", "answer": " my", "id": "langgame_gen_00830"}
+{"question": "Which option word contains 'we'? The available option words are: [ fair, week, mouth, coast]. Answer:", "answer": " week", "id": "langgame_gen_00831"}
+{"question": "What  starts with 'm'? The available option strings are: [ ran, mine, eight, list]. Answer:", "answer": " mine", "id": "langgame_gen_00832"}
+{"question": "What  is the shortest? The choices: [ forward, at, straight, except]. Answer:", "answer": " at", "id": "langgame_gen_00833"}
+{"question": "These are the available option words: [ pull, mouth, hill, game]. What choice contains 'am'? Answer:", "answer": " game", "id": "langgame_gen_00834"}
+{"question": "Which of the possible options contains 'rd'? These are the possible options: [ hard, row, weight, which]. Answer:", "answer": " hard", "id": "langgame_gen_00835"}
+{"question": "The option words are: [ food, practice, many, best]. Which option string is the longest? Answer:", "answer": " practice", "id": "langgame_gen_00836"}
+{"question": "The choices are: [ ten, don't, pull, party]. Which string contains 'll'? Answer:", "answer": " pull", "id": "langgame_gen_00837"}
+{"question": "Which choice is the shortest? The possible choices: [ stream, his, current, flower]. Answer:", "answer": " his", "id": "langgame_gen_00838"}
+{"question": "What string contains 'ur'? The options are: [ current, hill, stop, write]. Answer:", "answer": " current", "id": "langgame_gen_00839"}
+{"question": "Which of the options is the longest? The options are: [ tiny, rule, several, neck]. Answer:", "answer": " several", "id": "langgame_gen_00840"}
+{"question": "Which of the option words is the longest? These are the option words: [ here, less, similar, sent]. Answer:", "answer": " similar", "id": "langgame_gen_00841"}
+{"question": "The option words are: [ burn, pattern, window, save]. Which of the option words has the most letter 'w's? Answer:", "answer": " window", "id": "langgame_gen_00842"}
+{"question": "The available option strings are: [ stay, hot, trip, solution]. What string is the longest? Answer:", "answer": " solution", "id": "langgame_gen_00843"}
+{"question": "These are the options: [ paragraph, support, he, should]. Which of the options is the shortest? Answer:", "answer": " he", "id": "langgame_gen_00844"}
+{"question": "These are the option strings: [ excite, probable, dream, hunt]. Which of the option strings has the most letter 'b's? Answer:", "answer": " probable", "id": "langgame_gen_00845"}
+{"question": "The available option words are: [ one, energy, bought, magnet]. Which string is the shortest? Answer:", "answer": " one", "id": "langgame_gen_00846"}
+{"question": "The available choices: [ silent, catch, prove, receive]. What option word starts with 'rec'? Answer:", "answer": " receive", "id": "langgame_gen_00847"}
+{"question": "The option strings: [ main, major, both, like]. What  starts with 'bo'? Answer:", "answer": " both", "id": "langgame_gen_00848"}
+{"question": "The choices: [ new, quotient, note, soil]. What word is the longest? Answer:", "answer": " quotient", "id": "langgame_gen_00849"}
+{"question": "The possible option strings are: [ a, desert, similar, nothing]. Which of the possible option strings is the shortest? Answer:", "answer": " a", "id": "langgame_gen_00850"}
+{"question": "What string is the longest? The available option strings: [ multiply, blow, blue, eat]. Answer:", "answer": " multiply", "id": "langgame_gen_00851"}
+{"question": "The available options: [ triangle, record, ask, picture]. Which choice is the shortest? Answer:", "answer": " ask", "id": "langgame_gen_00852"}
+{"question": "Which of the possible option words is the shortest? The possible option words are: [ silver, it, famous, suggest]. Answer:", "answer": " it", "id": "langgame_gen_00853"}
+{"question": "What choice is the shortest? The available options are: [ am, gentle, segment, trouble]. Answer:", "answer": " am", "id": "langgame_gen_00854"}
+{"question": "The choices: [ station, happy, month, write]. What option string has the most letter 'p's? Answer:", "answer": " happy", "id": "langgame_gen_00855"}
+{"question": "The available options are: [ my, sit, oil, melody]. What choice ends with 'il'? Answer:", "answer": " oil", "id": "langgame_gen_00856"}
+{"question": "Which option string has the most letter 'l's? The options are: [ molecule, scale, ride, liquid]. Answer:", "answer": " molecule", "id": "langgame_gen_00857"}
+{"question": "The choices are: [ old, imagine, master, though]. What option is the shortest? Answer:", "answer": " old", "id": "langgame_gen_00858"}
+{"question": "The available option words are: [ why, say, search, rest]. What word contains 'ay'? Answer:", "answer": " say", "id": "langgame_gen_00859"}
+{"question": "The available options are: [ left, matter, master, leave]. Which of the available options contains 'ef'? Answer:", "answer": " left", "id": "langgame_gen_00860"}
+{"question": "The option words are: [ raise, even, much, colony]. What choice contains 'i'? Answer:", "answer": " raise", "id": "langgame_gen_00861"}
+{"question": "Which of the possible option words starts with 'p'? The possible option words: [ order, parent, imagine, carry]. Answer:", "answer": " parent", "id": "langgame_gen_00862"}
+{"question": "Which option word is the shortest? The possible option words: [ numeral, bed, arrange, country]. Answer:", "answer": " bed", "id": "langgame_gen_00863"}
+{"question": "Which option word is the shortest? These are the option words: [ strange, way, colony, temperature]. Answer:", "answer": " way", "id": "langgame_gen_00864"}
+{"question": "What  is the longest? The available option words: [ move, bed, together, air]. Answer:", "answer": " together", "id": "langgame_gen_00865"}
+{"question": "Which choice has the most letter 'b's? The possible options: [ probable, love, figure, home]. Answer:", "answer": " probable", "id": "langgame_gen_00866"}
+{"question": "The option strings: [ picture, then, fact, time]. What option is the longest? Answer:", "answer": " picture", "id": "langgame_gen_00867"}
+{"question": "Which option word ends with 'fer'? The option strings: [ wave, century, never, differ]. Answer:", "answer": " differ", "id": "langgame_gen_00868"}
+{"question": "Which string is the shortest? These are the possible option strings: [ correct, decide, get, beauty]. Answer:", "answer": " get", "id": "langgame_gen_00869"}
+{"question": "Which choice ends with 'job'? These are the options: [ much, neck, job, fun]. Answer:", "answer": " job", "id": "langgame_gen_00870"}
+{"question": "The possible option words are: [ fine, told, product, use]. Which of the possible option words is the longest? Answer:", "answer": " product", "id": "langgame_gen_00871"}
+{"question": "What  ends with 'l'? These are the available choices: [ modern, change, cell, slow]. Answer:", "answer": " cell", "id": "langgame_gen_00872"}
+{"question": "The available option strings are: [ repeat, trip, capital, every]. Which choice starts with 'eve'? Answer:", "answer": " every", "id": "langgame_gen_00873"}
+{"question": "Which word has the most letter 'o's? These are the possible option words: [ most, beat, foot, before]. Answer:", "answer": " foot", "id": "langgame_gen_00874"}
+{"question": "What option string ends with 'oft'? These are the possible choices: [ soft, knew, left, gold]. Answer:", "answer": " soft", "id": "langgame_gen_00875"}
+{"question": "The available option strings are: [ measure, quick, led, double]. Which string contains 'r'? Answer:", "answer": " measure", "id": "langgame_gen_00876"}
+{"question": "These are the available options: [ soon, chart, spot, stood]. What string ends with 'n'? Answer:", "answer": " soon", "id": "langgame_gen_00877"}
+{"question": "What option word starts with 'gra'? These are the possible option words: [ earth, far, face, gray]. Answer:", "answer": " gray", "id": "langgame_gen_00878"}
+{"question": "These are the available option words: [ syllable, stream, wait, order]. What  has the most letter 'l's? Answer:", "answer": " syllable", "id": "langgame_gen_00879"}
+{"question": "The possible option strings: [ cook, on, necessary, buy]. Which of the possible option strings is the longest? Answer:", "answer": " necessary", "id": "langgame_gen_00880"}
+{"question": "Which choice has the most letter 'a's? The available option words: [ lay, stand, captain, pitch]. Answer:", "answer": " captain", "id": "langgame_gen_00881"}
+{"question": "Which word has the most letter 'g's? These are the possible option words: [ language, whole, would, drive]. Answer:", "answer": " language", "id": "langgame_gen_00882"}
+{"question": "The possible choices are: [ colony, property, chance, say]. What option string is the shortest? Answer:", "answer": " say", "id": "langgame_gen_00883"}
+{"question": "Which of the possible choices starts with 'sit'? The possible choices are: [ simple, phrase, sit, slow]. Answer:", "answer": " sit", "id": "langgame_gen_00884"}
+{"question": "These are the available choices: [ woman, on, lot, process]. What option ends with 'ss'? Answer:", "answer": " process", "id": "langgame_gen_00885"}
+{"question": "The available option strings: [ how, warm, continue, bank]. What option is the longest? Answer:", "answer": " continue", "id": "langgame_gen_00886"}
+{"question": "The options are: [ but, loud, unit, hundred]. Which of the options is the longest? Answer:", "answer": " hundred", "id": "langgame_gen_00887"}
+{"question": "The available option words: [ surprise, tiny, plain, ago]. Which of the available option words has the most letter 's's? Answer:", "answer": " surprise", "id": "langgame_gen_00888"}
+{"question": "These are the possible choices: [ said, sudden, half, less]. Which option word has the most letter 'd's? Answer:", "answer": " sudden", "id": "langgame_gen_00889"}
+{"question": "Which  starts with 'lea'? These are the option words: [ busy, moment, leave, create]. Answer:", "answer": " leave", "id": "langgame_gen_00890"}
+{"question": "Which of the available choices starts with 'c'? The available choices are: [ many, century, total, toward]. Answer:", "answer": " century", "id": "langgame_gen_00891"}
+{"question": "What option contains 'ar'? The option words are: [ red, value, strong, card]. Answer:", "answer": " card", "id": "langgame_gen_00892"}
+{"question": "These are the choices: [ verb, sister, corn, soon]. Which of the choices starts with 'sis'? Answer:", "answer": " sister", "id": "langgame_gen_00893"}
+{"question": "These are the possible choices: [ travel, paper, children, am]. Which option word has the most letter 'p's? Answer:", "answer": " paper", "id": "langgame_gen_00894"}
+{"question": "Which of the available option words starts with 'can'? These are the available option words: [ ear, vowel, show, can]. Answer:", "answer": " can", "id": "langgame_gen_00895"}
+{"question": "Which string is the shortest? The available option words are: [ end, multiply, speech, sentence]. Answer:", "answer": " end", "id": "langgame_gen_00896"}
+{"question": "The available option words: [ final, check, divide, watch]. Which choice starts with 'w'? Answer:", "answer": " watch", "id": "langgame_gen_00897"}
+{"question": "The available option strings: [ brought, swim, bed, ride]. Which option word is the longest? Answer:", "answer": " brought", "id": "langgame_gen_00898"}
+{"question": "The available options are: [ lead, state, ball, sign]. Which option has the most letter 'l's? Answer:", "answer": " ball", "id": "langgame_gen_00899"}
+{"question": "Which of the available option words is the shortest? These are the available option words: [ gentle, support, fig, weight]. Answer:", "answer": " fig", "id": "langgame_gen_00900"}
+{"question": "The available options: [ way, strong, instrument, certain]. Which option word is the shortest? Answer:", "answer": " way", "id": "langgame_gen_00901"}
+{"question": "The possible options are: [ our, multiply, country, change]. Which of the possible options is the shortest? Answer:", "answer": " our", "id": "langgame_gen_00902"}
+{"question": "Which word has the most letter 'l's? These are the possible option words: [ thank, came, will, question]. Answer:", "answer": " will", "id": "langgame_gen_00903"}
+{"question": "These are the possible option words: [ tool, nothing, lady, low]. What option is the longest? Answer:", "answer": " nothing", "id": "langgame_gen_00904"}
+{"question": "What word starts with 'che'? The available option strings are: [ safe, rail, family, check]. Answer:", "answer": " check", "id": "langgame_gen_00905"}
+{"question": "Which of the available option words is the shortest? The available option words are: [ certain, six, middle, square]. Answer:", "answer": " six", "id": "langgame_gen_00906"}
+{"question": "These are the option words: [ language, fun, fly, sister]. Which of the option words contains 'gu'? Answer:", "answer": " language", "id": "langgame_gen_00907"}
+{"question": "These are the option words: [ noon, complete, born, magnet]. What option word ends with 'te'? Answer:", "answer": " complete", "id": "langgame_gen_00908"}
+{"question": "What word starts with 'f'? These are the option words: [ finger, sure, case, branch]. Answer:", "answer": " finger", "id": "langgame_gen_00909"}
+{"question": "These are the possible option words: [ my, stick, evening, mine]. Which of the possible option words starts with 'st'? Answer:", "answer": " stick", "id": "langgame_gen_00910"}
+{"question": "These are the available option strings: [ snow, stop, drop, company]. Which of the available option strings is the longest? Answer:", "answer": " company", "id": "langgame_gen_00911"}
+{"question": "What option is the longest? The available options: [ how, they, true, produce]. Answer:", "answer": " produce", "id": "langgame_gen_00912"}
+{"question": "The available choices are: [ life, type, remember, men]. What option string has the most letter 'm's? Answer:", "answer": " remember", "id": "langgame_gen_00913"}
+{"question": "Which string is the shortest? The available choices: [ experience, correct, student, be]. Answer:", "answer": " be", "id": "langgame_gen_00914"}
+{"question": "The option strings: [ natural, high, let, way]. What option word is the longest? Answer:", "answer": " natural", "id": "langgame_gen_00915"}
+{"question": "Which string contains 'ary'? The available options: [ meet, vary, dark, certain]. Answer:", "answer": " vary", "id": "langgame_gen_00916"}
+{"question": "The available option words are: [ loud, effect, tall, idea]. What option word contains 'lou'? Answer:", "answer": " loud", "id": "langgame_gen_00917"}
+{"question": "These are the possible choices: [ music, matter, fair, try]. Which option string starts with 't'? Answer:", "answer": " try", "id": "langgame_gen_00918"}
+{"question": "The available options: [ slow, usual, sugar, power]. Which option string has the most letter 'u's? Answer:", "answer": " usual", "id": "langgame_gen_00919"}
+{"question": "The possible option strings: [ wheel, six, gray, side]. Which  starts with 'whe'? Answer:", "answer": " wheel", "id": "langgame_gen_00920"}
+{"question": "The available option strings: [ sea, strong, instant, garden]. What word is the shortest? Answer:", "answer": " sea", "id": "langgame_gen_00921"}
+{"question": "Which of the available options is the longest? The available options are: [ experiment, fit, hair, have]. Answer:", "answer": " experiment", "id": "langgame_gen_00922"}
+{"question": "These are the possible option strings: [ eat, machine, master, sure]. Which of the possible option strings ends with 'er'? Answer:", "answer": " master", "id": "langgame_gen_00923"}
+{"question": "Which string has the most letter 'c's? The available options are: [ control, thick, character, two]. Answer:", "answer": " character", "id": "langgame_gen_00924"}
+{"question": "What string is the shortest? The options are: [ remember, modern, sentence, run]. Answer:", "answer": " run", "id": "langgame_gen_00925"}
+{"question": "The option words are: [ bring, character, snow, dead]. Which of the option words has the most letter 'c's? Answer:", "answer": " character", "id": "langgame_gen_00926"}
+{"question": "Which of the available options starts with 'a'? The available options are: [ again, miss, yes, sentence]. Answer:", "answer": " again", "id": "langgame_gen_00927"}
+{"question": "The options are: [ gone, row, set, safe]. Which option string ends with 't'? Answer:", "answer": " set", "id": "langgame_gen_00928"}
+{"question": "The possible choices: [ moment, dry, fill, atom]. Which of the possible choices has the most letter 'm's? Answer:", "answer": " moment", "id": "langgame_gen_00929"}
+{"question": "Which of the available options ends with 'd'? These are the available options: [ may, month, metal, sound]. Answer:", "answer": " sound", "id": "langgame_gen_00930"}
+{"question": "Which of the possible option strings contains 'i'? The possible option strings: [ mind, support, century, same]. Answer:", "answer": " mind", "id": "langgame_gen_00931"}
+{"question": "Which word has the most letter 'u's? These are the available options: [ least, sign, mount, usual]. Answer:", "answer": " usual", "id": "langgame_gen_00932"}
+{"question": "Which of the options has the most letter 'w's? These are the options: [ window, steel, do, log]. Answer:", "answer": " window", "id": "langgame_gen_00933"}
+{"question": "These are the available choices: [ safe, both, include, held]. Which of the available choices is the longest? Answer:", "answer": " include", "id": "langgame_gen_00934"}
+{"question": "Which of the possible option strings ends with 'e'? The possible option strings: [ chart, hope, near, does]. Answer:", "answer": " hope", "id": "langgame_gen_00935"}
+{"question": "The option words are: [ between, ground, fact, appear]. What choice has the most letter 'p's? Answer:", "answer": " appear", "id": "langgame_gen_00936"}
+{"question": "What option ends with 'rve'? These are the possible options: [ guess, serve, reach, mix]. Answer:", "answer": " serve", "id": "langgame_gen_00937"}
+{"question": "Which of the choices contains 'bri'? The choices are: [ paper, gone, bright, pay]. Answer:", "answer": " bright", "id": "langgame_gen_00938"}
+{"question": "The options: [ band, few, character, fat]. What option is the longest? Answer:", "answer": " character", "id": "langgame_gen_00939"}
+{"question": "Which of the available option strings contains 'f'? The available option strings: [ brown, famous, observe, hold]. Answer:", "answer": " famous", "id": "langgame_gen_00940"}
+{"question": "Which choice starts with 'd'? These are the possible option words: [ down, gather, result, wrong]. Answer:", "answer": " down", "id": "langgame_gen_00941"}
+{"question": "These are the possible option strings: [ govern, matter, together, top]. What word is the shortest? Answer:", "answer": " top", "id": "langgame_gen_00942"}
+{"question": "These are the options: [ spread, tall, body, among]. Which of the options contains 'll'? Answer:", "answer": " tall", "id": "langgame_gen_00943"}
+{"question": "The choices are: [ feed, father, fine, result]. What choice ends with 'ult'? Answer:", "answer": " result", "id": "langgame_gen_00944"}
+{"question": "Which of the possible options is the longest? The possible options are: [ wood, cent, fire, character]. Answer:", "answer": " character", "id": "langgame_gen_00945"}
+{"question": "These are the possible option words: [ figure, art, continue, method]. Which option is the shortest? Answer:", "answer": " art", "id": "langgame_gen_00946"}
+{"question": "The options: [ corn, paint, tall, clean]. Which option string starts with 'p'? Answer:", "answer": " paint", "id": "langgame_gen_00947"}
+{"question": "The available choices are: [ square, all, either, instant]. Which of the available choices is the shortest? Answer:", "answer": " all", "id": "langgame_gen_00948"}
+{"question": "The possible option strings are: [ protect, common, do, current]. Which of the possible option strings is the shortest? Answer:", "answer": " do", "id": "langgame_gen_00949"}
+{"question": "Which of the option words is the longest? The option words: [ we, pair, see, weather]. Answer:", "answer": " weather", "id": "langgame_gen_00950"}
+{"question": "Which of the possible option strings contains 'try'? These are the possible option strings: [ industry, instant, children, stand]. Answer:", "answer": " industry", "id": "langgame_gen_00951"}
+{"question": "What option word contains 'alt'? The possible choices: [ car, what, lost, salt]. Answer:", "answer": " salt", "id": "langgame_gen_00952"}
+{"question": "The option strings are: [ door, against, bad, teeth]. What  starts with 'ag'? Answer:", "answer": " against", "id": "langgame_gen_00953"}
+{"question": "The options are: [ sat, difficult, team, kept]. What word is the longest? Answer:", "answer": " difficult", "id": "langgame_gen_00954"}
+{"question": "Which of the possible options is the shortest? These are the possible options: [ please, oxygen, indicate, box]. Answer:", "answer": " box", "id": "langgame_gen_00955"}
+{"question": "Which  contains 'ic'? The possible option strings are: [ occur, raise, show, ice]. Answer:", "answer": " ice", "id": "langgame_gen_00956"}
+{"question": "The possible options are: [ joy, support, wrong, solve]. Which of the possible options ends with 'joy'? Answer:", "answer": " joy", "id": "langgame_gen_00957"}
+{"question": "Which option has the most letter 'm's? The possible option words are: [ process, log, heart, remember]. Answer:", "answer": " remember", "id": "langgame_gen_00958"}
+{"question": "Which choice starts with 'sat'? These are the available option words: [ cool, skin, question, sat]. Answer:", "answer": " sat", "id": "langgame_gen_00959"}
+{"question": "Which of the available option words is the longest? These are the available option words: [ thought, get, meat, sand]. Answer:", "answer": " thought", "id": "langgame_gen_00960"}
+{"question": "The option strings: [ world, bar, the, is]. Which of the option strings ends with 's'? Answer:", "answer": " is", "id": "langgame_gen_00961"}
+{"question": "The possible options: [ no, natural, order, apple]. What choice has the most letter 'p's? Answer:", "answer": " apple", "id": "langgame_gen_00962"}
+{"question": "The possible option strings: [ air, deal, necessary, put]. Which  is the longest? Answer:", "answer": " necessary", "id": "langgame_gen_00963"}
+{"question": "These are the option strings: [ before, less, cat, crease]. What choice ends with 't'? Answer:", "answer": " cat", "id": "langgame_gen_00964"}
+{"question": "The possible option strings: [ surprise, bought, usual, dead]. What option string has the most letter 'u's? Answer:", "answer": " usual", "id": "langgame_gen_00965"}
+{"question": "These are the available options: [ character, sit, horse, wild]. Which option ends with 'sit'? Answer:", "answer": " sit", "id": "langgame_gen_00966"}
+{"question": "Which word is the longest? The choices are: [ shoe, this, current, noon]. Answer:", "answer": " current", "id": "langgame_gen_00967"}
+{"question": "Which of the option strings ends with 'gan'? These are the option strings: [ direct, began, tool, time]. Answer:", "answer": " began", "id": "langgame_gen_00968"}
+{"question": "What option string is the longest? These are the option strings: [ why, forward, on, dad]. Answer:", "answer": " forward", "id": "langgame_gen_00969"}
+{"question": "What word ends with 'a'? The available options are: [ character, much, meant, area]. Answer:", "answer": " area", "id": "langgame_gen_00970"}
+{"question": "Which of the available option strings starts with 'sh'? The available option strings: [ it, shout, pattern, success]. Answer:", "answer": " shout", "id": "langgame_gen_00971"}
+{"question": "The option words are: [ cook, solution, miss, have]. Which option string is the longest? Answer:", "answer": " solution", "id": "langgame_gen_00972"}
+{"question": "These are the possible option words: [ glass, thank, call, ever]. Which  has the most letter 'e's? Answer:", "answer": " ever", "id": "langgame_gen_00973"}
+{"question": "What option word ends with 'ate'? These are the possible option words: [ indicate, coast, earth, govern]. Answer:", "answer": " indicate", "id": "langgame_gen_00974"}
+{"question": "The available options are: [ capital, move, swim, speak]. Which choice ends with 'l'? Answer:", "answer": " capital", "id": "langgame_gen_00975"}
+{"question": "Which  is the longest? These are the possible options: [ got, wave, original, trip]. Answer:", "answer": " original", "id": "langgame_gen_00976"}
+{"question": "The available options: [ engine, motion, glass, felt]. What word ends with 'elt'? Answer:", "answer": " felt", "id": "langgame_gen_00977"}
+{"question": "The option strings are: [ notice, gave, listen, buy]. What choice ends with 'y'? Answer:", "answer": " buy", "id": "langgame_gen_00978"}
+{"question": "The possible option strings are: [ seed, prepare, rise, kept]. Which choice is the longest? Answer:", "answer": " prepare", "id": "langgame_gen_00979"}
+{"question": "The available options are: [ body, out, rock, cook]. What option string starts with 'ro'? Answer:", "answer": " rock", "id": "langgame_gen_00980"}
+{"question": "These are the possible option words: [ gray, print, might, milk]. Which word ends with 'y'? Answer:", "answer": " gray", "id": "langgame_gen_00981"}
+{"question": "Which of the available choices is the shortest? The available choices: [ branch, forward, syllable, eat]. Answer:", "answer": " eat", "id": "langgame_gen_00982"}
+{"question": "Which of the choices ends with 'nd'? The choices are: [ track, point, thousand, last]. Answer:", "answer": " thousand", "id": "langgame_gen_00983"}
+{"question": "The possible options: [ proper, subject, answer, star]. Which  contains 'p'? Answer:", "answer": " proper", "id": "langgame_gen_00984"}
+{"question": "Which of the possible option strings starts with 'com'? The possible option strings: [ common, magnet, region, two]. Answer:", "answer": " common", "id": "langgame_gen_00985"}
+{"question": "What option contains 'eiv'? The possible option strings are: [ substance, receive, slip, sister]. Answer:", "answer": " receive", "id": "langgame_gen_00986"}
+{"question": "The possible option strings are: [ feed, out, imagine, call]. Which option word is the longest? Answer:", "answer": " imagine", "id": "langgame_gen_00987"}
+{"question": "Which of the possible option words is the shortest? The possible option words: [ station, brother, excite, up]. Answer:", "answer": " up", "id": "langgame_gen_00988"}
+{"question": "Which  ends with 'as'? The possible option words are: [ as, sentence, flat, form]. Answer:", "answer": " as", "id": "langgame_gen_00989"}
+{"question": "The available option words: [ will, get, force, fine]. Which option word contains 'n'? Answer:", "answer": " fine", "id": "langgame_gen_00990"}
+{"question": "Which of the available options contains 'uge'? These are the available options: [ I, cut, continent, huge]. Answer:", "answer": " huge", "id": "langgame_gen_00991"}
+{"question": "Which of the possible option strings starts with 'car'? These are the possible option strings: [ fat, carry, map, save]. Answer:", "answer": " carry", "id": "langgame_gen_00992"}
+{"question": "Which word has the most letter 'b's? The available options: [ just, baby, clear, coat]. Answer:", "answer": " baby", "id": "langgame_gen_00993"}
+{"question": "Which of the choices is the longest? The choices are: [ test, bear, wide, element]. Answer:", "answer": " element", "id": "langgame_gen_00994"}
+{"question": "The options: [ cost, century, move, am]. Which choice is the longest? Answer:", "answer": " century", "id": "langgame_gen_00995"}
+{"question": "The available options are: [ rather, symbol, third, saw]. Which option word starts with 'th'? Answer:", "answer": " third", "id": "langgame_gen_00996"}
+{"question": "The available options are: [ often, valley, offer, nine]. What option word starts with 'nin'? Answer:", "answer": " nine", "id": "langgame_gen_00997"}
+{"question": "What string has the most letter 'u's? These are the available option strings: [ coat, usual, book, might]. Answer:", "answer": " usual", "id": "langgame_gen_00998"}
+{"question": "What option word ends with 'd'? The available options: [ spot, wheel, add, busy]. Answer:", "answer": " add", "id": "langgame_gen_00999"}

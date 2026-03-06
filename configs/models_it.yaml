@@ -1,0 +1,183 @@
+# Instruction-tuned model configurations for evaluation
+# Format: model_name -> (huggingface_path, type)
+# type: "it" (instruction-tuned/chat)
+
+models:
+  # ============================================================================
+  # Gemma 3 Family
+  # ============================================================================
+  gemma-3-270m-it:
+    path: google/gemma-3-270m-it
+    type: it
+
+  gemma-3-1b-it:
+    path: google/gemma-3-1b-it
+    type: it
+
+  gemma-3-4b-it:
+    path: google/gemma-3-4b-it
+    type: it
+
+  gemma-3-12b-it:
+    path: google/gemma-3-12b-it
+    type: it
+
+  gemma-3-27b-it:
+    path: google/gemma-3-27b-it
+    type: it
+
+  # ============================================================================
+  # Llama 3.1 Family
+  # ============================================================================
+  llama-3.1-8b-it:
+    path: meta-llama/Llama-3.1-8B-Instruct
+    type: it
+
+  # ============================================================================
+  # Llama 3.2 Family
+  # ============================================================================
+  llama-3.2-1b-it:
+    path: meta-llama/Llama-3.2-1B-Instruct
+    type: it
+  
+  llama-3.2-3b-it:
+    path: meta-llama/Llama-3.2-3B-Instruct
+    type: it
+
+  # ============================================================================
+  # SEA-LION v4 Family (Southeast Asian language models)
+  # ============================================================================
+  sea-lion-gemma-v4-27b-it:
+    path: aisingapore/Gemma-SEA-LION-v4-27B-IT
+    type: it
+
+  sea-lion-qwen-v4-32b-it:
+    path: aisingapore/Qwen-SEA-LION-v4-32B-IT
+    type: it
+
+  # ============================================================================
+  # Qwen 2.5 Family
+  # ============================================================================
+  qwen-2.5-0.5b-it:
+    path: Qwen/Qwen2.5-0.5B-Instruct
+    type: it
+  
+  qwen-2.5-1.5b-it:
+    path: Qwen/Qwen2.5-1.5B-Instruct
+    type: it
+  
+  qwen-2.5-3b-it:
+    path: Qwen/Qwen2.5-3B-Instruct
+    type: it
+  
+  qwen-2.5-7b-it:
+    path: Qwen/Qwen2.5-7B-Instruct
+    type: it
+  
+  qwen-2.5-14b-it:
+    path: Qwen/Qwen2.5-14B-Instruct
+    type: it
+
+  # ============================================================================
+  # Qwen 3.5 Family
+  # Qwen 3.5 models have thinking enabled by default in their chat template.
+  # Use the -thinking variant to enable it; the plain variant disables it.
+  # ============================================================================
+  qwen-3.5-0.8b-it:
+    path: Qwen/Qwen3.5-0.8B
+    type: it
+    thinking: false
+
+  qwen-3.5-0.8b-it-thinking:
+    path: Qwen/Qwen3.5-0.8B
+    type: it
+    thinking: true
+
+  qwen-3.5-2b-it:
+    path: Qwen/Qwen3.5-2B
+    type: it
+    thinking: false
+
+  qwen-3.5-2b-it-thinking:
+    path: Qwen/Qwen3.5-2B
+    type: it
+    thinking: true
+
+  qwen-3.5-4b-it:
+    path: Qwen/Qwen3.5-4B
+    type: it
+    thinking: false
+
+  qwen-3.5-4b-it-thinking:
+    path: Qwen/Qwen3.5-4B
+    type: it
+    thinking: true
+
+  qwen-3.5-9b-it:
+    path: Qwen/Qwen3.5-9B
+    type: it
+    thinking: false
+
+  qwen-3.5-9b-it-thinking:
+    path: Qwen/Qwen3.5-9B
+    type: it
+    thinking: true
+
+  qwen-3.5-27b-it:
+    path: Qwen/Qwen3.5-27B
+    type: it
+    thinking: false
+
+  qwen-3.5-27b-it-thinking:
+    path: Qwen/Qwen3.5-27B
+    type: it
+    thinking: true
+
+  qwen-3.5-35b-it:
+    path: Qwen/Qwen3.5-35B-A3B
+    type: it
+    thinking: false
+
+  qwen-3.5-35b-it-thinking:
+    path: Qwen/Qwen3.5-35B-A3B
+    type: it
+    thinking: true
+
+  qwen-3.5-122b-it:
+    path: Qwen/Qwen3.5-122B-A10B
+    type: it
+    thinking: false
+
+  qwen-3.5-122b-it-thinking:
+    path: Qwen/Qwen3.5-122B-A10B
+    type: it
+    thinking: true
+
+  # ============================================================================
+  # Phi-4 Family
+  # No base (PT) versions are publicly available; all entries are IT only.
+  # phi-4-reasoning variants use chain-of-thought (<think> blocks).
+  # ============================================================================
+  phi-4:
+    path: microsoft/phi-4
+    type: it
+
+  phi-4-mini-it:
+    path: microsoft/Phi-4-mini-instruct
+    type: it
+
+  phi-4-reasoning-plus:
+    path: microsoft/Phi-4-reasoning-plus
+    type: it
+    thinking: true
+
+  # ============================================================================
+  # GPT-OSS Family (OpenAI open-source MoE models, natively supported in vLLM)
+  # ============================================================================
+  gpt-oss-20b:
+    path: openai/gpt-oss-20b
+    type: it
+
+  gpt-oss-120b:
+    path: openai/gpt-oss-120b
+    type: it

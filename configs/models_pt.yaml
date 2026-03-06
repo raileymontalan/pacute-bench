@@ -1,0 +1,113 @@
+# Pretrained (base) model configurations for evaluation
+# Format: model_name -> (huggingface_path, type)
+# type: "pt" (pretrained/base)
+
+models:
+  # ============================================================================
+  # GPT-2 Family (all share same tokenizer)
+  # ============================================================================
+  gpt2:
+    path: openai-community/gpt2
+    type: pt
+  
+  gpt2-medium:
+    path: openai-community/gpt2-medium
+    type: pt
+  
+  gpt2-large:
+    path: openai-community/gpt2-large
+    type: pt
+  
+  gpt2-xl:
+    path: openai-community/gpt2-xl
+    type: pt
+
+  # ============================================================================
+  # Gemma 3 Family
+  # ============================================================================
+  gemma-3-270m:
+    path: google/gemma-3-270m
+    type: pt
+
+  gemma-3-1b-pt:
+    path: google/gemma-3-1b-pt
+    type: pt
+
+  gemma-3-4b-pt:
+    path: google/gemma-3-4b-pt
+    type: pt
+
+  gemma-3-12b-pt:
+    path: google/gemma-3-12b-pt
+    type: pt
+
+  gemma-3-27b-pt:
+    path: google/gemma-3-27b-pt
+    type: pt
+
+  # ============================================================================
+  # Llama 3.1 Family
+  # ============================================================================
+  llama-3.1-8b:
+    path: meta-llama/Llama-3.1-8B
+    type: pt
+
+  # ============================================================================
+  # Llama 3.2 Family
+  # ============================================================================
+  llama-3.2-1b:
+    path: meta-llama/Llama-3.2-1B
+    type: pt
+  
+  llama-3.2-3b:
+    path: meta-llama/Llama-3.2-3B
+    type: pt
+
+  # ============================================================================
+  # SEA-LION v4 Family (Southeast Asian language models)
+  # ============================================================================
+  sea-lion-gemma-v4-27b:
+    path: aisingapore/Gemma-SEA-LION-v4-27B
+    type: pt
+
+  # ============================================================================
+  # Qwen 2.5 Family
+  # ============================================================================
+  qwen-2.5-0.5b:
+    path: Qwen/Qwen2.5-0.5B
+    type: pt
+  
+  qwen-2.5-1.5b:
+    path: Qwen/Qwen2.5-1.5B
+    type: pt
+  
+  qwen-2.5-3b:
+    path: Qwen/Qwen2.5-3B
+    type: pt
+  
+  qwen-2.5-7b:
+    path: Qwen/Qwen2.5-7B
+    type: pt
+  
+  qwen-2.5-14b:
+    path: Qwen/Qwen2.5-14B
+    type: pt
+
+  # ============================================================================
+  # Qwen 3.5 Family
+  # ============================================================================
+  qwen-3.5-0.8b:
+    path: Qwen/Qwen3.5-0.8B-Base
+    type: pt
+
+  qwen-3.5-2b:
+    path: Qwen/Qwen3.5-2B-Base
+    type: pt
+
+  qwen-3.5-4b:
+    path: Qwen/Qwen3.5-4B-Base
+    type: pt
+
+  qwen-3.5-9b:
+    path: Qwen/Qwen3.5-9B-Base
+    type: pt

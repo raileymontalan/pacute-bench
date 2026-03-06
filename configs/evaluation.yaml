@@ -1,0 +1,128 @@
+# Evaluation configuration for benchmark evaluation
+# Modeled after SEA-HELM prompt conventions:
+#   https://github.com/aisingapore/SEA-HELM
+
+# Per-benchmark instructions for the generative evaluation setting.
+#
+# These are applied automatically to every generative (-gen) benchmark run.
+# For instruction-tuned (IT) models they are injected as the system prompt via
+# the tokenizer's chat template.  For base (PT) models they are prepended as
+# plain text before the question.
+#
+# The CLI flag --system-prompt, if provided, overrides ALL entries below.
+#
+# Each entry has two sub-keys:
+#   instruction : the full instruction text shown to (or prepended for) the model
+#   answer_tag  : the prefix the model is asked to put before its answer
+#                 (e.g. "Answer:").  The evaluator strips this prefix before
+#                 comparing the generated text to the ground truth.
+
+generative_instructions:
+
+  # ---------------------------------------------------------------------------
+  # CUTE — character-level manipulation (e.g., swap two letters in a word)
+  # ---------------------------------------------------------------------------
+  cute-gen:
+    answer_tag: "<answer>"
+    instruction: |-
+      You will be given a character-level word manipulation task.
+      A set of worked examples demonstrates the transformation pattern.
+      Apply the exact same transformation to the final word given.
+
+      Your output MUST strictly follow this XML format:
+      <reflection>Your 1-2 sentence reflection explaining the transformation pattern you identified and how you applied it.</reflection>
+      <answer>ANSWER</answer>
+      Replace ANSWER with the transformed result.
+
+  # ---------------------------------------------------------------------------
+  # PACUTE — Filipino morphology benchmarks (affixation, composition,
+  #           manipulation, syllabification), generative setting
+  # ---------------------------------------------------------------------------
+  pacute-affixation-gen:
+    answer_tag: "<answer>"
+    instruction: |-
+      You will be given a question about Filipino word affixation.
+      Based on the question, identify the single word that satisfies the described condition.
+
+      Your output MUST strictly follow this XML format:
+      <reflection>Your 1-2 sentence reflection explaining which affix applies and why the resulting form is correct.</reflection>
+      <answer>ANSWER</answer>
+      Replace ANSWER with the correct Filipino word.
+
+  pacute-composition-gen:
+    answer_tag: "<answer>"
+    instruction: |-
+      You will be given a question about Filipino word spelling or letter composition.
+      Based on the question, identify the correct spelling or letter sequence.
+
+      Your output MUST strictly follow this XML format:
+      <reflection>Your 1-2 sentence reflection explaining how you determined the correct spelling or letter sequence.</reflection>
+      <answer>ANSWER</answer>
+      Replace ANSWER with the correct spelling or letter sequence.
+
+  pacute-manipulation-gen:
+    answer_tag: "<answer>"
+    instruction: |-
+      You will be given a question about a Filipino word transformation,
+      such as changing letter case, reversing characters, or a similar character-level operation.
+      Based on the question, identify the correct result of the transformation.
+
+      Your output MUST strictly follow this XML format:
+      <reflection>Your 1-2 sentence reflection explaining the transformation operation you applied and the result you obtained.</reflection>
+      <answer>ANSWER</answer>
+      Replace ANSWER with the transformed result.
+
+  pacute-syllabification-gen:
+    answer_tag: "<answer>"
+    instruction: |-
+      You will be given a question about Filipino word syllabification,
+      such as identifying a specific syllable pattern or counting the number of syllables in a word.
+      Based on the question, identify the single correct word or number.
+
+      Your output MUST strictly follow this XML format:
+      <reflection>Your 1-2 sentence reflection explaining how you determined the syllable structure or count.</reflection>
+      <answer>ANSWER</answer>
+      Replace ANSWER with the correct word or number.
+
+  # ---------------------------------------------------------------------------
+  # Hierarchical — Filipino morphological attachment tasks (in Filipino)
+  # ---------------------------------------------------------------------------
+  hierarchical-gen:
+    answer_tag: "<answer>"
+    instruction: |-
+      You will be given a question about Filipino word morphology.
+      Based on the question, identify the single correct word or form that satisfies the described condition.
+
+      Your output MUST strictly follow this XML format:
+      <reflection>Your 1-2 sentence reflection explaining how you identified the correct morphological form.</reflection>
+      <answer>ANSWER</answer>
+      Replace ANSWER with the correct word or form.
+
+  # ---------------------------------------------------------------------------
+  # LangGame — word-property language games (shortest, longest, alphabetical, etc.)
+  # ---------------------------------------------------------------------------
+  langgame-gen:
+    answer_tag: "<answer>"
+    instruction: |-
+      You will be given a language game question about the properties of a set of words,
+      such as their length, alphabetical order, number of vowels, or similar characteristics.
+      Based on the question, identify the single correct word.
+
+      Your output MUST strictly follow this XML format:
+      <reflection>Your 1-2 sentence reflection explaining which word property you evaluated and why your chosen word is correct.</reflection>
+      <answer>ANSWER</answer>
+      Replace ANSWER with the single correct word.
+
+  # ---------------------------------------------------------------------------
+  # Multi-digit addition — simple arithmetic
+  # ---------------------------------------------------------------------------
+  multi-digit-addition-gen:
+    answer_tag: "<answer>"
+    instruction: |-
+      You will be given a simple arithmetic addition problem.
+      Compute the sum and provide only the numerical result.
+
+      Your output MUST strictly follow this XML format:
+      <reflection>Your 1-2 sentence reflection showing your calculation and confirming the result.</reflection>
+      <answer>ANSWER</answer>
+      Replace ANSWER with the integer result of the calculation.

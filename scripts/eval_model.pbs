@@ -1,0 +1,141 @@
+#!/bin/bash
+# PBS job script — evaluate a single model on all benchmarks.
+# Do NOT run directly; submit via scripts/submit_evaluations.sh.
+#
+# Required PBS variable (pass with qsub -v):
+#   MODEL_NAME   Short model key from configs/models_*.yaml  (e.g. qwen-2.5-7b-it)
+#
+# Optional PBS variables:
+#   OVERWRITE    "true" to re-run benchmarks that already have results
+#   MAX_SAMPLES  Integer to cap samples per benchmark (default: all)
+#   VLLM_PORT    Port for the vLLM server (default: auto-derived from job ID)
+
+#PBS -l walltime=12:00:00
+#PBS -j oe
+#PBS -q AISG_debug
+# Note: -o and -e (log directory) are passed dynamically by submit_evaluations.sh
+
+# ── Defaults ─────────────────────────────────────────────────────────────────
+MODEL_NAME="${MODEL_NAME:-gpt2}"
+OVERWRITE="${OVERWRITE:-false}"
+MAX_SAMPLES="${MAX_SAMPLES:-}"
+BENCHMARKS="${BENCHMARKS:-}"
+
+# Auto-derive a unique port from PBS_JOBID so concurrent jobs don't collide.
+if [[ -z "${VLLM_PORT:-}" ]]; then
+    _JOBNUM="${PBS_JOBID%%.*}"
+    VLLM_PORT=$(( 8000 + (_JOBNUM % 1000) ))
+fi
+
+set -euo pipefail
+
+# PROJECT_ROOT is passed via qsub -v from submit_evaluations.sh
+: "${PROJECT_ROOT:?PROJECT_ROOT must be set (pass via qsub -v or export before running)}"
+cd "$PROJECT_ROOT"
+
+# Source .env for VENV_PATH, LOGS_PATH, and API keys
+# shellcheck source=.env
+source "$PROJECT_ROOT/.env"
+mkdir -p "$LOGS_PATH"
+
+source "$VENV_PATH/bin/activate"
+
+# Install package into the active venv
+uv pip install -e "$PROJECT_ROOT" --quiet
+
+# ── UUID → integer GPU remapping (PBS sets UUIDs, vLLM needs integers) ──────
+UUIDS=$(echo "$CUDA_VISIBLE_DEVICES" | tr ',' '\n')
+declare -a VISIBLE_DEVICES=()
+for UUID in $UUIDS; do
+    ID=$(nvidia-smi --id="$UUID" --query-gpu=index --format=csv,noheader 2>/dev/null || echo "$UUID")
+    VISIBLE_DEVICES+=("$ID")
+done
+VISIBLE_DEVICES_STR=$(IFS=,; echo "${VISIBLE_DEVICES[*]}")
+export CUDA_VISIBLE_DEVICES="$VISIBLE_DEVICES_STR"
+N_GPUS=${#VISIBLE_DEVICES[@]}
+echo "CUDA_VISIBLE_DEVICES → $CUDA_VISIBLE_DEVICES  ($N_GPUS GPUs)"
+
+# ── Resolve model path + type from YAML ─────────────────────────────────────
+read -r MODEL_PATH MODEL_TYPE < <(python3 - <<PYEOF
+import yaml, sys
+for cfg in ['configs/models_pt.yaml', 'configs/models_it.yaml']:
+    try:
+        data = yaml.safe_load(open(cfg))
+        info = data['models'].get('${MODEL_NAME}')
+        if info:
+            print(info['path'], info['type'])
+            sys.exit(0)
+    except Exception:
+        pass
+print("UNKNOWN UNKNOWN")
+sys.exit(1)
+PYEOF
+)
+
+if [[ "$MODEL_PATH" == "UNKNOWN" ]]; then
+    echo "ERROR: model '${MODEL_NAME}' not found in any config YAML" >&2
+    exit 1
+fi
+echo "Model path : $MODEL_PATH"
+echo "Model type : $MODEL_TYPE"
+echo "TP size    : $N_GPUS"
+
+# ── Start vLLM server ────────────────────────────────────────────────────────
+VLLM_LOG="${LOGS_PATH}/vllm_${MODEL_NAME}_$(date +%Y%m%d_%H%M%S).log"
+mkdir -p "$(dirname "$VLLM_LOG")"
+
+echo "Starting vLLM: $MODEL_PATH (TP=$N_GPUS, port=$VLLM_PORT)"
+vllm serve "$MODEL_PATH" \
+    --port "$VLLM_PORT" \
+    --tensor-parallel-size "$N_GPUS" \
+    --enable-prefix-caching \
+    --gpu-memory-utilization 0.85 \
+    --trust-remote-code \
+    > "$VLLM_LOG" 2>&1 &
+VLLM_PID=$!
+
+cleanup() {
+    if [[ -n "${VLLM_PID:-}" ]]; then
+        echo "Stopping vLLM server (PID $VLLM_PID)…"
+        kill "$VLLM_PID" 2>/dev/null || true
+        wait "$VLLM_PID" 2>/dev/null || true
+    fi
+}
+trap cleanup EXIT INT TERM
+
+# ── Wait for /health endpoint ────────────────────────────────────────────────
+VLLM_URL="http://localhost:${VLLM_PORT}"
+echo -n "Waiting for vLLM server"
+ELAPSED=0; TIMEOUT=600
+until curl -sf "${VLLM_URL}/health" > /dev/null 2>&1; do
+    sleep 5; ELAPSED=$((ELAPSED + 5))
+    echo -n "."
+    if [[ $ELAPSED -ge $TIMEOUT ]]; then
+        echo " TIMEOUT — see $VLLM_LOG" >&2
+        exit 1
+    fi
+done
+echo " ready (${ELAPSED}s)"
+
+# ── Detect the model ID actually registered by vLLM ─────────────────────────
+REGISTERED_MODEL=$(curl -sf "${VLLM_URL}/v1/models" \
+    | python3 -c "import sys,json; print(json.load(sys.stdin)['data'][0]['id'])")
+echo "Registered model ID: $REGISTERED_MODEL"
+
+# ── Build optional flags ─────────────────────────────────────────────────────
+EXTRA_FLAGS=""
+[[ "$OVERWRITE"   == "true" ]] && EXTRA_FLAGS="$EXTRA_FLAGS --overwrite"
+[[ -n "$MAX_SAMPLES" ]]        && EXTRA_FLAGS="$EXTRA_FLAGS --max-samples $MAX_SAMPLES"
+[[ -n "$BENCHMARKS" ]]         && EXTRA_FLAGS="$EXTRA_FLAGS --benchmarks ${BENCHMARKS//,/ }"
+
+# ── Run evaluation ────────────────────────────────────────────────────────────
+echo "Running evaluation for $MODEL_NAME…"
+python3 -m pacute_bench.scripts.run_evaluation \
+    --models "$MODEL_NAME" \
+    --model-config configs/models_pt.yaml configs/models_it.yaml \
+    --vllm-url "$VLLM_URL" \
+    --vllm-model-id "$REGISTERED_MODEL" \
+    --output-dir "$LOGS_PATH" \
+    $EXTRA_FLAGS
+
+echo "Done: $MODEL_NAME"

@@ -1,0 +1,45 @@
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{adjustbox}
+\usepackage{threeparttable}
+\usepackage{colortbl}
+\usepackage[margin=1in]{geometry}
+\begin{document}
+\section*{Results: PT Models}
+
+\begin{table}[htbp]
+\centering
+\caption{Results for PT models on PACUTE benchmarks.}
+\label{tab:results-pt}
+\begin{threeparttable}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrrrrrrrrrr}
+\toprule
+\textbf{Model} & \multicolumn{2}{c}{\textbf{Affix-MCQ}} & \multicolumn{2}{c}{\textbf{Comp-MCQ}} & \multicolumn{2}{c}{\textbf{Manip-MCQ}} & \multicolumn{2}{c}{\textbf{Syll-MCQ}} & \multicolumn{2}{c}{\textbf{Hier-MCQ}} & \multicolumn{2}{c}{\textbf{LGame-MCQ}} & \multicolumn{2}{c}{\textbf{MDA-MCQ}} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}\cmidrule(lr){10-11}\cmidrule(lr){12-13}\cmidrule(lr){14-15}
+ & \textit{NormAcc} & \textit{F1} & \textit{NormAcc} & \textit{F1} & \textit{NormAcc} & \textit{F1} & \textit{NormAcc} & \textit{F1} & \textit{NormAcc} & \textit{F1} & \textit{NormAcc} & \textit{F1} & \textit{NormAcc} & \textit{F1} \\
+\midrule
+Qwen/Qwen2.5-0.5B & \cellcolor[HTML]{FEFCFB}13.3 & \cellcolor[HTML]{F7FAFC}51.9 & \cellcolor[HTML]{E5F1F7}10.1 & \cellcolor[HTML]{E1EFF6}49.1 & \cellcolor[HTML]{F9D3C2}5.2 & \cellcolor[HTML]{FADBCD}44.8 & \cellcolor[HTML]{F3F8FB}13.1 & \cellcolor[HTML]{E5F1F7}51.6 & \cellcolor[HTML]{FCE9E0}-1.6 & \cellcolor[HTML]{FCEAE3}38.5 & \cellcolor[HTML]{F6B99E}14.1 & \cellcolor[HTML]{F7C1AA}52.5 & \cellcolor[HTML]{F7C2AA}7.9 & \cellcolor[HTML]{F9CEBB}47.2 \\
+Qwen/Qwen2.5-1.5B & \cellcolor[HTML]{FCE9E0}9.5 & \cellcolor[HTML]{FDF1EC}48.6 & \cellcolor[HTML]{B7D8E9}13.2 & \cellcolor[HTML]{B4D7E8}51.7 & \cellcolor[HTML]{FBDED2}7.8 & \cellcolor[HTML]{FCE8DF}47.2 & \cellcolor[HTML]{F4A582}-12.5 & \cellcolor[HTML]{F4A582}27.0 & \cellcolor[HTML]{FBE3D8}-1.8 & \cellcolor[HTML]{FBE4DA}38.3 & \cellcolor[HTML]{F9CEBB}24.1 & \cellcolor[HTML]{FADCCF}60.2 & \cellcolor[HTML]{FDF5F1}31.9 & \cellcolor[HTML]{F3F8FB}65.7 \\
+Qwen/Qwen2.5-14B & \cellcolor[HTML]{92C5DE}\textbf{31.4} & \cellcolor[HTML]{92C5DE}\textbf{65.4} & \cellcolor[HTML]{BEDCEB}12.7 & \cellcolor[HTML]{BBDAEA}51.4 & \cellcolor[HTML]{92C5DE}\textbf{36.0} & \cellcolor[HTML]{92C5DE}\textbf{68.4} & \cellcolor[HTML]{F9D0BE}-1.3 & \cellcolor[HTML]{FAD9CB}38.7 & \cellcolor[HTML]{FAD6C6}-2.2 & \cellcolor[HTML]{FAD8C8}37.8 & \cellcolor[HTML]{EFF6FA}53.2 & \cellcolor[HTML]{DAEBF3}78.7 & \cellcolor[HTML]{E7F2F7}45.5 & \cellcolor[HTML]{D2E7F1}74.3 \\
+Qwen/Qwen2.5-3B & \cellcolor[HTML]{BBDAEA}24.8 & \cellcolor[HTML]{B5D7E8}60.7 & \cellcolor[HTML]{C4DFED}12.3 & \cellcolor[HTML]{C1DEEC}51.0 & \cellcolor[HTML]{FDF6F3}13.3 & \cellcolor[HTML]{FCFDFE}51.9 & \cellcolor[HTML]{D1E6F1}20.3 & \cellcolor[HTML]{C5E0ED}57.3 & \cellcolor[HTML]{F4A582}-4.0 & \cellcolor[HTML]{F4A582}36.1 & \cellcolor[HTML]{FBDED2}31.7 & \cellcolor[HTML]{FDEFE9}65.6 & \cellcolor[HTML]{F0F7FA}42.1 & \cellcolor[HTML]{DAEBF3}72.3 \\
+Qwen/Qwen2.5-7B & \cellcolor[HTML]{B5D7E8}25.7 & \cellcolor[HTML]{AFD4E7}61.4 & \cellcolor[HTML]{9DCAE1}15.0 & \cellcolor[HTML]{9CCAE1}53.2 & \cellcolor[HTML]{C6E0ED}26.0 & \cellcolor[HTML]{BDDCEB}61.6 & \cellcolor[HTML]{F7C4AD}-4.5 & \cellcolor[HTML]{F8CBB7}35.5 & \cellcolor[HTML]{F4A582}-4.0 & \cellcolor[HTML]{F4A582}36.1 & \cellcolor[HTML]{F5FAFC}50.5 & \cellcolor[HTML]{E0EEF5}77.2 & \cellcolor[HTML]{D9EAF3}50.9 & \cellcolor[HTML]{C6E1ED}77.5 \\
+Qwen/Qwen3-1.7B-Base & \cellcolor[HTML]{D2E7F1}21.0 & \cellcolor[HTML]{CAE2EF}57.9 & \cellcolor[HTML]{AED4E6}13.8 & \cellcolor[HTML]{ACD3E6}52.2 & \cellcolor[HTML]{FDF5F1}13.0 & \cellcolor[HTML]{FEFEFE}51.6 & \cellcolor[HTML]{F4A582}-12.5 & \cellcolor[HTML]{F4A582}27.0 & \cellcolor[HTML]{FDEFE9}-1.3 & \cellcolor[HTML]{FDF1EB}38.7 & \cellcolor[HTML]{F9D3C1}26.3 & \cellcolor[HTML]{FBE2D6}61.8 & \cellcolor[HTML]{E6F2F7}45.7 & \cellcolor[HTML]{D2E7F1}74.5 \\
+Qwen/Qwen3-30B-A3B-Base & \cellcolor[HTML]{FCEDE7}10.5 & \cellcolor[HTML]{FDF6F3}49.5 & \cellcolor[HTML]{ACD3E5}13.9 & \cellcolor[HTML]{AAD2E5}52.3 & \cellcolor[HTML]{FEFDFD}15.0 & \cellcolor[HTML]{F3F9FB}53.2 & \cellcolor[HTML]{CBE3EF}21.3 & \cellcolor[HTML]{C1DEEC}58.2 & \cellcolor[HTML]{FEFBFA}-0.9 & \cellcolor[HTML]{FEFDFD}39.1 & \cellcolor[HTML]{EDF5F9}53.9 & \cellcolor[HTML]{D8EAF3}79.1 & \cellcolor[HTML]{D8EAF3}51.3 & \cellcolor[HTML]{C5E0ED}77.7 \\
+Qwen/Qwen3-4B-Base & \cellcolor[HTML]{F0F7FA}16.2 & \cellcolor[HTML]{E5F1F7}54.2 & \cellcolor[HTML]{BBDBEA}12.9 & \cellcolor[HTML]{B9D9E9}51.5 & \cellcolor[HTML]{FEFBFA}14.5 & \cellcolor[HTML]{F6FAFC}52.8 & \cellcolor[HTML]{F6BBA1}-6.7 & \cellcolor[HTML]{F7C1A9}33.3 & \cellcolor[HTML]{F7BDA4}-3.1 & \cellcolor[HTML]{F7BEA5}37.0 & \cellcolor[HTML]{FBFDFE}48.3 & \cellcolor[HTML]{E6F1F7}75.9 & \cellcolor[HTML]{CDE4F0}55.5 & \cellcolor[HTML]{BDDBEB}80.0 \\
+aisingapore/Gemma-SEA-LION-v4-27B & \cellcolor[HTML]{9DCBE1}29.5 & \cellcolor[HTML]{9BCAE0}64.1 & \cellcolor[HTML]{98C8DF}15.3 & \cellcolor[HTML]{98C8DF}53.4 & \cellcolor[HTML]{95C6DF}35.3 & \cellcolor[HTML]{94C6DE}68.0 & \cellcolor[HTML]{BBDBEA}24.8 & \cellcolor[HTML]{B3D6E8}60.7 & \cellcolor[HTML]{ECF5F9}-0.2 & \cellcolor[HTML]{EAF3F8}39.8 & \cellcolor[HTML]{92C5DE}\textbf{89.5} & \cellcolor[HTML]{92C5DE}\textbf{95.9} & \cellcolor[HTML]{D5E8F2}52.5 & \cellcolor[HTML]{C3DFEC}78.3 \\
+meta-llama/Llama-3.1-8B & \cellcolor[HTML]{F8CBB8}3.8 & \cellcolor[HTML]{F9D2C0}43.6 & \cellcolor[HTML]{92C5DE}\textbf{15.7} & \cellcolor[HTML]{92C5DE}\textbf{53.8} & \cellcolor[HTML]{E6F2F7}19.8 & \cellcolor[HTML]{DBECF4}57.0 & \cellcolor[HTML]{92C5DE}\textbf{33.6} & \cellcolor[HTML]{92C5DE}\textbf{66.8} & \cellcolor[HTML]{ECF5F9}-0.2 & \cellcolor[HTML]{EAF3F8}39.8 & \cellcolor[HTML]{F8C8B3}21.5 & \cellcolor[HTML]{F9D5C5}58.3 & \cellcolor[HTML]{92C5DE}\textbf{78.7} & \cellcolor[HTML]{92C5DE}\textbf{91.3} \\
+meta-llama/Llama-3.2-3B & \cellcolor[HTML]{F4A582}-3.8 & \cellcolor[HTML]{F4A582}36.3 & \cellcolor[HTML]{A8D0E4}14.2 & \cellcolor[HTML]{A6CFE4}52.6 & \cellcolor[HTML]{FDF1EC}12.2 & \cellcolor[HTML]{FEFBFA}50.9 & \cellcolor[HTML]{F4AB8A}-10.9 & \cellcolor[HTML]{F4AD8D}28.8 & \cellcolor[HTML]{E4F1F7}0.0 & \cellcolor[HTML]{E2EFF6}40.0 & \cellcolor[HTML]{F6BBA1}15.1 & \cellcolor[HTML]{F7C4AD}53.3 & \cellcolor[HTML]{A0CCE2}73.1 & \cellcolor[HTML]{9BCAE0}88.8 \\
+openai-community/gpt2 & \cellcolor[HTML]{F9D0BE}4.8 & \cellcolor[HTML]{FAD7C8}44.4 & \cellcolor[HTML]{F4A582}1.0 & \cellcolor[HTML]{F4A582}41.0 & \cellcolor[HTML]{F4A582}-5.5 & \cellcolor[HTML]{F4A582}34.5 & \cellcolor[HTML]{CBE3EF}21.3 & \cellcolor[HTML]{C1DEEC}58.2 & \cellcolor[HTML]{A1CDE2}2.0 & \cellcolor[HTML]{A0CCE2}41.9 & \cellcolor[HTML]{F4A684}5.5 & \cellcolor[HTML]{F4A786}45.1 & \cellcolor[HTML]{F5B395}0.7 & \cellcolor[HTML]{F6B99E}40.6 \\
+openai-community/gpt2-xl & \cellcolor[HTML]{F9D5C5}5.7 & \cellcolor[HTML]{FADCCF}45.3 & \cellcolor[HTML]{F9CEBC}4.4 & \cellcolor[HTML]{F9D1BF}44.2 & \cellcolor[HTML]{F6B79B}-1.3 & \cellcolor[HTML]{F6BBA0}38.7 & \cellcolor[HTML]{F5B294}-9.1 & \cellcolor[HTML]{F6B699}30.8 & \cellcolor[HTML]{92C5DE}\textbf{2.4} & \cellcolor[HTML]{92C5DE}\textbf{42.3} & \cellcolor[HTML]{F4A582}4.5 & \cellcolor[HTML]{F4A582}44.2 & \cellcolor[HTML]{F4A582}-6.0 & \cellcolor[HTML]{F4A582}34.0 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{tablenotes}[flushleft]\footnotesize
+\item \textit{Affix} = PACUTE Affixation; \textit{Comp} = PACUTE Composition; \textit{Hier} = Hierarchical; \textit{LGame} = LangGame; \textit{MDA} = Multi-Digit Addition; \textit{Manip} = PACUTE Manipulation; \textit{Syll} = PACUTE Syllabification; Bold = best in column. Cell colour: \colorbox[HTML]{F4A582}{\strut low} $\to$ white $\to$ \colorbox[HTML]{92C5DE}{high} per column.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\end{document}

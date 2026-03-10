@@ -340,6 +340,7 @@ def main() -> None:
             all_results[model_name] = {
                 "hf_model_name": hf_path,
                 "model_type":    model_type,
+                "thinking":      thinking,
                 "benchmarks":    model_results,
             }
 

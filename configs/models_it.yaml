@@ -210,7 +210,9 @@ models:
   gpt-oss-20b:
     path: openai/gpt-oss-20b
     type: it
+    thinking: true
 
   gpt-oss-120b:
     path: openai/gpt-oss-120b
     type: it
+    thinking: true

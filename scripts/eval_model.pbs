@@ -55,19 +55,20 @@ export CUDA_VISIBLE_DEVICES="$VISIBLE_DEVICES_STR"
 N_GPUS=${#VISIBLE_DEVICES[@]}
 echo "CUDA_VISIBLE_DEVICES → $CUDA_VISIBLE_DEVICES  ($N_GPUS GPUs)"
 
-# ── Resolve model path + type from YAML ─────────────────────────────────────
-read -r MODEL_PATH MODEL_TYPE < <(python3 - <<PYEOF
+# ── Resolve model path + type + reasoning_parser from YAML ──────────────────
+read -r MODEL_PATH MODEL_TYPE REASONING_PARSER < <(python3 - <<PYEOF
 import yaml, sys
 for cfg in ['configs/models_pt.yaml', 'configs/models_it.yaml']:
     try:
         data = yaml.safe_load(open(cfg))
         info = data['models'].get('${MODEL_NAME}')
         if info:
-            print(info['path'], info['type'])
+            rp = info.get('reasoning_parser', '')
+            print(info['path'], info['type'], rp)
             sys.exit(0)
     except Exception:
         pass
-print("UNKNOWN UNKNOWN")
+print("UNKNOWN UNKNOWN ")
 sys.exit(1)
 PYEOF
 )
@@ -76,22 +77,33 @@ if [[ "$MODEL_PATH" == "UNKNOWN" ]]; then
     echo "ERROR: model '${MODEL_NAME}' not found in any config YAML" >&2
     exit 1
 fi
-echo "Model path : $MODEL_PATH"
-echo "Model type : $MODEL_TYPE"
+echo "Model path       : $MODEL_PATH"
+echo "Model type       : $MODEL_TYPE"
+echo "Reasoning parser : ${REASONING_PARSER:-(none)}"
 echo "TP size    : $N_GPUS"
 
 # ── Start vLLM server ────────────────────────────────────────────────────────
 VLLM_LOG="${LOGS_PATH}/vllm_${MODEL_NAME}_$(date +%Y%m%d_%H%M%S).log"
 mkdir -p "$(dirname "$VLLM_LOG")"
 
+# Increase engine startup timeout so large models (e.g. 671B DeepSeek) don't time out
+export VLLM_ENGINE_CORE_CLIENT_TIMEOUT=3600
+
+# Build the vLLM serve command
+VLLM_SERVE_ARGS=(
+    "$MODEL_PATH"
+    --port "$VLLM_PORT"
+    --tensor-parallel-size "$N_GPUS"
+    --enable-prefix-caching
+    --gpu-memory-utilization 0.85
+    --trust-remote-code
+)
+# Add reasoning parser for models that always emit <think> blocks (phi-4-reasoning, gpt-oss, etc.).
+# Qwen3 models use the enable_thinking chat-template kwarg instead and do NOT need this flag.
+[[ -n "${REASONING_PARSER:-}" ]] && VLLM_SERVE_ARGS+=(--reasoning-parser "$REASONING_PARSER")
+
 echo "Starting vLLM: $MODEL_PATH (TP=$N_GPUS, port=$VLLM_PORT)"
-vllm serve "$MODEL_PATH" \
-    --port "$VLLM_PORT" \
-    --tensor-parallel-size "$N_GPUS" \
-    --enable-prefix-caching \
-    --gpu-memory-utilization 0.85 \
-    --trust-remote-code \
-    > "$VLLM_LOG" 2>&1 &
+vllm serve "${VLLM_SERVE_ARGS[@]}" > "$VLLM_LOG" 2>&1 &
 VLLM_PID=$!
 
 cleanup() {

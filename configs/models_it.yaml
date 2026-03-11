@@ -178,16 +178,19 @@ models:
     path: microsoft/Phi-4-mini-reasoning
     type: it
     thinking: true
+    reasoning_parser: deepseek_r1  # always-on <think> blocks; uses deepseek_r1 parser
 
   phi-4-reasoning:
     path: microsoft/Phi-4-reasoning
     type: it
     thinking: true
+    reasoning_parser: deepseek_r1
 
   phi-4-reasoning-plus:
     path: microsoft/Phi-4-reasoning-plus
     type: it
     thinking: true
+    reasoning_parser: deepseek_r1
 
   # ============================================================================
   # GPT-OSS Family (OpenAI open-source MoE models, natively supported in vLLM)
@@ -196,8 +199,10 @@ models:
     path: openai/gpt-oss-20b
     type: it
     thinking: true
+    reasoning_parser: deepseek_r1  # always-on <think> blocks
 
   gpt-oss-120b:
     path: openai/gpt-oss-120b
     type: it
     thinking: true
+    reasoning_parser: deepseek_r1

@@ -1,0 +1,7 @@
+{
+  "hf_model_name": "openai-community/gpt2-medium",
+  "model_type": "pt",
+  "thinking": false,
+  "benchmarks": {},
+  "timestamp": "20260311_235151"
+}

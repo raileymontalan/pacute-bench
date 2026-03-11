@@ -103,16 +103,6 @@ models:
     type: it
     thinking: true
 
-  qwen-3-4b-it:
-    path: Qwen/Qwen3-4B
-    type: it
-    thinking: false
-
-  qwen-3-4b-it-thinking:
-    path: Qwen/Qwen3-4B
-    type: it
-    thinking: true
-
   qwen-3-4b-it-2507:
     path: Qwen/Qwen3-4B-Instruct-2507
     type: it
@@ -173,12 +163,6 @@ models:
   phi-4-mini-it:
     path: microsoft/Phi-4-mini-instruct
     type: it
-
-  phi-4-mini-it-thinking:
-    path: microsoft/Phi-4-mini-reasoning
-    type: it
-    thinking: true
-    reasoning_parser: deepseek_r1  # always-on <think> blocks; uses deepseek_r1 parser
 
   phi-4-reasoning:
     path: microsoft/Phi-4-reasoning

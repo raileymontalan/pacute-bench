@@ -1,15 +1,18 @@
 # Commercial model configurations for evaluation via batch APIs.
-# Both OpenAI and Anthropic offer 50% cost reduction through batch processing.
+# OpenAI and Anthropic offer 50% cost reduction through batch processing.
+# Gemini batch jobs run asynchronously (results typically within minutes to hours).
 # MCQ benchmarks are NOT supported — only generative (-gen) benchmarks are run.
 #
 # Required environment variables:
 #   OPENAI_API_KEY     — for provider: openai
 #   ANTHROPIC_API_KEY  — for provider: anthropic
+#   GEMINI_API_KEY     — for provider: gemini
 
 models:
   # ============================================================================
   # OpenAI
   # ============================================================================
+  
   gpt-5.4:
     path: gpt-5.4
     type: it
@@ -39,3 +42,18 @@ models:
     path: claude-haiku-4-5
     type: it
     provider: anthropic
+
+
+  # ============================================================================
+  # Google Gemini
+  # ============================================================================
+
+  gemini-2.5-flash:
+    path: gemini-2.5-flash
+    type: it
+    provider: gemini
+
+  gemini-2.5-flash-lite:
+    path: gemini-2.5-flash-lite
+    type: it
+    provider: gemini

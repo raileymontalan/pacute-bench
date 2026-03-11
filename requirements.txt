@@ -3,6 +3,7 @@ torch>=2.5
 transformers>=5.3
 openai>=1.30
 anthropic>=0.40
+google-genai>=0.8
 vllm>=0.15.0
 
 # Data

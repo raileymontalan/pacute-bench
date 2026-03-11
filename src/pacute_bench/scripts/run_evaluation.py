@@ -33,7 +33,7 @@ from pathlib import Path
 
 import yaml
 
-from pacute_bench.evaluator import VLLMEvaluator, CommercialEvaluator, BENCHMARK_FORMATS
+from pacute_bench.evaluators import make_evaluator, BENCHMARK_FORMATS
 
 
 # ---------------------------------------------------------------------------
@@ -45,7 +45,7 @@ def load_model_configs(config_paths=None) -> dict:
     Load model configurations from one or more YAML files.
 
     Returns:
-        Dict mapping model name → (hf_path, type, tokenizer, thinking)
+        Dict mapping model name → (hf_path, type, tokenizer, thinking, provider, reasoning_parser)
     """
     if config_paths is None:
         config_paths = [
@@ -71,6 +71,7 @@ def load_model_configs(config_paths=None) -> dict:
                 info.get("tokenizer", info["path"]),
                 info.get("thinking", False),
                 info.get("provider", None),   # None → vLLM, "openai"/"anthropic" → CommercialEvaluator
+                info.get("reasoning_parser", None),  # None → Qwen3-style enable_thinking kwarg
             )
     return model_configs
 
@@ -246,7 +247,7 @@ def main() -> None:
     all_results: dict = {}
 
     for model_name in args.models:
-        hf_path, model_type, tokenizer_name, thinking, provider = model_configs[model_name]
+        hf_path, model_type, tokenizer_name, thinking, provider, reasoning_parser = model_configs[model_name]
 
         if provider:
             effective_mode = "gen"   # commercial batch APIs: gen-only
@@ -255,7 +256,10 @@ def main() -> None:
                 if args.eval_mode == "auto" else args.eval_mode
 
         benchmarks_for_model = filter_benchmarks(args.benchmarks, effective_mode)
-        thinking_label = "thinking=ON" if thinking else "thinking=OFF"
+        if thinking:
+            thinking_label = f"thinking=ON ({reasoning_parser or 'enable_thinking kwarg'})"
+        else:
+            thinking_label = "thinking=OFF"
 
         print(f"\n{'='*80}")
         print(f"Model: {model_name}  (type={model_type}, mode={effective_mode}, {thinking_label})")
@@ -268,22 +272,24 @@ def main() -> None:
 
         try:
             if provider:
-                evaluator = CommercialEvaluator(
+                evaluator = make_evaluator(
+                    provider,
                     model_name=model_name,
                     model_id=hf_path,
-                    provider=provider,
                     thinking=thinking,
                     system_prompt=args.system_prompt,
                     benchmark_system_prompts=benchmark_system_prompts,
                     benchmark_answer_tags=benchmark_answer_tags,
                 )
             else:
-                evaluator = VLLMEvaluator(
+                evaluator = make_evaluator(
+                    None,
                     model_name=model_name,
                     model_id=hf_path,
                     model_type=model_type,
                     tokenizer_name=tokenizer_name,
                     thinking=thinking,
+                    reasoning_parser=reasoning_parser,
                     vllm_url=args.vllm_url,
                     vllm_api_key=args.vllm_api_key,
                     vllm_model_id=args.vllm_model_id,

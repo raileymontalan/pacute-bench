@@ -119,3 +119,19 @@ models:
   qwen-3-30b:
     path: Qwen/Qwen3-30B-A3B-Base
     type: pt
+
+  # ============================================================================
+  # DeepSeek Family
+  # DeepSeek-V3-Base is the pretrained MoE base model.
+  # DeepSeek-R1-Zero is trained from V3-Base via RL only (no SFT); it reasons
+  # natively but lacks instruction fine-tuning.
+  # ============================================================================
+  deepseek-v3-base:
+    path: deepseek-ai/DeepSeek-V3-Base
+    type: pt
+    min_gpus: 8
+
+  deepseek-r1-zero:
+    path: deepseek-ai/DeepSeek-R1-Zero
+    type: pt
+    min_gpus: 8

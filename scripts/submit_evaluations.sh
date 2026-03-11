@@ -109,6 +109,8 @@ fi
 # Extracts the largest "NNb" or "NNN" token from the model path/name as a
 # parameter count (in billions), then maps it to a GPU count via ranges:
 #   >= 120B → 8 GPUs  |  >= 27B → 4 GPUs  |  >= 7B → 2 GPUs  |  else → 1 GPU
+# Note: models with an explicit "NNm" (millions) suffix are treated as <1B and
+# skip the integer fallback to avoid misreading e.g. "270m" as 270B.
 gpus_for_model() {
     local model_id="$1"
     local size_b
@@ -116,10 +118,17 @@ gpus_for_model() {
     size_b=$(echo "$model_id" | grep -oiE '[0-9]+(\.[0-9]+)?b' \
                | sed 's/[bB]$//' \
                | awk 'BEGIN{m=0} {if($1+0>m) m=$1+0} END{print m}')
-    # Fallback: plain integers in the path (e.g. deepseek-v3 has no explicit Nb)
     if [[ -z "$size_b" || "$size_b" == "0" ]]; then
-        size_b=$(echo "$model_id" | grep -oE '[0-9]+' \
-                   | awk 'BEGIN{m=0} {if($1+0>m) m=$1+0} END{print m}')
+        # If path has an explicit Nm/NM suffix (millions), skip fallback — model is <1B
+        local has_m
+        has_m=$(echo "$model_id" | grep -oiE '[0-9]+(\.[0-9]+)?m' | head -1)
+        if [[ -z "$has_m" ]]; then
+            # Fallback: plain integers in the path (e.g. deepseek-v3 has no explicit Nb)
+            size_b=$(echo "$model_id" | grep -oE '[0-9]+' \
+                       | awk 'BEGIN{m=0} {if($1+0>m) m=$1+0} END{print m}')
+        else
+            size_b=0
+        fi
     fi
     size_b=${size_b:-0}
     if   awk "BEGIN{exit !($size_b >= 120)}"; then echo 8
@@ -143,6 +152,23 @@ for cfg in ['$PROJECT_ROOT/configs/models_pt.yaml', '$PROJECT_ROOT/configs/model
     except Exception:
         pass
 sys.exit(1)
+PYEOF
+}
+
+get_model_min_gpus() {
+    local name="$1"
+    python3 - <<PYEOF
+import yaml, sys
+for cfg in ['$PROJECT_ROOT/configs/models_pt.yaml', '$PROJECT_ROOT/configs/models_it.yaml', '$PROJECT_ROOT/configs/models_commercial.yaml']:
+    try:
+        data = yaml.safe_load(open(cfg))
+        info = data['models'].get('$name')
+        if info and 'min_gpus' in info:
+            print(info['min_gpus'])
+            sys.exit(0)
+    except Exception:
+        pass
+print(0)
 PYEOF
 }
 
@@ -203,6 +229,8 @@ for model_name in "${ALL_MODELS[@]}"; do
         printf "  %-32s  (commercial API)  " "$model_name"
     else
         N_GPUS=$(gpus_for_model "$model_path")
+        MIN_GPUS=$(get_model_min_gpus "$model_name")
+        [[ "$MIN_GPUS" -gt "$N_GPUS" ]] && N_GPUS="$MIN_GPUS"
         NCPUS=$((N_GPUS * 4))
         MEM=$((N_GPUS * 64))gb
         VARS=$(pbs_vars "$model_name")

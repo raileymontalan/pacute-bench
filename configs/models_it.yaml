@@ -174,19 +174,6 @@ models:
     thinking: true
 
   # ============================================================================
-  # Qwen3-Next Family (80B MoE; separate -Instruct and -Thinking checkpoints)
-  # ============================================================================
-  qwen-3-next-80b-it:
-    path: Qwen/Qwen3-Next-80B-A3B-Instruct
-    type: it
-    thinking: false
-
-  qwen-3-next-80b-it-thinking:
-    path: Qwen/Qwen3-Next-80B-A3B-Thinking
-    type: it
-    thinking: true
-
-  # ============================================================================
   # Phi-4 Family
   # No base (PT) versions are publicly available; all entries are IT only.
   # phi-4-reasoning variants use chain-of-thought (<think> blocks).
@@ -198,6 +185,16 @@ models:
   phi-4-mini-it:
     path: microsoft/Phi-4-mini-instruct
     type: it
+
+  phi-4-mini-it-thinking:
+    path: microsoft/Phi-4-mini-reasoning
+    type: it
+    thinking: true
+
+  phi-4-reasoning:
+    path: microsoft/Phi-4-reasoning
+    type: it
+    thinking: true
 
   phi-4-reasoning-plus:
     path: microsoft/Phi-4-reasoning-plus
@@ -216,3 +213,21 @@ models:
     path: openai/gpt-oss-120b
     type: it
     thinking: true
+
+  # ============================================================================
+  # DeepSeek Family
+  # deepseek-v3 and deepseek-v3-0324 are standard chat models (no thinking).
+  # deepseek-r1 variants always emit <think> blocks (thinking is always-on, not a toggle).
+  # R1 distills are SFT'd into smaller Qwen/Llama backbones with always-on thinking.
+  # ============================================================================
+
+  deepseek-v3-0324:
+    path: deepseek-ai/DeepSeek-V3-0324
+    type: it
+    min_gpus: 8
+
+  deepseek-r1-0528:
+    path: deepseek-ai/DeepSeek-R1-0528
+    type: it
+    thinking: true
+    min_gpus: 8

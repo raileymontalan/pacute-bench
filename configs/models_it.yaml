@@ -116,10 +116,9 @@ models:
   qwen-3-4b-it-2507:
     path: Qwen/Qwen3-4B-Instruct-2507
     type: it
-    thinking: false
 
   qwen-3-4b-it-2507-thinking:
-    path: Qwen/Qwen3-4B-Instruct-2507
+    path: Qwen/Qwen3-4B-Thinking-2507
     type: it
     thinking: true
 
@@ -153,23 +152,12 @@ models:
     type: it
     thinking: true
 
-  qwen-3-30b-it:
-    path: Qwen/Qwen3-30B-A3B
+  qwen-3-30b-it-2507:
+    path: Qwen/Qwen3-30B-A3B-Instruct-2507
     type: it
-    thinking: false
 
-  qwen-3-30b-it-thinking:
-    path: Qwen/Qwen3-30B-A3B
-    type: it
-    thinking: true
-
-  qwen-3-235b-it:
-    path: Qwen/Qwen3-235B-A22B
-    type: it
-    thinking: false
-
-  qwen-3-235b-it-thinking:
-    path: Qwen/Qwen3-235B-A22B
+  qwen-3-30b-it-2507-thinking:
+    path: Qwen/Qwen3-30B-A3B-Thinking-2507
     type: it
     thinking: true
 
@@ -213,21 +201,3 @@ models:
     path: openai/gpt-oss-120b
     type: it
     thinking: true
-
-  # ============================================================================
-  # DeepSeek Family
-  # deepseek-v3 and deepseek-v3-0324 are standard chat models (no thinking).
-  # deepseek-r1 variants always emit <think> blocks (thinking is always-on, not a toggle).
-  # R1 distills are SFT'd into smaller Qwen/Llama backbones with always-on thinking.
-  # ============================================================================
-
-  deepseek-v3-0324:
-    path: deepseek-ai/DeepSeek-V3-0324
-    type: it
-    min_gpus: 8
-
-  deepseek-r1-0528:
-    path: deepseek-ai/DeepSeek-R1-0528
-    type: it
-    thinking: true
-    min_gpus: 8

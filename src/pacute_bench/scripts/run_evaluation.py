@@ -76,6 +76,22 @@ def load_model_configs(config_paths=None) -> dict:
 
 
 # ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
+def _print_bench_summary(bench: str, results: dict) -> None:
+    print(f"\n  {bench} Results  (n={results['num_samples']})")
+    if results.get("format") == "generative":
+        print(f"    Exact match  : {results['exact_match']:.4f}")
+        print(f"    Contains     : {results['contains_match']:.4f}")
+        print(f"    Prefix       : {results['prefix_match']:.4f}")
+    else:
+        print(f"    Accuracy     : {results['accuracy']:.4f}")
+        print(f"    F1           : {results['f1_score']:.4f}")
+        print(f"    Norm. Acc.   : {results['normalized_accuracy']:.4f}")
+
+
+# ---------------------------------------------------------------------------
 # main
 # ---------------------------------------------------------------------------
 
@@ -286,10 +302,24 @@ def main() -> None:
                     check_existing=not args.overwrite,
                     timestamp=timestamp,
                 )
-                benches_to_save = bench_results.items()
+                for bench, results in bench_results.items():
+                    if not results or results.get("skipped"):
+                        continue
+                    detailed = results.pop("detailed_results", None)
+                    results.pop("setting", None)
+                    if detailed:
+                        inf_dir = Path("results") / model_name / "inference"
+                        inf_dir.mkdir(parents=True, exist_ok=True)
+                        inf_file = inf_dir / f"{bench}.jsonl"
+                        detailed.sort(key=lambda r: r.get("id", ""))
+                        with open(inf_file, "w", encoding="utf-8") as f:
+                            for r in detailed:
+                                f.write(json.dumps(r, ensure_ascii=False) + "\n")
+                        print(f"  Saved inference results → {inf_file}")
+                    model_results[bench] = results
+                    _print_bench_summary(bench, results)
             else:
                 # vLLM models: sequential (server handles one model at a time).
-                _seq_results = {}
                 for bench in benchmarks_for_model:
                     try:
                         res = evaluator.evaluate_benchmark(
@@ -303,39 +333,21 @@ def main() -> None:
                         print(f"ERROR on {bench}: {e}")
                         traceback.print_exc()
                         continue
-                    if res and not res.get("skipped"):
-                        _seq_results[bench] = res
-                benches_to_save = _seq_results.items()
-
-            for bench, results in benches_to_save:
-                if not results or results.get("skipped"):
-                    continue
-
-                # Save per-sample inference results
-                detailed = results.pop("detailed_results", None)
-                results.pop("setting", None)
-                if detailed:
-                    inf_dir  = Path("results") / model_name / "inference"
-                    inf_dir.mkdir(parents=True, exist_ok=True)
-                    inf_file = inf_dir / f"{bench}.jsonl"
-                    detailed.sort(key=lambda r: r.get("id", ""))
-                    with open(inf_file, "w", encoding="utf-8") as f:
-                        for r in detailed:
-                            f.write(json.dumps(r, ensure_ascii=False) + "\n")
-                    print(f"  Saved inference results → {inf_file}")
-
-                model_results[bench] = results
-
-                # Summary print
-                print(f"\n  {bench} Results  (n={results['num_samples']})")
-                if results.get("format") == "generative":
-                    print(f"    Exact match  : {results['exact_match']:.4f}")
-                    print(f"    Contains     : {results['contains_match']:.4f}")
-                    print(f"    Prefix       : {results['prefix_match']:.4f}")
-                else:
-                    print(f"    Accuracy     : {results['accuracy']:.4f}")
-                    print(f"    F1           : {results['f1_score']:.4f}")
-                    print(f"    Norm. Acc.   : {results['normalized_accuracy']:.4f}")
+                    if not res or res.get("skipped"):
+                        continue
+                    detailed = res.pop("detailed_results", None)
+                    res.pop("setting", None)
+                    if detailed:
+                        inf_dir = Path("results") / model_name / "inference"
+                        inf_dir.mkdir(parents=True, exist_ok=True)
+                        inf_file = inf_dir / f"{bench}.jsonl"
+                        detailed.sort(key=lambda r: r.get("id", ""))
+                        with open(inf_file, "w", encoding="utf-8") as f:
+                            for r in detailed:
+                                f.write(json.dumps(r, ensure_ascii=False) + "\n")
+                        print(f"  Saved inference results → {inf_file}")
+                    model_results[bench] = res
+                    _print_bench_summary(bench, res)
 
             all_results[model_name] = {
                 "hf_model_name": hf_path,

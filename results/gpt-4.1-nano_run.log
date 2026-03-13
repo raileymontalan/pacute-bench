@@ -1,0 +1,175 @@
+Loaded eval config: configs/evaluation.yaml
+  Instructions for: ['cute-gen', 'pacute-affixation-gen', 'pacute-composition-gen', 'pacute-manipulation-gen', 'pacute-syllabification-gen', 'hierarchical-gen', 'langgame-gen', 'multi-digit-addition-gen']
+
+================================================================================
+Evaluation Configuration
+================================================================================
+  Eval mode  : gen
+  Overwrite  : False
+  vLLM URL   : http://localhost:8000
+================================================================================
+
+
+================================================================================
+Model: gpt-4.1-nano  (type=it, mode=gen, thinking=OFF)
+Benchmarks: pacute-affixation-gen, pacute-composition-gen, pacute-manipulation-gen, pacute-syllabification-gen, hierarchical-gen, langgame-gen, multi-digit-addition-gen, cute-gen
+================================================================================
+  Using AISI API key proxy (aisitools detected)
+CommercialEvaluator: OpenAI batch API → model=gpt-4.1-nano via proxy https://openai.apps.aisi.org.uk/v1
+
+Evaluating on pacute-affixation-gen (batch)...
+PACUTE (gen): Loaded 140 tasks across 1 categories:
+  - affixation: 140 tasks
+Format: generative (140 items)
+  Uploading 140 requests to OpenAI Files API…
+  Batch created: batch_69b31ec2514c81909be319a7fe852c19  (polling every 60s)
+  [batch_69b31ec2514c81909be319a7fe852c19] status=in_progress  completed=136  failed=0  total=140
+  [batch_69b31ec2514c81909be319a7fe852c19] status=completed  completed=140  failed=0  total=140
+  Saved inference results → results/gpt-4.1-nano/inference/pacute-affixation-gen.jsonl
+
+  pacute-affixation-gen Results  (n=140)
+    Exact match  : 0.3500
+    Contains     : 0.6786
+    Prefix       : 0.4786
+
+Evaluating on pacute-composition-gen (batch)...
+PACUTE (gen): Loaded 500 tasks across 1 categories:
+  - composition: 500 tasks
+Format: generative (500 items)
+  Uploading 500 requests to OpenAI Files API…
+  Batch created: batch_69b31f3cd690819086d876a9eeb487de  (polling every 60s)
+  [batch_69b31f3cd690819086d876a9eeb487de] status=in_progress  completed=0  failed=0  total=500
+  [batch_69b31f3cd690819086d876a9eeb487de] status=in_progress  completed=496  failed=0  total=500
+  [batch_69b31f3cd690819086d876a9eeb487de] status=finalizing  completed=500  failed=0  total=500
+  [batch_69b31f3cd690819086d876a9eeb487de] status=completed  completed=500  failed=0  total=500
+  Saved inference results → results/gpt-4.1-nano/inference/pacute-composition-gen.jsonl
+
+  pacute-composition-gen Results  (n=500)
+    Exact match  : 0.8980
+    Contains     : 0.8980
+    Prefix       : 0.8980
+
+Evaluating on pacute-manipulation-gen (batch)...
+PACUTE (gen): Loaded 800 tasks across 1 categories:
+  - manipulation: 800 tasks
+Format: generative (800 items)
+  Uploading 800 requests to OpenAI Files API…
+  Batch created: batch_69b32031a7188190ad71ec33d32accdf  (polling every 60s)
+  [batch_69b32031a7188190ad71ec33d32accdf] status=in_progress  completed=0  failed=0  total=800
+  [batch_69b32031a7188190ad71ec33d32accdf] status=in_progress  completed=290  failed=0  total=800
+  [batch_69b32031a7188190ad71ec33d32accdf] status=in_progress  completed=654  failed=0  total=800
+  [batch_69b32031a7188190ad71ec33d32accdf] status=finalizing  completed=800  failed=0  total=800
+  [batch_69b32031a7188190ad71ec33d32accdf] status=finalizing  completed=800  failed=0  total=800
+  [batch_69b32031a7188190ad71ec33d32accdf] status=completed  completed=800  failed=0  total=800
+  Saved inference results → results/gpt-4.1-nano/inference/pacute-manipulation-gen.jsonl
+
+  pacute-manipulation-gen Results  (n=800)
+    Exact match  : 0.5675
+    Contains     : 0.5863
+    Prefix       : 0.5850
+
+Evaluating on pacute-syllabification-gen (batch)...
+PACUTE (gen): Loaded 500 tasks across 1 categories:
+  - syllabification: 500 tasks
+Format: generative (500 items)
+  Uploading 500 requests to OpenAI Files API…
+  Batch created: batch_69b3219e78808190aafe68a21f87f1f1  (polling every 60s)
+  [batch_69b3219e78808190aafe68a21f87f1f1] status=in_progress  completed=0  failed=0  total=500
+  [batch_69b3219e78808190aafe68a21f87f1f1] status=in_progress  completed=0  failed=0  total=500
+  [batch_69b3219e78808190aafe68a21f87f1f1] status=in_progress  completed=496  failed=0  total=500
+  [batch_69b3219e78808190aafe68a21f87f1f1] status=finalizing  completed=500  failed=0  total=500
+  [batch_69b3219e78808190aafe68a21f87f1f1] status=completed  completed=500  failed=0  total=500
+  Saved inference results → results/gpt-4.1-nano/inference/pacute-syllabification-gen.jsonl
+
+  pacute-syllabification-gen Results  (n=500)
+    Exact match  : 0.5840
+    Contains     : 0.6120
+    Prefix       : 0.5900
+
+Evaluating on hierarchical-gen (batch)...
+Hierarchical (gen): Loaded 600 tasks from data/benchmarks/hierarchical_gen.jsonl
+Format: generative (600 items)
+  Uploading 600 requests to OpenAI Files API…
+  Batch created: batch_69b322ce7c0c81909fa27dc7f0960b20  (polling every 60s)
+  [batch_69b322ce7c0c81909fa27dc7f0960b20] status=in_progress  completed=488  failed=0  total=600
+  [batch_69b322ce7c0c81909fa27dc7f0960b20] status=finalizing  completed=600  failed=0  total=600
+  [batch_69b322ce7c0c81909fa27dc7f0960b20] status=completed  completed=600  failed=0  total=600
+  Saved inference results → results/gpt-4.1-nano/inference/hierarchical-gen.jsonl
+
+  hierarchical-gen Results  (n=600)
+    Exact match  : 0.3717
+    Contains     : 0.5383
+    Prefix       : 0.4100
+
+Evaluating on langgame-gen (batch)...
+LangGame (gen): Loaded 1000 examples from data/benchmarks/langgame_gen.jsonl
+Format: generative (1000 items)
+  Uploading 1000 requests to OpenAI Files API…
+  Batch created: batch_69b3238634e88190bd47113ee24a2e72  (polling every 60s)
+  [batch_69b3238634e88190bd47113ee24a2e72] status=in_progress  completed=468  failed=0  total=1000
+  [batch_69b3238634e88190bd47113ee24a2e72] status=finalizing  completed=1000  failed=0  total=1000
+  [batch_69b3238634e88190bd47113ee24a2e72] status=completed  completed=1000  failed=0  total=1000
+  Saved inference results → results/gpt-4.1-nano/inference/langgame-gen.jsonl
+
+  langgame-gen Results  (n=1000)
+    Exact match  : 0.9380
+    Contains     : 0.9390
+    Prefix       : 0.9380
+
+Evaluating on multi-digit-addition-gen (batch)...
+Multi-digit Addition (gen): Loaded 1000 examples from data/benchmarks/multi_digit_addition_gen.jsonl
+Format: generative (1000 items)
+  Uploading 1000 requests to OpenAI Files API…
+  Batch created: batch_69b3243dad5081909907bdf3f44b4fdc  (polling every 60s)
+  [batch_69b3243dad5081909907bdf3f44b4fdc] status=in_progress  completed=466  failed=0  total=1000
+  [batch_69b3243dad5081909907bdf3f44b4fdc] status=in_progress  completed=844  failed=0  total=1000
+  [batch_69b3243dad5081909907bdf3f44b4fdc] status=in_progress  completed=870  failed=0  total=1000
+  [batch_69b3243dad5081909907bdf3f44b4fdc] status=in_progress  completed=870  failed=0  total=1000
+  [batch_69b3243dad5081909907bdf3f44b4fdc] status=in_progress  completed=934  failed=0  total=1000
+  [batch_69b3243dad5081909907bdf3f44b4fdc] status=in_progress  completed=965  failed=0  total=1000
+  [batch_69b3243dad5081909907bdf3f44b4fdc] status=in_progress  completed=983  failed=0  total=1000
+  [batch_69b3243dad5081909907bdf3f44b4fdc] status=finalizing  completed=1000  failed=0  total=1000
+  [batch_69b3243dad5081909907bdf3f44b4fdc] status=completed  completed=1000  failed=0  total=1000
+  Saved inference results → results/gpt-4.1-nano/inference/multi-digit-addition-gen.jsonl
+
+  multi-digit-addition-gen Results  (n=1000)
+    Exact match  : 1.0000
+    Contains     : 1.0000
+    Prefix       : 1.0000
+
+Evaluating on cute-gen (batch)...
+CUTE (gen): Loaded 1400 tasks (14 task types) from data/benchmarks/cute_gen.jsonl
+Format: generative (1400 items)
+  Uploading 1400 requests to OpenAI Files API…
+  Batch created: batch_69b3265f7c08819099104bae28c79ab5  (polling every 60s)
+  [batch_69b3265f7c08819099104bae28c79ab5] status=in_progress  completed=0  failed=0  total=1400
+  [batch_69b3265f7c08819099104bae28c79ab5] status=in_progress  completed=560  failed=0  total=1400
+  [batch_69b3265f7c08819099104bae28c79ab5] status=in_progress  completed=1125  failed=0  total=1400
+  [batch_69b3265f7c08819099104bae28c79ab5] status=finalizing  completed=1400  failed=0  total=1400
+  [batch_69b3265f7c08819099104bae28c79ab5] status=finalizing  completed=1400  failed=0  total=1400
+  [batch_69b3265f7c08819099104bae28c79ab5] status=completed  completed=1400  failed=0  total=1400
+  Saved inference results → results/gpt-4.1-nano/inference/cute-gen.jsonl
+
+  cute-gen Results  (n=1400)
+    Exact match  : 0.7336
+    Contains     : 0.7379
+    Prefix       : 0.7364
+
+  Results saved → results/gpt-4.1-nano/evaluation_results_20260312_201456.json
+
+================================================================================
+Combined results → results/benchmark_evaluation/evaluation_results_20260312_201456.json
+================================================================================
+
+Summary:
+Model                        Benchmark                    Format   Primary Metric
+------------------------------------------------------------------------------------------
+gpt-4.1-nano                 pacute-affixation-gen        generative EM=0.350
+gpt-4.1-nano                 pacute-composition-gen       generative EM=0.898
+gpt-4.1-nano                 pacute-manipulation-gen      generative EM=0.568
+gpt-4.1-nano                 pacute-syllabification-gen   generative EM=0.584
+gpt-4.1-nano                 hierarchical-gen             generative EM=0.372
+gpt-4.1-nano                 langgame-gen                 generative EM=0.938
+gpt-4.1-nano                 multi-digit-addition-gen     generative EM=1.000
+gpt-4.1-nano                 cute-gen                     generative EM=0.734
+

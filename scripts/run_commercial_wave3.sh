@@ -15,15 +15,17 @@ BENCHMARKS=(
 )
 BENCH_ARGS="${BENCHMARKS[*]}"
 
-# Wave 3: GPT-5 family (need max_completion_tokens, batch may be slow)
+# Wave 3: GPT-5 family via async (batch API too slow for these)
 MODELS=(
-    gpt-5
     gpt-5-mini
+    gpt-5-nano
+    gpt-5.1
+    gpt-5.2
     gpt-5.4
 )
 
 echo "=============================================="
-echo "PACUTE Commercial Evaluation — Wave 3"
+echo "PACUTE Commercial Evaluation — Wave 3 (GPT-5 family async)"
 echo "Models: ${MODELS[*]}"
 echo "Started: $(date)"
 echo "=============================================="

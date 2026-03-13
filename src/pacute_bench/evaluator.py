@@ -614,7 +614,7 @@ class CommercialEvaluator(VLLMEvaluator):
         self.poll_interval = poll_interval
         self.provider = provider.lower()
 
-        if self.provider == "openai":
+        if self.provider in ("openai", "openai-async"):
             from openai import OpenAI
             api_key = os.environ.get("OPENAI_API_KEY")
             if not api_key:
@@ -625,8 +625,11 @@ class CommercialEvaluator(VLLMEvaluator):
             if base_url:
                 client_kwargs["base_url"] = base_url
             self.client = OpenAI(**client_kwargs)
+            if self.provider == "openai-async":
+                self.async_client = AsyncOpenAI(**client_kwargs)
             proxy_note = f" via proxy {base_url}" if base_url else ""
-            print(f"CommercialEvaluator: OpenAI batch API → model={model_id}{proxy_note}")
+            mode_label = "async" if self.provider == "openai-async" else "batch"
+            print(f"CommercialEvaluator: OpenAI {mode_label} API → model={model_id}{proxy_note}")
 
         elif self.provider == "anthropic":
             import anthropic as _anthropic
@@ -744,6 +747,10 @@ class CommercialEvaluator(VLLMEvaluator):
 
         if self.provider == "openai":
             results_by_id = self._run_openai_batch(items, benchmark_name, effective_prompt)
+        elif self.provider == "openai-async":
+            results_by_id = asyncio.run(
+                self._run_openai_compatible_async(items, benchmark_name, effective_prompt)
+            )
         elif self.provider == "anthropic" and not getattr(self, "_anthropic_use_async", False):
             results_by_id = self._run_anthropic_batch(items, benchmark_name, effective_prompt)
         elif self.provider == "anthropic":
@@ -961,21 +968,28 @@ class CommercialEvaluator(VLLMEvaluator):
     async def _run_openai_compatible_async(
         self, items, benchmark_name: str, effective_prompt: Optional[str]
     ) -> dict:
-        max_tokens = 8192 if self.thinking else 256
+        is_reasoning = self._is_openai_reasoning_model()
+        token_limit = 8192 if (self.thinking or is_reasoning) else 256
         sem = asyncio.Semaphore(16)
 
         async def gen_one(sample_id: str, prefix: str):
             messages: list = []
             if effective_prompt:
-                messages.append({"role": "system", "content": effective_prompt})
+                if is_reasoning:
+                    messages.append({"role": "user", "content": effective_prompt})
+                else:
+                    messages.append({"role": "system", "content": effective_prompt})
             messages.append({"role": "user", "content": str(prefix)})
+
+            kwargs: dict = {"model": self.model_id, "messages": messages}
+            if is_reasoning:
+                kwargs["max_completion_tokens"] = token_limit
+            else:
+                kwargs["max_tokens"] = token_limit
+                kwargs["temperature"] = 0.0
+
             async with sem:
-                response = await self.async_client.chat.completions.create(
-                    model=self.model_id,
-                    messages=messages,
-                    max_tokens=max_tokens,
-                    temperature=0.0,
-                )
+                response = await self.async_client.chat.completions.create(**kwargs)
             content = response.choices[0].message.content or ""
             return sample_id, content.strip().lower()
 

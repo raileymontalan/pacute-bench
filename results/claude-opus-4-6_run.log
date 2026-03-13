@@ -1,0 +1,129 @@
+Loaded eval config: configs/evaluation.yaml
+  Instructions for: ['cute-gen', 'pacute-affixation-gen', 'pacute-composition-gen', 'pacute-manipulation-gen', 'pacute-syllabification-gen', 'hierarchical-gen', 'langgame-gen', 'multi-digit-addition-gen']
+
+================================================================================
+Evaluation Configuration
+================================================================================
+  Eval mode  : gen
+  Overwrite  : False
+  vLLM URL   : http://localhost:8000
+================================================================================
+
+
+================================================================================
+Model: claude-opus-4-6  (type=it, mode=gen, thinking=OFF)
+Benchmarks: pacute-affixation-gen, pacute-composition-gen, pacute-manipulation-gen, pacute-syllabification-gen, hierarchical-gen, langgame-gen, multi-digit-addition-gen, cute-gen
+================================================================================
+  Using AISI API key proxy (aisitools detected)
+CommercialEvaluator: Anthropic async API → model=claude-opus-4-6 via proxy https://anthropic.apps.aisi.org.uk
+
+Evaluating on pacute-affixation-gen (batch)...
+PACUTE (gen): Loaded 140 tasks across 1 categories:
+  - affixation: 140 tasks
+Format: generative (140 items)
+  Sending 140 generation requests (max 16 concurrent)...
+  Saved inference results → results/claude-opus-4-6/inference/pacute-affixation-gen.jsonl
+
+  pacute-affixation-gen Results  (n=140)
+    Exact match  : 0.5357
+    Contains     : 0.8929
+    Prefix       : 0.6571
+
+Evaluating on pacute-composition-gen (batch)...
+PACUTE (gen): Loaded 500 tasks across 1 categories:
+  - composition: 500 tasks
+Format: generative (500 items)
+  Sending 500 generation requests (max 16 concurrent)...
+  Saved inference results → results/claude-opus-4-6/inference/pacute-composition-gen.jsonl
+
+  pacute-composition-gen Results  (n=500)
+    Exact match  : 1.0000
+    Contains     : 1.0000
+    Prefix       : 1.0000
+
+Evaluating on pacute-manipulation-gen (batch)...
+PACUTE (gen): Loaded 800 tasks across 1 categories:
+  - manipulation: 800 tasks
+Format: generative (800 items)
+  Sending 800 generation requests (max 16 concurrent)...
+  Saved inference results → results/claude-opus-4-6/inference/pacute-manipulation-gen.jsonl
+
+  pacute-manipulation-gen Results  (n=800)
+    Exact match  : 0.9850
+    Contains     : 0.9875
+    Prefix       : 0.9862
+
+Evaluating on pacute-syllabification-gen (batch)...
+PACUTE (gen): Loaded 500 tasks across 1 categories:
+  - syllabification: 500 tasks
+Format: generative (500 items)
+  Sending 500 generation requests (max 16 concurrent)...
+  Saved inference results → results/claude-opus-4-6/inference/pacute-syllabification-gen.jsonl
+
+  pacute-syllabification-gen Results  (n=500)
+    Exact match  : 0.7560
+    Contains     : 0.7860
+    Prefix       : 0.7720
+
+Evaluating on hierarchical-gen (batch)...
+Hierarchical (gen): Loaded 600 tasks from data/benchmarks/hierarchical_gen.jsonl
+Format: generative (600 items)
+  Sending 600 generation requests (max 16 concurrent)...
+  Saved inference results → results/claude-opus-4-6/inference/hierarchical-gen.jsonl
+
+  hierarchical-gen Results  (n=600)
+    Exact match  : 0.5567
+    Contains     : 0.7617
+    Prefix       : 0.6083
+
+Evaluating on langgame-gen (batch)...
+LangGame (gen): Loaded 1000 examples from data/benchmarks/langgame_gen.jsonl
+Format: generative (1000 items)
+  Sending 1000 generation requests (max 16 concurrent)...
+  Saved inference results → results/claude-opus-4-6/inference/langgame-gen.jsonl
+
+  langgame-gen Results  (n=1000)
+    Exact match  : 0.9990
+    Contains     : 0.9990
+    Prefix       : 0.9990
+
+Evaluating on multi-digit-addition-gen (batch)...
+Multi-digit Addition (gen): Loaded 1000 examples from data/benchmarks/multi_digit_addition_gen.jsonl
+Format: generative (1000 items)
+  Sending 1000 generation requests (max 16 concurrent)...
+  Saved inference results → results/claude-opus-4-6/inference/multi-digit-addition-gen.jsonl
+
+  multi-digit-addition-gen Results  (n=1000)
+    Exact match  : 1.0000
+    Contains     : 1.0000
+    Prefix       : 1.0000
+
+Evaluating on cute-gen (batch)...
+CUTE (gen): Loaded 1400 tasks (14 task types) from data/benchmarks/cute_gen.jsonl
+Format: generative (1400 items)
+  Sending 1400 generation requests (max 16 concurrent)...
+  Saved inference results → results/claude-opus-4-6/inference/cute-gen.jsonl
+
+  cute-gen Results  (n=1400)
+    Exact match  : 0.9664
+    Contains     : 0.9786
+    Prefix       : 0.9664
+
+  Results saved → results/claude-opus-4-6/evaluation_results_20260312_173601.json
+
+================================================================================
+Combined results → results/benchmark_evaluation/evaluation_results_20260312_173601.json
+================================================================================
+
+Summary:
+Model                        Benchmark                    Format   Primary Metric
+------------------------------------------------------------------------------------------
+claude-opus-4-6              pacute-affixation-gen        generative EM=0.536
+claude-opus-4-6              pacute-composition-gen       generative EM=1.000
+claude-opus-4-6              pacute-manipulation-gen      generative EM=0.985
+claude-opus-4-6              pacute-syllabification-gen   generative EM=0.756
+claude-opus-4-6              hierarchical-gen             generative EM=0.557
+claude-opus-4-6              langgame-gen                 generative EM=0.999
+claude-opus-4-6              multi-digit-addition-gen     generative EM=1.000
+claude-opus-4-6              cute-gen                     generative EM=0.966
+

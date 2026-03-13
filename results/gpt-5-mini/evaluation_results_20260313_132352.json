@@ -1,0 +1,101 @@
+{
+  "hf_model_name": "gpt-5-mini",
+  "model_type": "it",
+  "benchmarks": {
+    "cute-gen": {
+      "num_samples": 1400,
+      "exact_match": 0.8985714285714286,
+      "contains_match": 0.99,
+      "prefix_match": 0.8985714285714286,
+      "format": "generative",
+      "by_category": {
+        "contains_char": {
+          "num_samples": 100,
+          "exact_match": 0.55,
+          "contains_match": 1.0,
+          "prefix_match": 0.55
+        },
+        "contains_word": {
+          "num_samples": 100,
+          "exact_match": 0.89,
+          "contains_match": 1.0,
+          "prefix_match": 0.89
+        },
+        "del_char": {
+          "num_samples": 100,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "del_word": {
+          "num_samples": 100,
+          "exact_match": 0.97,
+          "contains_match": 0.97,
+          "prefix_match": 0.97
+        },
+        "ins_char": {
+          "num_samples": 100,
+          "exact_match": 0.98,
+          "contains_match": 0.98,
+          "prefix_match": 0.98
+        },
+        "ins_word": {
+          "num_samples": 100,
+          "exact_match": 0.91,
+          "contains_match": 0.98,
+          "prefix_match": 0.91
+        },
+        "orth": {
+          "num_samples": 100,
+          "exact_match": 0.99,
+          "contains_match": 1.0,
+          "prefix_match": 0.99
+        },
+        "sem": {
+          "num_samples": 100,
+          "exact_match": 0.98,
+          "contains_match": 0.98,
+          "prefix_match": 0.98
+        },
+        "spell": {
+          "num_samples": 100,
+          "exact_match": 0.41,
+          "contains_match": 1.0,
+          "prefix_match": 0.41
+        },
+        "spell_inverse": {
+          "num_samples": 100,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "sub_char": {
+          "num_samples": 100,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "sub_word": {
+          "num_samples": 100,
+          "exact_match": 0.94,
+          "contains_match": 0.98,
+          "prefix_match": 0.94
+        },
+        "swap_char": {
+          "num_samples": 100,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "swap_word": {
+          "num_samples": 100,
+          "exact_match": 0.96,
+          "contains_match": 0.97,
+          "prefix_match": 0.96
+        }
+      },
+      "timestamp": "20260313_132352"
+    }
+  },
+  "timestamp": "20260313_132352"
+}

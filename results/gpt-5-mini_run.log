@@ -1,0 +1,157 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/pacute-bench/src/pacute_bench/scripts/run_evaluation.py", line 283, in main
+    results = evaluator.evaluate_benchmark(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/pacute-bench/src/pacute_bench/evaluator.py", line 737, in evaluate_benchmark
+    return self._evaluate_generative(benchmark_items, benchmark_name, "gen", timestamp)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/pacute-bench/src/pacute_bench/evaluator.py", line 751, in _evaluate_generative
+    results_by_id = asyncio.run(
+                    ^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/ubuntu/pacute-bench/src/pacute_bench/evaluator.py", line 998, in _run_openai_compatible_async
+    results = await asyncio.gather(*tasks)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/pacute-bench/src/pacute_bench/evaluator.py", line 992, in gen_one
+    response = await self.async_client.chat.completions.create(**kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/pacute-bench/env/lib/python3.12/site-packages/openai/resources/chat/completions/completions.py", line 2714, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/pacute-bench/env/lib/python3.12/site-packages/openai/_base_client.py", line 1884, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/pacute-bench/env/lib/python3.12/site-packages/openai/_base_client.py", line 1669, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.InternalServerError: Error code: 504 - {'error': {'message': 'upstream request timeout', 'x_amzn_trace_id': 'unknown'}}
+Loaded eval config: configs/evaluation.yaml
+  Instructions for: ['cute-gen', 'pacute-affixation-gen', 'pacute-composition-gen', 'pacute-manipulation-gen', 'pacute-syllabification-gen', 'hierarchical-gen', 'langgame-gen', 'multi-digit-addition-gen']
+
+================================================================================
+Evaluation Configuration
+================================================================================
+  Eval mode  : gen
+  Overwrite  : False
+  vLLM URL   : http://localhost:8000
+================================================================================
+
+
+================================================================================
+Model: gpt-5-mini  (type=it, mode=gen, thinking=OFF)
+Benchmarks: pacute-affixation-gen, pacute-composition-gen, pacute-manipulation-gen, pacute-syllabification-gen, hierarchical-gen, langgame-gen, multi-digit-addition-gen, cute-gen
+================================================================================
+  Using AISI API key proxy (aisitools detected)
+CommercialEvaluator: OpenAI async API → model=gpt-5-mini via proxy https://openai.apps.aisi.org.uk/v1
+
+Evaluating on pacute-affixation-gen (batch)...
+PACUTE (gen): Loaded 140 tasks across 1 categories:
+  - affixation: 140 tasks
+Format: generative (140 items)
+  Sending 140 generation requests (max 16 concurrent)...
+  Saved inference results → results/gpt-5-mini/inference/pacute-affixation-gen.jsonl
+
+  pacute-affixation-gen Results  (n=140)
+    Exact match  : 0.5071
+    Contains     : 0.8500
+    Prefix       : 0.6357
+
+Evaluating on pacute-composition-gen (batch)...
+PACUTE (gen): Loaded 500 tasks across 1 categories:
+  - composition: 500 tasks
+Format: generative (500 items)
+  Sending 500 generation requests (max 16 concurrent)...
+  Saved inference results → results/gpt-5-mini/inference/pacute-composition-gen.jsonl
+
+  pacute-composition-gen Results  (n=500)
+    Exact match  : 1.0000
+    Contains     : 1.0000
+    Prefix       : 1.0000
+
+Evaluating on pacute-manipulation-gen (batch)...
+PACUTE (gen): Loaded 800 tasks across 1 categories:
+  - manipulation: 800 tasks
+Format: generative (800 items)
+  Sending 800 generation requests (max 16 concurrent)...
+  Saved inference results → results/gpt-5-mini/inference/pacute-manipulation-gen.jsonl
+
+  pacute-manipulation-gen Results  (n=800)
+    Exact match  : 0.9975
+    Contains     : 0.9975
+    Prefix       : 0.9975
+
+Evaluating on pacute-syllabification-gen (batch)...
+PACUTE (gen): Loaded 500 tasks across 1 categories:
+  - syllabification: 500 tasks
+Format: generative (500 items)
+  Sending 500 generation requests (max 16 concurrent)...
+  Saved inference results → results/gpt-5-mini/inference/pacute-syllabification-gen.jsonl
+
+  pacute-syllabification-gen Results  (n=500)
+    Exact match  : 0.6840
+    Contains     : 0.7000
+    Prefix       : 0.6980
+
+Evaluating on hierarchical-gen (batch)...
+Hierarchical (gen): Loaded 600 tasks from data/benchmarks/hierarchical_gen.jsonl
+Format: generative (600 items)
+  Sending 600 generation requests (max 16 concurrent)...
+  Saved inference results → results/gpt-5-mini/inference/hierarchical-gen.jsonl
+
+  hierarchical-gen Results  (n=600)
+    Exact match  : 0.5200
+    Contains     : 0.6800
+    Prefix       : 0.5700
+
+Evaluating on langgame-gen (batch)...
+LangGame (gen): Loaded 1000 examples from data/benchmarks/langgame_gen.jsonl
+Format: generative (1000 items)
+  Sending 1000 generation requests (max 16 concurrent)...
+  Saved inference results → results/gpt-5-mini/inference/langgame-gen.jsonl
+
+  langgame-gen Results  (n=1000)
+    Exact match  : 1.0000
+    Contains     : 1.0000
+    Prefix       : 1.0000
+
+Evaluating on multi-digit-addition-gen (batch)...
+Multi-digit Addition (gen): Loaded 1000 examples from data/benchmarks/multi_digit_addition_gen.jsonl
+Format: generative (1000 items)
+  Sending 1000 generation requests (max 16 concurrent)...
+  Saved inference results → results/gpt-5-mini/inference/multi-digit-addition-gen.jsonl
+
+  multi-digit-addition-gen Results  (n=1000)
+    Exact match  : 1.0000
+    Contains     : 1.0000
+    Prefix       : 1.0000
+
+Evaluating on cute-gen (batch)...
+CUTE (gen): Loaded 1400 tasks (14 task types) from data/benchmarks/cute_gen.jsonl
+Format: generative (1400 items)
+  Sending 1400 generation requests (max 16 concurrent)...
+ERROR on cute-gen: Error code: 504 - {'error': {'message': 'upstream request timeout', 'x_amzn_trace_id': 'unknown'}}
+
+  Results saved → results/gpt-5-mini/evaluation_results_20260313_110027.json
+
+================================================================================
+Combined results → results/benchmark_evaluation/evaluation_results_20260313_110027.json
+================================================================================
+
+Summary:
+Model                        Benchmark                    Format   Primary Metric
+------------------------------------------------------------------------------------------
+gpt-5-mini                   pacute-affixation-gen        generative EM=0.507
+gpt-5-mini                   pacute-composition-gen       generative EM=1.000
+gpt-5-mini                   pacute-manipulation-gen      generative EM=0.998
+gpt-5-mini                   pacute-syllabification-gen   generative EM=0.684
+gpt-5-mini                   hierarchical-gen             generative EM=0.520
+gpt-5-mini                   langgame-gen                 generative EM=1.000
+gpt-5-mini                   multi-digit-addition-gen     generative EM=1.000
+

@@ -53,20 +53,33 @@ models:
     type: it
     provider: openai
 
-  gpt-5:
-    path: gpt-5
-    type: it
-    provider: openai
-
+  # ============================================================================
+  # OpenAI — async (gpt-5 family; batch API is too slow for these models)
+  # ============================================================================
   gpt-5-mini:
     path: gpt-5-mini
     type: it
-    provider: openai
+    provider: openai-async
+
+  gpt-5-nano:
+    path: gpt-5-nano
+    type: it
+    provider: openai-async
+
+  gpt-5.1:
+    path: gpt-5.1
+    type: it
+    provider: openai-async
+
+  gpt-5.2:
+    path: gpt-5.2
+    type: it
+    provider: openai-async
 
   gpt-5.4:
     path: gpt-5.4
     type: it
-    provider: openai
+    provider: openai-async
 
 
   # ============================================================================

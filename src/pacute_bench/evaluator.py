@@ -16,6 +16,7 @@ from .evaluators import (  # noqa: F401
     OpenAIEvaluator,
     AnthropicEvaluator,
     GeminiEvaluator,
+    XAIEvaluator,
     BENCHMARK_FORMATS,
     make_evaluator,
 )

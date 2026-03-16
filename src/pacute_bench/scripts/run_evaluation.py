@@ -33,7 +33,7 @@ from pathlib import Path
 
 import yaml
 
-from pacute_bench.evaluator import VLLMEvaluator, CommercialEvaluator, BENCHMARK_FORMATS
+from pacute_bench.evaluators import make_evaluator, BENCHMARK_FORMATS
 
 
 # ---------------------------------------------------------------------------
@@ -45,7 +45,7 @@ def load_model_configs(config_paths=None) -> dict:
     Load model configurations from one or more YAML files.
 
     Returns:
-        Dict mapping model name → (hf_path, type, tokenizer, thinking)
+        Dict mapping model name → (hf_path, type, tokenizer, thinking, provider, reasoning_parser)
     """
     if config_paths is None:
         config_paths = [
@@ -71,8 +71,25 @@ def load_model_configs(config_paths=None) -> dict:
                 info.get("tokenizer", info["path"]),
                 info.get("thinking", False),
                 info.get("provider", None),   # None → vLLM, "openai"/"anthropic" → CommercialEvaluator
+                info.get("reasoning_parser", None),  # None → Qwen3-style enable_thinking kwarg
             )
     return model_configs
+
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
+def _print_bench_summary(bench: str, results: dict) -> None:
+    print(f"\n  {bench} Results  (n={results['num_samples']})")
+    if results.get("format") == "generative":
+        print(f"    Exact match  : {results['exact_match']:.4f}")
+        print(f"    Contains     : {results['contains_match']:.4f}")
+        print(f"    Prefix       : {results['prefix_match']:.4f}")
+    else:
+        print(f"    Accuracy     : {results['accuracy']:.4f}")
+        print(f"    F1           : {results['f1_score']:.4f}")
+        print(f"    Norm. Acc.   : {results['normalized_accuracy']:.4f}")
 
 
 # ---------------------------------------------------------------------------
@@ -230,7 +247,7 @@ def main() -> None:
     all_results: dict = {}
 
     for model_name in args.models:
-        hf_path, model_type, tokenizer_name, thinking, provider = model_configs[model_name]
+        hf_path, model_type, tokenizer_name, thinking, provider, reasoning_parser = model_configs[model_name]
 
         if provider:
             effective_mode = "gen"   # commercial batch APIs: gen-only
@@ -239,7 +256,10 @@ def main() -> None:
                 if args.eval_mode == "auto" else args.eval_mode
 
         benchmarks_for_model = filter_benchmarks(args.benchmarks, effective_mode)
-        thinking_label = "thinking=ON" if thinking else "thinking=OFF"
+        if thinking:
+            thinking_label = f"thinking=ON ({reasoning_parser or 'enable_thinking kwarg'})"
+        else:
+            thinking_label = "thinking=OFF"
 
         print(f"\n{'='*80}")
         print(f"Model: {model_name}  (type={model_type}, mode={effective_mode}, {thinking_label})")
@@ -252,22 +272,24 @@ def main() -> None:
 
         try:
             if provider:
-                evaluator = CommercialEvaluator(
+                evaluator = make_evaluator(
+                    provider,
                     model_name=model_name,
                     model_id=hf_path,
-                    provider=provider,
                     thinking=thinking,
                     system_prompt=args.system_prompt,
                     benchmark_system_prompts=benchmark_system_prompts,
                     benchmark_answer_tags=benchmark_answer_tags,
                 )
             else:
-                evaluator = VLLMEvaluator(
+                evaluator = make_evaluator(
+                    None,
                     model_name=model_name,
                     model_id=hf_path,
                     model_type=model_type,
                     tokenizer_name=tokenizer_name,
                     thinking=thinking,
+                    reasoning_parser=reasoning_parser,
                     vllm_url=args.vllm_url,
                     vllm_api_key=args.vllm_api_key,
                     vllm_model_id=args.vllm_model_id,
@@ -278,52 +300,65 @@ def main() -> None:
 
             model_results: dict = {}
 
-            for bench in benchmarks_for_model:
-                try:
-                    results = evaluator.evaluate_benchmark(
-                        benchmark_name=bench,
-                        max_samples=args.max_samples,
-                        check_existing=not args.overwrite,
-                        timestamp=timestamp,
-                    )
-                except Exception as e:
-                    import traceback
-                    print(f"ERROR on {bench}: {e}")
-                    traceback.print_exc()
-                    continue
-
-                if not results or results.get("skipped"):
-                    continue
-
-                # Save per-sample inference results
-                detailed = results.pop("detailed_results", None)
-                results.pop("setting", None)
-                if detailed:
-                    inf_dir  = Path("results") / model_name / "inference"
-                    inf_dir.mkdir(parents=True, exist_ok=True)
-                    inf_file = inf_dir / f"{bench}.jsonl"
-                    detailed.sort(key=lambda r: r.get("id", ""))
-                    with open(inf_file, "w", encoding="utf-8") as f:
-                        for r in detailed:
-                            f.write(json.dumps(r, ensure_ascii=False) + "\n")
-                    print(f"  Saved inference results → {inf_file}")
-
-                model_results[bench] = results
-
-                # Summary print
-                print(f"\n  {bench} Results  (n={results['num_samples']})")
-                if results.get("format") == "generative":
-                    print(f"    Exact match  : {results['exact_match']:.4f}")
-                    print(f"    Contains     : {results['contains_match']:.4f}")
-                    print(f"    Prefix       : {results['prefix_match']:.4f}")
-                else:
-                    print(f"    Accuracy     : {results['accuracy']:.4f}")
-                    print(f"    F1           : {results['f1_score']:.4f}")
-                    print(f"    Norm. Acc.   : {results['normalized_accuracy']:.4f}")
+            if provider:
+                # Commercial models: submit all batches at once, poll concurrently.
+                bench_results = evaluator.evaluate_benchmarks_parallel(
+                    benchmarks_for_model,
+                    max_samples=args.max_samples,
+                    check_existing=not args.overwrite,
+                    timestamp=timestamp,
+                )
+                for bench, results in bench_results.items():
+                    if not results or results.get("skipped"):
+                        continue
+                    detailed = results.pop("detailed_results", None)
+                    results.pop("setting", None)
+                    if detailed:
+                        inf_dir = Path("results") / model_name / "inference"
+                        inf_dir.mkdir(parents=True, exist_ok=True)
+                        inf_file = inf_dir / f"{bench}.jsonl"
+                        detailed.sort(key=lambda r: r.get("id", ""))
+                        with open(inf_file, "w", encoding="utf-8") as f:
+                            for r in detailed:
+                                f.write(json.dumps(r, ensure_ascii=False) + "\n")
+                        print(f"  Saved inference results → {inf_file}")
+                    model_results[bench] = results
+                    _print_bench_summary(bench, results)
+            else:
+                # vLLM models: sequential (server handles one model at a time).
+                for bench in benchmarks_for_model:
+                    try:
+                        res = evaluator.evaluate_benchmark(
+                            benchmark_name=bench,
+                            max_samples=args.max_samples,
+                            check_existing=not args.overwrite,
+                            timestamp=timestamp,
+                        )
+                    except Exception as e:
+                        import traceback
+                        print(f"ERROR on {bench}: {e}")
+                        traceback.print_exc()
+                        continue
+                    if not res or res.get("skipped"):
+                        continue
+                    detailed = res.pop("detailed_results", None)
+                    res.pop("setting", None)
+                    if detailed:
+                        inf_dir = Path("results") / model_name / "inference"
+                        inf_dir.mkdir(parents=True, exist_ok=True)
+                        inf_file = inf_dir / f"{bench}.jsonl"
+                        detailed.sort(key=lambda r: r.get("id", ""))
+                        with open(inf_file, "w", encoding="utf-8") as f:
+                            for r in detailed:
+                                f.write(json.dumps(r, ensure_ascii=False) + "\n")
+                        print(f"  Saved inference results → {inf_file}")
+                    model_results[bench] = res
+                    _print_bench_summary(bench, res)
 
             all_results[model_name] = {
                 "hf_model_name": hf_path,
                 "model_type":    model_type,
+                "thinking":      thinking,
                 "benchmarks":    model_results,
             }
 

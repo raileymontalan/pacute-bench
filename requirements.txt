@@ -1,8 +1,9 @@
 # Core ML / inference
 torch>=2.5
-transformers>=4.50
+transformers>=5.3
 openai>=1.30
 anthropic>=0.40
+google-genai>=0.8
 vllm>=0.15.0
 
 # Data
@@ -17,6 +18,7 @@ python-Levenshtein>=0.25
 # Misc
 tqdm>=4.65
 pyyaml>=6.0
+jupyter>=1.0
 
 # Dev / testing (optional)
 # pytest>=8.0

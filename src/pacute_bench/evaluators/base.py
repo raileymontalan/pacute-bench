@@ -257,6 +257,21 @@ class BaseEvaluator(ABC):
         return out
 
     # ──────────────────────────────────────────────────────────────────────────
+    # API key proxy support
+    # ──────────────────────────────────────────────────────────────────────────
+
+    @staticmethod
+    def _maybe_wrap_key_for_proxy(api_key: str) -> str:
+        """Wrap an API key using the API proxy if ``proxy_tools`` is installed."""
+        try:
+            from proxy_tools.api_key import get_api_key_for_proxy
+            wrapped = get_api_key_for_proxy(api_key)
+            print("  Using API key proxy")
+            return wrapped
+        except ImportError:
+            return api_key
+
+    # ──────────────────────────────────────────────────────────────────────────
     # Result persistence
     # ──────────────────────────────────────────────────────────────────────────
 

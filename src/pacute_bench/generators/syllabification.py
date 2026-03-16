@@ -841,7 +841,7 @@ def create_syllabification_dataset(
                 "prompts": [mcq_row["prompts"]],
             })], ignore_index=True)
 
-        # General syllable counting tasks (longer words, minimum 9 characters)
+        # General syllable counting tasks (longer words, minimum 7 characters)
         syllables_long = _filter_by_word_length(syllables_df, MIN_WORD_LENGTH_GENERAL_SYLLABLE_COUNTING)
         general_sample_rows = syllables_long.head(num_samples) if freq_weight > 0 else syllables_long.sample(num_samples, random_state=random_seed)
         for _, row in general_sample_rows.iterrows():
@@ -936,7 +936,7 @@ def create_syllabification_dataset(
                 "label": [gen_row["label"]],
             })], ignore_index=True)
 
-        # General syllable counting tasks (GEN) - longer words, minimum 9 characters
+        # General syllable counting tasks (GEN) - longer words, minimum 7 characters
         syllables_long = _filter_by_word_length(syllables_df, MIN_WORD_LENGTH_GENERAL_SYLLABLE_COUNTING)
         general_sample_rows = syllables_long.head(num_samples) if freq_weight > 0 else syllables_long.sample(num_samples, random_state=random_seed)
         for _, row in general_sample_rows.iterrows():

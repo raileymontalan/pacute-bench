@@ -25,7 +25,7 @@ models:
   # ============================================================================
   # Gemma 3 Family
   # ============================================================================
-  gemma-3-270m:
+  gemma-3-270m-pt:
     path: google/gemma-3-270m
     type: pt
 
@@ -94,20 +94,28 @@ models:
     type: pt
 
   # ============================================================================
-  # Qwen 3.5 Family
+  # Qwen 3 Family
   # ============================================================================
-  qwen-3.5-0.8b:
-    path: Qwen/Qwen3.5-0.8B-Base
+  qwen-3-0.6b:
+    path: Qwen/Qwen3-0.6B-Base
     type: pt
 
-  qwen-3.5-2b:
-    path: Qwen/Qwen3.5-2B-Base
+  qwen-3-1.7b:
+    path: Qwen/Qwen3-1.7B-Base
     type: pt
 
-  qwen-3.5-4b:
-    path: Qwen/Qwen3.5-4B-Base
+  qwen-3-4b:
+    path: Qwen/Qwen3-4B-Base
     type: pt
 
-  qwen-3.5-9b:
-    path: Qwen/Qwen3.5-9B-Base
+  qwen-3-8b:
+    path: Qwen/Qwen3-8B-Base
+    type: pt
+
+  qwen-3-14b:
+    path: Qwen/Qwen3-14B-Base
+    type: pt
+
+  qwen-3-30b:
+    path: Qwen/Qwen3-30B-A3B-Base
     type: pt

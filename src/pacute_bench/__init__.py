@@ -15,4 +15,15 @@ Usage:
 
 __version__ = "0.1.0"
 
-from .evaluator import VLLMEvaluator, CommercialEvaluator, BENCHMARK_FORMATS  # noqa: F401
+from .evaluators import (  # noqa: F401
+    VLLMEvaluator,
+    OpenAIEvaluator,
+    AnthropicEvaluator,
+    GeminiEvaluator,
+    BatchEvaluator,
+    BaseEvaluator,
+    BENCHMARK_FORMATS,
+    make_evaluator,
+)
+# Backward-compat alias
+CommercialEvaluator = BatchEvaluator  # noqa: F401

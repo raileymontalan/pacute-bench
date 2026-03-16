@@ -566,22 +566,17 @@ class VLLMEvaluator:
 
 class CommercialEvaluator(VLLMEvaluator):
     """
-    Evaluates commercial models via provider APIs.
+    Evaluates commercial models (OpenAI, Anthropic) using their batch APIs.
 
-    OpenAI and Anthropic use batch APIs (50 % cost discount, results within
-    24 hours).  Google Gemini and xAI Grok use real-time async generation via
-    their OpenAI-compatible endpoints.  Only *generative* (``-gen``) benchmarks
-    are supported — MCQ benchmarks require token log-probabilities which
-    commercial APIs do not expose.
-
-    If ``aisitools`` is installed, API keys are automatically wrapped for the
-    AISI API key proxy.  Set the corresponding ``*_BASE_URL`` environment
-    variable to route through the proxy.
+    Both providers offer a 50 % cost discount via asynchronous batch processing
+    with results delivered within 24 hours.  Only *generative* (``-gen``)
+    benchmarks are supported — MCQ benchmarks require token log-probabilities
+    which commercial APIs do not expose.
 
     Args:
         model_name: Short label for logging and output paths.
         model_id: API model identifier (e.g. ``"gpt-4o"`` or ``"claude-opus-4-6"``).
-        provider: ``"openai"``, ``"anthropic"``, ``"google"``, or ``"xai"``.
+        provider: ``"openai"`` or ``"anthropic"``.
         thinking: Whether the model uses extended reasoning / chain-of-thought.
         system_prompt: Global system prompt override.
         benchmark_system_prompts: Per-benchmark system prompts from evaluation config.
@@ -614,83 +609,24 @@ class CommercialEvaluator(VLLMEvaluator):
         self.poll_interval = poll_interval
         self.provider = provider.lower()
 
-        if self.provider in ("openai", "openai-async"):
+        if self.provider == "openai":
             from openai import OpenAI
             api_key = os.environ.get("OPENAI_API_KEY")
             if not api_key:
                 raise EnvironmentError("OPENAI_API_KEY is not set")
-            api_key = self._maybe_wrap_key_for_proxy(api_key)
-            base_url = os.environ.get("OPENAI_BASE_URL")
-            client_kwargs: dict = {"api_key": api_key}
-            if base_url:
-                client_kwargs["base_url"] = base_url
-            self.client = OpenAI(**client_kwargs)
-            if self.provider == "openai-async":
-                self.async_client = AsyncOpenAI(**client_kwargs)
-            proxy_note = f" via proxy {base_url}" if base_url else ""
-            mode_label = "async" if self.provider == "openai-async" else "batch"
-            print(f"CommercialEvaluator: OpenAI {mode_label} API → model={model_id}{proxy_note}")
+            self.client = OpenAI(api_key=api_key)
+            print(f"CommercialEvaluator: OpenAI batch API → model={model_id}")
 
         elif self.provider == "anthropic":
             import anthropic as _anthropic
             api_key = os.environ.get("ANTHROPIC_API_KEY")
             if not api_key:
                 raise EnvironmentError("ANTHROPIC_API_KEY is not set")
-            api_key = self._maybe_wrap_key_for_proxy(api_key)
-            base_url = os.environ.get("ANTHROPIC_BASE_URL")
-            client_kwargs = {"api_key": api_key}
-            if base_url:
-                client_kwargs["base_url"] = base_url
-            self.client = _anthropic.Anthropic(**client_kwargs)
-            self.async_anthropic = _anthropic.AsyncAnthropic(**client_kwargs)
-            # Use async generation when going through a proxy (batch results
-            # endpoint is not supported by the AISI proxy).
-            self._anthropic_use_async = bool(base_url)
-            mode_label = "async" if self._anthropic_use_async else "batch"
-            proxy_note = f" via proxy {base_url}" if base_url else ""
-            print(f"CommercialEvaluator: Anthropic {mode_label} API → model={model_id}{proxy_note}")
-
-        elif self.provider == "google":
-            api_key = os.environ.get("GEMINI_API_KEY")
-            if not api_key:
-                raise EnvironmentError("GEMINI_API_KEY is not set")
-            api_key = self._maybe_wrap_key_for_proxy(api_key)
-            base_url = os.environ.get(
-                "GEMINI_BASE_URL",
-                "https://generativelanguage.googleapis.com/v1beta/openai/",
-            )
-            self.async_client = AsyncOpenAI(api_key=api_key, base_url=base_url)
-            print(f"CommercialEvaluator: Google Gemini API → model={model_id} ({base_url})")
-
-        elif self.provider == "xai":
-            api_key = os.environ.get("XAI_API_KEY")
-            if not api_key:
-                raise EnvironmentError("XAI_API_KEY is not set")
-            api_key = self._maybe_wrap_key_for_proxy(api_key)
-            base_url = os.environ.get("XAI_BASE_URL", "https://api.x.ai/v1")
-            self.async_client = AsyncOpenAI(api_key=api_key, base_url=base_url)
-            print(f"CommercialEvaluator: xAI Grok API → model={model_id} ({base_url})")
+            self.client = _anthropic.Anthropic(api_key=api_key)
+            print(f"CommercialEvaluator: Anthropic batch API → model={model_id}")
 
         else:
-            raise ValueError(
-                f"Unknown provider '{provider}'. "
-                "Expected 'openai', 'anthropic', 'google', or 'xai'."
-            )
-
-    # ──────────────────────────────────────────────────────────────────────────
-    # AISI API key proxy support
-    # ──────────────────────────────────────────────────────────────────────────
-
-    @staticmethod
-    def _maybe_wrap_key_for_proxy(api_key: str) -> str:
-        """Wrap an API key using the AISI proxy if ``aisitools`` is installed."""
-        try:
-            from aisitools.api_key import get_api_key_for_proxy
-            wrapped = get_api_key_for_proxy(api_key)
-            print("  Using AISI API key proxy (aisitools detected)")
-            return wrapped
-        except ImportError:
-            return api_key
+            raise ValueError(f"Unknown provider '{provider}'. Expected 'openai' or 'anthropic'.")
 
     # ──────────────────────────────────────────────────────────────────────────
     # Public evaluation entry point — gen only
@@ -747,22 +683,8 @@ class CommercialEvaluator(VLLMEvaluator):
 
         if self.provider == "openai":
             results_by_id = self._run_openai_batch(items, benchmark_name, effective_prompt)
-        elif self.provider == "openai-async":
-            results_by_id = asyncio.run(
-                self._run_openai_compatible_async(items, benchmark_name, effective_prompt)
-            )
-        elif self.provider == "anthropic" and not getattr(self, "_anthropic_use_async", False):
-            results_by_id = self._run_anthropic_batch(items, benchmark_name, effective_prompt)
-        elif self.provider == "anthropic":
-            results_by_id = asyncio.run(
-                self._run_anthropic_async(items, benchmark_name, effective_prompt)
-            )
-        elif self.provider in ("google", "xai"):
-            results_by_id = asyncio.run(
-                self._run_openai_compatible_async(items, benchmark_name, effective_prompt)
-            )
         else:
-            raise ValueError(f"No generation backend for provider '{self.provider}'")
+            results_by_id = self._run_anthropic_batch(items, benchmark_name, effective_prompt)
 
         return self._process_batch_results(
             items, results_by_id, answer_tag, benchmark_name, setting, timestamp
@@ -772,17 +694,10 @@ class CommercialEvaluator(VLLMEvaluator):
     # OpenAI batch
     # ──────────────────────────────────────────────────────────────────────────
 
-    # OpenAI reasoning models require different API parameters.
-    _OPENAI_REASONING_PREFIXES = ("o1", "o3", "o4", "gpt-5")
-
-    def _is_openai_reasoning_model(self) -> bool:
-        return any(self.model_id.startswith(p) for p in self._OPENAI_REASONING_PREFIXES)
-
     def _run_openai_batch(self, items, benchmark_name: str, effective_prompt: Optional[str]) -> dict:
         import tempfile, time
 
-        is_reasoning = self._is_openai_reasoning_model()
-        token_limit = 8192 if (self.thinking or is_reasoning) else 256
+        max_tokens = 8192 if self.thinking else 256
 
         # Build JSONL request list
         batch_requests = []
@@ -790,33 +705,18 @@ class CommercialEvaluator(VLLMEvaluator):
             prefix, _gt, _, sample_id = item[:4]
             messages: list = []
             if effective_prompt:
-                if is_reasoning:
-                    # Reasoning models don't support system messages;
-                    # prepend instructions as a user message instead.
-                    messages.append({"role": "user", "content": effective_prompt})
-                else:
-                    messages.append({"role": "system", "content": effective_prompt})
+                messages.append({"role": "system", "content": effective_prompt})
             messages.append({"role": "user", "content": str(prefix)})
-
-            if is_reasoning:
-                body: dict = {
-                    "model": self.model_id,
-                    "messages": messages,
-                    "max_completion_tokens": token_limit,
-                }
-            else:
-                body = {
-                    "model": self.model_id,
-                    "messages": messages,
-                    "max_tokens": token_limit,
-                    "temperature": 0.0,
-                }
-
             batch_requests.append({
                 "custom_id": str(sample_id),
                 "method": "POST",
                 "url": "/v1/chat/completions",
-                "body": body,
+                "body": {
+                    "model": self.model_id,
+                    "messages": messages,
+                    "max_tokens": max_tokens,
+                    "temperature": 0.0,
+                },
             })
 
         # Write to a temp file and upload
@@ -930,74 +830,6 @@ class CommercialEvaluator(VLLMEvaluator):
                 results_by_id[cid] = ""
 
         return results_by_id
-
-    # ──────────────────────────────────────────────────────────────────────────
-    # Anthropic async generation (used when batch results endpoint is
-    # unavailable, e.g. behind the AISI API key proxy)
-    # ──────────────────────────────────────────────────────────────────────────
-
-    async def _run_anthropic_async(
-        self, items, benchmark_name: str, effective_prompt: Optional[str]
-    ) -> dict:
-        max_tokens = 8192 if self.thinking else 256
-        sem = asyncio.Semaphore(16)
-
-        async def gen_one(sample_id: str, prefix: str):
-            kwargs: dict = {
-                "model": self.model_id,
-                "max_tokens": max_tokens,
-                "messages": [{"role": "user", "content": str(prefix)}],
-            }
-            if effective_prompt:
-                kwargs["system"] = effective_prompt
-            async with sem:
-                response = await self.async_anthropic.messages.create(**kwargs)
-            text = response.content[0].text or ""
-            return sample_id, text.strip().lower()
-
-        tasks = [gen_one(str(item[3]), item[0]) for item in items]
-        print(f"  Sending {len(tasks)} generation requests (max 16 concurrent)...")
-        results = await asyncio.gather(*tasks)
-
-        return {sid: text for sid, text in results}
-
-    # ──────────────────────────────────────────────────────────────────────────
-    # OpenAI-compatible async generation (Google Gemini, xAI Grok, etc.)
-    # ──────────────────────────────────────────────────────────────────────────
-
-    async def _run_openai_compatible_async(
-        self, items, benchmark_name: str, effective_prompt: Optional[str]
-    ) -> dict:
-        is_reasoning = self._is_openai_reasoning_model()
-        token_limit = 8192 if (self.thinking or is_reasoning) else 256
-        sem = asyncio.Semaphore(16)
-
-        async def gen_one(sample_id: str, prefix: str):
-            messages: list = []
-            if effective_prompt:
-                if is_reasoning:
-                    messages.append({"role": "user", "content": effective_prompt})
-                else:
-                    messages.append({"role": "system", "content": effective_prompt})
-            messages.append({"role": "user", "content": str(prefix)})
-
-            kwargs: dict = {"model": self.model_id, "messages": messages}
-            if is_reasoning:
-                kwargs["max_completion_tokens"] = token_limit
-            else:
-                kwargs["max_tokens"] = token_limit
-                kwargs["temperature"] = 0.0
-
-            async with sem:
-                response = await self.async_client.chat.completions.create(**kwargs)
-            content = response.choices[0].message.content or ""
-            return sample_id, content.strip().lower()
-
-        tasks = [gen_one(str(item[3]), item[0]) for item in items]
-        print(f"  Sending {len(tasks)} generation requests (max 16 concurrent)...")
-        results = await asyncio.gather(*tasks)
-
-        return {sid: text for sid, text in results}
 
     # ──────────────────────────────────────────────────────────────────────────
     # Shared result processing (same answer-extraction logic as VLLMEvaluator)

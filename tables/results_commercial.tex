@@ -1,0 +1,42 @@
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{adjustbox}
+\usepackage{threeparttable}
+\usepackage{colortbl}
+\usepackage[margin=1in]{geometry}
+\begin{document}
+\section*{Results: Commercial Models}
+
+\begin{table}[htbp]
+\centering
+\caption{Results for Commercial models on PACUTE benchmarks.}
+\label{tab:results-commercial}
+\begin{threeparttable}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrrrrrrrrrrrr}
+\toprule
+\textbf{Model} & \multicolumn{2}{c}{\textbf{Affix-Gen}} & \multicolumn{2}{c}{\textbf{Comp-Gen}} & \multicolumn{2}{c}{\textbf{Manip-Gen}} & \multicolumn{2}{c}{\textbf{Syll-Gen}} & \multicolumn{2}{c}{\textbf{Hier-Gen}} & \multicolumn{2}{c}{\textbf{LGame-Gen}} & \multicolumn{2}{c}{\textbf{MDA-Gen}} & \multicolumn{2}{c}{\textbf{CUTE-Gen}} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}\cmidrule(lr){10-11}\cmidrule(lr){12-13}\cmidrule(lr){14-15}\cmidrule(lr){16-17}
+ & \textit{EM} & \textit{CM} & \textit{EM} & \textit{CM} & \textit{EM} & \textit{CM} & \textit{EM} & \textit{CM} & \textit{EM} & \textit{CM} & \textit{EM} & \textit{CM} & \textit{EM} & \textit{CM} & \textit{EM} & \textit{CM} \\
+\midrule
+claude-haiku-4-5 & \cellcolor[HTML]{FAD8C9}40.7 & \cellcolor[HTML]{FCE6DC}76.4 & \cellcolor[HTML]{96C7DF}99.8 & \cellcolor[HTML]{92C5DE}\textbf{100.0} & \cellcolor[HTML]{EBF4F9}82.0 & \cellcolor[HTML]{F0F7FA}82.0 & \cellcolor[HTML]{E6F1F7}69.8 & \cellcolor[HTML]{CCE4EF}74.2 & \cellcolor[HTML]{B7D8E9}52.5 & \cellcolor[HTML]{BCDBEA}71.8 & \cellcolor[HTML]{99C8E0}99.7 & \cellcolor[HTML]{9CCAE1}99.7 & \cellcolor[HTML]{92C5DE}\textbf{100.0} & \cellcolor[HTML]{92C5DE}\textbf{100.0} & \cellcolor[HTML]{E4F0F6}88.4 & \cellcolor[HTML]{E7F2F7}89.1 \\
+claude-opus-4-6 & \cellcolor[HTML]{A1CDE2}53.6 & \cellcolor[HTML]{A5CFE3}89.3 & \cellcolor[HTML]{92C5DE}\textbf{100.0} & \cellcolor[HTML]{92C5DE}100.0 & \cellcolor[HTML]{98C8DF}98.5 & \cellcolor[HTML]{97C7DF}98.8 & \cellcolor[HTML]{A2CDE2}75.6 & \cellcolor[HTML]{96C7DF}78.6 & \cellcolor[HTML]{92C5DE}\textbf{55.7} & \cellcolor[HTML]{92C5DE}\textbf{76.2} & \cellcolor[HTML]{92C5DE}\textbf{99.9} & \cellcolor[HTML]{95C6DF}99.9 & \cellcolor[HTML]{92C5DE}100.0 & \cellcolor[HTML]{92C5DE}100.0 & \cellcolor[HTML]{99C9E0}96.6 & \cellcolor[HTML]{9BCAE0}97.9 \\
+claude-sonnet-4-6 & \cellcolor[HTML]{F7BEA5}37.9 & \cellcolor[HTML]{FBFDFE}80.0 & \cellcolor[HTML]{96C7DF}99.8 & \cellcolor[HTML]{96C7DF}99.8 & \cellcolor[HTML]{A5CFE3}95.9 & \cellcolor[HTML]{A5CFE3}96.1 & \cellcolor[HTML]{CEE5F0}71.8 & \cellcolor[HTML]{D1E6F1}73.8 & \cellcolor[HTML]{B3D6E8}52.8 & \cellcolor[HTML]{FDFEFE}65.2 & \cellcolor[HTML]{95C6DF}99.8 & \cellcolor[HTML]{95C6DF}99.9 & \cellcolor[HTML]{92C5DE}100.0 & \cellcolor[HTML]{92C5DE}100.0 & \cellcolor[HTML]{CDE4EF}90.9 & \cellcolor[HTML]{C2DEEC}93.4 \\
+gpt-4.1 & \cellcolor[HTML]{EFF6FA}46.4 & \cellcolor[HTML]{E7F2F8}82.1 & \cellcolor[HTML]{BCDBEA}98.0 & \cellcolor[HTML]{BCDBEA}98.0 & \cellcolor[HTML]{E3F0F6}83.8 & \cellcolor[HTML]{E3F0F6}84.4 & \cellcolor[HTML]{99C8E0}76.4 & \cellcolor[HTML]{96C7DF}78.6 & \cellcolor[HTML]{B7D8E9}52.5 & \cellcolor[HTML]{CFE5F0}69.8 & \cellcolor[HTML]{99C8E0}99.7 & \cellcolor[HTML]{9CCAE1}99.7 & \cellcolor[HTML]{92C5DE}100.0 & \cellcolor[HTML]{92C5DE}100.0 & \cellcolor[HTML]{CCE3EF}91.1 & \cellcolor[HTML]{D3E7F1}91.4 \\
+gpt-4.1-mini & \cellcolor[HTML]{D0E6F0}49.3 & \cellcolor[HTML]{FDF1EC}77.9 & \cellcolor[HTML]{C1DEEC}97.8 & \cellcolor[HTML]{C1DEEC}97.8 & \cellcolor[HTML]{E2EFF6}83.9 & \cellcolor[HTML]{E5F1F7}84.0 & \cellcolor[HTML]{F7C0A7}61.2 & \cellcolor[HTML]{F5B395}62.6 & \cellcolor[HTML]{DCECF4}49.3 & \cellcolor[HTML]{DEEDF5}68.3 & \cellcolor[HTML]{A7D0E4}99.3 & \cellcolor[HTML]{ABD2E5}99.3 & \cellcolor[HTML]{F4A582}99.6 & \cellcolor[HTML]{F4A582}99.6 & \cellcolor[HTML]{DFEEF5}88.9 & \cellcolor[HTML]{E7F2F7}89.1 \\
+gpt-4.1-nano & \cellcolor[HTML]{F4A582}35.0 & \cellcolor[HTML]{F4A582}67.9 & \cellcolor[HTML]{F4A582}89.8 & \cellcolor[HTML]{F4A582}89.8 & \cellcolor[HTML]{F4A582}56.8 & \cellcolor[HTML]{F4A582}58.6 & \cellcolor[HTML]{F4A582}58.4 & \cellcolor[HTML]{F4A582}61.2 & \cellcolor[HTML]{F4A582}37.2 & \cellcolor[HTML]{F4A582}53.8 & \cellcolor[HTML]{F4A582}93.8 & \cellcolor[HTML]{F4A582}93.9 & \cellcolor[HTML]{92C5DE}100.0 & \cellcolor[HTML]{92C5DE}100.0 & \cellcolor[HTML]{F4A582}73.4 & \cellcolor[HTML]{F4A582}73.8 \\
+gpt-4o & \cellcolor[HTML]{B8D9E9}51.4 & \cellcolor[HTML]{FEF6F3}78.6 & \cellcolor[HTML]{AFD4E7}98.6 & \cellcolor[HTML]{AFD4E7}98.6 & \cellcolor[HTML]{EEF6FA}81.5 & \cellcolor[HTML]{F0F7FA}82.0 & \cellcolor[HTML]{DFEEF5}70.4 & \cellcolor[HTML]{EAF3F8}71.8 & \cellcolor[HTML]{C7E1EE}51.2 & \cellcolor[HTML]{D3E7F1}69.5 & \cellcolor[HTML]{A7D0E4}99.3 & \cellcolor[HTML]{ABD2E5}99.3 & \cellcolor[HTML]{92C5DE}100.0 & \cellcolor[HTML]{92C5DE}100.0 & \cellcolor[HTML]{CEE5F0}90.8 & \cellcolor[HTML]{D7EAF3}90.9 \\
+gpt-5-mini & — & — & — & — & — & — & — & — & — & — & — & — & — & — & \cellcolor[HTML]{D7E9F2}89.9 & \cellcolor[HTML]{92C5DE}\textbf{99.0} \\
+o3 & \cellcolor[HTML]{B1D5E7}52.1 & \cellcolor[HTML]{92C5DE}\textbf{91.4} & \cellcolor[HTML]{9ECBE1}99.4 & \cellcolor[HTML]{9ECBE1}99.4 & \cellcolor[HTML]{93C6DE}99.4 & \cellcolor[HTML]{92C5DE}\textbf{99.8} & \cellcolor[HTML]{92C5DE}\textbf{77.0} & \cellcolor[HTML]{92C5DE}\textbf{79.0} & \cellcolor[HTML]{CCE4EF}50.7 & \cellcolor[HTML]{F3F8FB}66.2 & \cellcolor[HTML]{92C5DE}99.9 & \cellcolor[HTML]{92C5DE}\textbf{100.0} & \cellcolor[HTML]{FFFFFF}99.8 & \cellcolor[HTML]{92C5DE}100.0 & \cellcolor[HTML]{F9D5C6}79.9 & \cellcolor[HTML]{95C6DF}98.6 \\
+o4-mini & \cellcolor[HTML]{92C5DE}\textbf{55.0} & \cellcolor[HTML]{DAEBF4}83.6 & \cellcolor[HTML]{9AC9E0}99.6 & \cellcolor[HTML]{9AC9E0}99.6 & \cellcolor[HTML]{92C5DE}\textbf{99.8} & \cellcolor[HTML]{92C5DE}99.8 & \cellcolor[HTML]{FBE2D8}64.8 & \cellcolor[HTML]{FADBCD}66.6 & \cellcolor[HTML]{ABD2E5}53.5 & \cellcolor[HTML]{D6E9F2}69.2 & \cellcolor[HTML]{95C6DF}99.8 & \cellcolor[HTML]{99C8E0}99.8 & \cellcolor[HTML]{92C5DE}100.0 & \cellcolor[HTML]{92C5DE}100.0 & \cellcolor[HTML]{92C5DE}\textbf{97.5} & \cellcolor[HTML]{9AC9E0}98.0 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{tablenotes}[flushleft]\footnotesize
+\item \textit{Affix} = PACUTE Affixation; \textit{CUTE} = CUTE; \textit{Comp} = PACUTE Composition; \textit{Hier} = Hierarchical; \textit{LGame} = LangGame; \textit{MDA} = Multi-Digit Addition; \textit{Manip} = PACUTE Manipulation; \textit{Syll} = PACUTE Syllabification; Bold = best in column. Cell colour: \colorbox[HTML]{F4A582}{\strut low} $\to$ white $\to$ \colorbox[HTML]{92C5DE}{high} per column.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\end{document}

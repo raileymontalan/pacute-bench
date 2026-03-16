@@ -257,6 +257,21 @@ class BaseEvaluator(ABC):
         return out
 
     # ──────────────────────────────────────────────────────────────────────────
+    # AISI API key proxy support
+    # ──────────────────────────────────────────────────────────────────────────
+
+    @staticmethod
+    def _maybe_wrap_key_for_proxy(api_key: str) -> str:
+        """Wrap an API key using the AISI proxy if ``aisitools`` is installed."""
+        try:
+            from aisitools.api_key import get_api_key_for_proxy
+            wrapped = get_api_key_for_proxy(api_key)
+            print("  Using AISI API key proxy (aisitools detected)")
+            return wrapped
+        except ImportError:
+            return api_key
+
+    # ──────────────────────────────────────────────────────────────────────────
     # Result persistence
     # ──────────────────────────────────────────────────────────────────────────
 

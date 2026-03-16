@@ -277,7 +277,7 @@ models:
   gpt-4o:
     path: gpt-4o
     type: it
-    provider: openai      # openai | anthropic | gemini
+    provider: openai      # openai | anthropic | gemini | xai
 ```
 
 Set the appropriate API key in `.env`, then run:
@@ -290,7 +290,18 @@ python -m pacute_bench.scripts.run_evaluation \
 
 > **Note:** Only the GEN format is supported for commercial models. MCQ evaluation requires per-token log-probabilities, which commercial APIs do not expose.
 
-Providers currently supported: **OpenAI** (`OpenAIEvaluator`), **Anthropic** (`AnthropicEvaluator`), **Gemini** (`GeminiEvaluator`). To add a new provider, subclass `BatchEvaluator` in `src/pacute_bench/evaluators/` and implement `_submit_batch` and `_try_collect_batch`.
+Providers currently supported:
+
+| Provider | Class | Mechanism | Required env var |
+|---|---|---|---|
+| **OpenAI** | `OpenAIEvaluator` | Batch API | `OPENAI_API_KEY` |
+| **Anthropic** | `AnthropicEvaluator` | Message Batches API | `ANTHROPIC_API_KEY` |
+| **Gemini** | `GeminiEvaluator` | Google Batch API | `GEMINI_API_KEY` |
+| **xAI (Grok)** | `XAIEvaluator` | Real-time async (no batch API available) | `XAI_API_KEY` |
+
+> **xAI note:** `XAIEvaluator` uses real-time async generation rather than a batch API. `XAI_BASE_URL` can be overridden via environment variable to route through a proxy (default: `https://api.x.ai/v1`).
+
+To add a new provider, subclass `BatchEvaluator` in `src/pacute_bench/evaluators/` and implement `_submit_batch` and `_try_collect_batch`.
 
 ## Output structure
 
@@ -343,7 +354,8 @@ pacute-bench/
 │   ├── benchmarks/               # generated JSONL evaluation files
 │   └── corpora/                  # source data for generation
 ├── scripts/
-│   ├── eval_model.pbs            # PBS job script (single model)
+│   ├── eval_model.pbs            # PBS job script (single vLLM model)
+│   ├── eval_commercial.pbs       # PBS job script (commercial API models)
 │   └── submit_evaluations.sh     # batch PBS submission
 ├── src/pacute_bench/
 │   ├── evaluators/
@@ -352,7 +364,8 @@ pacute-bench/
 │   │   ├── batch.py              # BatchEvaluator (abstract base for commercial)
 │   │   ├── openai.py             # OpenAIEvaluator
 │   │   ├── anthropic.py          # AnthropicEvaluator
-│   │   └── gemini.py             # GeminiEvaluator
+│   │   ├── gemini.py             # GeminiEvaluator
+│   │   └── xai.py                # XAIEvaluator (xAI Grok, async)
 │   ├── generators/               # benchmark dataset generators
 │   ├── loaders/                  # benchmark loaders (registry)
 │   ├── scripts/

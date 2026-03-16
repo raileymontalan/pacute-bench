@@ -1,0 +1,169 @@
+Loaded eval config: configs/evaluation.yaml
+  Instructions for: ['cute-gen', 'pacute-affixation-gen', 'pacute-composition-gen', 'pacute-manipulation-gen', 'pacute-syllabification-gen', 'hierarchical-gen', 'langgame-gen', 'multi-digit-addition-gen']
+
+================================================================================
+Evaluation Configuration
+================================================================================
+  Eval mode  : gen
+  Overwrite  : False
+  vLLM URL   : http://localhost:8000
+================================================================================
+
+
+================================================================================
+Model: o4-mini  (type=it, mode=gen, thinking=OFF)
+Benchmarks: pacute-affixation-gen, pacute-composition-gen, pacute-manipulation-gen, pacute-syllabification-gen, hierarchical-gen, langgame-gen, multi-digit-addition-gen, cute-gen
+================================================================================
+  Using AISI API key proxy (aisitools detected)
+CommercialEvaluator: OpenAI batch API → model=o4-mini via proxy https://openai.apps.aisi.org.uk/v1
+
+Evaluating on pacute-affixation-gen (batch)...
+PACUTE (gen): Loaded 140 tasks across 1 categories:
+  - affixation: 140 tasks
+Format: generative (140 items)
+  Uploading 140 requests to OpenAI Files API…
+  Batch created: batch_69b366aa6f688190812f00b4e816e986  (polling every 60s)
+  [batch_69b366aa6f688190812f00b4e816e986] status=in_progress  completed=26  failed=0  total=140
+  [batch_69b366aa6f688190812f00b4e816e986] status=in_progress  completed=136  failed=0  total=140
+  [batch_69b366aa6f688190812f00b4e816e986] status=in_progress  completed=136  failed=0  total=140
+  [batch_69b366aa6f688190812f00b4e816e986] status=completed  completed=140  failed=0  total=140
+  Saved inference results → results/o4-mini/inference/pacute-affixation-gen.jsonl
+
+  pacute-affixation-gen Results  (n=140)
+    Exact match  : 0.5500
+    Contains     : 0.8357
+    Prefix       : 0.6500
+
+Evaluating on pacute-composition-gen (batch)...
+PACUTE (gen): Loaded 500 tasks across 1 categories:
+  - composition: 500 tasks
+Format: generative (500 items)
+  Uploading 500 requests to OpenAI Files API…
+  Batch created: batch_69b3679e953481908ebc902a287ddc96  (polling every 60s)
+  [batch_69b3679e953481908ebc902a287ddc96] status=in_progress  completed=0  failed=0  total=500
+  [batch_69b3679e953481908ebc902a287ddc96] status=in_progress  completed=496  failed=0  total=500
+  [batch_69b3679e953481908ebc902a287ddc96] status=completed  completed=500  failed=0  total=500
+  Saved inference results → results/o4-mini/inference/pacute-composition-gen.jsonl
+
+  pacute-composition-gen Results  (n=500)
+    Exact match  : 0.9960
+    Contains     : 0.9960
+    Prefix       : 0.9960
+
+Evaluating on pacute-manipulation-gen (batch)...
+PACUTE (gen): Loaded 800 tasks across 1 categories:
+  - manipulation: 800 tasks
+Format: generative (800 items)
+  Uploading 800 requests to OpenAI Files API…
+  Batch created: batch_69b3685664a08190aaa9aabf4b0ac886  (polling every 60s)
+  [batch_69b3685664a08190aaa9aabf4b0ac886] status=in_progress  completed=0  failed=0  total=800
+  [batch_69b3685664a08190aaa9aabf4b0ac886] status=finalizing  completed=800  failed=0  total=800
+  [batch_69b3685664a08190aaa9aabf4b0ac886] status=finalizing  completed=800  failed=0  total=800
+  [batch_69b3685664a08190aaa9aabf4b0ac886] status=completed  completed=800  failed=0  total=800
+  Saved inference results → results/o4-mini/inference/pacute-manipulation-gen.jsonl
+
+  pacute-manipulation-gen Results  (n=800)
+    Exact match  : 0.9975
+    Contains     : 0.9975
+    Prefix       : 0.9975
+
+Evaluating on pacute-syllabification-gen (batch)...
+PACUTE (gen): Loaded 500 tasks across 1 categories:
+  - syllabification: 500 tasks
+Format: generative (500 items)
+  Uploading 500 requests to OpenAI Files API…
+  Batch created: batch_69b3694a2d9081909a1a0d8d9b74c066  (polling every 60s)
+  [batch_69b3694a2d9081909a1a0d8d9b74c066] status=in_progress  completed=0  failed=0  total=500
+  [batch_69b3694a2d9081909a1a0d8d9b74c066] status=in_progress  completed=440  failed=0  total=500
+  [batch_69b3694a2d9081909a1a0d8d9b74c066] status=completed  completed=500  failed=0  total=500
+  Saved inference results → results/o4-mini/inference/pacute-syllabification-gen.jsonl
+
+  pacute-syllabification-gen Results  (n=500)
+    Exact match  : 0.6480
+    Contains     : 0.6660
+    Prefix       : 0.6660
+
+Evaluating on hierarchical-gen (batch)...
+Hierarchical (gen): Loaded 600 tasks from data/benchmarks/hierarchical_gen.jsonl
+Format: generative (600 items)
+  Uploading 600 requests to OpenAI Files API…
+  Batch created: batch_69b36a016cfc8190a6b4e9ebab0450e4  (polling every 60s)
+  [batch_69b36a016cfc8190a6b4e9ebab0450e4] status=in_progress  completed=0  failed=0  total=600
+  [batch_69b36a016cfc8190a6b4e9ebab0450e4] status=in_progress  completed=86  failed=0  total=600
+  [batch_69b36a016cfc8190a6b4e9ebab0450e4] status=in_progress  completed=390  failed=0  total=600
+  [batch_69b36a016cfc8190a6b4e9ebab0450e4] status=finalizing  completed=600  failed=0  total=600
+  [batch_69b36a016cfc8190a6b4e9ebab0450e4] status=completed  completed=600  failed=0  total=600
+  Saved inference results → results/o4-mini/inference/hierarchical-gen.jsonl
+
+  hierarchical-gen Results  (n=600)
+    Exact match  : 0.5350
+    Contains     : 0.6917
+    Prefix       : 0.5783
+
+Evaluating on langgame-gen (batch)...
+LangGame (gen): Loaded 1000 examples from data/benchmarks/langgame_gen.jsonl
+Format: generative (1000 items)
+  Uploading 1000 requests to OpenAI Files API…
+  Batch created: batch_69b36b31e1b081908256da175dfbf66f  (polling every 60s)
+  [batch_69b36b31e1b081908256da175dfbf66f] status=in_progress  completed=26  failed=0  total=1000
+  [batch_69b36b31e1b081908256da175dfbf66f] status=in_progress  completed=476  failed=0  total=1000
+  [batch_69b36b31e1b081908256da175dfbf66f] status=finalizing  completed=1000  failed=0  total=1000
+  [batch_69b36b31e1b081908256da175dfbf66f] status=completed  completed=1000  failed=0  total=1000
+  Saved inference results → results/o4-mini/inference/langgame-gen.jsonl
+
+  langgame-gen Results  (n=1000)
+    Exact match  : 0.9980
+    Contains     : 0.9980
+    Prefix       : 0.9980
+
+Evaluating on multi-digit-addition-gen (batch)...
+Multi-digit Addition (gen): Loaded 1000 examples from data/benchmarks/multi_digit_addition_gen.jsonl
+Format: generative (1000 items)
+  Uploading 1000 requests to OpenAI Files API…
+  Batch created: batch_69b36c27ee608190a2bac1b790cb238c  (polling every 60s)
+  [batch_69b36c27ee608190a2bac1b790cb238c] status=in_progress  completed=26  failed=0  total=1000
+  [batch_69b36c27ee608190a2bac1b790cb238c] status=in_progress  completed=940  failed=0  total=1000
+  [batch_69b36c27ee608190a2bac1b790cb238c] status=finalizing  completed=1000  failed=0  total=1000
+  [batch_69b36c27ee608190a2bac1b790cb238c] status=completed  completed=1000  failed=0  total=1000
+  Saved inference results → results/o4-mini/inference/multi-digit-addition-gen.jsonl
+
+  multi-digit-addition-gen Results  (n=1000)
+    Exact match  : 1.0000
+    Contains     : 1.0000
+    Prefix       : 1.0000
+
+Evaluating on cute-gen (batch)...
+CUTE (gen): Loaded 1400 tasks (14 task types) from data/benchmarks/cute_gen.jsonl
+Format: generative (1400 items)
+  Uploading 1400 requests to OpenAI Files API…
+  Batch created: batch_69b36d1c93fc81908b397dbe89710ed0  (polling every 60s)
+  [batch_69b36d1c93fc81908b397dbe89710ed0] status=in_progress  completed=0  failed=0  total=1400
+  [batch_69b36d1c93fc81908b397dbe89710ed0] status=in_progress  completed=476  failed=0  total=1400
+  [batch_69b36d1c93fc81908b397dbe89710ed0] status=finalizing  completed=1400  failed=0  total=1400
+  [batch_69b36d1c93fc81908b397dbe89710ed0] status=finalizing  completed=1400  failed=0  total=1400
+  [batch_69b36d1c93fc81908b397dbe89710ed0] status=completed  completed=1400  failed=0  total=1400
+  Saved inference results → results/o4-mini/inference/cute-gen.jsonl
+
+  cute-gen Results  (n=1400)
+    Exact match  : 0.9750
+    Contains     : 0.9800
+    Prefix       : 0.9750
+
+  Results saved → results/o4-mini/evaluation_results_20260313_012143.json
+
+================================================================================
+Combined results → results/benchmark_evaluation/evaluation_results_20260313_012143.json
+================================================================================
+
+Summary:
+Model                        Benchmark                    Format   Primary Metric
+------------------------------------------------------------------------------------------
+o4-mini                      pacute-affixation-gen        generative EM=0.550
+o4-mini                      pacute-composition-gen       generative EM=0.996
+o4-mini                      pacute-manipulation-gen      generative EM=0.998
+o4-mini                      pacute-syllabification-gen   generative EM=0.648
+o4-mini                      hierarchical-gen             generative EM=0.535
+o4-mini                      langgame-gen                 generative EM=0.998
+o4-mini                      multi-digit-addition-gen     generative EM=1.000
+o4-mini                      cute-gen                     generative EM=0.975
+

@@ -1,5 +1,5 @@
 #!/bin/bash
-# PBS job script — evaluate a single commercial model (OpenAI/Anthropic) via batch API.
+# PBS job script — evaluate a single commercial model (OpenAI/Anthropic/Gemini/xAI) via batch API.
 # No GPU required. Submits all requests as a batch, then polls until complete.
 # Do NOT run directly; submit via scripts/submit_evaluations.sh --commercial-only.
 #
@@ -9,6 +9,7 @@
 # Optional PBS variables:
 #   OVERWRITE    "true" to re-run benchmarks that already have results
 #   MAX_SAMPLES  Integer to cap samples per benchmark (default: all)
+#   BENCHMARKS   Comma-separated benchmark names (default: all 8 gen benchmarks below)
 
 #PBS -l walltime=26:00:00
 #PBS -j oe
@@ -18,7 +19,9 @@
 MODEL_NAME="${MODEL_NAME:-claude-sonnet-4-6}"
 OVERWRITE="${OVERWRITE:-false}"
 MAX_SAMPLES="${MAX_SAMPLES:-}"
-BENCHMARKS="${BENCHMARKS:-}"
+# Default: all generative benchmarks. Commercial APIs do not expose log-probabilities,
+# so MCQ evaluation is not supported — always run gen-only.
+BENCHMARKS="${BENCHMARKS:-pacute-affixation-gen,pacute-composition-gen,pacute-manipulation-gen,pacute-syllabification-gen,hierarchical-gen,langgame-gen,multi-digit-addition-gen,cute-gen}"
 
 set -euo pipefail
 
@@ -41,6 +44,7 @@ EXTRA_FLAGS=""
 python3 -m pacute_bench.scripts.run_evaluation \
     --models "$MODEL_NAME" \
     --model-config configs/models_commercial.yaml \
+    --eval-mode gen \
     --output-dir "$LOGS_PATH" \
     $EXTRA_FLAGS
 

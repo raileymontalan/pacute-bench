@@ -74,5 +74,5 @@ temp/
 # Environment variables and secrets
 .env
 
-# Results - ignore all subfolders and files but keep the results/ directory itself
+# Results - ignore by default, but force-add commercial evaluation results
 results/*/

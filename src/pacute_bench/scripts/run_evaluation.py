@@ -147,8 +147,8 @@ def main() -> None:
     )
     parser.add_argument(
         "--output-dir",
-        default="results/benchmark_evaluation",
-        help="Directory for combined results JSON (default: results/benchmark_evaluation)",
+        default="results",
+        help="Root directory for evaluation output: per-model inference JSONL and combined results JSON (default: results)",
     )
     parser.add_argument(
         "--eval-mode",
@@ -282,6 +282,7 @@ def main() -> None:
                     system_prompt=args.system_prompt,
                     benchmark_system_prompts=benchmark_system_prompts,
                     benchmark_answer_tags=benchmark_answer_tags,
+                    results_dir=args.output_dir,
                 )
             else:
                 evaluator = make_evaluator(
@@ -298,6 +299,7 @@ def main() -> None:
                     system_prompt=args.system_prompt,
                     benchmark_system_prompts=benchmark_system_prompts,
                     benchmark_answer_tags=benchmark_answer_tags,
+                    results_dir=args.output_dir,
                 )
 
             model_results: dict = {}
@@ -316,7 +318,7 @@ def main() -> None:
                     detailed = results.pop("detailed_results", None)
                     results.pop("setting", None)
                     if detailed:
-                        inf_dir = Path("results") / model_name / "inference"
+                        inf_dir = Path(args.output_dir) / model_name / "inference"
                         inf_dir.mkdir(parents=True, exist_ok=True)
                         inf_file = inf_dir / f"{bench}.jsonl"
                         detailed.sort(key=lambda r: r.get("id", ""))
@@ -346,7 +348,7 @@ def main() -> None:
                     detailed = res.pop("detailed_results", None)
                     res.pop("setting", None)
                     if detailed:
-                        inf_dir = Path("results") / model_name / "inference"
+                        inf_dir = Path(args.output_dir) / model_name / "inference"
                         inf_dir.mkdir(parents=True, exist_ok=True)
                         inf_file = inf_dir / f"{bench}.jsonl"
                         detailed.sort(key=lambda r: r.get("id", ""))
@@ -365,7 +367,7 @@ def main() -> None:
             }
 
             # Save per-model JSON
-            model_dir = Path("results") / model_name
+            model_dir = Path(args.output_dir) / model_name
             model_dir.mkdir(parents=True, exist_ok=True)
             model_file = model_dir / f"evaluation_results_{timestamp}.json"
             with open(model_file, "w", encoding="utf-8") as f:

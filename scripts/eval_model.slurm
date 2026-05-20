@@ -22,7 +22,7 @@
 #SBATCH --time=12:00:00
 #SBATCH --output=logs/pb-eval_%j.out
 #SBATCH --error=logs/pb-eval_%j.out
-# Note: --output/--error/--gres are overridden dynamically by submit_evaluations_slurm.sh
+# Note: --output, --error, and --gres are overridden dynamically by submit_evaluations_slurm.sh
 
 
 # ── Defaults ──────────────────────────────────────────────────────────────────
@@ -58,7 +58,7 @@ source "$VENV_PATH/bin/activate"
 
 # Set LD_LIBRARY_PATH for CUDA libs bundled in the venv
 SITE_PACKAGES=$(python3 -c 'import site; print(site.getsitepackages()[0])')
-export LD_LIBRARY_PATH="${SITE_PACKAGES}/nvidia/cudnn/lib:${SITE_PACKAGES}/nvidia/cusparselt/lib:${SITE_PACKAGES}/nvidia/nccl/lib:${LD_LIBRARY_PATH:-}"
+export LD_LIBRARY_PATH="${SITE_PACKAGES}/nvidia/cudnn/lib:${SITE_PACKAGES}/nvidia/cusparselt/lib:${SITE_PACKAGES}/nvidia/nccl/lib:${SITE_PACKAGES}/nvidia/nvshmem/lib:${LD_LIBRARY_PATH:-}"
 export PYTORCH_CUDA_ALLOC_CONF="expandable_segments:True"
 export VLLM_USE_DEEP_GEMM=0
 
@@ -92,7 +92,13 @@ for cfg in ['configs/models_pt.yaml', 'configs/models_it.yaml']:
             print('LANGUAGE_MODEL_ONLY=' + str(info.get('language_model_only', False)).lower())
             print('REASONING_PARSER_PLUGIN=' + shlex.quote(str(info.get('reasoning_parser_plugin', ''))))
             print('CHAT_TEMPLATE_KWARGS=' + shlex.quote(str(info.get('chat_template_kwargs', ''))))
-            print('MAX_MODEL_LEN=' + shlex.quote(str(info.get('max_model_len', 8192))))
+            default_len = 32768 if info.get('thinking') else 8192
+            print('MAX_MODEL_LEN=' + shlex.quote(str(info.get('max_model_len', default_len))))
+            print('ATTENTION_BACKEND=' + shlex.quote(str(info.get('attention_backend', ''))))
+            print('ENFORCE_EAGER=' + str(info.get('enforce_eager', False)).lower())
+            print('DISABLE_PREFIX_CACHING=' + str(info.get('disable_prefix_caching', False)).lower())
+            print('MAX_CUDAGRAPH_CAPTURE_SIZE=' + shlex.quote(str(info.get('max_cudagraph_capture_size', ''))))
+            print('MAX_NUM_BATCHED_TOKENS=' + shlex.quote(str(info.get('max_num_batched_tokens', ''))))
             sys.exit(0)
     except Exception:
         pass
@@ -118,8 +124,9 @@ echo "Chat template kwargs    : ${CHAT_TEMPLATE_KWARGS:-(none)}"
 echo "Max model len           : $MAX_MODEL_LEN"
 
 # ── Start vLLM server ─────────────────────────────────────────────────────────
-VLLM_LOG="${LOGS_PATH}/vllm_${MODEL_NAME}_$(date +%Y%m%d_%H%M%S).log"
-mkdir -p "$(dirname "$VLLM_LOG")"
+VLLM_LOG="${LOGS_PATH}/vllm/${SLURM_JOB_ID}-${MODEL_NAME}.log"
+mkdir -p "${LOGS_PATH}/vllm"
+
 
 export VLLM_ENGINE_CORE_CLIENT_TIMEOUT=3600
 
@@ -128,16 +135,23 @@ VLLM_SERVE_ARGS=(
     --port "$VLLM_PORT"
     --tensor-parallel-size "$N_GPUS"
     --max-model-len "$MAX_MODEL_LEN"
-    --enable-prefix-caching
     --gpu-memory-utilization 0.85
     --trust-remote-code
-    --attention-backend FLASH_ATTN
 )
+[[ "${DISABLE_PREFIX_CACHING:-}" == "true" ]] && VLLM_SERVE_ARGS+=(--no-enable-prefix-caching) \
+    || VLLM_SERVE_ARGS+=(--enable-prefix-caching)
+# FLASH_ATTN is the cluster default; models with partial multimodal attention (e.g. Gemma4 26B-A4B)
+# set attention_backend: auto in YAML to let vLLM choose the compatible backend automatically.
+_ATTN="${ATTENTION_BACKEND:-FLASH_ATTN}"
+[[ "$_ATTN" != "auto" ]] && VLLM_SERVE_ARGS+=(--attention-backend "$_ATTN")
 [[ -n "${REASONING_PARSER:-}" ]]        && VLLM_SERVE_ARGS+=(--reasoning-parser "$REASONING_PARSER")
 [[ -n "${REASONING_PARSER_PLUGIN:-}" ]] && VLLM_SERVE_ARGS+=(--reasoning-parser-plugin "$REASONING_PARSER_PLUGIN")
 [[ -n "${CHAT_TEMPLATE_KWARGS:-}" ]]    && VLLM_SERVE_ARGS+=(--default-chat-template-kwargs "$CHAT_TEMPLATE_KWARGS")
 [[ "${ENABLE_EXPERT_PARALLEL:-}" == "true" ]] && VLLM_SERVE_ARGS+=(--enable-expert-parallel)
 [[ "${LANGUAGE_MODEL_ONLY:-}" == "true" ]]   && VLLM_SERVE_ARGS+=(--language-model-only)
+[[ "${ENFORCE_EAGER:-}" == "true" ]]         && VLLM_SERVE_ARGS+=(--enforce-eager)
+[[ -n "${MAX_CUDAGRAPH_CAPTURE_SIZE:-}" ]]   && VLLM_SERVE_ARGS+=(--max-cudagraph-capture-size "$MAX_CUDAGRAPH_CAPTURE_SIZE")
+[[ -n "${MAX_NUM_BATCHED_TOKENS:-}" ]]       && VLLM_SERVE_ARGS+=(--max-num-batched-tokens "$MAX_NUM_BATCHED_TOKENS")
 
 echo "Starting vLLM: $MODEL_PATH (TP=$N_GPUS, port=$VLLM_PORT, max_model_len=$MAX_MODEL_LEN)"
 vllm serve "${VLLM_SERVE_ARGS[@]}" > "$VLLM_LOG" 2>&1 &

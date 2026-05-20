@@ -67,3 +67,4 @@ models:
     path: google/gemini-3.5-flash
     type: it
     provider: openai-async
+    thinking: true  # Gemini 3.5 Flash emits internal reasoning tokens; needs ~8K max_tokens

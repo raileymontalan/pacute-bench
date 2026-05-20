@@ -220,7 +220,7 @@ class VLLMEvaluator(BaseEvaluator):
         Evaluate the model on a single benchmark.
 
         Args:
-            benchmark_name: Registered benchmark name (e.g. ``"pacute-affixation-mcq"``).
+            benchmark_name: Registered benchmark name (e.g. ``"pacute-composition-mcq"``).
             max_samples: Cap on number of items (``None`` = all).
             check_existing: Skip and return ``{"skipped": True}`` when inference
                 results already exist on disk.
@@ -362,7 +362,8 @@ class VLLMEvaluator(BaseEvaluator):
             if api_resp.get("thinking_content") is not None:
                 thinking_trace = api_resp["thinking_content"]
 
-            expected = str(ground_truth).strip().lower()
+            expected = self._normalize_label(str(ground_truth))
+            answer   = self._normalize_label(answer)
             is_exact = answer == expected
             is_contains = expected in answer
             is_prefix = answer.startswith(expected)

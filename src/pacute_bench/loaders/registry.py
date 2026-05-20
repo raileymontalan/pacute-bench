@@ -38,9 +38,6 @@ BENCHMARK_REGISTRY: dict = {
     "pacute-gen": partial(load_pacute, format="gen"),
 
     # PACUTE — per-category variants
-    "pacute-affixation":        partial(load_pacute, categories=["affixation"]),
-    "pacute-affixation-mcq":    partial(load_pacute, categories=["affixation"], format="mcq"),
-    "pacute-affixation-gen":    partial(load_pacute, categories=["affixation"], format="gen"),
     "pacute-composition":       partial(load_pacute, categories=["composition"]),
     "pacute-composition-mcq":   partial(load_pacute, categories=["composition"], format="mcq"),
     "pacute-composition-gen":   partial(load_pacute, categories=["composition"], format="gen"),
@@ -50,6 +47,30 @@ BENCHMARK_REGISTRY: dict = {
     "pacute-syllabification":       partial(load_pacute, categories=["syllabification"]),
     "pacute-syllabification-mcq":   partial(load_pacute, categories=["syllabification"], format="mcq"),
     "pacute-syllabification-gen":   partial(load_pacute, categories=["syllabification"], format="gen"),
+    "pacute-morphological-extraction":     partial(load_pacute, categories=["morphological_extraction"]),
+    "pacute-morphological-extraction-mcq": partial(load_pacute, categories=["morphological_extraction"], format="mcq"),
+    "pacute-morphological-extraction-gen": partial(load_pacute, categories=["morphological_extraction"], format="gen"),
+    "pacute-morphological-production":     partial(load_pacute, categories=["morphological_production"]),
+    "pacute-morphological-production-mcq": partial(load_pacute, categories=["morphological_production"], format="mcq"),
+    "pacute-morphological-production-gen": partial(load_pacute, categories=["morphological_production"], format="gen"),
+
+    # ── Affixation (legacy benchmark, not part of PACUTE group) ─────────────
+    "pacute-affixation":     partial(load_pacute, categories=["affixation"]),
+    "pacute-affixation-mcq": partial(load_pacute, categories=["affixation"], format="mcq"),
+    "pacute-affixation-gen": partial(load_pacute, categories=["affixation"], format="gen"),
+
+    # ── Morphological (aliases → load_pacute) ────────────────────────────────
+    "morphological":     partial(load_pacute, categories=["morphological_extraction", "morphological_production"]),
+    "morphological-mcq": partial(load_pacute, categories=["morphological_extraction", "morphological_production"], format="mcq"),
+    "morphological-gen": partial(load_pacute, categories=["morphological_extraction", "morphological_production"], format="gen"),
+
+    "morphological-extraction":     partial(load_pacute, categories=["morphological_extraction"]),
+    "morphological-extraction-mcq": partial(load_pacute, categories=["morphological_extraction"], format="mcq"),
+    "morphological-extraction-gen": partial(load_pacute, categories=["morphological_extraction"], format="gen"),
+
+    "morphological-production":     partial(load_pacute, categories=["morphological_production"]),
+    "morphological-production-mcq": partial(load_pacute, categories=["morphological_production"], format="mcq"),
+    "morphological-production-gen": partial(load_pacute, categories=["morphological_production"], format="gen"),
 }
 
 

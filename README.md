@@ -6,14 +6,15 @@ A self-contained evaluation suite for Filipino morphology benchmarks, designed t
 
 ### Main benchmark
 
-**PACUTE** (**P**ilipino **A**ffix and **C**haracter-Level **U**nderstanding of **T**okens **E**valuation) is the primary benchmark in this suite, designed to evaluate Filipino morphological and phonological understanding.
+**PACUTE** (**P**honology, **A**ffix, and **C**haracter-level **U**nderstanding of **T**okens **E**valuation) is the primary benchmark in this suite, designed to evaluate Filipino morphological and phonological understanding.
 
 | Category | Task | GEN samples | MCQ samples |
 |---|---|---|---|
-| **PACUTE-Affixation** | Identify/apply Filipino affix inflections (prefix, suffix, infix, circumfix) | 140 | 140 |
-| **PACUTE-Composition** | Character-level composition: spelling, counting, length, diacritics | 500 | 900 |
+| **PACUTE-Composition** | Character-level composition: spelling, counting, character finding, diacritics | 550 | 950 |
 | **PACUTE-Manipulation** | String operations on Filipino words (deletion, insertion, substitution, …) | 800 | 800 |
-| **PACUTE-Syllabification** | Syllable counting, stress identification/disambiguation, reduplication | 500 | 500 |
+| **PACUTE-Syllabification** | Stress identification and disambiguation | 200 | 200 |
+| **PACUTE-Morphological-Extraction** | Identify affix, root word, or reduplicant of a Filipino word | 400 | 400 |
+| **PACUTE-Morphological-Production** | Produce the correctly inflected form given a root word and affix | 150 | 150 |
 
 **Generative (GEN)** is the primary evaluation format: the model produces a free-form answer that is scored against the ground truth using exact, contains, and prefix match. **Multiple-choice (MCQ)** is provided as a alternative for base pretrained models that cannot reliably follow generation instructions; it uses log-probability scoring over a fixed option set, requiring no generation.
 
@@ -40,21 +41,6 @@ The following are existing benchmarks from other researchers, included to situat
 
 ## Task Details
 
-### PACUTE-Affixation
-
-Tests understanding and application of Filipino affix morphology. Each sample belongs to one of two task types — **Inflection** (`affix_inflection`: given a root word and an affix, produce the inflected form) or **Identification** (`affix_identification`: given an inflected word, name the affix that was applied) — and one of four affix subcategories:
-
-| Subcategory | Inflection example | Identification example | GEN samples | MCQ samples |
-|---|---|---|---|---|
-| `prefix` | `um-` + `inom` → `uminom` | Which affix is in `uminom`? → `um-` | 40 | 40 |
-| `suffix` | `bukas` + `-an` → `buksan` | Which affix is in `buksan`? → `-an` | 40 | 40 |
-| `infix` | `-in-` + `kain` → `kinain` | Which affix is in `kinain`? → `-in-` | 40 | 40 |
-| `circumfix` | `pag-` + `sayaw` + `-an` → `pagsayawan` | Which affixes are in `pagsayawan`? → `pag-`, `-an` | 20 | 20 |
-
-GEN and MCQ counts are split evenly between the two task types. MCQ distractors are sourced from affixes with high Levenshtein similarity to make options plausible.
-
----
-
 ### PACUTE-Composition
 
 Tests character-level composition skills — understanding the internal structure of Filipino words without morphological transformations. Samples are drawn from a corpus of Filipino words.
@@ -62,16 +48,17 @@ Tests character-level composition skills — understanding the internal structur
 | Subcategory | Description | Example | GEN samples | MCQ samples |
 |---|---|---|---|---|
 | `spelling` | Spell out a word with spaces between each character | `sila` → `s i l a` | 100 | 100 |
-| `character` / `char_exactly` | How many occurrences of a given character are in the word? | How many `a`s in `sila`? → `1` | 100 | 100 |
-| `char_most` | Which of four words has the most occurrences of a given character? | Which has the most `a`s? | — | 100 |
-| `char_least` | Which of four words has the fewest occurrences of a given character? | Which has the fewest `a`s? | — | 100 |
-| `length` / `length_exactly` | How many characters does the word have? | How many characters in `sila`? → `4` | 100 | 100 |
-| `length_most` | Which of four words is the longest? | Which word is longest? | — | 100 |
-| `length_least` | Which of four words is the shortest? | Which word is shortest? | — | 100 |
-| `diacritic` / `diacritic_exactly` | How many diacritics (tuldik) does the word contain? | How many diacritics in `silà`? → `1` | 100 | 100 |
-| `uppercase` / `uppercase_exactly` | How many uppercase characters does the word contain? | How many uppercase in `Hindi`? → `1` | 100 | 100 |
+| `character_counting` / `character_counting_exactly` | How many occurrences of a given character are in the word? | How many `a`s in `sila`? → `1` | 100 | 100 |
+| `character_counting_most` | Which of four words has the most occurrences of a given character? | Which has the most `a`s? | — | 100 |
+| `character_counting_least` | Which of four words has the fewest occurrences of a given character? | Which has the fewest `a`s? | — | 100 |
+| `length_counting` | How many characters does the word have? | How many characters in `sila`? → `4` | 100 | 100 |
+| `length_counting_most` | Which of four words is the longest? | Which word is longest? | — | 100 |
+| `length_counting_least` | Which of four words is the shortest? | Which word is shortest? | — | 100 |
+| `diacritic_counting` | How many diacritics (tuldik) does the word contain? | How many diacritics in `silà`? → `1` | 100 | 100 |
+| `uppercase_counting` | How many uppercase characters does the word contain? | How many uppercase in `Hindi`? → `1` | 100 | 100 |
+| `character_finding` | Which character appears at a given position in the word? | What is the 2nd character of `sila`? → `i` | 50 | 50 |
 
-GEN tasks ask the model to produce a count or character sequence directly (subcategory names: `spelling`, `character`, `length`, `diacritic`, `uppercase`). The comparative MCQ-only tasks (`char_most`, `char_least`, `length_most`, `length_least`) do not have a GEN counterpart because the question changes form between formats.
+GEN tasks ask the model to produce a count or character sequence directly. The comparative MCQ-only tasks (`character_counting_most`, `character_counting_least`, `length_counting_most`, `length_counting_least`) do not have a GEN counterpart.
 
 ---
 
@@ -94,18 +81,41 @@ Tests the ability to apply specific character-level transformations to Filipino 
 
 ### PACUTE-Syllabification
 
-Tests phonological and prosodic awareness of Filipino words. There are **5 task types**, each with 100 GEN samples (and 100 MCQ samples where applicable), covering syllable counting and stress:
+Tests phonological and prosodic awareness of Filipino words. Only stress tasks are included; syllable counting and reduplication detection are not part of the current benchmark.
 
 | Subcategory | Description | Example | GEN samples | MCQ samples |
 |---|---|---|---|---|
-| `stress_identification` | Given sentence context, identify which syllable of the target word carries the stress | *Punong-puno ng tubig at putik ang mga bahay.* — which syllable of `puno` has the stress? → `no` | 100 | 100 (2-option) |
+| `stress_identification` | Given sentence context, identify which syllable of the target word carries the stress | *Hindi ito ang huling tren, hindi ba?* — which syllable of `huli` has the stress? → `li` | 100 | 100 (2-option) |
 | `stress_disambiguation` | Given sentence context, write the word with the correct diacritic marks (tuldik) | *Pag-asa ang huling namamatay.* — write `huli` with diacritics → `hulí` | 100 | 100 |
-| `reduplication_identification` | Name the syllable being reduplicated in a given word | What is the reduplicated syllable in `babae`? → `ba` | 100 | — |
-| `reduplication_detection` | Identify which of four words exhibits CV-reduplication | Which word has CV-reduplication? → `babae` | — | 100 |
-| `ng_aware_syllable_counting` | Count syllables in words containing `ng`, testing awareness that `ng` is a single consonant digraph | How many syllables in `galing`? → `2` | 100 | 100 |
-| `general_syllable_counting` | Count syllables in longer words (≥ 7 characters) | How many syllables in `bulubundukin`? → `5` | 100 | 100 |
 
-> **Note on stress tasks:** Stress identification and disambiguation are context-dependent — they use sentence-level context from a curated corpus to resolve stress ambiguity. The MCQ stress identification task presents only 2 options (the stressed syllable and one other from the same word).
+Both tasks are context-dependent — they use sentence-level context from a curated corpus to resolve stress ambiguity. The MCQ stress identification task presents only 2 options (the stressed syllable and one other from the same word).
+
+---
+
+### PACUTE-Morphological-Extraction
+
+Tests the ability to identify morphological components of Filipino words. Each sample belongs to one of four subcategories:
+
+| Subcategory | Description | Example | GEN samples | MCQ samples |
+|---|---|---|---|---|
+| `inflected_affix_extraction` | Identify the affix (prefix, infix, or suffix) used to inflect a word | What is the affix in `uminom`? → `um-` | 100 | 100 |
+| `inflected_root_extraction` | Identify the root word of an inflected form | What is the root of `uminom`? → `inom` | 100 | 100 |
+| `reduplicated_root_extraction` | Identify the root word of a reduplicated form | What is the root of `mabubuti`? → `buti` | 100 | 100 |
+| `reduplicant_extraction` | Identify the repeated segment in a reduplicated word; `none` if not reduplicated | What is the reduplicant in `mabubuti`? → `bu` | 100 | 100 |
+
+`inflected_affix_extraction` samples are stratified across prefix, infix, and suffix (no circumfix). MCQ distractors for affix tasks use Levenshtein similarity against the affix pool; root and reduplicant tasks use character-level perturbations of the correct answer (random insertion, deletion, shuffle, substitution). Labels are normalized at evaluation time (leading/trailing dashes stripped, lowercased).
+
+---
+
+### PACUTE-Morphological-Production
+
+Tests the ability to produce correctly inflected Filipino word forms. All 150 samples belong to the `inflected_form_production` subcategory: given a root word and an affix (with its type), produce the inflected form applying the correct morphophonemic changes (e.g., nasal assimilation, consonant deletion).
+
+| Source | Description | Example | GEN samples | MCQ samples |
+|---|---|---|---|---|
+| `inflected_form_production` | Root + affix → inflected word | `mang-` + `sulat` → `manulat` | 150 | 150 |
+
+Samples are drawn from the combined `inflected_affix_extraction` and `inflected_root_extraction` corpus rows, deduplicated on (word, root, affix), then sampled from the unique pool. MCQ distractors are character-level perturbations of the correct inflected form (random insertion, deletion, shuffle, substitution).
 
 ---
 
@@ -310,7 +320,8 @@ results/
 └── <model-name>/
     ├── evaluation_results_<timestamp>.json   # metrics summary
     └── inference/
-        ├── pacute-affixation-mcq.jsonl       # per-sample predictions
+        ├── pacute-composition-mcq.jsonl      # per-sample predictions
+        ├── pacute-morphological-extraction-gen.jsonl
         ├── cute-gen.jsonl
         └── ...
 

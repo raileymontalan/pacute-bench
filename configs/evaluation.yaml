@@ -35,54 +35,118 @@ generative_instructions:
       Replace ANSWER with the transformed result.
 
   # ---------------------------------------------------------------------------
-  # PACUTE — Filipino morphology benchmarks (affixation, composition,
-  #           manipulation, syllabification), generative setting
+  # PACUTE — Filipino morphology benchmarks (composition, manipulation,
+  #           syllabification, morphological extraction/production), generative setting
   # ---------------------------------------------------------------------------
-  pacute-affixation-gen:
-    answer_tag: "<answer>"
-    instruction: |-
-      You will be given a question about Filipino word affixation.
-      Based on the question, identify the single word that satisfies the described condition.
-
-      Your output MUST strictly follow this XML format:
-      <reflection>Your 1-2 sentence reflection explaining which affix applies and why the resulting form is correct.</reflection>
-      <answer>ANSWER</answer>
-      Replace ANSWER with the correct Filipino word.
-
   pacute-composition-gen:
     answer_tag: "<answer>"
     instruction: |-
-      You will be given a question about Filipino word spelling or letter composition.
-      Based on the question, identify the correct spelling or letter sequence.
+      You will be given a question about the composition of a Filipino word. Tasks include:
+      - Spelling out a word letter by letter with spaces between each character
+      - Identifying a specific character at a given position in a word
+      - Counting the number of diacritical marks (tilde, accent marks) in a word
+      - Counting the number of uppercase letters in a word
+      - Counting the total number of characters in a word
+
+      For spelling tasks, your answer is the word's letters separated by spaces.
+      For character-finding tasks, your answer is the single character at the specified position.
+      For counting tasks, your answer is a single integer.
 
       Your output MUST strictly follow this XML format:
-      <reflection>Your 1-2 sentence reflection explaining how you determined the correct spelling or letter sequence.</reflection>
+      <reflection>Your 1-2 sentence reflection explaining how you analyzed the word's composition to arrive at your answer.</reflection>
       <answer>ANSWER</answer>
-      Replace ANSWER with the correct spelling or letter sequence.
+      Replace ANSWER with the spelled-out letters, the single character, or the integer count.
 
   pacute-manipulation-gen:
     answer_tag: "<answer>"
     instruction: |-
-      You will be given a question about a Filipino word transformation,
-      such as changing letter case, reversing characters, or a similar character-level operation.
-      Based on the question, identify the correct result of the transformation.
+      You will be given a Filipino word and a character-level transformation to apply. Tasks include:
+      - Deleting every occurrence of a specified character
+      - Inserting a character after every occurrence of another specified character
+      - Substituting every occurrence of one character with another
+      - Swapping every occurrence of two specified characters with each other
+      - Duplicating every occurrence of a specified character (inserting a copy immediately after it)
+      - Converting the entire word to uppercase or lowercase
+      - Removing all diacritical marks (tilde, accent marks) to produce the normalized form
+
+      Apply the transformation exactly as described. Your answer is the single resulting word.
 
       Your output MUST strictly follow this XML format:
-      <reflection>Your 1-2 sentence reflection explaining the transformation operation you applied and the result you obtained.</reflection>
+      <reflection>Your 1-2 sentence reflection identifying which characters are affected and what the word looks like after applying the transformation.</reflection>
       <answer>ANSWER</answer>
-      Replace ANSWER with the transformed result.
+      Replace ANSWER with the transformed word.
 
   pacute-syllabification-gen:
     answer_tag: "<answer>"
     instruction: |-
-      You will be given a question about Filipino word syllabification,
-      such as identifying a specific syllable pattern or counting the number of syllables in a word.
-      Based on the question, identify the single correct word or number.
+      You will be given a question about Filipino word stress. Tasks include:
+      - Identifying which syllable of a target word carries the primary stress, given a sentence
+        context that disambiguates the meaning (stress_identification)
+      - Writing the correct diacritically-marked form of a word given a sentence context that
+        determines which stress pattern applies (stress_disambiguation)
+
+      For both tasks your answer is a single word (the stressed syllable or the diacritically-marked form).
 
       Your output MUST strictly follow this XML format:
-      <reflection>Your 1-2 sentence reflection explaining how you determined the syllable structure or count.</reflection>
+      <reflection>Your 1-2 sentence reflection explaining which stress pattern the sentence context implies and how you arrived at your answer.</reflection>
       <answer>ANSWER</answer>
-      Replace ANSWER with the correct word or number.
+      Replace ANSWER with the single correct word or syllable.
+
+  pacute-morphological-extraction-gen:
+    answer_tag: "<answer>"
+    instruction: |-
+      You will be given a Filipino word and asked to identify one of its morphological components. Tasks include:
+      - Identifying the affix (prefix, suffix, infix, or circumfix) in an inflected word
+      - Identifying the root word of an inflected form (the base before affixation)
+      - Identifying the root word of a reduplicated form (the base before reduplication)
+      - Identifying the reduplicant (the repeated syllable or segment) in a reduplicated word;
+        if the word has no reduplication, the correct answer is "none"
+
+      Your answer must be a single morpheme: the affix string, the root word, or the reduplicant.
+      Do not include hyphens or extra punctuation. Write "none" if asked for a reduplicant that does not exist.
+
+      Your output MUST strictly follow this XML format:
+      <reflection>Your 1-2 sentence reflection explaining the morphological structure of the word and how you identified the target component.</reflection>
+      <answer>ANSWER</answer>
+      Replace ANSWER with the affix, root word, or reduplicant (or "none").
+
+  pacute-morphological-production-gen:
+    answer_tag: "<answer>"
+    instruction: |-
+      You will be given a Filipino root word and an affix (prefix, suffix, infix, or circumfix).
+      Produce the correctly inflected form by attaching the affix to the root.
+
+      When attaching affixes, apply the appropriate morphophonemic changes:
+      - Nasal assimilation: a nasal-final prefix (mag-, mang-, pang-, etc.) assimilates to the
+        root-initial consonant (e.g., mang- + pili → mamili; mang- + sulat → manulat)
+      - Consonant deletion: the root-initial consonant may be dropped after nasal assimilation
+      - Vowel changes or other phonological adjustments required by the specific affix
+
+      Your answer is a single correctly spelled Filipino word.
+
+      Your output MUST strictly follow this XML format:
+      <reflection>Your 1-2 sentence reflection explaining how the affix attaches to the root and which morphophonemic changes (if any) you applied.</reflection>
+      <answer>ANSWER</answer>
+      Replace ANSWER with the correctly inflected Filipino word.
+
+  pacute-affixation-gen:
+    answer_tag: "<answer>"
+    instruction: |-
+      You will be given a Filipino root word and an affix (prefix, suffix, infix, or circumfix).
+      Produce the correctly inflected form by attaching the affix to the root.
+
+      When attaching affixes, apply the appropriate morphophonemic changes:
+      - Nasal assimilation: a nasal-final prefix (mag-, mang-, pang-, etc.) assimilates to the
+        root-initial consonant (e.g., mang- + pili → mamili; mang- + sulat → manulat)
+      - Consonant deletion: the root-initial consonant may be dropped after nasal assimilation
+      - Vowel changes or other phonological adjustments required by the specific affix
+
+      Your answer is a single correctly spelled Filipino word.
+
+      Your output MUST strictly follow this XML format:
+      <reflection>Your 1-2 sentence reflection explaining how the affix attaches to the root and which morphophonemic changes (if any) you applied.</reflection>
+      <answer>ANSWER</answer>
+      Replace ANSWER with the correctly inflected Filipino word.
 
   # ---------------------------------------------------------------------------
   # Hierarchical — Filipino morphological attachment tasks (in Filipino)

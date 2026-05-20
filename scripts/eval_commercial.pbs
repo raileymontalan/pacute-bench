@@ -21,7 +21,7 @@ OVERWRITE="${OVERWRITE:-false}"
 MAX_SAMPLES="${MAX_SAMPLES:-}"
 # Default: all generative benchmarks. Commercial APIs do not expose log-probabilities,
 # so MCQ evaluation is not supported — always run gen-only.
-BENCHMARKS="${BENCHMARKS:-pacute-affixation-gen,pacute-composition-gen,pacute-manipulation-gen,pacute-syllabification-gen,hierarchical-gen,langgame-gen,multi-digit-addition-gen,cute-gen}"
+BENCHMARKS="${BENCHMARKS:-pacute-composition-gen,pacute-manipulation-gen,pacute-syllabification-gen,pacute-morphological-extraction-gen,pacute-morphological-production-gen,hierarchical-gen,langgame-gen,multi-digit-addition-gen,cute-gen}"
 
 set -euo pipefail
 

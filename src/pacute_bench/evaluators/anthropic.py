@@ -129,8 +129,16 @@ class AnthropicEvaluator(BatchEvaluator):
             if effective_prompt:
                 kwargs["system"] = effective_prompt
             async with sem:
-                response = await self.async_anthropic.messages.create(**kwargs)
-            text = response.content[0].text or ""
+                try:
+                    response = await self.async_anthropic.messages.create(**kwargs)
+                except Exception as e:
+                    print(f"    [warn] {sample_id}: request failed ({type(e).__name__}: {e}); recording empty result")
+                    return sample_id, ""
+            try:
+                text = response.content[0].text or ""
+            except (TypeError, IndexError, AttributeError):
+                print(f"    [warn] {sample_id}: malformed response (no content); recording empty result")
+                text = ""
             return sample_id, text.strip().lower()
 
         tasks = [gen_one(str(item[3]), item[0]) for item in items]

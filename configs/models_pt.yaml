@@ -7,6 +7,8 @@
 #   type:                   "pt" (pretrained/base)
 #   tp:                     tensor-parallel size (default: 1)
 #   enable_expert_parallel: true for MoE models
+#   language_model_only:    true to pass --language-model-only; skips vision encoder for
+#                           multimodal models (Gemma4) when doing text-only eval
 
 models:
   # ============================================================================

@@ -1,8 +1,8 @@
 #!/bin/bash
-# Submit one PBS job per model defined in the model config YAMLs.
+# Submit one SLURM job per model defined in the model config YAMLs.
 #
 # Usage:
-#   bash scripts/submit_evaluations.sh [OPTIONS]
+#   bash scripts/submit_evaluations_slurm.sh [OPTIONS]
 #
 # Options:
 #   --pt-only              Only submit PT (pretrained) models
@@ -12,19 +12,18 @@
 #   --overwrite            Re-run benchmarks that already have results
 #   --max-samples <n>      Cap samples per benchmark
 #   --benchmarks <b...>    Only run these benchmarks (e.g. pacute-syllabification-gen)
+#   --output-dir <path>    Where to write evaluation results (default: $RESULTS_PATH from .env)
 #   --port <n>             vLLM server port (default: auto)
-#   --queue <q>            PBS queue (default: AISG_debug)
+#   --partition <p>        SLURM partition (default: high)
 #   --walltime <hh:mm:ss>  Job walltime (default: 12:00:00)
-#   --filter <pattern>    Only submit models whose name contains <pattern>
-#   --dry-run              Print qsub commands without submitting
+#   --filter <pattern>     Only submit models whose name contains <pattern>
+#   --dry-run              Print sbatch commands without submitting
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PBS_SCRIPT="$SCRIPT_DIR/eval_model.pbs"
+SLURM_SCRIPT="$SCRIPT_DIR/eval_model.slurm"
 
-# ── Load environment from .env ────────────────────────────────────────────────
-# PROJECT_ROOT, VENV_PATH, LOGS_PATH are all defined there.
 _ENV_FILE="$(dirname "$SCRIPT_DIR")/.env"
 if [[ ! -f "$_ENV_FILE" ]]; then
     echo "ERROR: .env not found at $_ENV_FILE" >&2
@@ -41,33 +40,33 @@ DRY_RUN=false
 OVERWRITE=false
 MAX_SAMPLES=""
 BENCHMARKS=""
-VLLM_PORT=""
 OUTPUT_DIR="${RESULTS_PATH:-}"
-PBS_QUEUE="AISG_debug"
+VLLM_PORT=""
+SLURM_PARTITION="high"
 WALLTIME="12:00:00"
 SINGLE_MODELS=()
 FILTER=""
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
-        --pt-only)     PT_ONLY=true ;;
-        --it-only)     IT_ONLY=true ;;
-        --commercial-only) COMMERCIAL_ONLY=true ;;
-        --dry-run)     DRY_RUN=true ;;
-        --overwrite)   OVERWRITE=true ;;
-        --port)        VLLM_PORT="$2"; shift ;;
-        --max-samples) MAX_SAMPLES="$2"; shift ;;
-        --benchmarks)  shift
-                       while [[ $# -gt 0 && "$1" != --* ]]; do
-                           BENCHMARKS="${BENCHMARKS:+${BENCHMARKS},}$1"
-                           shift
-                       done
-                       continue ;;
-        --output-dir)  OUTPUT_DIR="$2"; shift ;;
-        --queue)       PBS_QUEUE="$2"; shift ;;
-        --walltime)    WALLTIME="$2"; shift ;;
-        --model)       SINGLE_MODELS+=("$2"); shift ;;
-        --filter)      FILTER="$2"; shift ;;
+        --pt-only)          PT_ONLY=true ;;
+        --it-only)          IT_ONLY=true ;;
+        --commercial-only)  COMMERCIAL_ONLY=true ;;
+        --dry-run)          DRY_RUN=true ;;
+        --overwrite)        OVERWRITE=true ;;
+        --port)             VLLM_PORT="$2"; shift ;;
+        --max-samples)      MAX_SAMPLES="$2"; shift ;;
+        --benchmarks)       shift
+                            while [[ $# -gt 0 && "$1" != --* ]]; do
+                                BENCHMARKS="${BENCHMARKS:+${BENCHMARKS},}$1"
+                                shift
+                            done
+                            continue ;;
+        --output-dir)       OUTPUT_DIR="$2"; shift ;;
+        --partition)        SLURM_PARTITION="$2"; shift ;;
+        --walltime)         WALLTIME="$2"; shift ;;
+        --model)            SINGLE_MODELS+=("$2"); shift ;;
+        --filter)           FILTER="$2"; shift ;;
         *) echo "Unknown option: $1" >&2; exit 1 ;;
     esac
     shift
@@ -142,19 +141,7 @@ print(1)
 PYEOF
 }
 
-# ── PBS variable string ───────────────────────────────────────────────────────
-pbs_vars() {
-    local model="$1"
-    local vars="MODEL_NAME=${model},PROJECT_ROOT=${PROJECT_ROOT}"
-    [[ -n "$VLLM_PORT" ]]   && vars="${vars},VLLM_PORT=${VLLM_PORT}"
-    [[ -n "$OUTPUT_DIR" ]]  && vars="${vars},OUTPUT_DIR=${OUTPUT_DIR}"
-    $OVERWRITE              && vars="${vars},OVERWRITE=true"
-    [[ -n "$MAX_SAMPLES" ]] && vars="${vars},MAX_SAMPLES=${MAX_SAMPLES}"
-    [[ -n "$BENCHMARKS" ]]  && vars="${vars},BENCHMARKS=${BENCHMARKS}"
-    echo "$vars"
-}
-
-# ── Apply --filter ───────────────────────────────────────────────────────────
+# ── Apply --filter ────────────────────────────────────────────────────────────
 if [[ -n "$FILTER" ]]; then
     FILTERED=()
     for m in "${ALL_MODELS[@]}"; do
@@ -163,12 +150,10 @@ if [[ -n "$FILTER" ]]; then
     ALL_MODELS=("${FILTERED[@]}")
 fi
 
-# ── Create log directory ──────────────────────────────────────────────────────
 mkdir -p "$LOGS_PATH"
 
-# ── Submit ────────────────────────────────────────────────────────────────────
-echo "Submitting ${#ALL_MODELS[@]} model evaluation job(s) to queue: $PBS_QUEUE"
-echo "PBS script: $PBS_SCRIPT"
+echo "Submitting ${#ALL_MODELS[@]} model evaluation job(s) to partition: $SLURM_PARTITION"
+echo "SLURM script: $SLURM_SCRIPT"
 echo ""
 
 SUBMITTED=0
@@ -181,40 +166,60 @@ for model_name in "${ALL_MODELS[@]}"; do
         continue
     }
 
+    JOB_NAME="pb-eval-$(echo "$model_name" | tr '.' '-')"
+
     if $COMMERCIAL_ONLY; then
-        # Commercial models: no GPU needed, poll-based batch job
-        VARS=$(pbs_vars "$model_name")
-        JOB_NAME="pb-commercial-$(echo "$model_name" | tr '.' '-')"
+        declare -a EXPORT_VARS=(
+            MODEL_NAME="$model_name"
+            PROJECT_ROOT="$PROJECT_ROOT"
+            OVERWRITE="$( $OVERWRITE && echo true || echo false )"
+        )
+        [[ -n "$OUTPUT_DIR" ]]  && EXPORT_VARS+=(OUTPUT_DIR="$OUTPUT_DIR")
+        [[ -n "$MAX_SAMPLES" ]] && EXPORT_VARS+=(MAX_SAMPLES="$MAX_SAMPLES")
+        [[ -n "$BENCHMARKS" ]]  && EXPORT_VARS+=(BENCHMARKS="$BENCHMARKS")
+
         CMD=(
-            qsub
-            -N "$JOB_NAME"
-            -q "$PBS_QUEUE"
-            -l "select=1:mem=8gb:ncpus=2"
-            -l "walltime=${WALLTIME}"
-            -o "${LOGS_PATH}/"
-            -e "${LOGS_PATH}/"
-            -j oe
-            -v "$VARS"
-            "$SCRIPT_DIR/eval_commercial.pbs"
+            env "${EXPORT_VARS[@]}"
+            sbatch
+            --job-name="$JOB_NAME"
+            --partition="$SLURM_PARTITION"
+            --nodes=1
+            --ntasks-per-node=1
+            --cpus-per-task=2
+            --mem=8G
+            --time="${WALLTIME:-26:00:00}"
+            --output="${LOGS_PATH}/${JOB_NAME}_%j.out"
+            "$SCRIPT_DIR/eval_commercial.slurm"
         )
         printf "  %-32s  (commercial API)  " "$model_name"
     else
         N_GPUS=$(get_model_tp "$model_name")
         NCPUS=$((N_GPUS * 4))
-        MEM=$((N_GPUS * 64))gb
-        VARS=$(pbs_vars "$model_name")
-        JOB_NAME="pb-eval-$(echo "$model_name" | tr '.' '-')"
+        MEM=$((N_GPUS * 64))G
+
+        declare -a EXPORT_VARS=(
+            MODEL_NAME="$model_name"
+            PROJECT_ROOT="$PROJECT_ROOT"
+            OVERWRITE="$( $OVERWRITE && echo true || echo false )"
+        )
+        [[ -n "$OUTPUT_DIR" ]]  && EXPORT_VARS+=(OUTPUT_DIR="$OUTPUT_DIR")
+        [[ -n "$VLLM_PORT" ]]   && EXPORT_VARS+=(VLLM_PORT="$VLLM_PORT")
+        [[ -n "$MAX_SAMPLES" ]] && EXPORT_VARS+=(MAX_SAMPLES="$MAX_SAMPLES")
+        [[ -n "$BENCHMARKS" ]]  && EXPORT_VARS+=(BENCHMARKS="$BENCHMARKS")
+
         CMD=(
-            qsub
-            -N "$JOB_NAME"
-            -q "$PBS_QUEUE"
-            -l "select=1:mem=${MEM}:ncpus=${NCPUS}:ngpus=${N_GPUS}"
-            -l "walltime=${WALLTIME}"
-            -o "${LOGS_PATH}/"
-            -e "${LOGS_PATH}/"
-            -j oe
-            -v "$VARS"
-            "$PBS_SCRIPT"
+            env "${EXPORT_VARS[@]}"
+            sbatch
+            --job-name="$JOB_NAME"
+            --partition="$SLURM_PARTITION"
+            --nodes=1
+            --ntasks-per-node=1
+            --cpus-per-task="$NCPUS"
+            --mem="$MEM"
+            --gres="gpu:${N_GPUS}"
+            --time="$WALLTIME"
+            --output="${LOGS_PATH}/${JOB_NAME}_%j.out"
+            "$SLURM_SCRIPT"
         )
         printf "  %-32s  ngpus=%-2s  " "$model_name" "$N_GPUS"
     fi

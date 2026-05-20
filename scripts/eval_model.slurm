@@ -1,52 +1,70 @@
 #!/bin/bash
-# PBS job script — evaluate a single model on all benchmarks.
-# Do NOT run directly; submit via scripts/submit_evaluations.sh.
+# SLURM job script — evaluate a single model on all benchmarks.
+# Do NOT run directly; submit via scripts/submit_evaluations_slurm.sh.
 #
-# Required PBS variable (pass with qsub -v):
+# Required env vars (set before sbatch, or via --export):
 #   MODEL_NAME   Short model key from configs/models_*.yaml  (e.g. qwen-2.5-7b-it)
+#   PROJECT_ROOT Absolute path to pacute-bench repo root
 #
-# Optional PBS variables:
+# Optional env vars:
+#   OUTPUT_DIR   Where to write evaluation results (default: $RESULTS_PATH from .env, else $LOGS_PATH)
 #   OVERWRITE    "true" to re-run benchmarks that already have results
 #   MAX_SAMPLES  Integer to cap samples per benchmark (default: all)
+#   BENCHMARKS   Comma-separated benchmark names (default: all)
 #   VLLM_PORT    Port for the vLLM server (default: auto-derived from job ID)
 
-#PBS -l walltime=12:00:00
-#PBS -j oe
-#PBS -q AISG_debug
-# Note: -o and -e (log directory) are passed dynamically by submit_evaluations.sh
+#SBATCH --job-name=pb-eval
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=64G
+#SBATCH --gres=gpu:1
+#SBATCH --time=12:00:00
+#SBATCH --output=logs/pb-eval_%j.out
+#SBATCH --error=logs/pb-eval_%j.out
+# Note: --output/--error/--gres are overridden dynamically by submit_evaluations_slurm.sh
 
-# ── Defaults ─────────────────────────────────────────────────────────────────
+
+# ── Defaults ──────────────────────────────────────────────────────────────────
 MODEL_NAME="${MODEL_NAME:-gpt2}"
 OVERWRITE="${OVERWRITE:-false}"
 MAX_SAMPLES="${MAX_SAMPLES:-}"
 BENCHMARKS="${BENCHMARKS:-}"
+# OUTPUT_DIR resolved after .env is sourced (RESULTS_PATH may be set there)
 
-# Auto-derive a unique port from PBS_JOBID so concurrent jobs don't collide.
+# Auto-derive a unique port from SLURM_JOB_ID so concurrent jobs don't collide.
 if [[ -z "${VLLM_PORT:-}" ]]; then
-    _JOBNUM="${PBS_JOBID%%.*}"
-    VLLM_PORT=$(( 8000 + (_JOBNUM % 1000) ))
+    VLLM_PORT=$(( 8000 + (SLURM_JOB_ID % 1000) ))
 fi
 
 set -euo pipefail
 
-# PROJECT_ROOT is passed via qsub -v from submit_evaluations.sh
-: "${PROJECT_ROOT:?PROJECT_ROOT must be set (pass via qsub -v or export before running)}"
+: "${PROJECT_ROOT:?PROJECT_ROOT must be set}"
 cd "$PROJECT_ROOT"
 
-# Source .env for VENV_PATH, LOGS_PATH, and API keys
-# shellcheck source=.env
+# Source .env for VENV_PATH, LOGS_PATH, RESULTS_PATH, and API keys
 source "$PROJECT_ROOT/.env"
 mkdir -p "$LOGS_PATH"
-
 OUTPUT_DIR="${OUTPUT_DIR:-${RESULTS_PATH:-$LOGS_PATH}}"
 mkdir -p "$OUTPUT_DIR"
 
+# Load CUDA modules if MODULEFILES_PATH is defined in .env
+if [[ -n "${MODULEFILES_PATH:-}" ]]; then
+    module use "$MODULEFILES_PATH"
+    module swap cuda/13.0.3 2>/dev/null || true
+fi
+
 source "$VENV_PATH/bin/activate"
 
-# Install package into the active venv
+# Set LD_LIBRARY_PATH for CUDA libs bundled in the venv
+SITE_PACKAGES=$(python3 -c 'import site; print(site.getsitepackages()[0])')
+export LD_LIBRARY_PATH="${SITE_PACKAGES}/nvidia/cudnn/lib:${SITE_PACKAGES}/nvidia/cusparselt/lib:${SITE_PACKAGES}/nvidia/nccl/lib:${LD_LIBRARY_PATH:-}"
+export PYTORCH_CUDA_ALLOC_CONF="expandable_segments:True"
+export VLLM_USE_DEEP_GEMM=0
+
 uv pip install -e "$PROJECT_ROOT" --quiet
 
-# ── UUID → integer GPU remapping (PBS sets UUIDs, vLLM needs integers) ──────
+# ── UUID → integer GPU remapping ──────────────────────────────────────────────
 UUIDS=$(echo "$CUDA_VISIBLE_DEVICES" | tr ',' '\n')
 declare -a VISIBLE_DEVICES=()
 for UUID in $UUIDS; do
@@ -58,7 +76,7 @@ export CUDA_VISIBLE_DEVICES="$VISIBLE_DEVICES_STR"
 N_GPUS=${#VISIBLE_DEVICES[@]}
 echo "CUDA_VISIBLE_DEVICES → $CUDA_VISIBLE_DEVICES  ($N_GPUS GPUs)"
 
-# ── Resolve all model fields from YAML ───────────────────────────────────────
+# ── Resolve all model fields from YAML ────────────────────────────────────────
 _model_info=$(python3 - <<PYEOF
 import yaml, sys, shlex
 for cfg in ['configs/models_pt.yaml', 'configs/models_it.yaml']:
@@ -99,11 +117,10 @@ echo "Reasoning parser plugin : ${REASONING_PARSER_PLUGIN:-(none)}"
 echo "Chat template kwargs    : ${CHAT_TEMPLATE_KWARGS:-(none)}"
 echo "Max model len           : $MAX_MODEL_LEN"
 
-# ── Start vLLM server ────────────────────────────────────────────────────────
+# ── Start vLLM server ─────────────────────────────────────────────────────────
 VLLM_LOG="${LOGS_PATH}/vllm_${MODEL_NAME}_$(date +%Y%m%d_%H%M%S).log"
 mkdir -p "$(dirname "$VLLM_LOG")"
 
-# Increase engine startup timeout so large models (e.g. 671B DeepSeek) don't time out
 export VLLM_ENGINE_CORE_CLIENT_TIMEOUT=3600
 
 VLLM_SERVE_ARGS=(
@@ -135,26 +152,27 @@ cleanup() {
 }
 trap cleanup EXIT INT TERM
 
-# ── Wait for /health endpoint ────────────────────────────────────────────────
+# ── Wait for /health endpoint ─────────────────────────────────────────────────
 VLLM_URL="http://localhost:${VLLM_PORT}"
 echo -n "Waiting for vLLM server"
 ELAPSED=0; TIMEOUT=600
 until curl -sf "${VLLM_URL}/health" > /dev/null 2>&1; do
-    sleep 5; ELAPSED=$((ELAPSED + 5))
-    echo -n "."
+    if ! kill -0 "$VLLM_PID" 2>/dev/null; then
+        echo " DIED — see $VLLM_LOG" >&2; exit 1
+    fi
+    sleep 5; ELAPSED=$((ELAPSED + 5)); echo -n "."
     if [[ $ELAPSED -ge $TIMEOUT ]]; then
-        echo " TIMEOUT — see $VLLM_LOG" >&2
-        exit 1
+        echo " TIMEOUT — see $VLLM_LOG" >&2; exit 1
     fi
 done
 echo " ready (${ELAPSED}s)"
 
-# ── Detect the model ID actually registered by vLLM ─────────────────────────
+# ── Detect the model ID actually registered by vLLM ──────────────────────────
 REGISTERED_MODEL=$(curl -sf "${VLLM_URL}/v1/models" \
     | python3 -c "import sys,json; print(json.load(sys.stdin)['data'][0]['id'])")
 echo "Registered model ID: $REGISTERED_MODEL"
 
-# ── Build optional flags ─────────────────────────────────────────────────────
+# ── Build optional flags ──────────────────────────────────────────────────────
 EXTRA_FLAGS=""
 [[ "$OVERWRITE"   == "true" ]] && EXTRA_FLAGS="$EXTRA_FLAGS --overwrite"
 [[ -n "$MAX_SAMPLES" ]]        && EXTRA_FLAGS="$EXTRA_FLAGS --max-samples $MAX_SAMPLES"
@@ -170,4 +188,5 @@ python3 -m pacute_bench.scripts.run_evaluation \
     --output-dir "$OUTPUT_DIR" \
     $EXTRA_FLAGS
 
+printf "\n=== Job Runtime: %dh %dm %ds ===\n" $((SECONDS/3600)) $(((SECONDS%3600)/60)) $((SECONDS%60))
 echo "Done: $MODEL_NAME"

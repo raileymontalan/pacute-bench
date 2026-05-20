@@ -164,12 +164,16 @@ class VLLMEvaluator(BaseEvaluator):
                 messages.append({"role": "system", "content": effective_prompt})
             messages.append({"role": "user", "content": prefix})
 
-            # Qwen3 hybrid-thinking models use the enable_thinking chat-template kwarg.
-            # Models with a server-side reasoning_parser (phi-4-reasoning, gpt-oss, DeepSeek-R1,
-            # etc.) always emit <think> blocks; passing enable_thinking is unnecessary there.
+            # Thinking control via extra_body:
+            #   Qwen3.x thinking=True, reasoning_parser=None: enable per-request via kwarg.
+            #   reasoning_parser-based models (phi-4, gpt-oss, deepseek-r1, etc.): always-on,
+            #     no extra_body needed.
+            #   Gemma4 thinking=False, reasoning_parser="gemma4": disable per-request (default-on).
             extra_body: dict = {}
             if self.thinking and self.reasoning_parser is None:
                 extra_body["chat_template_kwargs"] = {"enable_thinking": True}
+            elif not self.thinking and self.reasoning_parser == "gemma4":
+                extra_body["chat_template_kwargs"] = {"thinking": False}
 
             response = await self.client.chat.completions.create(
                 model=self.model_id,

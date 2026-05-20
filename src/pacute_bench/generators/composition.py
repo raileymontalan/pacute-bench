@@ -91,15 +91,15 @@ def create_mcq_spelling(row: pd.Series) -> Dict[str, Any]:
 def create_gen_spelling(row: pd.Series) -> Dict[str, Any]:
     """
     Create a generative question for spelling out a word.
-    
+
     Args:
         row: DataFrame row containing word data
-    
+
     Returns:
         Dictionary containing formatted generative prompts and label
     """
-    text_en = 'Spell out the word "{normalized_word}" by placing spaces between each character.'
-    text_tl = 'Baybayin ang salitang "{normalized_word}" sa pamamagitan ng paglagay ng espasyo sa pagitan ng bawat titik.'
+    text_en = 'To spell a word, place a space between each character. Spell out the word "{normalized_word}".'
+    text_tl = 'Para baybayin ang isang salita, maglagay ng espasyo sa pagitan ng bawat titik. Baybayin ang salitang "{normalized_word}".'
 
     spelling = string_to_chars(row['normalized_word'])
     label = chars_to_string(spelling, add_space=True)
@@ -793,14 +793,11 @@ def create_composition_dataset(
     if mode == 'mcq':
         tasks = {
             "spelling": (create_mcq_spelling, 'single'),
-            "char_exactly": (create_mcq_char_exactly, 'multi'),
-            "char_least": (create_mcq_char_least, 'multi'),
-            "char_most": (create_mcq_char_most, 'multi'),
-            "diacritic_exactly": (create_mcq_char_exactly_one, 'multi'),
-            "uppercase_exactly": (create_mcq_uppercase_exactly_one, 'multi'),
-            "length_exactly": (create_mcq_length_exactly, 'multi'),
-            "length_least": (create_mcq_length_least, 'multi'),
-            "length_most": (create_mcq_length_most, 'multi'),
+            "character_counting_exactly": (create_mcq_char_exactly, 'multi'),
+            "character_counting_least": (create_mcq_char_least, 'multi'),
+            "character_counting_most": (create_mcq_char_most, 'multi'),
+            "length_counting_least": (create_mcq_length_least, 'multi'),
+            "length_counting_most": (create_mcq_length_most, 'multi'),
         }
 
         for subcategory_name, (subcategory_function, task_type) in tasks.items():
@@ -885,10 +882,7 @@ def create_composition_dataset(
     elif mode == 'gen':
         tasks = {
             "spelling": create_gen_spelling,
-            "character": create_gen_character,
-            "diacritic": create_gen_diacritic,
-            "uppercase": create_gen_uppercase,
-            "length": create_gen_length,
+            "character_counting": create_gen_character,
         }
 
         for subcategory_name, subcategory_function in tasks.items():
@@ -918,5 +912,210 @@ def create_composition_dataset(
     
     else:
         raise ValueError(f"Invalid mode: {mode}. Choose 'mcq' or 'gen'.")
+
+    return dataset
+
+
+# ============================================================================
+# Corpus-driven composition tasks (from pacute_dataset.xlsx)
+# ============================================================================
+
+# Filipino single-character alphabet for character_recognition distractors.
+_FILIPINO_CHARS = list("abcdefghijklmnñopqrstuvwxyz")
+
+
+def _numeric_distractors(correct: int, pool: List[int], n: int = 3) -> List[str]:
+    """Return n unique distractor integers from pool, excluding correct."""
+    candidates = [v for v in pool if v != correct]
+    if len(candidates) < n:
+        # Extend with nearby values not in pool
+        extra = correct + 1
+        while len(candidates) < n:
+            if extra != correct:
+                candidates.append(extra)
+            extra += 1
+    return [str(v) for v in candidates[:n]]
+
+
+def create_gen_corpus_task(row: pd.Series) -> Dict[str, Any]:
+    """
+    Create a GEN item directly from a corpus row that already has text_en/text_tl/label.
+    """
+    return prepare_gen_outputs(row["text_en"], row["text_tl"], str(row["label"]))
+
+
+def create_mcq_corpus_diacritics(row: pd.Series) -> Dict[str, Any]:
+    """MCQ for diacritics: options are numeric diacritic counts."""
+    correct = int(row["diacritics_count"])
+    pool = [0, 1, 2, 3]
+    distractors = _numeric_distractors(correct, pool)
+    mcq_options = {
+        "correct": str(correct),
+        "incorrect1": distractors[0],
+        "incorrect2": distractors[1],
+        "incorrect3": distractors[2],
+    }
+    return prepare_mcq_outputs(row["text_en"], row["text_tl"], mcq_options)
+
+
+def create_mcq_corpus_uppercasing(row: pd.Series) -> Dict[str, Any]:
+    """MCQ for uppercasing: options are numeric uppercase counts."""
+    correct = int(row["uppercase_count"])
+    pool = list(range(max(0, correct - 2), correct + 4))
+    distractors = _numeric_distractors(correct, pool)
+    mcq_options = {
+        "correct": str(correct),
+        "incorrect1": distractors[0],
+        "incorrect2": distractors[1],
+        "incorrect3": distractors[2],
+    }
+    return prepare_mcq_outputs(row["text_en"], row["text_tl"], mcq_options)
+
+
+def create_mcq_corpus_character_counting(row: pd.Series) -> Dict[str, Any]:
+    """MCQ for character counting: options are nearby letter counts."""
+    correct = int(row["label"])
+    pool = list(range(max(1, correct - 2), correct + 4))
+    distractors = _numeric_distractors(correct, pool)
+    mcq_options = {
+        "correct": str(correct),
+        "incorrect1": distractors[0],
+        "incorrect2": distractors[1],
+        "incorrect3": distractors[2],
+    }
+    return prepare_mcq_outputs(row["text_en"], row["text_tl"], mcq_options)
+
+
+def create_mcq_corpus_character_recognition(row: pd.Series, random_state: random.Random) -> Dict[str, Any]:
+    """MCQ for character recognition: options are distinct Filipino letters."""
+    correct = str(row["label"]).lower()
+    candidates = [c for c in _FILIPINO_CHARS if c != correct]
+    random_state.shuffle(candidates)
+    distractors = candidates[:3]
+    mcq_options = {
+        "correct": correct,
+        "incorrect1": distractors[0],
+        "incorrect2": distractors[1],
+        "incorrect3": distractors[2],
+    }
+    return prepare_mcq_outputs(row["text_en"], row["text_tl"], mcq_options)
+
+
+def _sample_strata(
+    df: pd.DataFrame,
+    col: str,
+    strata: List[tuple],
+    random_seed: int,
+) -> pd.DataFrame:
+    """
+    Stratified sample. strata = list of (label_or_labels, n) where
+    label_or_labels is a single value or list of values for that bucket.
+    Uses min(n, available) per stratum.
+    """
+    frames = []
+    for bucket, n in strata:
+        if isinstance(bucket, list):
+            mask = df[col].isin(bucket)
+        else:
+            mask = df[col] == bucket
+        stratum = df[mask].reset_index(drop=True)
+        take = min(n, len(stratum))
+        if take > 0:
+            frames.append(stratum.sample(take, random_state=random_seed))
+    return pd.concat(frames, ignore_index=True) if frames else df.iloc[0:0]
+
+
+def create_corpus_composition_dataset(
+    corpus_df: pd.DataFrame,
+    mode: str = "gen",
+    random_seed: int = 100,
+) -> pd.DataFrame:
+    """
+    Create composition benchmark items from the pre-built corpus
+    (pacute_dataset.xlsx → corpus_composition.jsonl).
+
+    Sampling:
+      - diacritics      : 50 count=0, 50 count=1, 50 count>=2  (150 total)
+      - uppercasing     : 50 count=0, 50 count=1, 50 count>=2  (150 total)
+      - character_counting    : all rows
+      - character_recognition : all rows
+
+    Args:
+        corpus_df: DataFrame loaded from corpus_composition.jsonl
+        mode: 'gen' or 'mcq'
+        random_seed: Random seed for reproducibility
+
+    Returns:
+        DataFrame with columns: category, subcategory, prompts, label
+    """
+    rng = random.Random(random_seed)
+    dataset = pd.DataFrame(columns=["category", "subcategory", "prompts", "label"])
+
+    # Build per-subcategory sub-dataframes with stratified sampling applied
+    sub_dfs: dict = {}
+
+    dc = corpus_df[corpus_df["subcategory"] == "diacritics"].copy()
+    dc["_bucket"] = dc["diacritics_count"].apply(lambda x: x if x in (0, 1) else "2+")
+    sub_dfs["diacritics"] = _sample_strata(
+        dc, "_bucket",
+        [(0, 33), (1, 33), ("2+", 34)],
+        random_seed,
+    )
+
+    uc = corpus_df[corpus_df["subcategory"] == "uppercasing"].copy()
+    uc["_bucket"] = uc["uppercase_count"].apply(lambda x: x if x in (0, 1) else "2+")
+    sub_dfs["uppercasing"] = _sample_strata(
+        uc, "_bucket",
+        [(0, 33), (1, 33), ("2+", 34)],
+        random_seed,
+    )
+
+    cc = corpus_df[corpus_df["subcategory"] == "character_counting"].reset_index(drop=True)
+    sub_dfs["character_counting"] = cc.sample(min(100, len(cc)), random_state=random_seed)
+    cr = corpus_df[corpus_df["subcategory"] == "character_recognition"].reset_index(drop=True)
+    sub_dfs["character_recognition"] = cr.sample(min(100, len(cr)), random_state=random_seed)
+
+    _SUBCAT_RENAME = {
+        "diacritics":          "diacritic_counting",
+        "uppercasing":         "uppercase_counting",
+        "character_counting":  "length_counting",
+        "character_recognition": "character_finding",
+    }
+
+    for subcat in ["diacritics", "uppercasing", "character_counting", "character_recognition"]:
+        sub_df = sub_dfs[subcat]
+        if sub_df.empty:
+            continue
+
+        for _, row in sub_df.iterrows():
+            if mode == "gen":
+                result = create_gen_corpus_task(row)
+                dataset = pd.concat([dataset, pd.DataFrame({
+                    "category":    ["composition"],
+                    "subcategory": [_SUBCAT_RENAME.get(subcat, subcat)],
+                    "prompts":     [result["prompts"]],
+                    "label":       [result["label"]],
+                })], ignore_index=True)
+
+            elif mode == "mcq":
+                if subcat == "diacritics":
+                    result = create_mcq_corpus_diacritics(row)
+                elif subcat == "uppercasing":
+                    result = create_mcq_corpus_uppercasing(row)
+                elif subcat == "character_counting":
+                    result = create_mcq_corpus_character_counting(row)
+                elif subcat == "character_recognition":
+                    result = create_mcq_corpus_character_recognition(row, rng)
+                else:
+                    continue
+
+                dataset = pd.concat([dataset, pd.DataFrame({
+                    "category":    ["composition"],
+                    "subcategory": [_SUBCAT_RENAME.get(subcat, subcat)],
+                    "prompts":     [result["prompts"]],
+                })], ignore_index=True)
+
+    if mode == "mcq":
+        dataset = _shuffle_mcq_options(dataset, random_seed)
 
     return dataset

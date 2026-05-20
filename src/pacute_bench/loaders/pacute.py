@@ -1,11 +1,12 @@
 """
-PACUTE: Philippine Annotated Corpus for Understanding Tagalog Entities
+PACUTE: Phonology, Affix, and Character-level Understanding of Tokens Evaluation
 
 Full morphological understanding benchmark covering:
-- Affixation  (MCQ + generative)
 - Composition (MCQ + generative)
 - Manipulation (MCQ + generative)
 - Syllabification (MCQ + generative)
+- Morphological Extraction (MCQ + generative)
+- Morphological Production (MCQ + generative)
 """
 import json
 import random
@@ -24,8 +25,9 @@ def load_pacute(
 
     Args:
         split: Unused (all data treated as test).
-        categories: List of PACUTE categories to include. Defaults to all four:
-            ['affixation', 'composition', 'manipulation', 'syllabification'].
+        categories: List of PACUTE categories to include. Defaults to all five:
+            ['composition', 'manipulation', 'syllabification',
+             'morphological_extraction', 'morphological_production'].
         format: ``"mcq"`` or ``"gen"``.
         data_dir: Directory containing the benchmark JSONL files.
 
@@ -35,7 +37,8 @@ def load_pacute(
     benchmarks_dir = Path(data_dir)
 
     if categories is None:
-        categories = ["affixation", "composition", "manipulation", "syllabification"]
+        categories = ["composition", "manipulation", "syllabification",
+                      "morphological_extraction", "morphological_production"]
 
     tasks = []
     category_counts = {}

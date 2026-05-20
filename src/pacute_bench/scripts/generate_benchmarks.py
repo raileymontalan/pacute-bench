@@ -3,18 +3,18 @@
 Generate all evaluation benchmarks for pacute-bench.
 
 Benchmarks generated:
-  1. PACUTE   – affixation, composition, manipulation, syllabification (MCQ + GEN)
-  2. Hierarchical – 6-level diagnostic tasks (MCQ + GEN)
-  3. CUTE     – character-understanding tasks from HuggingFace (GEN)
-  4. LangGame – language reasoning tasks (MCQ, then GEN variant)
-  5. Math     – multi-digit addition (GEN, then MCQ variant)
+  1. pacute       – all 5 PACUTE tasks: composition, manipulation, syllabification,
+                    morphological_extraction, morphological_production (MCQ + GEN)
+  2. hierarchical – 6-level diagnostic tasks (MCQ + GEN)
+  3. cute         – character-understanding tasks from HuggingFace (GEN)
+  4. langgame     – language reasoning tasks (MCQ + GEN)
+  5. math         – multi-digit addition (GEN + MCQ)
 
 After generation, unique IDs are added to every sample and MCQ↔GEN variants
 are derived where needed.
 
 Usage:
     python scripts/generate_benchmarks.py
-    python scripts/generate_benchmarks.py --benchmarks pacute hierarchical cute
     python scripts/generate_benchmarks.py --corpora-dir /path/to/corpora \\
                                           --output-dir data/benchmarks
 """
@@ -36,11 +36,12 @@ import numpy as np
 # ---------------------------------------------------------------------------
 
 def generate_pacute(output_dir: Path, corpora_dir: Path, random_seed: int = 1859) -> bool:
-    """Generate PACUTE benchmarks (affixation, composition, manipulation, syllabification)."""
+    """Generate all 5 PACUTE benchmarks: composition, manipulation, syllabification,
+    morphological_extraction, and morphological_production."""
     import pandas as pd
     from pacute_bench.generators import (
-        create_affixation_dataset,
         create_composition_dataset,
+        create_corpus_composition_dataset,
         create_manipulation_dataset,
         create_syllabification_dataset,
     )
@@ -51,51 +52,130 @@ def generate_pacute(output_dir: Path, corpora_dir: Path, random_seed: int = 1859
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    pacute_data = corpora_dir / "pacute_data"
-    inflections_path = pacute_data / "inflections.xlsx"
+    pacute_data      = corpora_dir / "pacute_data"
     syllables_path   = pacute_data / "syllables.jsonl"
+    corpus_comp_path = pacute_data / "corpus_composition.jsonl"
 
-    # ---- affixation --------------------------------------------------------
-    print("\n[1/4] Affixation …")
-    if not inflections_path.exists():
-        print(f"  ERROR: {inflections_path} not found — skip affixation"); return False
-    inflections = pd.read_excel(inflections_path, sheet_name="data")
-    print(f"  Loaded {len(inflections)} inflection pairs")
-    for mode in ("mcq", "gen"):
-        ds = create_affixation_dataset(inflections, mode=mode, random_seed=random_seed)
-        out = output_dir / f"affixation_{mode}.jsonl"
-        ds.to_json(out, lines=True, orient="records", force_ascii=False)
-        print(f"  ✓ affixation_{mode}.jsonl  ({len(ds)} samples)")
-
-    # ---- composition -------------------------------------------------------
-    print("\n[2/4] Composition …")
     if not syllables_path.exists():
-        print(f"  ERROR: {syllables_path} not found — skip composition"); return False
+        print(f"  ERROR: {syllables_path} not found — skip pacute"); return False
     syllables = pd.read_json(syllables_path, lines=True)
     print(f"  Loaded {len(syllables)} syllabified words")
+
+    corpus_comp = None
+    if corpus_comp_path.exists():
+        corpus_comp = pd.read_json(corpus_comp_path, lines=True)
+        print(f"  Loaded {len(corpus_comp)} corpus composition rows")
+    else:
+        print(f"  Warning: {corpus_comp_path} not found — skipping corpus-driven tasks")
+
+    # ---- composition -------------------------------------------------------
+    print("\n[1/3] Composition …")
     for mode in ("mcq", "gen"):
+        # Syllable-based tasks (spelling, character, length variants)
         ds = create_composition_dataset(syllables, mode=mode, num_samples=100, random_seed=random_seed)
+        # Corpus-driven tasks (diacritics, uppercasing, character_counting, character_recognition)
+        if corpus_comp is not None:
+            ds_corpus = create_corpus_composition_dataset(corpus_comp, mode=mode, random_seed=random_seed)
+            ds = pd.concat([ds, ds_corpus], ignore_index=True)
         out = output_dir / f"composition_{mode}.jsonl"
         ds.to_json(out, lines=True, orient="records", force_ascii=False)
         print(f"  ✓ composition_{mode}.jsonl  ({len(ds)} samples)")
 
     # ---- manipulation ------------------------------------------------------
-    print("\n[3/4] Manipulation …")
+    print("\n[2/3] Manipulation …")
     for mode in ("mcq", "gen"):
         ds = create_manipulation_dataset(syllables, mode=mode, num_samples=100, random_seed=random_seed)
         out = output_dir / f"manipulation_{mode}.jsonl"
         ds.to_json(out, lines=True, orient="records", force_ascii=False)
         print(f"  ✓ manipulation_{mode}.jsonl  ({len(ds)} samples)")
 
-    # ---- syllabification ---------------------------------------------------
-    print("\n[4/4] Syllabification …")
+    # ---- syllabification (stress tasks only) --------------------------------
+    print("\n[3/3] Syllabification (stress tasks only) …")
     csv_dir = str(pacute_data)
+    _STRESS_SUBCATEGORIES = {"stress_identification", "stress_disambiguation"}
     for mode in ("mcq", "gen"):
         ds = create_syllabification_dataset(syllables, mode=mode, num_samples=100,
                                             random_seed=random_seed, csv_dir=csv_dir)
+        ds = ds[ds["subcategory"].isin(_STRESS_SUBCATEGORIES)].reset_index(drop=True)
         out = output_dir / f"syllabification_{mode}.jsonl"
         ds.to_json(out, lines=True, orient="records", force_ascii=False)
         print(f"  ✓ syllabification_{mode}.jsonl  ({len(ds)} samples)")
+
+    # ---- morphological extraction ------------------------------------------
+    print("\n[4/5] Morphological Extraction …")
+    if not _generate_morphological_extraction(output_dir, corpora_dir, random_seed):
+        return False
+
+    # ---- morphological production ------------------------------------------
+    print("\n[5/5] Morphological Production …")
+    if not _generate_morphological_production(output_dir, corpora_dir, random_seed):
+        return False
+
+    print()
+    return True
+
+
+# ---------------------------------------------------------------------------
+# Morphological Extraction benchmarks
+# ---------------------------------------------------------------------------
+
+def _generate_morphological_extraction(output_dir: Path, corpora_dir: Path, random_seed: int = 1859) -> bool:
+    """Generate morphological extraction benchmarks."""
+    import pandas as pd
+    from pacute_bench.generators import create_morphological_extraction_dataset
+
+    print("=" * 80)
+    print("Generating Morphological Extraction Benchmarks")
+    print("=" * 80)
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    corpus_path = corpora_dir / "pacute_data" / "corpus_morphological_extraction.jsonl"
+    if not corpus_path.exists():
+        print(f"  ERROR: {corpus_path} not found — run convert_dataset first"); return False
+
+    corpus_df = pd.read_json(corpus_path, lines=True)
+    print(f"  Loaded {len(corpus_df)} corpus rows")
+
+    for mode in ("mcq", "gen"):
+        ds = create_morphological_extraction_dataset(corpus_df, mode=mode, random_seed=random_seed, num_samples=100)
+        out = output_dir / f"morphological_extraction_{mode}.jsonl"
+        ds.to_json(out, lines=True, orient="records", force_ascii=False)
+        from collections import Counter
+        sub_counts = Counter(ds["subcategory"].tolist())
+        print(f"  ✓ morphological_extraction_{mode}.jsonl  ({len(ds)} samples: {dict(sub_counts)})")
+
+    print()
+    return True
+
+
+# ---------------------------------------------------------------------------
+# Morphological Production benchmarks
+# ---------------------------------------------------------------------------
+
+def _generate_morphological_production(output_dir: Path, corpora_dir: Path, random_seed: int = 1859) -> bool:
+    """Generate morphological production benchmarks."""
+    import pandas as pd
+    from pacute_bench.generators import create_morphological_production_dataset
+
+    print("=" * 80)
+    print("Generating Morphological Production Benchmarks")
+    print("=" * 80)
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    corpus_path = corpora_dir / "pacute_data" / "corpus_morphological_extraction.jsonl"
+    if not corpus_path.exists():
+        print(f"  ERROR: {corpus_path} not found — run convert_dataset first"); return False
+
+    corpus_df = pd.read_json(corpus_path, lines=True)
+    print(f"  Loaded {len(corpus_df)} corpus rows")
+
+    for mode in ("mcq", "gen"):
+        ds = create_morphological_production_dataset(corpus_df, mode=mode, random_seed=random_seed, num_samples=100)
+        out = output_dir / f"morphological_production_{mode}.jsonl"
+        ds.to_json(out, lines=True, orient="records", force_ascii=False)
+        print(f"  ✓ morphological_production_{mode}.jsonl  ({len(ds)} samples)")
 
     print()
     return True
@@ -573,8 +653,8 @@ def main() -> None:
     output_dir  = Path(args.output_dir)
     corpora_dir = Path(args.corpora_dir)
 
-    wanted = set(["pacute", "hierarchical", "langgame", "math", "cute"]
-                 if "all" in args.benchmarks else args.benchmarks)
+    _ALL_BENCHMARKS = ["pacute", "hierarchical", "langgame", "math", "cute"]
+    wanted = set(_ALL_BENCHMARKS if "all" in args.benchmarks else args.benchmarks)
 
     print("=" * 80)
     print("pacute-bench  –  Benchmark Generation")
@@ -592,7 +672,7 @@ def main() -> None:
         "math":         lambda: generate_math(output_dir),
         "cute":         lambda: generate_cute(output_dir),
     }
-    for name in ["pacute", "hierarchical", "langgame", "math", "cute"]:
+    for name in _ALL_BENCHMARKS:
         if name not in wanted:
             continue
         try:

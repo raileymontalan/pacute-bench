@@ -1,7 +1,7 @@
 """
 BaseEvaluator — shared state, metrics, answer extraction, and result persistence.
 
-All concrete evaluators (VLLMEvaluator, CommercialEvaluator) inherit from this.
+All concrete evaluators (VLLMEvaluator, BatchEvaluator and its subclasses) inherit from this.
 """
 
 import json
@@ -40,9 +40,6 @@ BENCHMARK_FORMATS: dict = {
     "pacute-mcq": "mcq",
     "pacute-gen": "gen",
 
-    "pacute-affixation":          "mcq",
-    "pacute-affixation-mcq":      "mcq",
-    "pacute-affixation-gen":      "gen",
     "pacute-composition":         "mcq",
     "pacute-composition-mcq":     "mcq",
     "pacute-composition-gen":     "gen",
@@ -52,6 +49,17 @@ BENCHMARK_FORMATS: dict = {
     "pacute-syllabification":     "mcq",
     "pacute-syllabification-mcq": "mcq",
     "pacute-syllabification-gen": "gen",
+
+    "pacute-morphological-extraction":     "mcq",
+    "pacute-morphological-extraction-mcq": "mcq",
+    "pacute-morphological-extraction-gen": "gen",
+    "pacute-morphological-production":     "mcq",
+    "pacute-morphological-production-mcq": "mcq",
+    "pacute-morphological-production-gen": "gen",
+
+    "pacute-affixation":     "mcq",
+    "pacute-affixation-mcq": "mcq",
+    "pacute-affixation-gen": "gen",
 }
 
 
@@ -112,6 +120,19 @@ class BaseEvaluator(ABC):
         timestamp: Optional[str] = None,
     ) -> Optional[dict]:
         """Evaluate the model on a single benchmark. Must be implemented by subclasses."""
+
+    # ──────────────────────────────────────────────────────────────────────────
+    # Label normalization
+    # ──────────────────────────────────────────────────────────────────────────
+
+    @staticmethod
+    def _normalize_label(s: str) -> str:
+        """Normalize a label for comparison: lowercase, strip whitespace and leading/trailing dashes.
+
+        Allows affix labels like 'mang-', '-um-', 'ika-' to match
+        model outputs that omit the dashes (e.g. 'mang', 'um', 'ika').
+        """
+        return s.strip().lower().strip("-")
 
     # ──────────────────────────────────────────────────────────────────────────
     # Answer extraction (shared between VLLMEvaluator._async_gen and

@@ -323,7 +323,8 @@ class BatchEvaluator(BaseEvaluator):
             response = results_by_id.get(str(sample_id), "")
             answer, thinking_trace, reflection = self._extract_answer(response, answer_tag)
 
-            expected = str(ground_truth).strip().lower()
+            expected = self._normalize_label(str(ground_truth))
+            answer   = self._normalize_label(answer)
             is_exact    = answer == expected
             is_contains = expected in answer
             is_prefix   = answer.startswith(expected)

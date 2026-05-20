@@ -424,6 +424,67 @@ def randomly_delete_char(char_list: List[str]) -> List[str]:
     return char_list[:idx] + char_list[idx + 1:]
 
 
+def word_perturbation_distractors(word: str, k: int = 3, rng: Optional[random.Random] = None) -> List[str]:
+    """
+    Generate k word-level distractors by applying single character-level perturbations.
+
+    Uses randomly_insert_char, randomly_delete_char, shuffle_chars, and single-char
+    substitution to produce plausible near-miss alternatives (no spaces added).
+
+    Args:
+        word: Correct answer word to perturb
+        k: Number of distractors to generate
+        rng: Optional Random instance for reproducibility
+
+    Returns:
+        List of k distinct distractor strings
+    """
+    if rng is None:
+        rng = random.Random()
+
+    def _randomly_substitute_char(char_list: List[str]) -> List[str]:
+        if not char_list:
+            return char_list
+        idx = rng.randint(0, len(char_list) - 1)
+        alphabet = 'abcdefghijklmnopqrstuvwxyz'
+        replacement = rng.choice([c for c in alphabet if c != char_list[idx]] or list(alphabet))
+        return char_list[:idx] + [replacement] + char_list[idx + 1:]
+
+    char_list = string_to_chars(word)
+    ops = [
+        randomly_insert_char,
+        randomly_delete_char,
+        shuffle_chars,
+        _randomly_substitute_char,
+    ]
+    rng.shuffle(ops)
+
+    seen = {word}
+    results = []
+    # Multiple passes in case early ops produce duplicates
+    for _ in range(3):
+        for op in ops:
+            if len(results) >= k:
+                break
+            try:
+                candidate = chars_to_string(op(char_list[:]))
+                if candidate and candidate != word and candidate not in seen:
+                    results.append(candidate)
+                    seen.add(candidate)
+            except Exception:
+                pass
+
+    i = 1
+    while len(results) < k:
+        placeholder = f"{word}alt{i}"
+        if placeholder not in seen:
+            results.append(placeholder)
+            seen.add(placeholder)
+        i += 1
+
+    return results[:k]
+
+
 def perturb_string(string: str) -> List[str]:
     """
     Generate multiple perturbed versions of a string for MCQ distractors.

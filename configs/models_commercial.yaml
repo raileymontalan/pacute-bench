@@ -35,11 +35,6 @@ models:
     type: it
     provider: openai-async
 
-  gpt-5.5-pro:
-    path: gpt-5.5-pro
-    type: it
-    provider: openai-async
-
   # ============================================================================
   # Anthropic (batch API)
   # ============================================================================
@@ -62,11 +57,6 @@ models:
   # ============================================================================
   # Google Gemini (async via OpenAI-compatible endpoint)
   # ============================================================================
-
-  gemini-3.1-pro:
-    path: gemini-3.1-pro
-    type: it
-    provider: google
 
   gemini-3.1-flash-lite:
     path: gemini-3.1-flash-lite

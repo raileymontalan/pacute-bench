@@ -192,15 +192,26 @@ Key variables:
 |---|---|
 | `PROJECT_ROOT` | Absolute path to this repo |
 | `VENV_PATH` | Python virtual environment to activate |
-| `LOGS_PATH` | Directory for PBS job logs and vLLM server logs (default: `$PROJECT_ROOT/logs`) |
+| `LOGS_PATH` | Job stdout/stderr and vLLM server logs (default: `$PROJECT_ROOT/logs`) |
+| `RESULTS_PATH` | Evaluation outputs — JSON summaries + inference JSONL (default: `$PROJECT_ROOT/results`) |
 
 ### 2. Install the package
 
+**On the SLURM cluster** (CUDA 13.0, one-time setup — must run on a GPU node):
+
 ```bash
-source .env
-source "$VENV_PATH/bin/activate"
+sbatch scripts/setup_env.slurm
+```
+
+This creates `.venv/` with `vllm==0.20.2`, `torch==2.11.0`, `transformers==5.5.4`, and all other dependencies.
+
+**Local / interactive:**
+
+```bash
 pip install -e ".[dev]"
 ```
+
+> vLLM and PyTorch are pinned in the main dependencies for CUDA 13.0 compatibility. Local installs on non-CUDA machines may need to install PyTorch separately with the appropriate wheel.
 
 ### 3. Add your models
 
@@ -259,24 +270,47 @@ Useful flags:
 --output-dir   Where to write the combined results JSON (default: results/benchmark_evaluation)
 ```
 
-### PBS cluster (recommended)
+### SLURM cluster (recommended)
 
 ```bash
 # Submit all models:
-bash scripts/submit_evaluations.sh
+bash scripts/submit_evaluations_slurm.sh
 
 # Subset options:
-bash scripts/submit_evaluations.sh --it-only
-bash scripts/submit_evaluations.sh --model my-model-7b-it
-bash scripts/submit_evaluations.sh --dry-run          # preview qsub commands
-bash scripts/submit_evaluations.sh --overwrite --max-samples 50
+bash scripts/submit_evaluations_slurm.sh --it-only
+bash scripts/submit_evaluations_slurm.sh --model my-model-7b-it
+bash scripts/submit_evaluations_slurm.sh --dry-run               # preview sbatch commands
+bash scripts/submit_evaluations_slurm.sh --overwrite --max-samples 50
+bash scripts/submit_evaluations_slurm.sh --output-dir /my/results # override RESULTS_PATH
 ```
 
-Each job:
-1. Sources `.env` for `PROJECT_ROOT`, `VENV_PATH`, and `LOGS_PATH`
-2. Starts a vLLM server (port auto-derived from PBS job ID)
+Available flags:
+
+```
+--pt-only / --it-only / --commercial-only   Filter by model type
+--model <name>         Submit a single model (repeatable)
+--output-dir <path>    Override RESULTS_PATH for this run
+--partition <p>        SLURM partition (default: high)
+--walltime <hh:mm:ss>  Job walltime (default: 12:00:00)
+--benchmarks <b...>    Only run specific benchmarks
+--overwrite            Re-run even when results already exist
+--max-samples <n>      Cap samples per benchmark
+--filter <pattern>     Only submit models whose name matches pattern
+--dry-run              Print sbatch commands without submitting
+```
+
+Each job (`eval_model.slurm`):
+1. Sources `.env` for `VENV_PATH`, `LOGS_PATH`, and `RESULTS_PATH`
+2. Starts a vLLM server (port auto-derived from `$SLURM_JOB_ID`)
 3. Runs `pacute_bench.scripts.run_evaluation` against it
-4. Writes PBS stdout/stderr and the vLLM server log to `$LOGS_PATH/`
+4. Writes job stdout/stderr to `$LOGS_PATH/<job-name>_<jobid>.out`; vLLM log to `$LOGS_PATH/vllm_<model>_<timestamp>.log`
+5. Writes evaluation results to `$RESULTS_PATH` (or `$OUTPUT_DIR` if overridden)
+
+GPU count is auto-derived from model path (≥120B → 8, ≥27B → 4, ≥7B → 2, else 1); override with `min_gpus` in the model config YAML.
+
+### PBS cluster
+
+PBS scripts (`eval_model.pbs`, `eval_commercial.pbs`, `submit_evaluations.sh`) are also provided for PBS/Torque clusters. Usage mirrors the SLURM version with `qsub` instead of `sbatch`.
 
 ### Commercial models (OpenAI, Anthropic, Gemini)
 
@@ -316,7 +350,7 @@ To add a new provider, subclass `BatchEvaluator` in `src/pacute_bench/evaluators
 ## Output structure
 
 ```
-results/
+$RESULTS_PATH/
 └── <model-name>/
     ├── evaluation_results_<timestamp>.json   # metrics summary
     └── inference/
@@ -325,9 +359,9 @@ results/
         ├── cute-gen.jsonl
         └── ...
 
-logs/
-├── pb-eval-<model>.o<jobid>                  # PBS stdout/stderr
-└── vllm_<model>_<timestamp>.log             # vLLM server log
+$LOGS_PATH/
+├── pb-eval-<model>_<jobid>.out              # SLURM job stdout/stderr
+└── vllm_<model>_<timestamp>.log            # vLLM server log
 ```
 
 ### Result format
@@ -365,9 +399,12 @@ pacute-bench/
 │   ├── benchmarks/               # generated JSONL evaluation files
 │   └── corpora/                  # source data for generation
 ├── scripts/
-│   ├── eval_model.pbs            # PBS job script (single vLLM model)
-│   ├── eval_commercial.pbs       # PBS job script (commercial API models)
-│   └── submit_evaluations.sh     # batch PBS submission
+│   ├── eval_model.slurm          # SLURM job script (single vLLM model)
+│   ├── eval_commercial.slurm     # SLURM job script (commercial API models)
+│   ├── submit_evaluations_slurm.sh  # batch SLURM submission
+│   ├── eval_model.pbs            # PBS equivalents
+│   ├── eval_commercial.pbs
+│   └── submit_evaluations.sh
 ├── src/pacute_bench/
 │   ├── evaluators/
 │   │   ├── base.py               # BaseEvaluator (shared logic)

@@ -11,6 +11,8 @@
 #   enable_expert_parallel: true for MoE models to distribute experts across GPUs
 #   max_model_len:          context window override (default: 8192)
 #   reasoning_parser_plugin: path to a custom reasoning-parser plugin script
+#   language_model_only:    true to pass --language-model-only at serve time; skips loading the
+#                           vision encoder for multimodal models (Gemma4) when text eval only
 #   chat_template_kwargs:   JSON string passed to --default-chat-template-kwargs at serve time;
 #                           used by Qwen3.x non-thinking variants to disable thinking server-side
 

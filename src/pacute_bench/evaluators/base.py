@@ -4,7 +4,9 @@ BaseEvaluator — shared state, metrics, answer extraction, and result persisten
 All concrete evaluators (VLLMEvaluator, CommercialEvaluator) inherit from this.
 """
 
+import importlib
 import json
+import os
 import re
 from abc import ABC, abstractmethod
 from pathlib import Path
@@ -262,13 +264,21 @@ class BaseEvaluator(ABC):
 
     @staticmethod
     def _maybe_wrap_key_for_proxy(api_key: str) -> str:
-        """Wrap an API key using the API proxy if ``proxy_tools`` is installed."""
+        """Optionally wrap an API key via a user-provided proxy module.
+
+        Set ``PACUTE_BENCH_KEY_PROXY_MODULE`` to the dotted name of a module
+        that exposes ``api_key.get_api_key_for_proxy(key) -> str``. Returns the
+        original key if the env var is unset or the module isn't importable.
+        """
+        module_name = os.environ.get("PACUTE_BENCH_KEY_PROXY_MODULE")
+        if not module_name:
+            return api_key
         try:
-            from proxy_tools.api_key import get_api_key_for_proxy
-            wrapped = get_api_key_for_proxy(api_key)
-            print("  Using API key proxy")
+            mod = importlib.import_module(f"{module_name}.api_key")
+            wrapped = mod.get_api_key_for_proxy(api_key)
+            print(f"  Using API key proxy ({module_name})")
             return wrapped
-        except ImportError:
+        except (ImportError, AttributeError):
             return api_key
 
     # ──────────────────────────────────────────────────────────────────────────

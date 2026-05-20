@@ -35,6 +35,12 @@ models:
     type: it
     provider: openai-async
 
+  # Re-added for paper continuity (§Results cites its specific Affix-GEN EM score).
+  gpt-5-mini:
+    path: gpt-5-mini
+    type: it
+    provider: openai-async
+
   # ============================================================================
   # Anthropic (batch API)
   # ============================================================================

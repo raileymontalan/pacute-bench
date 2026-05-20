@@ -16,78 +16,35 @@
 
 models:
   # ============================================================================
-  # OpenAI (batch API)
-  # ============================================================================
-  gpt-4o:
-    path: gpt-4o
-    type: it
-    provider: openai
-
-  gpt-4.1:
-    path: gpt-4.1
-    type: it
-    provider: openai
-
-  gpt-4.1-mini:
-    path: gpt-4.1-mini
-    type: it
-    provider: openai
-
-  gpt-4.1-nano:
-    path: gpt-4.1-nano
-    type: it
-    provider: openai
-
-  o3:
-    path: o3
-    type: it
-    provider: openai
-
-  o3-pro:
-    path: o3-pro
-    type: it
-    provider: openai
-
-  o4-mini:
-    path: o4-mini
-    type: it
-    provider: openai
-
-  # ============================================================================
   # OpenAI — async (gpt-5 family; batch API is too slow for these models)
   # ============================================================================
-  gpt-5-mini:
-    path: gpt-5-mini
+
+  gpt-5.4-mini:
+    path: gpt-5.4-mini
     type: it
     provider: openai-async
 
-  gpt-5-nano:
-    path: gpt-5-nano
+  gpt-5.4-nano:
+    path: gpt-5.4-nano
     type: it
     provider: openai-async
 
-  gpt-5.1:
-    path: gpt-5.1
+  gpt-5.5:
+    path: gpt-5.5
     type: it
     provider: openai-async
 
-  gpt-5.2:
-    path: gpt-5.2
+  gpt-5.5-pro:
+    path: gpt-5.5-pro
     type: it
     provider: openai-async
-
-  gpt-5.4:
-    path: gpt-5.4
-    type: it
-    provider: openai-async
-
 
   # ============================================================================
   # Anthropic (batch API)
   # ============================================================================
 
-  claude-opus-4-6:
-    path: claude-opus-4-6
+  claude-opus-4-7:
+    path: claude-opus-4-7
     type: it
     provider: anthropic
 
@@ -101,37 +58,21 @@ models:
     type: it
     provider: anthropic
 
-
   # ============================================================================
   # Google Gemini (async via OpenAI-compatible endpoint)
   # ============================================================================
 
-  gemini-2.5-pro:
-    path: gemini-2.5-pro
+  gemini-3.1-pro:
+    path: gemini-3.1-pro
     type: it
     provider: google
 
-  gemini-2.5-flash:
-    path: gemini-2.5-flash
+  gemini-3.1-flash-lite:
+    path: gemini-3.1-flash-lite
     type: it
     provider: google
 
-  gemini-2.0-flash:
-    path: gemini-2.0-flash
+  gemini-3.5-flash:
+    path: gemini-3.5-flash
     type: it
     provider: google
-
-
-  # ============================================================================
-  # xAI Grok (async via OpenAI-compatible endpoint)
-  # ============================================================================
-
-  grok-3:
-    path: grok-3
-    type: it
-    provider: xai
-
-  grok-3-mini:
-    path: grok-3-mini
-    type: it
-    provider: xai

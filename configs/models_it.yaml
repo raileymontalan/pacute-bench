@@ -1,192 +1,416 @@
-# Instruction-tuned model configurations for evaluation
-# Format: model_name -> (huggingface_path, type)
-# type: "it" (instruction-tuned/chat)
+# Instruction-tuned model configurations for evaluation.
+#
+# Schema fields (all optional except path and type):
+#   path:                   HuggingFace model id or local path
+#   type:                   "it" (instruction-tuned/chat)
+#   tp:                     tensor-parallel size (default: 1)
+#   thinking:               true  = thinking ON  (per-request or server-side)
+#                           false = thinking OFF (Gemma4: per-request budget=0;
+#                                                 Qwen3.x: combined with chat_template_kwargs)
+#   reasoning_parser:       vLLM server-side reasoning parser name, e.g. "qwen3", "gemma4"
+#   enable_expert_parallel: true for MoE models to distribute experts across GPUs
+#   max_model_len:          context window override (default: 8192)
+#   reasoning_parser_plugin: path to a custom reasoning-parser plugin script
+#   chat_template_kwargs:   JSON string passed to --default-chat-template-kwargs at serve time;
+#                           used by Qwen3.x non-thinking variants to disable thinking server-side
 
 models:
   # ============================================================================
-  # Gemma 3 Family
+  # AISG SEA-LION v4.5
   # ============================================================================
-  gemma-3-270m-it:
-    path: google/gemma-3-270m-it
+  sea-lion-qwen-v4.5-27b-it:
+    path: aisingapore/Qwen-SEA-LION-v4.5-27B-IT
     type: it
+    tp: 2
+    chat_template_kwargs: '{"enable_thinking": false}'
 
-  gemma-3-1b-it:
-    path: google/gemma-3-1b-it
+  sea-lion-qwen-v4.5-27b-it-thinking:
+    path: aisingapore/Qwen-SEA-LION-v4.5-27B-IT
     type: it
-
-  gemma-3-4b-it:
-    path: google/gemma-3-4b-it
-    type: it
-
-  gemma-3-12b-it:
-    path: google/gemma-3-12b-it
-    type: it
-
-  gemma-3-27b-it:
-    path: google/gemma-3-27b-it
-    type: it
-
-  # ============================================================================
-  # Llama 3.1 Family
-  # ============================================================================
-  llama-3.1-8b-it:
-    path: meta-llama/Llama-3.1-8B-Instruct
-    type: it
-
-  # ============================================================================
-  # Llama 3.2 Family
-  # ============================================================================
-  llama-3.2-1b-it:
-    path: meta-llama/Llama-3.2-1B-Instruct
-    type: it
-  
-  llama-3.2-3b-it:
-    path: meta-llama/Llama-3.2-3B-Instruct
-    type: it
-
-  # ============================================================================
-  # SEA-LION v4 Family (Southeast Asian language models)
-  # ============================================================================
-  sea-lion-gemma-v4-27b-it:
-    path: aisingapore/Gemma-SEA-LION-v4-27B-IT
-    type: it
-
-  sea-lion-qwen-v4-32b-it:
-    path: aisingapore/Qwen-SEA-LION-v4-32B-IT
-    type: it
-
-  # ============================================================================
-  # Qwen 2.5 Family
-  # ============================================================================
-  qwen-2.5-0.5b-it:
-    path: Qwen/Qwen2.5-0.5B-Instruct
-    type: it
-  
-  qwen-2.5-1.5b-it:
-    path: Qwen/Qwen2.5-1.5B-Instruct
-    type: it
-  
-  qwen-2.5-3b-it:
-    path: Qwen/Qwen2.5-3B-Instruct
-    type: it
-  
-  qwen-2.5-7b-it:
-    path: Qwen/Qwen2.5-7B-Instruct
-    type: it
-  
-  qwen-2.5-14b-it:
-    path: Qwen/Qwen2.5-14B-Instruct
-    type: it
-
-  # ============================================================================
-  # Qwen 3 Family
-  # Qwen3 models support hybrid thinking mode (on/off via chat template).
-  # The -2507 variants are updated July 2025 checkpoints of select sizes.
-  # ============================================================================
-  qwen-3-0.6b-it:
-    path: Qwen/Qwen3-0.6B
-    type: it
-    thinking: false
-
-  qwen-3-0.6b-it-thinking:
-    path: Qwen/Qwen3-0.6B
-    type: it
+    tp: 2
     thinking: true
+    reasoning_parser: qwen3
 
-  qwen-3-1.7b-it:
-    path: Qwen/Qwen3-1.7B
+  sea-lion-gemma-v4.5-e2b-it:
+    path: aisingapore/Gemma-SEA-LION-v4.5-E2B-IT
     type: it
-    thinking: false
+    tp: 1
+    reasoning_parser: gemma4
+    enable_expert_parallel: true
+    language_model_only: true
 
-  qwen-3-1.7b-it-thinking:
-    path: Qwen/Qwen3-1.7B
+  sea-lion-gemma-v4.5-e2b-it-thinking:
+    path: aisingapore/Gemma-SEA-LION-v4.5-E2B-IT
     type: it
+    tp: 1
     thinking: true
-
-  qwen-3-4b-it-2507:
-    path: Qwen/Qwen3-4B-Instruct-2507
-    type: it
-
-  qwen-3-4b-it-2507-thinking:
-    path: Qwen/Qwen3-4B-Thinking-2507
-    type: it
-    thinking: true
-
-  qwen-3-8b-it:
-    path: Qwen/Qwen3-8B
-    type: it
-    thinking: false
-
-  qwen-3-8b-it-thinking:
-    path: Qwen/Qwen3-8B
-    type: it
-    thinking: true
-
-  qwen-3-14b-it:
-    path: Qwen/Qwen3-14B
-    type: it
-    thinking: false
-
-  qwen-3-14b-it-thinking:
-    path: Qwen/Qwen3-14B
-    type: it
-    thinking: true
-
-  qwen-3-32b-it:
-    path: Qwen/Qwen3-32B
-    type: it
-    thinking: false
-
-  qwen-3-32b-it-thinking:
-    path: Qwen/Qwen3-32B
-    type: it
-    thinking: true
-
-  qwen-3-30b-it-2507:
-    path: Qwen/Qwen3-30B-A3B-Instruct-2507
-    type: it
-
-  qwen-3-30b-it-2507-thinking:
-    path: Qwen/Qwen3-30B-A3B-Thinking-2507
-    type: it
-    thinking: true
+    reasoning_parser: gemma4
+    enable_expert_parallel: true
+    language_model_only: true
 
   # ============================================================================
-  # Phi-4 Family
-  # No base (PT) versions are publicly available; all entries are IT only.
-  # phi-4-reasoning variants use chain-of-thought (<think> blocks).
+  # Google Gemma 4
+  # Thinking is controlled per-request via extra_body (not at serve time).
+  # reasoning_parser: gemma4 is needed for both thinking/non-thinking variants
+  # so vLLM can structure the reasoning_content output.
   # ============================================================================
-  phi-4:
-    path: microsoft/phi-4
+  gemma-4-e2b-it:
+    path: google/gemma-4-E2B-it
     type: it
+    tp: 1
+    reasoning_parser: gemma4
+    enable_expert_parallel: true
+    language_model_only: true
 
-  phi-4-mini-it:
-    path: microsoft/Phi-4-mini-instruct
+  gemma-4-e2b-it-thinking:
+    path: google/gemma-4-E2B-it
     type: it
+    tp: 1
+    thinking: true
+    reasoning_parser: gemma4
+    enable_expert_parallel: true
+    language_model_only: true
 
-  phi-4-reasoning:
-    path: microsoft/Phi-4-reasoning
+  # E4B-OT is an "optimized thinking" model — thinking-only, no non-thinking variant.
+  gemma-4-e4b-ot:
+    path: google/gemma-4-E4B-ot
     type: it
+    tp: 1
+    thinking: true
+    reasoning_parser: gemma4
+    enable_expert_parallel: true
+    language_model_only: true
+
+  gemma-4-26b-a4b-it:
+    path: google/gemma-4-26B-A4B-it
+    type: it
+    tp: 2
+    reasoning_parser: gemma4
+    enable_expert_parallel: true
+    language_model_only: true
+
+  gemma-4-26b-a4b-it-thinking:
+    path: google/gemma-4-26B-A4B-it
+    type: it
+    tp: 2
+    thinking: true
+    reasoning_parser: gemma4
+    enable_expert_parallel: true
+    language_model_only: true
+
+  gemma-4-31b-it:
+    path: google/gemma-4-31B-it
+    type: it
+    tp: 2
+    reasoning_parser: gemma4
+    language_model_only: true
+
+  gemma-4-31b-it-thinking:
+    path: google/gemma-4-31B-it
+    type: it
+    tp: 2
+    thinking: true
+    reasoning_parser: gemma4
+    language_model_only: true
+
+  # ============================================================================
+  # Qwen 3.5 Family
+  # Non-thinking variants use --default-chat-template-kwargs to disable thinking
+  # server-side; no reasoning_parser is needed when thinking is off.
+  # Thinking variants use --reasoning-parser qwen3 at serve time.
+  # MoE variants (35B-A3B, 122B-A10B, 397B-A17B) use enable_expert_parallel.
+  # ============================================================================
+  qwen3.5-0.8b-it:
+    path: Qwen/Qwen3.5-0.8B
+    type: it
+    tp: 1
+    chat_template_kwargs: '{"enable_thinking": false}'
+
+  qwen3.5-0.8b-it-thinking:
+    path: Qwen/Qwen3.5-0.8B
+    type: it
+    tp: 1
+    thinking: true
+    reasoning_parser: qwen3
+
+  qwen3.5-2b-it:
+    path: Qwen/Qwen3.5-2B
+    type: it
+    tp: 1
+    chat_template_kwargs: '{"enable_thinking": false}'
+
+  qwen3.5-2b-it-thinking:
+    path: Qwen/Qwen3.5-2B
+    type: it
+    tp: 1
+    thinking: true
+    reasoning_parser: qwen3
+
+  qwen3.5-4b-it:
+    path: Qwen/Qwen3.5-4B
+    type: it
+    tp: 1
+    chat_template_kwargs: '{"enable_thinking": false}'
+
+  qwen3.5-4b-it-thinking:
+    path: Qwen/Qwen3.5-4B
+    type: it
+    tp: 1
+    thinking: true
+    reasoning_parser: qwen3
+
+  qwen3.5-9b-it:
+    path: Qwen/Qwen3.5-9B
+    type: it
+    tp: 1
+    chat_template_kwargs: '{"enable_thinking": false}'
+
+  qwen3.5-9b-it-thinking:
+    path: Qwen/Qwen3.5-9B
+    type: it
+    tp: 1
+    thinking: true
+    reasoning_parser: qwen3
+
+  qwen3.5-27b-it:
+    path: Qwen/Qwen3.5-27B
+    type: it
+    tp: 2
+    chat_template_kwargs: '{"enable_thinking": false}'
+
+  qwen3.5-27b-it-thinking:
+    path: Qwen/Qwen3.5-27B
+    type: it
+    tp: 2
+    thinking: true
+    reasoning_parser: qwen3
+
+  qwen3.5-35b-a3b-it:
+    path: Qwen/Qwen3.5-35B-A3B
+    type: it
+    tp: 2
+    enable_expert_parallel: true
+    chat_template_kwargs: '{"enable_thinking": false}'
+
+  qwen3.5-35b-a3b-it-thinking:
+    path: Qwen/Qwen3.5-35B-A3B
+    type: it
+    tp: 2
+    thinking: true
+    reasoning_parser: qwen3
+    enable_expert_parallel: true
+
+  qwen3.5-122b-a10b-it:
+    path: Qwen/Qwen3.5-122B-A10B
+    type: it
+    tp: 4
+    enable_expert_parallel: true
+    chat_template_kwargs: '{"enable_thinking": false}'
+
+  qwen3.5-122b-a10b-it-thinking:
+    path: Qwen/Qwen3.5-122B-A10B
+    type: it
+    tp: 4
+    thinking: true
+    reasoning_parser: qwen3
+    enable_expert_parallel: true
+
+  qwen3.5-397b-a17b-it:
+    path: Qwen/Qwen3.5-397B-A17B
+    type: it
+    tp: 8
+    enable_expert_parallel: true
+    chat_template_kwargs: '{"enable_thinking": false}'
+
+  qwen3.5-397b-a17b-it-thinking:
+    path: Qwen/Qwen3.5-397B-A17B
+    type: it
+    tp: 8
+    thinking: true
+    reasoning_parser: qwen3
+    enable_expert_parallel: true
+
+  # ============================================================================
+  # Qwen 3.6 Family
+  # ============================================================================
+  qwen3.6-27b-it:
+    path: Qwen/Qwen3.6-27B
+    type: it
+    tp: 2
+    chat_template_kwargs: '{"enable_thinking": false}'
+
+  qwen3.6-27b-it-thinking:
+    path: Qwen/Qwen3.6-27B
+    type: it
+    tp: 2
+    thinking: true
+    reasoning_parser: qwen3
+
+  qwen3.6-35b-a3b-it:
+    path: Qwen/Qwen3.6-35B-A3B
+    type: it
+    tp: 2
+    enable_expert_parallel: true
+    chat_template_kwargs: '{"enable_thinking": false}'
+
+  qwen3.6-35b-a3b-it-thinking:
+    path: Qwen/Qwen3.6-35B-A3B
+    type: it
+    tp: 2
+    thinking: true
+    reasoning_parser: qwen3
+    enable_expert_parallel: true
+
+  # ============================================================================
+  # NVIDIA Nemotron 3
+  # Nemotron models emit structured <think> blocks. Nano/Super use reasoning_parser
+  # nemotron_v3. Nano-Omni-Reasoning uses a custom plugin (nano_v3_reasoning_parser.py)
+  # that must be placed in the project root before serving.
+  # ============================================================================
+  nemotron-3-nano-30b-it:
+    path: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16
+    type: it
+    tp: 2
+    enable_expert_parallel: true
+
+  nemotron-3-nano-30b-it-thinking:
+    path: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16
+    type: it
+    tp: 2
+    thinking: true
+    reasoning_parser: nemotron_v3
+    enable_expert_parallel: true
+
+  nemotron-3-super-120b-it:
+    path: nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16
+    type: it
+    tp: 4
+    enable_expert_parallel: true
+
+  nemotron-3-super-120b-it-thinking:
+    path: nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16
+    type: it
+    tp: 4
+    thinking: true
+    reasoning_parser: nemotron_v3
+    enable_expert_parallel: true
+
+  # Nano-Omni-Reasoning is a reasoning-only model with a custom vLLM parser plugin.
+  # Place nano_v3_reasoning_parser.py in the project root before serving.
+  nemotron-3-nano-omni-30b-reasoning:
+    path: nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16
+    type: it
+    tp: 2
+    thinking: true
+    reasoning_parser: nano_v3
+    reasoning_parser_plugin: nano_v3_reasoning_parser.py
+    enable_expert_parallel: true
+
+  # ============================================================================
+  # Mistral
+  # Both Medium-3.5 and Small-4 support optional thinking mode.
+  # ============================================================================
+  mistral-medium-3.5-128b-it:
+    path: mistralai/Mistral-Medium-3.5-128B
+    type: it
+    tp: 4
+    enable_expert_parallel: true
+
+  mistral-medium-3.5-128b-it-thinking:
+    path: mistralai/Mistral-Medium-3.5-128B
+    type: it
+    tp: 4
+    thinking: true
+    reasoning_parser: mistral
+    enable_expert_parallel: true
+
+  mistral-small-4-119b-it:
+    path: mistralai/Mistral-Small-4-119B-2603
+    type: it
+    tp: 4
+    enable_expert_parallel: true
+
+  mistral-small-4-119b-it-thinking:
+    path: mistralai/Mistral-Small-4-119B-2603
+    type: it
+    tp: 4
+    thinking: true
+    reasoning_parser: mistral
+    enable_expert_parallel: true
+
+  # ============================================================================
+  # DeepSeek V4
+  # These are always-thinking models that emit <think> blocks unconditionally.
+  # Note: V4-Pro may require disaggregated prefill/decode for optimal throughput.
+  # ============================================================================
+  deepseek-v4-flash:
+    path: deepseek-ai/DeepSeek-V4-Flash
+    type: it
+    tp: 2
     thinking: true
     reasoning_parser: deepseek_r1
+    enable_expert_parallel: true
 
-  phi-4-reasoning-plus:
-    path: microsoft/Phi-4-reasoning-plus
+  deepseek-v4-pro:
+    path: deepseek-ai/DeepSeek-V4-Pro
     type: it
+    tp: 8
     thinking: true
     reasoning_parser: deepseek_r1
+    enable_expert_parallel: true
 
   # ============================================================================
-  # GPT-OSS Family (OpenAI open-source MoE models, natively supported in vLLM)
+  # OpenAI OSS (open-weight MoE models)
+  # Always-thinking; <think> blocks emitted unconditionally.
   # ============================================================================
   gpt-oss-20b:
     path: openai/gpt-oss-20b
     type: it
+    tp: 2
     thinking: true
-    reasoning_parser: deepseek_r1  # always-on <think> blocks
+    reasoning_parser: deepseek_r1
 
   gpt-oss-120b:
     path: openai/gpt-oss-120b
     type: it
+    tp: 8
+    thinking: true
+    reasoning_parser: deepseek_r1
+
+  # ============================================================================
+  # MiniMax M2.7
+  # Large MoE; enable_expert_parallel is required.
+  # ============================================================================
+  minimax-m2.7:
+    path: MiniMaxAI/MiniMax-M2.7
+    type: it
+    tp: 8
+    thinking: true
+    reasoning_parser: minimax_m2
+    enable_expert_parallel: true
+
+  # ============================================================================
+  # Arcee Trinity
+  # Trinity-Large-Thinking uses chain-of-thought reasoning.
+  # ============================================================================
+  arcee-trinity-nano:
+    path: arcee-ai/Trinity-Nano-Preview
+    type: it
+    tp: 1
+
+  arcee-trinity-mini:
+    path: arcee-ai/Trinity-Mini
+    type: it
+    tp: 1
+
+  arcee-trinity-large:
+    path: arcee-ai/Trinity-Large-Preview
+    type: it
+    tp: 4
+
+  arcee-trinity-large-thinking:
+    path: arcee-ai/Trinity-Large-Thinking
+    type: it
+    tp: 4
     thinking: true
     reasoning_parser: deepseek_r1

@@ -7,11 +7,14 @@ name = "pacute-bench"
 version = "0.1.0"
 description = "End-to-end evaluation suite for Filipino morphology benchmarks"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 license = { text = "MIT" }
 dependencies = [
-    "torch>=2.5",
-    "transformers>=5.3",
+    "vllm==0.20.2",
+    "torch==2.11.0",
+    "torchaudio==2.11.0",
+    "torchvision==0.26.0",
+    "transformers==5.5.4",
     "openai>=1.30",
     "anthropic>=0.40",
     "pandas>=2.0",

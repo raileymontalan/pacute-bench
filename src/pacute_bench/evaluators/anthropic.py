@@ -117,7 +117,8 @@ class AnthropicEvaluator(BatchEvaluator):
         self, items, benchmark_name: str, effective_prompt: Optional[str]
     ) -> dict:
         max_tokens = 8192 if self.thinking else 256
-        sem = asyncio.Semaphore(16)
+        max_concurrent = int(os.environ.get("PACUTE_BENCH_MAX_CONCURRENT", 16))
+        sem = asyncio.Semaphore(max_concurrent)
 
         async def gen_one(sample_id: str, prefix: str):
             kwargs: dict = {
@@ -133,7 +134,7 @@ class AnthropicEvaluator(BatchEvaluator):
             return sample_id, text.strip().lower()
 
         tasks = [gen_one(str(item[3]), item[0]) for item in items]
-        print(f"  Sending {len(tasks)} async requests (max 16 concurrent)…")
+        print(f"  Sending {len(tasks)} async requests (max {max_concurrent} concurrent)…")
         results = await asyncio.gather(*tasks)
         return {sid: text for sid, text in results}
 

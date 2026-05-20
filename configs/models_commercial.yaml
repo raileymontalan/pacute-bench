@@ -59,11 +59,11 @@ models:
   # ============================================================================
 
   gemini-3.1-flash-lite:
-    path: gemini-3.1-flash-lite
+    path: google/gemini-3.1-flash-lite
     type: it
-    provider: google
+    provider: openai-async
 
   gemini-3.5-flash:
-    path: gemini-3.5-flash
+    path: google/gemini-3.5-flash
     type: it
-    provider: google
+    provider: openai-async

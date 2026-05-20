@@ -143,7 +143,8 @@ class OpenAIEvaluator(BatchEvaluator):
     ) -> dict:
         is_reasoning = self._is_reasoning_model()
         token_limit = 8192 if (self.thinking or is_reasoning) else 256
-        sem = asyncio.Semaphore(16)
+        max_concurrent = int(os.environ.get("PACUTE_BENCH_MAX_CONCURRENT", 16))
+        sem = asyncio.Semaphore(max_concurrent)
 
         async def gen_one(sample_id: str, prefix: str):
             messages: list = []

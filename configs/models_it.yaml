@@ -13,6 +13,12 @@
 #   reasoning_parser_plugin: path to a custom reasoning-parser plugin script
 #   language_model_only:    true to pass --language-model-only at serve time; skips loading the
 #                           vision encoder for multimodal models (Gemma4) when text eval only
+#   attention_backend:      vLLM attention backend override. Unset = cluster default (FLASH_ATTN).
+#                           Set to "auto" to let vLLM choose (required for models with partial
+#                           multimodal token attention, e.g. Gemma4 26B-A4B and 31B).
+#   disable_prefix_caching: true to pass --no-enable-prefix-caching (default: prefix caching ON)
+#   max_cudagraph_capture_size: integer; passed as --max-cudagraph-capture-size
+#   max_num_batched_tokens: integer; passed as --max-num-batched-tokens
 #   chat_template_kwargs:   JSON string passed to --default-chat-template-kwargs at serve time;
 #                           used by Qwen3.x non-thinking variants to disable thinking server-side
 
@@ -37,8 +43,6 @@ models:
     path: aisingapore/Gemma-SEA-LION-v4.5-E2B-IT
     type: it
     tp: 1
-    reasoning_parser: gemma4
-    enable_expert_parallel: true
     language_model_only: true
 
   sea-lion-gemma-v4.5-e2b-it-thinking:
@@ -47,7 +51,6 @@ models:
     tp: 1
     thinking: true
     reasoning_parser: gemma4
-    enable_expert_parallel: true
     language_model_only: true
 
   # ============================================================================
@@ -60,8 +63,6 @@ models:
     path: google/gemma-4-E2B-it
     type: it
     tp: 1
-    reasoning_parser: gemma4
-    enable_expert_parallel: true
     language_model_only: true
 
   gemma-4-e2b-it-thinking:
@@ -70,50 +71,53 @@ models:
     tp: 1
     thinking: true
     reasoning_parser: gemma4
-    enable_expert_parallel: true
     language_model_only: true
 
-  # E4B-OT is an "optimized thinking" model — thinking-only, no non-thinking variant.
-  gemma-4-e4b-ot:
-    path: google/gemma-4-E4B-ot
+  gemma-4-e4b-it:
+    path: google/gemma-4-E4B-it
+    type: it
+    tp: 1
+    language_model_only: true
+
+  gemma-4-e4b-it-thinking:
+    path: google/gemma-4-E4B-it
     type: it
     tp: 1
     thinking: true
     reasoning_parser: gemma4
-    enable_expert_parallel: true
     language_model_only: true
 
   gemma-4-26b-a4b-it:
     path: google/gemma-4-26B-A4B-it
     type: it
-    tp: 2
-    reasoning_parser: gemma4
-    enable_expert_parallel: true
+    tp: 1
     language_model_only: true
+    attention_backend: auto
 
   gemma-4-26b-a4b-it-thinking:
     path: google/gemma-4-26B-A4B-it
     type: it
-    tp: 2
+    tp: 1
     thinking: true
     reasoning_parser: gemma4
-    enable_expert_parallel: true
     language_model_only: true
+    attention_backend: auto
 
   gemma-4-31b-it:
     path: google/gemma-4-31B-it
     type: it
-    tp: 2
-    reasoning_parser: gemma4
+    tp: 1
     language_model_only: true
+    attention_backend: auto
 
   gemma-4-31b-it-thinking:
     path: google/gemma-4-31B-it
     type: it
-    tp: 2
+    tp: 1
     thinking: true
     reasoning_parser: gemma4
     language_model_only: true
+    attention_backend: auto
 
   # ============================================================================
   # Qwen 3.5 Family
@@ -179,6 +183,7 @@ models:
     type: it
     tp: 2
     chat_template_kwargs: '{"enable_thinking": false}'
+    language_model_only: true
 
   qwen3.5-27b-it-thinking:
     path: Qwen/Qwen3.5-27B
@@ -186,21 +191,22 @@ models:
     tp: 2
     thinking: true
     reasoning_parser: qwen3
+    language_model_only: true
 
   qwen3.5-35b-a3b-it:
     path: Qwen/Qwen3.5-35B-A3B
     type: it
-    tp: 2
-    enable_expert_parallel: true
+    tp: 8
     chat_template_kwargs: '{"enable_thinking": false}'
+    language_model_only: true
 
   qwen3.5-35b-a3b-it-thinking:
     path: Qwen/Qwen3.5-35B-A3B
     type: it
-    tp: 2
+    tp: 8
     thinking: true
     reasoning_parser: qwen3
-    enable_expert_parallel: true
+    language_model_only: true
 
   qwen3.5-122b-a10b-it:
     path: Qwen/Qwen3.5-122B-A10B
@@ -208,6 +214,7 @@ models:
     tp: 4
     enable_expert_parallel: true
     chat_template_kwargs: '{"enable_thinking": false}'
+    language_model_only: true
 
   qwen3.5-122b-a10b-it-thinking:
     path: Qwen/Qwen3.5-122B-A10B
@@ -216,6 +223,7 @@ models:
     thinking: true
     reasoning_parser: qwen3
     enable_expert_parallel: true
+    language_model_only: true
 
   qwen3.5-397b-a17b-it:
     path: Qwen/Qwen3.5-397B-A17B
@@ -223,6 +231,7 @@ models:
     tp: 8
     enable_expert_parallel: true
     chat_template_kwargs: '{"enable_thinking": false}'
+    language_model_only: true
 
   qwen3.5-397b-a17b-it-thinking:
     path: Qwen/Qwen3.5-397B-A17B
@@ -231,6 +240,7 @@ models:
     thinking: true
     reasoning_parser: qwen3
     enable_expert_parallel: true
+    language_model_only: true
 
   # ============================================================================
   # Qwen 3.6 Family
@@ -238,75 +248,33 @@ models:
   qwen3.6-27b-it:
     path: Qwen/Qwen3.6-27B
     type: it
-    tp: 2
+    tp: 1
     chat_template_kwargs: '{"enable_thinking": false}'
+    language_model_only: true
 
   qwen3.6-27b-it-thinking:
     path: Qwen/Qwen3.6-27B
     type: it
-    tp: 2
+    tp: 1
     thinking: true
     reasoning_parser: qwen3
+    language_model_only: true
 
   qwen3.6-35b-a3b-it:
     path: Qwen/Qwen3.6-35B-A3B
     type: it
-    tp: 2
-    enable_expert_parallel: true
+    tp: 8
     chat_template_kwargs: '{"enable_thinking": false}'
+    enable_expert_parallel: true
 
   qwen3.6-35b-a3b-it-thinking:
     path: Qwen/Qwen3.6-35B-A3B
     type: it
-    tp: 2
+    tp: 8
     thinking: true
     reasoning_parser: qwen3
     enable_expert_parallel: true
 
-  # ============================================================================
-  # NVIDIA Nemotron 3
-  # Nemotron models emit structured <think> blocks. Nano/Super use reasoning_parser
-  # nemotron_v3. Nano-Omni-Reasoning uses a custom plugin (nano_v3_reasoning_parser.py)
-  # that must be placed in the project root before serving.
-  # ============================================================================
-  nemotron-3-nano-30b-it:
-    path: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16
-    type: it
-    tp: 2
-    enable_expert_parallel: true
-
-  nemotron-3-nano-30b-it-thinking:
-    path: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16
-    type: it
-    tp: 2
-    thinking: true
-    reasoning_parser: nemotron_v3
-    enable_expert_parallel: true
-
-  nemotron-3-super-120b-it:
-    path: nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16
-    type: it
-    tp: 4
-    enable_expert_parallel: true
-
-  nemotron-3-super-120b-it-thinking:
-    path: nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16
-    type: it
-    tp: 4
-    thinking: true
-    reasoning_parser: nemotron_v3
-    enable_expert_parallel: true
-
-  # Nano-Omni-Reasoning is a reasoning-only model with a custom vLLM parser plugin.
-  # Place nano_v3_reasoning_parser.py in the project root before serving.
-  nemotron-3-nano-omni-30b-reasoning:
-    path: nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16
-    type: it
-    tp: 2
-    thinking: true
-    reasoning_parser: nano_v3
-    reasoning_parser_plugin: nano_v3_reasoning_parser.py
-    enable_expert_parallel: true
 
   # ============================================================================
   # Mistral
@@ -363,21 +331,26 @@ models:
 
   # ============================================================================
   # OpenAI OSS (open-weight MoE models)
-  # Always-thinking; <think> blocks emitted unconditionally.
+  # vLLM recipes: no reasoning-parser; prefix caching disabled; cudagraph/batch tuned.
   # ============================================================================
   gpt-oss-20b:
     path: openai/gpt-oss-20b
     type: it
-    tp: 2
+    tp: 1
     thinking: true
-    reasoning_parser: deepseek_r1
+    disable_prefix_caching: true
+    max_cudagraph_capture_size: 2048
+    max_num_batched_tokens: 8192
 
   gpt-oss-120b:
     path: openai/gpt-oss-120b
     type: it
     tp: 8
     thinking: true
-    reasoning_parser: deepseek_r1
+    enforce_eager: true
+    disable_prefix_caching: true
+    max_cudagraph_capture_size: 2048
+    max_num_batched_tokens: 8192
 
   # ============================================================================
   # MiniMax M2.7

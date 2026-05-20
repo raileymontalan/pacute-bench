@@ -188,7 +188,8 @@ for model_name in "${ALL_MODELS[@]}"; do
             --cpus-per-task=2
             --mem=8G
             --time="${WALLTIME:-26:00:00}"
-            --output="${LOGS_PATH}/${JOB_NAME}_%j.out"
+            --output="${LOGS_PATH}/pb-eval-%j-${JOB_NAME#pb-eval-}.out"
+            --error="${LOGS_PATH}/pb-eval-%j-${JOB_NAME#pb-eval-}.out"
             "$SCRIPT_DIR/eval_commercial.slurm"
         )
         printf "  %-32s  (commercial API)  " "$model_name"
@@ -218,7 +219,8 @@ for model_name in "${ALL_MODELS[@]}"; do
             --mem="$MEM"
             --gres="gpu:${N_GPUS}"
             --time="$WALLTIME"
-            --output="${LOGS_PATH}/${JOB_NAME}_%j.out"
+            --output="${LOGS_PATH}/pb-eval-%j-${JOB_NAME#pb-eval-}.out"
+            --error="${LOGS_PATH}/pb-eval-%j-${JOB_NAME#pb-eval-}.out"
             "$SLURM_SCRIPT"
         )
         printf "  %-32s  ngpus=%-2s  " "$model_name" "$N_GPUS"

@@ -9,6 +9,8 @@
 #   enable_expert_parallel: true for MoE models
 #   language_model_only:    true to pass --language-model-only; skips vision encoder for
 #                           multimodal models (Gemma4) when doing text-only eval
+#   attention_backend:      vLLM attention backend override; "auto" lets vLLM choose
+#   enforce_eager:          true to pass --enforce-eager; disables Inductor compilation
 
 models:
   # ============================================================================
@@ -41,28 +43,28 @@ models:
     path: google/gemma-4-E2B
     type: pt
     tp: 1
-    enable_expert_parallel: true
     language_model_only: true
 
   gemma-4-e4b:
     path: google/gemma-4-E4B
     type: pt
     tp: 1
-    enable_expert_parallel: true
     language_model_only: true
 
   gemma-4-26b-a4b:
     path: google/gemma-4-26B-A4B
     type: pt
-    tp: 2
-    enable_expert_parallel: true
+    tp: 1
     language_model_only: true
+    attention_backend: auto
 
   gemma-4-31b:
     path: google/gemma-4-31B
     type: pt
     tp: 2
     language_model_only: true
+    attention_backend: auto
+    enforce_eager: true
 
   # ============================================================================
   # Qwen 3.5 Base
@@ -91,6 +93,7 @@ models:
     path: Qwen/Qwen3.5-27B-Base
     type: pt
     tp: 2
+    language_model_only: true
 
   qwen3.5-35b-a3b:
     path: Qwen/Qwen3.5-35B-A3B-Base

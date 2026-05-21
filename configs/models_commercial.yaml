@@ -74,3 +74,38 @@ models:
     type: it
     provider: openai-async
     thinking: true  # Gemini 3.5 Flash emits internal reasoning tokens; needs ~8K max_tokens
+
+  # ============================================================================
+  # OpenRouter additions: Chinese / non-OAI frontier + xAI gap-fill
+  # All run via openai-async path with OPENAI_BASE_URL=$OPENROUTER_BASE_URL.
+  # ============================================================================
+
+  qwen3-235b-thinking:
+    path: qwen/qwen3-235b-a22b-thinking-2507
+    type: it
+    provider: openai-async
+    thinking: true
+
+  deepseek-v3.2:
+    path: deepseek/deepseek-v3.2-exp
+    type: it
+    provider: openai-async
+    thinking: true  # safe budget — non-reasoning variant still occasionally verbose
+
+  deepseek-r1:
+    path: deepseek/deepseek-r1-0528
+    type: it
+    provider: openai-async
+    thinking: true
+
+  kimi-k2-thinking:
+    path: moonshotai/kimi-k2-thinking
+    type: it
+    provider: openai-async
+    thinking: true
+
+  grok-4:
+    path: x-ai/grok-4.20
+    type: it
+    provider: openai-async
+    thinking: true

@@ -1,0 +1,42 @@
+{
+  "hf_model_name": "claude-sonnet-4-6",
+  "model_type": "it",
+  "thinking": false,
+  "benchmarks": {
+    "pacute-affixation-gen": {
+      "num_samples": 140,
+      "exact_match": 0.2857142857142857,
+      "contains_match": 0.5785714285714286,
+      "prefix_match": 0.39285714285714285,
+      "format": "generative",
+      "by_category": {
+        "circumfix": {
+          "num_samples": 20,
+          "exact_match": 0.5,
+          "contains_match": 0.5,
+          "prefix_match": 0.5
+        },
+        "infix": {
+          "num_samples": 40,
+          "exact_match": 0.225,
+          "contains_match": 0.525,
+          "prefix_match": 0.225
+        },
+        "prefix": {
+          "num_samples": 40,
+          "exact_match": 0.325,
+          "contains_match": 0.725,
+          "prefix_match": 0.7
+        },
+        "suffix": {
+          "num_samples": 40,
+          "exact_match": 0.2,
+          "contains_match": 0.525,
+          "prefix_match": 0.2
+        }
+      },
+      "timestamp": "20260522_102122"
+    }
+  },
+  "timestamp": "20260522_102122"
+}

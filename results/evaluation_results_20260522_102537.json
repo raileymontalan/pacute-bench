@@ -1,0 +1,207 @@
+{
+  "gemini-3.1-flash-lite": {
+    "hf_model_name": "google/gemini-3.1-flash-lite",
+    "model_type": "it",
+    "thinking": false,
+    "benchmarks": {
+      "pacute-affixation-gen": {
+        "num_samples": 140,
+        "exact_match": 0.45714285714285713,
+        "contains_match": 0.8785714285714286,
+        "prefix_match": 0.6,
+        "format": "generative",
+        "by_category": {
+          "circumfix": {
+            "num_samples": 20,
+            "exact_match": 0.8,
+            "contains_match": 0.8,
+            "prefix_match": 0.8
+          },
+          "infix": {
+            "num_samples": 40,
+            "exact_match": 0.4,
+            "contains_match": 0.875,
+            "prefix_match": 0.4
+          },
+          "prefix": {
+            "num_samples": 40,
+            "exact_match": 0.45,
+            "contains_match": 0.95,
+            "prefix_match": 0.95
+          },
+          "suffix": {
+            "num_samples": 40,
+            "exact_match": 0.35,
+            "contains_match": 0.85,
+            "prefix_match": 0.35
+          }
+        },
+        "timestamp": "20260522_102537"
+      }
+    }
+  },
+  "gemini-3.5-flash": {
+    "hf_model_name": "google/gemini-3.5-flash",
+    "model_type": "it",
+    "thinking": true,
+    "benchmarks": {
+      "pacute-affixation-gen": {
+        "num_samples": 140,
+        "exact_match": 0.85,
+        "contains_match": 0.9285714285714286,
+        "prefix_match": 0.8928571428571429,
+        "format": "generative",
+        "by_category": {
+          "circumfix": {
+            "num_samples": 20,
+            "exact_match": 0.95,
+            "contains_match": 0.95,
+            "prefix_match": 0.95
+          },
+          "infix": {
+            "num_samples": 40,
+            "exact_match": 0.875,
+            "contains_match": 0.875,
+            "prefix_match": 0.875
+          },
+          "prefix": {
+            "num_samples": 40,
+            "exact_match": 0.775,
+            "contains_match": 0.925,
+            "prefix_match": 0.925
+          },
+          "suffix": {
+            "num_samples": 40,
+            "exact_match": 0.85,
+            "contains_match": 0.975,
+            "prefix_match": 0.85
+          }
+        },
+        "timestamp": "20260522_102537"
+      }
+    }
+  },
+  "deepseek-v3.2": {
+    "hf_model_name": "deepseek/deepseek-v3.2-exp",
+    "model_type": "it",
+    "thinking": true,
+    "benchmarks": {
+      "pacute-affixation-gen": {
+        "num_samples": 140,
+        "exact_match": 0.5785714285714286,
+        "contains_match": 0.8285714285714286,
+        "prefix_match": 0.6714285714285714,
+        "format": "generative",
+        "by_category": {
+          "circumfix": {
+            "num_samples": 20,
+            "exact_match": 0.8,
+            "contains_match": 0.8,
+            "prefix_match": 0.8
+          },
+          "infix": {
+            "num_samples": 40,
+            "exact_match": 0.675,
+            "contains_match": 0.775,
+            "prefix_match": 0.675
+          },
+          "prefix": {
+            "num_samples": 40,
+            "exact_match": 0.575,
+            "contains_match": 0.9,
+            "prefix_match": 0.9
+          },
+          "suffix": {
+            "num_samples": 40,
+            "exact_match": 0.375,
+            "contains_match": 0.825,
+            "prefix_match": 0.375
+          }
+        },
+        "timestamp": "20260522_102537"
+      }
+    }
+  },
+  "deepseek-r1": {
+    "hf_model_name": "deepseek/deepseek-r1-0528",
+    "model_type": "it",
+    "thinking": true,
+    "benchmarks": {
+      "pacute-affixation-gen": {
+        "num_samples": 140,
+        "exact_match": 0.6642857142857143,
+        "contains_match": 0.8571428571428571,
+        "prefix_match": 0.7285714285714285,
+        "format": "generative",
+        "by_category": {
+          "circumfix": {
+            "num_samples": 20,
+            "exact_match": 0.7,
+            "contains_match": 0.7,
+            "prefix_match": 0.7
+          },
+          "infix": {
+            "num_samples": 40,
+            "exact_match": 0.825,
+            "contains_match": 0.875,
+            "prefix_match": 0.825
+          },
+          "prefix": {
+            "num_samples": 40,
+            "exact_match": 0.7,
+            "contains_match": 0.925,
+            "prefix_match": 0.925
+          },
+          "suffix": {
+            "num_samples": 40,
+            "exact_match": 0.45,
+            "contains_match": 0.85,
+            "prefix_match": 0.45
+          }
+        },
+        "timestamp": "20260522_102537"
+      }
+    }
+  },
+  "kimi-k2-thinking": {
+    "hf_model_name": "moonshotai/kimi-k2-thinking",
+    "model_type": "it",
+    "thinking": true,
+    "benchmarks": {
+      "pacute-affixation-gen": {
+        "num_samples": 140,
+        "exact_match": 0.7428571428571429,
+        "contains_match": 0.8428571428571429,
+        "prefix_match": 0.75,
+        "format": "generative",
+        "by_category": {
+          "circumfix": {
+            "num_samples": 20,
+            "exact_match": 0.75,
+            "contains_match": 0.75,
+            "prefix_match": 0.75
+          },
+          "infix": {
+            "num_samples": 40,
+            "exact_match": 0.7,
+            "contains_match": 0.85,
+            "prefix_match": 0.7
+          },
+          "prefix": {
+            "num_samples": 40,
+            "exact_match": 0.8,
+            "contains_match": 0.825,
+            "prefix_match": 0.825
+          },
+          "suffix": {
+            "num_samples": 40,
+            "exact_match": 0.725,
+            "contains_match": 0.9,
+            "prefix_match": 0.725
+          }
+        },
+        "timestamp": "20260522_102537"
+      }
+    }
+  }
+}

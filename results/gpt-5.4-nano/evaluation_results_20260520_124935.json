@@ -1,0 +1,30 @@
+{
+  "hf_model_name": "gpt-5.4-nano",
+  "model_type": "it",
+  "thinking": false,
+  "benchmarks": {
+    "pacute-syllabification-gen": {
+      "num_samples": 5,
+      "exact_match": 0.2,
+      "contains_match": 0.4,
+      "prefix_match": 0.2,
+      "format": "generative",
+      "by_category": {
+        "stress_disambiguation": {
+          "num_samples": 4,
+          "exact_match": 0.25,
+          "contains_match": 0.5,
+          "prefix_match": 0.25
+        },
+        "stress_identification": {
+          "num_samples": 1,
+          "exact_match": 0.0,
+          "contains_match": 0.0,
+          "prefix_match": 0.0
+        }
+      },
+      "timestamp": "20260520_124935"
+    }
+  },
+  "timestamp": "20260520_124935"
+}

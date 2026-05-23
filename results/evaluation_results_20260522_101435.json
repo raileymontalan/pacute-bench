@@ -1,0 +1,166 @@
+{
+  "gpt-5.4-mini": {
+    "hf_model_name": "gpt-5.4-mini",
+    "model_type": "it",
+    "thinking": false,
+    "benchmarks": {
+      "pacute-affixation-gen": {
+        "num_samples": 140,
+        "exact_match": 0.42857142857142855,
+        "contains_match": 0.8285714285714286,
+        "prefix_match": 0.5642857142857143,
+        "format": "generative",
+        "by_category": {
+          "circumfix": {
+            "num_samples": 20,
+            "exact_match": 0.7,
+            "contains_match": 0.7,
+            "prefix_match": 0.7
+          },
+          "infix": {
+            "num_samples": 40,
+            "exact_match": 0.425,
+            "contains_match": 0.875,
+            "prefix_match": 0.425
+          },
+          "prefix": {
+            "num_samples": 40,
+            "exact_match": 0.4,
+            "contains_match": 0.875,
+            "prefix_match": 0.875
+          },
+          "suffix": {
+            "num_samples": 40,
+            "exact_match": 0.325,
+            "contains_match": 0.8,
+            "prefix_match": 0.325
+          }
+        },
+        "timestamp": "20260522_101435"
+      }
+    }
+  },
+  "gpt-5.4-nano": {
+    "hf_model_name": "gpt-5.4-nano",
+    "model_type": "it",
+    "thinking": false,
+    "benchmarks": {
+      "pacute-affixation-gen": {
+        "num_samples": 140,
+        "exact_match": 0.3142857142857143,
+        "contains_match": 0.45,
+        "prefix_match": 0.35714285714285715,
+        "format": "generative",
+        "by_category": {
+          "circumfix": {
+            "num_samples": 20,
+            "exact_match": 0.35,
+            "contains_match": 0.35,
+            "prefix_match": 0.35
+          },
+          "infix": {
+            "num_samples": 40,
+            "exact_match": 0.225,
+            "contains_match": 0.425,
+            "prefix_match": 0.275
+          },
+          "prefix": {
+            "num_samples": 40,
+            "exact_match": 0.45,
+            "contains_match": 0.6,
+            "prefix_match": 0.55
+          },
+          "suffix": {
+            "num_samples": 40,
+            "exact_match": 0.25,
+            "contains_match": 0.375,
+            "prefix_match": 0.25
+          }
+        },
+        "timestamp": "20260522_101435"
+      }
+    }
+  },
+  "gpt-5.5": {
+    "hf_model_name": "gpt-5.5",
+    "model_type": "it",
+    "thinking": false,
+    "benchmarks": {
+      "pacute-affixation-gen": {
+        "num_samples": 140,
+        "exact_match": 0.8714285714285714,
+        "contains_match": 0.9142857142857143,
+        "prefix_match": 0.8857142857142857,
+        "format": "generative",
+        "by_category": {
+          "circumfix": {
+            "num_samples": 20,
+            "exact_match": 0.9,
+            "contains_match": 0.9,
+            "prefix_match": 0.9
+          },
+          "infix": {
+            "num_samples": 40,
+            "exact_match": 0.85,
+            "contains_match": 0.875,
+            "prefix_match": 0.85
+          },
+          "prefix": {
+            "num_samples": 40,
+            "exact_match": 0.875,
+            "contains_match": 0.925,
+            "prefix_match": 0.925
+          },
+          "suffix": {
+            "num_samples": 40,
+            "exact_match": 0.875,
+            "contains_match": 0.95,
+            "prefix_match": 0.875
+          }
+        },
+        "timestamp": "20260522_101435"
+      }
+    }
+  },
+  "gpt-5-mini": {
+    "hf_model_name": "gpt-5-mini",
+    "model_type": "it",
+    "thinking": false,
+    "benchmarks": {
+      "pacute-affixation-gen": {
+        "num_samples": 140,
+        "exact_match": 0.7571428571428571,
+        "contains_match": 0.8571428571428571,
+        "prefix_match": 0.7857142857142857,
+        "format": "generative",
+        "by_category": {
+          "circumfix": {
+            "num_samples": 20,
+            "exact_match": 0.8,
+            "contains_match": 0.8,
+            "prefix_match": 0.8
+          },
+          "infix": {
+            "num_samples": 40,
+            "exact_match": 0.8,
+            "contains_match": 0.875,
+            "prefix_match": 0.8
+          },
+          "prefix": {
+            "num_samples": 40,
+            "exact_match": 0.775,
+            "contains_match": 0.875,
+            "prefix_match": 0.875
+          },
+          "suffix": {
+            "num_samples": 40,
+            "exact_match": 0.675,
+            "contains_match": 0.85,
+            "prefix_match": 0.675
+          }
+        },
+        "timestamp": "20260522_101435"
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "hf_model_name": "mistralai/Mistral-Small-4-119B-2603",
+  "model_type": "it",
+  "thinking": true,
+  "benchmarks": {},
+  "timestamp": "20260522_082708"
+}

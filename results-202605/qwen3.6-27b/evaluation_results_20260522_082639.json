@@ -1,0 +1,7 @@
+{
+  "hf_model_name": "Qwen/Qwen3.6-27B",
+  "model_type": "it",
+  "thinking": false,
+  "benchmarks": {},
+  "timestamp": "20260522_082639"
+}

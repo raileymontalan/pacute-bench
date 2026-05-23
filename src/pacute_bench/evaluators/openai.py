@@ -4,7 +4,7 @@ OpenAIEvaluator — evaluates models via the OpenAI batch API.
 Requires the ``OPENAI_API_KEY`` environment variable and ``openai >= 1.30``.
 Batch processing offers a 50% cost discount with results delivered within 24 hours.
 
-When ``OPENAI_BASE_URL`` is set (e.g. for the AISI API key proxy), the batch
+When ``OPENAI_BASE_URL`` is set (e.g. for the API key proxy), the batch
 results endpoint is typically unavailable; the evaluator automatically falls
 back to real-time async generation instead.
 """
@@ -24,7 +24,7 @@ class OpenAIEvaluator(BatchEvaluator):
     """
     Evaluates OpenAI models using the Batch API.
 
-    When ``OPENAI_BASE_URL`` is set (e.g. the AISI API key proxy), the evaluator
+    When ``OPENAI_BASE_URL`` is set (e.g. the API key proxy), the evaluator
     automatically switches to real-time async generation because the batch
     results endpoint is not exposed by the proxy.
 

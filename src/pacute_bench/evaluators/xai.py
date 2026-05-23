@@ -20,7 +20,7 @@ class XAIEvaluator(BatchEvaluator):
 
     Uses real-time async generation (xAI does not offer a batch API).
     ``XAI_BASE_URL`` can be overridden via environment variable (default:
-    ``"https://api.x.ai/v1"``); set it to route through the AISI proxy.
+    ``"https://api.x.ai/v1"``); set it to route through the API proxy.
 
     Args:
         model_name: Short label for logging and output paths.

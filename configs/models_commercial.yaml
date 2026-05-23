@@ -9,10 +9,11 @@
 #   GEMINI_API_KEY     — for provider: google
 #   XAI_API_KEY        — for provider: xai
 #
-# AISI API key proxy (optional):
-#   If running on AISI infrastructure with aisitools installed, set
-#   OPENAI_BASE_URL / ANTHROPIC_BASE_URL / GEMINI_BASE_URL / XAI_BASE_URL
-#   to the proxy endpoint. API keys are automatically wrapped via aisitools.
+# API key proxy (optional):
+#   If running through an organization-internal proxy, set the *_BASE_URL
+#   variables to the proxy endpoint. To additionally wrap API keys via a
+#   local helper module, set PACUTE_BENCH_KEY_PROXY_MODULE to its dotted name
+#   (see .env.example).
 
 models:
   # ============================================================================

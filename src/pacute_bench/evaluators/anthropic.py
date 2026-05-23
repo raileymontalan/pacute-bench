@@ -4,7 +4,7 @@ AnthropicEvaluator — evaluates models via the Anthropic Message Batches API.
 Requires the ``ANTHROPIC_API_KEY`` environment variable and ``anthropic >= 0.40``.
 Batch processing offers a 50% cost discount with results delivered within 24 hours.
 
-When ``ANTHROPIC_BASE_URL`` is set (e.g. for the AISI API key proxy), the batch
+When ``ANTHROPIC_BASE_URL`` is set (e.g. for the API key proxy), the batch
 results endpoint is unavailable; the evaluator automatically falls back to
 real-time async generation instead.
 """
@@ -20,7 +20,7 @@ class AnthropicEvaluator(BatchEvaluator):
     """
     Evaluates Anthropic models using the Message Batches API.
 
-    When ``ANTHROPIC_BASE_URL`` is set (e.g. the AISI API key proxy), the evaluator
+    When ``ANTHROPIC_BASE_URL`` is set (e.g. the API key proxy), the evaluator
     automatically switches to real-time async generation because the batch
     results endpoint is not exposed by the proxy.
 
@@ -71,7 +71,7 @@ class AnthropicEvaluator(BatchEvaluator):
         self.client = _anthropic.Anthropic(**client_kwargs)
         self.async_anthropic = _anthropic.AsyncAnthropic(**client_kwargs)
         # Use async generation when going through a proxy (batch results
-        # endpoint is not supported by the AISI proxy).
+        # endpoint is not supported by the API proxy).
         self._use_async = bool(base_url)
 
         mode_label = "async (proxy)" if self._use_async else "batch"

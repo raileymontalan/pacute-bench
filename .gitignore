@@ -56,6 +56,7 @@ multirun/
 # Logs
 logs/
 *.log
+*.out
 
 # Cache
 .cache/

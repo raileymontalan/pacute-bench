@@ -16,7 +16,19 @@
 #   attention_backend:      vLLM attention backend override. Unset = cluster default (FLASH_ATTN).
 #                           Set to "auto" to let vLLM choose (required for models with partial
 #                           multimodal token attention, e.g. Gemma4 26B-A4B and 31B).
-#   disable_prefix_caching: true to pass --no-enable-prefix-caching (default: prefix caching ON)
+#   disable_prefix_caching:  true to pass --no-enable-prefix-caching (default: prefix caching ON)
+#   disable_custom_all_reduce: true to pass --disable-custom-all-reduce; needed for hybrid
+#                           Mamba+attention models where the custom all-reduce CUDA kernel
+#                           fails during CUDA graph capture
+#   tokenizer_mode:         vLLM tokenizer mode (e.g. "mistral" for Mistral native format)
+#   config_format:          model config format (e.g. "mistral"); needed for Mistral consolidated
+#                           safetensors where HF format doesn't expose expert count
+#   load_format:            checkpoint load format (e.g. "mistral")
+#   data_parallel_size:     integer; enables DP serving (--data-parallel-size N, TP forced to 1).
+#                           tp field still determines total GPU allocation (= data_parallel_size).
+#   kv_cache_dtype:         KV cache dtype (e.g. "fp8"); passed as --kv-cache-dtype
+#   block_size:             KV cache block size in tokens; passed as --block-size
+#   compilation_config:     JSON string passed as --compilation-config (e.g. MiniMax qk-norm fusion)
 #   max_cudagraph_capture_size: integer; passed as --max-cudagraph-capture-size
 #   max_num_batched_tokens: integer; passed as --max-num-batched-tokens
 #   chat_template_kwargs:   JSON string passed to --default-chat-template-kwargs at serve time;
@@ -29,15 +41,17 @@ models:
   sea-lion-qwen-v4.5-27b-it:
     path: aisingapore/Qwen-SEA-LION-v4.5-27B-IT
     type: it
-    tp: 2
+    tp: 1
     chat_template_kwargs: '{"enable_thinking": false}'
+    language_model_only: true
 
   sea-lion-qwen-v4.5-27b-it-thinking:
     path: aisingapore/Qwen-SEA-LION-v4.5-27B-IT
     type: it
-    tp: 2
+    tp: 1
     thinking: true
     reasoning_parser: qwen3
+    language_model_only: true
 
   sea-lion-gemma-v4.5-e2b-it:
     path: aisingapore/Gemma-SEA-LION-v4.5-E2B-IT
@@ -120,161 +134,22 @@ models:
     attention_backend: auto
 
   # ============================================================================
-  # Qwen 3.5 Family
-  # Non-thinking variants use --default-chat-template-kwargs to disable thinking
-  # server-side; no reasoning_parser is needed when thinking is off.
-  # Thinking variants use --reasoning-parser qwen3 at serve time.
-  # MoE variants (35B-A3B, 122B-A10B, 397B-A17B) use enable_expert_parallel.
-  # ============================================================================
-  qwen3.5-0.8b-it:
-    path: Qwen/Qwen3.5-0.8B
-    type: it
-    tp: 1
-    chat_template_kwargs: '{"enable_thinking": false}'
-
-  qwen3.5-0.8b-it-thinking:
-    path: Qwen/Qwen3.5-0.8B
-    type: it
-    tp: 1
-    thinking: true
-    reasoning_parser: qwen3
-
-  qwen3.5-2b-it:
-    path: Qwen/Qwen3.5-2B
-    type: it
-    tp: 1
-    chat_template_kwargs: '{"enable_thinking": false}'
-
-  qwen3.5-2b-it-thinking:
-    path: Qwen/Qwen3.5-2B
-    type: it
-    tp: 1
-    thinking: true
-    reasoning_parser: qwen3
-
-  qwen3.5-4b-it:
-    path: Qwen/Qwen3.5-4B
-    type: it
-    tp: 1
-    chat_template_kwargs: '{"enable_thinking": false}'
-
-  qwen3.5-4b-it-thinking:
-    path: Qwen/Qwen3.5-4B
-    type: it
-    tp: 1
-    thinking: true
-    reasoning_parser: qwen3
-
-  qwen3.5-9b-it:
-    path: Qwen/Qwen3.5-9B
-    type: it
-    tp: 1
-    chat_template_kwargs: '{"enable_thinking": false}'
-
-  qwen3.5-9b-it-thinking:
-    path: Qwen/Qwen3.5-9B
-    type: it
-    tp: 1
-    thinking: true
-    reasoning_parser: qwen3
-
-  qwen3.5-27b-it:
-    path: Qwen/Qwen3.5-27B
-    type: it
-    tp: 2
-    chat_template_kwargs: '{"enable_thinking": false}'
-    language_model_only: true
-
-  qwen3.5-27b-it-thinking:
-    path: Qwen/Qwen3.5-27B
-    type: it
-    tp: 2
-    thinking: true
-    reasoning_parser: qwen3
-    language_model_only: true
-
-  qwen3.5-35b-a3b-it:
-    path: Qwen/Qwen3.5-35B-A3B
-    type: it
-    tp: 8
-    chat_template_kwargs: '{"enable_thinking": false}'
-    language_model_only: true
-
-  qwen3.5-35b-a3b-it-thinking:
-    path: Qwen/Qwen3.5-35B-A3B
-    type: it
-    tp: 8
-    thinking: true
-    reasoning_parser: qwen3
-    language_model_only: true
-
-  qwen3.5-122b-a10b-it:
-    path: Qwen/Qwen3.5-122B-A10B
-    type: it
-    tp: 4
-    enable_expert_parallel: true
-    chat_template_kwargs: '{"enable_thinking": false}'
-    language_model_only: true
-
-  qwen3.5-122b-a10b-it-thinking:
-    path: Qwen/Qwen3.5-122B-A10B
-    type: it
-    tp: 4
-    thinking: true
-    reasoning_parser: qwen3
-    enable_expert_parallel: true
-    language_model_only: true
-
-  qwen3.5-397b-a17b-it:
-    path: Qwen/Qwen3.5-397B-A17B
-    type: it
-    tp: 8
-    enable_expert_parallel: true
-    chat_template_kwargs: '{"enable_thinking": false}'
-    language_model_only: true
-
-  qwen3.5-397b-a17b-it-thinking:
-    path: Qwen/Qwen3.5-397B-A17B
-    type: it
-    tp: 8
-    thinking: true
-    reasoning_parser: qwen3
-    enable_expert_parallel: true
-    language_model_only: true
-
-  # ============================================================================
   # Qwen 3.6 Family
   # ============================================================================
-  qwen3.6-27b-it:
+  qwen3.6-27b:
     path: Qwen/Qwen3.6-27B
     type: it
     tp: 1
     chat_template_kwargs: '{"enable_thinking": false}'
     language_model_only: true
 
-  qwen3.6-27b-it-thinking:
+  qwen3.6-27b-thinking:
     path: Qwen/Qwen3.6-27B
     type: it
     tp: 1
     thinking: true
     reasoning_parser: qwen3
     language_model_only: true
-
-  qwen3.6-35b-a3b-it:
-    path: Qwen/Qwen3.6-35B-A3B
-    type: it
-    tp: 8
-    chat_template_kwargs: '{"enable_thinking": false}'
-    enable_expert_parallel: true
-
-  qwen3.6-35b-a3b-it-thinking:
-    path: Qwen/Qwen3.6-35B-A3B
-    type: it
-    tp: 8
-    thinking: true
-    reasoning_parser: qwen3
-    enable_expert_parallel: true
-
 
   # ============================================================================
   # Mistral
@@ -283,51 +158,38 @@ models:
   mistral-medium-3.5-128b-it:
     path: mistralai/Mistral-Medium-3.5-128B
     type: it
-    tp: 4
-    enable_expert_parallel: true
+    tp: 8
+    tokenizer_mode: mistral
+    config_format: mistral
+    load_format: mistral
+    language_model_only: true
 
   mistral-medium-3.5-128b-it-thinking:
     path: mistralai/Mistral-Medium-3.5-128B
     type: it
-    tp: 4
+    tp: 8
     thinking: true
     reasoning_parser: mistral
-    enable_expert_parallel: true
+    tokenizer_mode: mistral
+    config_format: mistral
+    load_format: mistral
+    language_model_only: true
 
   mistral-small-4-119b-it:
     path: mistralai/Mistral-Small-4-119B-2603
     type: it
-    tp: 4
-    enable_expert_parallel: true
+    tp: 2
+    attention_backend: FLASH_ATTN_MLA
+    max_num_batched_tokens: 16384
 
   mistral-small-4-119b-it-thinking:
     path: mistralai/Mistral-Small-4-119B-2603
     type: it
-    tp: 4
-    thinking: true
-    reasoning_parser: mistral
-    enable_expert_parallel: true
-
-  # ============================================================================
-  # DeepSeek V4
-  # These are always-thinking models that emit <think> blocks unconditionally.
-  # Note: V4-Pro may require disaggregated prefill/decode for optimal throughput.
-  # ============================================================================
-  deepseek-v4-flash:
-    path: deepseek-ai/DeepSeek-V4-Flash
-    type: it
     tp: 2
     thinking: true
-    reasoning_parser: deepseek_r1
-    enable_expert_parallel: true
-
-  deepseek-v4-pro:
-    path: deepseek-ai/DeepSeek-V4-Pro
-    type: it
-    tp: 8
-    thinking: true
-    reasoning_parser: deepseek_r1
-    enable_expert_parallel: true
+    reasoning_parser: mistral
+    attention_backend: FLASH_ATTN_MLA
+    max_num_batched_tokens: 16384
 
   # ============================================================================
   # OpenAI OSS (open-weight MoE models)
@@ -353,39 +215,35 @@ models:
     max_num_batched_tokens: 8192
 
   # ============================================================================
-  # MiniMax M2.7
-  # Large MoE; enable_expert_parallel is required.
+  # Phi-4 Family
+  # No base (PT) versions are publicly available; all entries are IT only.
+  # phi-4-reasoning variants use chain-of-thought (<think> blocks).
   # ============================================================================
-  minimax-m2.7:
-    path: MiniMaxAI/MiniMax-M2.7
-    type: it
-    tp: 8
-    thinking: true
-    reasoning_parser: minimax_m2
-    enable_expert_parallel: true
-
-  # ============================================================================
-  # Arcee Trinity
-  # Trinity-Large-Thinking uses chain-of-thought reasoning.
-  # ============================================================================
-  arcee-trinity-nano:
-    path: arcee-ai/Trinity-Nano-Preview
+  phi-4:
+    path: microsoft/phi-4
     type: it
     tp: 1
+    language_model_only: true
+    max_model_len: 8192
 
-  arcee-trinity-mini:
-    path: arcee-ai/Trinity-Mini
+  phi-4-reasoning:
+    path: microsoft/Phi-4-reasoning
     type: it
-    tp: 1
-
-  arcee-trinity-large:
-    path: arcee-ai/Trinity-Large-Preview
-    type: it
-    tp: 4
-
-  arcee-trinity-large-thinking:
-    path: arcee-ai/Trinity-Large-Thinking
-    type: it
-    tp: 4
     thinking: true
     reasoning_parser: deepseek_r1
+    tp: 1
+    language_model_only: true
+
+  phi-4-reasoning-plus:
+    path: microsoft/Phi-4-reasoning-plus
+    type: it
+    thinking: true
+    reasoning_parser: deepseek_r1
+    tp: 1
+    language_model_only: true
+
+  phi-4-mini-instruct:
+    path: microsoft/Phi-4-mini-instruct
+    type: it
+    tp: 1
+    language_model_only: true

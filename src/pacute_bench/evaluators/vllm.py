@@ -86,7 +86,7 @@ class VLLMEvaluator(BaseEvaluator):
         )
 
         print(f"Loading tokenizer: {tokenizer_name}")
-        self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
+        self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_name, trust_remote_code=True)
 
         if thinking:
             if reasoning_parser:

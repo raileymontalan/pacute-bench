@@ -11,6 +11,13 @@
 #                           multimodal models (Gemma4) when doing text-only eval
 #   attention_backend:      vLLM attention backend override; "auto" lets vLLM choose
 #   enforce_eager:          true to pass --enforce-eager; disables Inductor compilation
+#   tokenizer_mode:         vLLM tokenizer mode (e.g. "deepseek_v4")
+#   kv_cache_dtype:         KV cache dtype (e.g. "fp8"); passed as --kv-cache-dtype
+#   block_size:             KV cache block size in tokens; passed as --block-size
+#   max_num_batched_tokens: integer; passed as --max-num-batched-tokens
+#   disable_custom_all_reduce: true to pass --disable-custom-all-reduce; needed for hybrid
+#                           Mamba+attention models where the custom all-reduce CUDA kernel
+#                           fails during CUDA graph capture
 
 models:
   # ============================================================================
@@ -20,21 +27,25 @@ models:
     path: openai-community/gpt2
     type: pt
     tp: 1
+    max_model_len: 1024
 
   gpt2-medium:
     path: openai-community/gpt2-medium
     type: pt
     tp: 1
+    max_model_len: 1024
 
   gpt2-large:
     path: openai-community/gpt2-large
     type: pt
     tp: 1
+    max_model_len: 1024
 
   gpt2-xl:
     path: openai-community/gpt2-xl
     type: pt
     tp: 1
+    max_model_len: 1024
 
   # ============================================================================
   # Google Gemma 4 Base
@@ -61,10 +72,9 @@ models:
   gemma-4-31b:
     path: google/gemma-4-31B
     type: pt
-    tp: 2
+    tp: 1
     language_model_only: true
     attention_backend: auto
-    enforce_eager: true
 
   # ============================================================================
   # Qwen 3.5 Base
@@ -88,63 +98,3 @@ models:
     path: Qwen/Qwen3.5-9B-Base
     type: pt
     tp: 1
-
-  qwen3.5-27b:
-    path: Qwen/Qwen3.5-27B-Base
-    type: pt
-    tp: 2
-    language_model_only: true
-
-  qwen3.5-35b-a3b:
-    path: Qwen/Qwen3.5-35B-A3B-Base
-    type: pt
-    tp: 2
-    enable_expert_parallel: true
-
-  # ============================================================================
-  # NVIDIA Nemotron 3 Base
-  # ============================================================================
-  nemotron-3-nano-30b:
-    path: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-Base-BF16
-    type: pt
-    tp: 2
-    enable_expert_parallel: true
-
-  nemotron-3-super-120b:
-    path: nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-Base-BF16
-    type: pt
-    tp: 4
-    enable_expert_parallel: true
-
-  # ============================================================================
-  # DeepSeek V4 Base
-  # ============================================================================
-  deepseek-v4-flash-base:
-    path: deepseek-ai/DeepSeek-V4-Flash-Base
-    type: pt
-    tp: 2
-    enable_expert_parallel: true
-
-  deepseek-v4-pro-base:
-    path: deepseek-ai/DeepSeek-V4-Pro-Base
-    type: pt
-    tp: 8
-    enable_expert_parallel: true
-
-  # ============================================================================
-  # Arcee Trinity Base
-  # ============================================================================
-  arcee-trinity-nano-base:
-    path: arcee-ai/Trinity-Nano-Base
-    type: pt
-    tp: 1
-
-  arcee-trinity-mini-base:
-    path: arcee-ai/Trinity-Mini-Base
-    type: pt
-    tp: 1
-
-  arcee-trinity-large-base:
-    path: arcee-ai/Trinity-Large-Base
-    type: pt
-    tp: 4

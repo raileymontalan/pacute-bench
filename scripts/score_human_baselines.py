@@ -4,9 +4,9 @@ Score filled human baseline annotation workbooks and compute IAA.
 
 Run from the repo root:
     python scripts/score_human_baselines.py \
-        data/human_baseline/annotation_annotator1.xlsx \
-        data/human_baseline/annotation_annotator2.xlsx \
-        data/human_baseline/annotation_annotator3.xlsx
+        data/human_baseline_annotations/annotation_annotator1.xlsx \
+        data/human_baseline_annotations/annotation_annotator2.xlsx \
+        data/human_baseline_annotations/annotation_annotator3.xlsx
 
 Outputs (written to results/human_baseline/):
     scores_per_annotator.json   — per-annotator accuracy/exact_match by benchmark
@@ -22,8 +22,8 @@ from pathlib import Path
 
 import openpyxl
 
-OUT_DIR = Path("results/human_baseline")
-SAMPLE_DIR = Path("data/human_baseline")
+OUT_DIR = Path("results-202605/human_baseline")
+SAMPLE_DIR = Path("data/human_baseline_annotations")
 
 # Sheet name → (benchmark, format) reverse map
 SHEET_TO_KEY = {v: k for k, v in {

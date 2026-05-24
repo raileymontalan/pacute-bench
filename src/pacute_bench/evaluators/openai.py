@@ -143,7 +143,8 @@ class OpenAIEvaluator(BatchEvaluator):
     ) -> dict:
         is_reasoning = self._is_reasoning_model()
         token_limit = 8192 if (self.thinking or is_reasoning) else 256
-        sem = asyncio.Semaphore(16)
+        max_concurrent = int(os.environ.get("PACUTE_BENCH_MAX_CONCURRENT", 16))
+        sem = asyncio.Semaphore(max_concurrent)
 
         async def gen_one(sample_id: str, prefix: str):
             messages: list = []
@@ -159,12 +160,20 @@ class OpenAIEvaluator(BatchEvaluator):
             if not is_reasoning:
                 kwargs["temperature"] = 0.0
             async with sem:
-                response = await self.async_client.chat.completions.create(**kwargs)
-            content = response.choices[0].message.content or ""
+                try:
+                    response = await self.async_client.chat.completions.create(**kwargs)
+                except Exception as e:
+                    print(f"    [warn] {sample_id}: request failed ({type(e).__name__}: {e}); recording empty result")
+                    return sample_id, ""
+            try:
+                content = response.choices[0].message.content or ""
+            except (TypeError, IndexError, AttributeError):
+                print(f"    [warn] {sample_id}: malformed response (no choices); recording empty result")
+                content = ""
             return sample_id, content.strip().lower()
 
         tasks = [gen_one(str(item[3]), item[0]) for item in items]
-        print(f"  Sending {len(tasks)} async requests (max 16 concurrent)…")
+        print(f"  Sending {len(tasks)} async requests (max {max_concurrent} concurrent)…")
         results = await asyncio.gather(*tasks)
         return {sid: text for sid, text in results}
 

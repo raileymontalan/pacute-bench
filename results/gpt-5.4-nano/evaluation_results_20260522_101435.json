@@ -1,0 +1,42 @@
+{
+  "hf_model_name": "gpt-5.4-nano",
+  "model_type": "it",
+  "thinking": false,
+  "benchmarks": {
+    "pacute-affixation-gen": {
+      "num_samples": 140,
+      "exact_match": 0.3142857142857143,
+      "contains_match": 0.45,
+      "prefix_match": 0.35714285714285715,
+      "format": "generative",
+      "by_category": {
+        "circumfix": {
+          "num_samples": 20,
+          "exact_match": 0.35,
+          "contains_match": 0.35,
+          "prefix_match": 0.35
+        },
+        "infix": {
+          "num_samples": 40,
+          "exact_match": 0.225,
+          "contains_match": 0.425,
+          "prefix_match": 0.275
+        },
+        "prefix": {
+          "num_samples": 40,
+          "exact_match": 0.45,
+          "contains_match": 0.6,
+          "prefix_match": 0.55
+        },
+        "suffix": {
+          "num_samples": 40,
+          "exact_match": 0.25,
+          "contains_match": 0.375,
+          "prefix_match": 0.25
+        }
+      },
+      "timestamp": "20260522_101435"
+    }
+  },
+  "timestamp": "20260522_101435"
+}

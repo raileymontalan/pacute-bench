@@ -1,0 +1,42 @@
+{
+  "hf_model_name": "gpt-5.4-mini",
+  "model_type": "it",
+  "thinking": false,
+  "benchmarks": {
+    "pacute-affixation-gen": {
+      "num_samples": 140,
+      "exact_match": 0.42857142857142855,
+      "contains_match": 0.8285714285714286,
+      "prefix_match": 0.5642857142857143,
+      "format": "generative",
+      "by_category": {
+        "circumfix": {
+          "num_samples": 20,
+          "exact_match": 0.7,
+          "contains_match": 0.7,
+          "prefix_match": 0.7
+        },
+        "infix": {
+          "num_samples": 40,
+          "exact_match": 0.425,
+          "contains_match": 0.875,
+          "prefix_match": 0.425
+        },
+        "prefix": {
+          "num_samples": 40,
+          "exact_match": 0.4,
+          "contains_match": 0.875,
+          "prefix_match": 0.875
+        },
+        "suffix": {
+          "num_samples": 40,
+          "exact_match": 0.325,
+          "contains_match": 0.8,
+          "prefix_match": 0.325
+        }
+      },
+      "timestamp": "20260522_101435"
+    }
+  },
+  "timestamp": "20260522_101435"
+}

@@ -1,0 +1,42 @@
+{
+  "hf_model_name": "google/gemini-3.1-flash-lite",
+  "model_type": "it",
+  "thinking": false,
+  "benchmarks": {
+    "pacute-affixation-gen": {
+      "num_samples": 140,
+      "exact_match": 0.45714285714285713,
+      "contains_match": 0.8785714285714286,
+      "prefix_match": 0.6,
+      "format": "generative",
+      "by_category": {
+        "circumfix": {
+          "num_samples": 20,
+          "exact_match": 0.8,
+          "contains_match": 0.8,
+          "prefix_match": 0.8
+        },
+        "infix": {
+          "num_samples": 40,
+          "exact_match": 0.4,
+          "contains_match": 0.875,
+          "prefix_match": 0.4
+        },
+        "prefix": {
+          "num_samples": 40,
+          "exact_match": 0.45,
+          "contains_match": 0.95,
+          "prefix_match": 0.95
+        },
+        "suffix": {
+          "num_samples": 40,
+          "exact_match": 0.35,
+          "contains_match": 0.85,
+          "prefix_match": 0.35
+        }
+      },
+      "timestamp": "20260522_102537"
+    }
+  },
+  "timestamp": "20260522_102537"
+}

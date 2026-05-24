@@ -35,8 +35,9 @@ models:
     type: it
     provider: openai-async
 
-  gpt-5.5-pro:
-    path: gpt-5.5-pro
+  # Re-added for paper continuity (§Results cites its specific Affix-GEN EM score).
+  gpt-5-mini:
+    path: gpt-5-mini
     type: it
     provider: openai-async
 
@@ -63,17 +64,48 @@ models:
   # Google Gemini (async via OpenAI-compatible endpoint)
   # ============================================================================
 
-  gemini-3.1-pro:
-    path: gemini-3.1-pro
-    type: it
-    provider: google
-
   gemini-3.1-flash-lite:
-    path: gemini-3.1-flash-lite
+    path: google/gemini-3.1-flash-lite
     type: it
-    provider: google
+    provider: openai-async
 
   gemini-3.5-flash:
-    path: gemini-3.5-flash
+    path: google/gemini-3.5-flash
     type: it
-    provider: google
+    provider: openai-async
+    thinking: true  # Gemini 3.5 Flash emits internal reasoning tokens; needs ~8K max_tokens
+
+  # ============================================================================
+  # OpenRouter additions: Chinese / non-OAI frontier + xAI gap-fill
+  # All run via openai-async path with OPENAI_BASE_URL=$OPENROUTER_BASE_URL.
+  # ============================================================================
+
+  qwen3-235b-thinking:
+    path: qwen/qwen3-235b-a22b-thinking-2507
+    type: it
+    provider: openai-async
+    thinking: true
+
+  deepseek-v3.2:
+    path: deepseek/deepseek-v3.2-exp
+    type: it
+    provider: openai-async
+    thinking: true  # safe budget — non-reasoning variant still occasionally verbose
+
+  deepseek-r1:
+    path: deepseek/deepseek-r1-0528
+    type: it
+    provider: openai-async
+    thinking: true
+
+  kimi-k2-thinking:
+    path: moonshotai/kimi-k2-thinking
+    type: it
+    provider: openai-async
+    thinking: true
+
+  grok-4:
+    path: x-ai/grok-4.20
+    type: it
+    provider: openai-async
+    thinking: true

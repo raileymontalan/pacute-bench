@@ -117,7 +117,8 @@ class AnthropicEvaluator(BatchEvaluator):
         self, items, benchmark_name: str, effective_prompt: Optional[str]
     ) -> dict:
         max_tokens = 8192 if self.thinking else 256
-        sem = asyncio.Semaphore(16)
+        max_concurrent = int(os.environ.get("PACUTE_BENCH_MAX_CONCURRENT", 16))
+        sem = asyncio.Semaphore(max_concurrent)
 
         async def gen_one(sample_id: str, prefix: str):
             kwargs: dict = {
@@ -128,12 +129,20 @@ class AnthropicEvaluator(BatchEvaluator):
             if effective_prompt:
                 kwargs["system"] = effective_prompt
             async with sem:
-                response = await self.async_anthropic.messages.create(**kwargs)
-            text = response.content[0].text or ""
+                try:
+                    response = await self.async_anthropic.messages.create(**kwargs)
+                except Exception as e:
+                    print(f"    [warn] {sample_id}: request failed ({type(e).__name__}: {e}); recording empty result")
+                    return sample_id, ""
+            try:
+                text = response.content[0].text or ""
+            except (TypeError, IndexError, AttributeError):
+                print(f"    [warn] {sample_id}: malformed response (no content); recording empty result")
+                text = ""
             return sample_id, text.strip().lower()
 
         tasks = [gen_one(str(item[3]), item[0]) for item in items]
-        print(f"  Sending {len(tasks)} async requests (max 16 concurrent)…")
+        print(f"  Sending {len(tasks)} async requests (max {max_concurrent} concurrent)…")
         results = await asyncio.gather(*tasks)
         return {sid: text for sid, text in results}
 

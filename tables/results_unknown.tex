@@ -1,0 +1,33 @@
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{adjustbox}
+\usepackage{threeparttable}
+\usepackage{colortbl}
+\usepackage[margin=1in]{geometry}
+\begin{document}
+\section*{Results: Unknown Models}
+
+\begin{table}[htbp]
+\centering
+\caption{Results for Unknown models on PACUTE benchmarks.}
+\label{tab:results-unknown}
+\begin{threeparttable}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr}
+\toprule
+\textbf{Model} & \multicolumn{2}{c}{\textbf{Comp-MCQ}} & \multicolumn{2}{c}{\textbf{Comp-Gen}} & \multicolumn{2}{c}{\textbf{Manip-MCQ}} & \multicolumn{2}{c}{\textbf{Manip-Gen}} & \multicolumn{2}{c}{\textbf{MExt-MCQ}} & \multicolumn{2}{c}{\textbf{MExt-Gen}} & \multicolumn{2}{c}{\textbf{MProd-MCQ}} & \multicolumn{2}{c}{\textbf{MProd-Gen}} & \multicolumn{2}{c}{\textbf{Syll-MCQ}} & \multicolumn{2}{c}{\textbf{Syll-Gen}} & \multicolumn{2}{c}{\textbf{Hier-MCQ}} & \multicolumn{2}{c}{\textbf{Hier-Gen}} & \multicolumn{2}{c}{\textbf{LGame-MCQ}} & \multicolumn{2}{c}{\textbf{LGame-Gen}} & \multicolumn{2}{c}{\textbf{MDA-MCQ}} & \multicolumn{2}{c}{\textbf{MDA-Gen}} & \multicolumn{2}{c}{\textbf{CUTE-Gen}} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}\cmidrule(lr){10-11}\cmidrule(lr){12-13}\cmidrule(lr){14-15}\cmidrule(lr){16-17}\cmidrule(lr){18-19}\cmidrule(lr){20-21}\cmidrule(lr){22-23}\cmidrule(lr){24-25}\cmidrule(lr){26-27}\cmidrule(lr){28-29}\cmidrule(lr){30-31}\cmidrule(lr){32-33}\cmidrule(lr){34-35}
+ & \textit{NormAcc} & \textit{F1} & \textit{EM} & \textit{CM} & \textit{NormAcc} & \textit{F1} & \textit{EM} & \textit{CM} & \textit{NormAcc} & \textit{F1} & \textit{EM} & \textit{CM} & \textit{NormAcc} & \textit{F1} & \textit{EM} & \textit{CM} & \textit{NormAcc} & \textit{F1} & \textit{EM} & \textit{CM} & \textit{NormAcc} & \textit{F1} & \textit{EM} & \textit{CM} & \textit{NormAcc} & \textit{F1} & \textit{EM} & \textit{CM} & \textit{NormAcc} & \textit{F1} & \textit{EM} & \textit{CM} & \textit{EM} & \textit{CM} \\
+\midrule
+Qwen/Qwen3.6-27B & \textbf{24.5} & \textbf{60.5} & \textbf{87.6} & \textbf{87.6} & \textbf{26.2} & \textbf{61.7} & \textbf{75.0} & \textbf{76.2} & \textbf{62.3} & \textbf{83.6} & \textbf{52.2} & \textbf{59.5} & \textbf{84.0} & \textbf{93.6} & \textbf{39.3} & \textbf{40.0} & \textbf{-51.0} & \textbf{39.4} & \textbf{41.5} & \textbf{45.5} & \textbf{-3.1} & \textbf{37.0} & \textbf{53.5} & \textbf{69.8} & \textbf{83.9} & \textbf{93.6} & \textbf{99.7} & \textbf{99.9} & \textbf{53.5} & \textbf{78.9} & \textbf{99.9} & \textbf{99.9} & \textbf{82.2} & \textbf{85.1} \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{tablenotes}[flushleft]\footnotesize
+\item \textit{CUTE} = CUTE; \textit{Comp} = PACUTE Composition; \textit{Hier} = Hierarchical; \textit{LGame} = LangGame; \textit{MDA} = Multi-Digit Addition; \textit{MExt} = PACUTE Morphological Extraction; \textit{MProd} = PACUTE Morphological Production; \textit{Manip} = PACUTE Manipulation; \textit{Syll} = PACUTE Syllabification; Bold = best in column. Cell colour: \colorbox[HTML]{F4A582}{\strut low} $\to$ white $\to$ \colorbox[HTML]{92C5DE}{high} per column.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\end{document}

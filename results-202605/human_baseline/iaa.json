@@ -10,39 +10,11 @@
     "kappa": 0.9152,
     "pct_agree": 0.9053
   },
-  "cute_gen": {
-    "n": 140,
-    "kappa_binary": 1.0,
-    "pct_exact_agree_raw": 1.0,
-    "pct_exact_agree_bin": 1.0
-  },
-  "hierarchical_gen": {
-    "n": 60,
-    "kappa_binary": 0.1667,
-    "pct_exact_agree_raw": 0.5833,
-    "pct_exact_agree_bin": 0.6
-  },
-  "hierarchical_mcq": {
-    "n": 60,
-    "kappa": 0.9554,
-    "pct_agree": 0.95
-  },
-  "langgame_gen": {
-    "n": 100,
-    "kappa_binary": 1.0,
-    "pct_exact_agree_raw": 1.0,
-    "pct_exact_agree_bin": 1.0
-  },
-  "langgame_mcq": {
-    "n": 100,
-    "kappa": 1.0,
-    "pct_agree": 1.0
-  },
   "manipulation_gen": {
     "n": 80,
-    "kappa_binary": -0.0084,
-    "pct_exact_agree_raw": 0.9625,
-    "pct_exact_agree_bin": 0.975
+    "kappa_binary": 1.0,
+    "pct_exact_agree_raw": 0.9875,
+    "pct_exact_agree_bin": 1.0
   },
   "manipulation_mcq": {
     "n": 80,
@@ -62,7 +34,7 @@
   },
   "morphological_production_gen": {
     "n": 15,
-    "kappa_binary": 0.2857,
+    "kappa_binary": 0.4512,
     "pct_exact_agree_raw": 0.8667,
     "pct_exact_agree_bin": 0.8667
   },
@@ -70,17 +42,6 @@
     "n": 15,
     "kappa": 0.9382,
     "pct_agree": 0.9333
-  },
-  "multi_digit_addition_gen": {
-    "n": 100,
-    "kappa_binary": 1.0,
-    "pct_exact_agree_raw": 1.0,
-    "pct_exact_agree_bin": 1.0
-  },
-  "multi_digit_addition_mcq": {
-    "n": 100,
-    "kappa": 1.0,
-    "pct_agree": 1.0
   },
   "syllabification_gen": {
     "n": 20,
@@ -90,7 +51,7 @@
   },
   "syllabification_mcq": {
     "n": 20,
-    "kappa": 0.1275,
-    "pct_agree": 0.15
+    "kappa": 0.5894,
+    "pct_agree": 0.6
   }
 }

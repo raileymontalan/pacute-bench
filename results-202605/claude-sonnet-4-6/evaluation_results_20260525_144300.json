@@ -1,0 +1,428 @@
+{
+  "hf_model_name": "claude-sonnet-4-6",
+  "model_type": "it",
+  "thinking": false,
+  "timestamp": "20260525_144300",
+  "benchmarks": {
+    "cute-gen": {
+      "exact_match": 0.9192857142857143,
+      "contains_match": 0.9385714285714286,
+      "prefix_match": 0.9192857142857143,
+      "num_samples": 1400,
+      "format": "gen",
+      "by_category": {
+        "contains_char": {
+          "num_samples": 100,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "contains_word": {
+          "num_samples": 100,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "del_char": {
+          "num_samples": 100,
+          "exact_match": 0.98,
+          "contains_match": 0.98,
+          "prefix_match": 0.98
+        },
+        "del_word": {
+          "num_samples": 100,
+          "exact_match": 0.94,
+          "contains_match": 0.94,
+          "prefix_match": 0.94
+        },
+        "ins_char": {
+          "num_samples": 100,
+          "exact_match": 0.87,
+          "contains_match": 0.87,
+          "prefix_match": 0.87
+        },
+        "ins_word": {
+          "num_samples": 100,
+          "exact_match": 0.99,
+          "contains_match": 0.99,
+          "prefix_match": 0.99
+        },
+        "orth": {
+          "num_samples": 100,
+          "exact_match": 0.39,
+          "contains_match": 0.62,
+          "prefix_match": 0.39
+        },
+        "sem": {
+          "num_samples": 100,
+          "exact_match": 0.93,
+          "contains_match": 0.97,
+          "prefix_match": 0.93
+        },
+        "spell": {
+          "num_samples": 100,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "spell_inverse": {
+          "num_samples": 100,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "sub_char": {
+          "num_samples": 100,
+          "exact_match": 0.95,
+          "contains_match": 0.95,
+          "prefix_match": 0.95
+        },
+        "sub_word": {
+          "num_samples": 100,
+          "exact_match": 0.97,
+          "contains_match": 0.97,
+          "prefix_match": 0.97
+        },
+        "swap_char": {
+          "num_samples": 100,
+          "exact_match": 0.9,
+          "contains_match": 0.9,
+          "prefix_match": 0.9
+        },
+        "swap_word": {
+          "num_samples": 100,
+          "exact_match": 0.95,
+          "contains_match": 0.95,
+          "prefix_match": 0.95
+        }
+      }
+    },
+    "hierarchical-gen": {
+      "exact_match": 0.5716666666666667,
+      "contains_match": 0.68,
+      "prefix_match": 0.585,
+      "num_samples": 600,
+      "format": "gen",
+      "by_category": {
+        "composition/affix_application_infix": {
+          "num_samples": 1,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "composition/affix_application_prefix": {
+          "num_samples": 99,
+          "exact_match": 0.7576,
+          "contains_match": 0.7576,
+          "prefix_match": 0.7576
+        },
+        "decomposition/affix_identification_prefix": {
+          "num_samples": 49,
+          "exact_match": 0.3265,
+          "contains_match": 0.5306,
+          "prefix_match": 0.4694
+        },
+        "decomposition/affix_identification_suffix": {
+          "num_samples": 1,
+          "exact_match": 0.0,
+          "contains_match": 0.0,
+          "prefix_match": 0.0
+        },
+        "decomposition/root_extraction": {
+          "num_samples": 50,
+          "exact_match": 0.2,
+          "contains_match": 0.62,
+          "prefix_match": 0.2
+        },
+        "manipulation/affix_removal_prefix": {
+          "num_samples": 99,
+          "exact_match": 0.4141,
+          "contains_match": 0.7475,
+          "prefix_match": 0.4242
+        },
+        "manipulation/affix_removal_suffix": {
+          "num_samples": 1,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/character_deletion": {
+          "num_samples": 25,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/character_insertion": {
+          "num_samples": 25,
+          "exact_match": 0.84,
+          "contains_match": 0.84,
+          "prefix_match": 0.84
+        },
+        "manipulation/character_permutation": {
+          "num_samples": 25,
+          "exact_match": 0.8,
+          "contains_match": 0.8,
+          "prefix_match": 0.8
+        },
+        "manipulation/character_substitution": {
+          "num_samples": 25,
+          "exact_match": 0.96,
+          "contains_match": 0.96,
+          "prefix_match": 0.96
+        },
+        "reasoning/multi_step_transformation": {
+          "num_samples": 100,
+          "exact_match": 0.09,
+          "contains_match": 0.1,
+          "prefix_match": 0.09
+        },
+        "recognition/character_counting": {
+          "num_samples": 50,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "recognition/character_identification": {
+          "num_samples": 50,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        }
+      }
+    },
+    "langgame-gen": {
+      "exact_match": 0.999,
+      "contains_match": 0.999,
+      "prefix_match": 0.999,
+      "num_samples": 1000,
+      "format": "gen",
+      "by_category": {
+        "__all__": {
+          "num_samples": 1000,
+          "exact_match": 0.999,
+          "contains_match": 0.999,
+          "prefix_match": 0.999
+        }
+      }
+    },
+    "multi-digit-addition-gen": {
+      "exact_match": 1.0,
+      "contains_match": 1.0,
+      "prefix_match": 1.0,
+      "num_samples": 1000,
+      "format": "gen",
+      "by_category": {
+        "__all__": {
+          "num_samples": 1000,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        }
+      }
+    },
+    "pacute-affixation-gen": {
+      "exact_match": 0.2857142857142857,
+      "contains_match": 0.5785714285714286,
+      "prefix_match": 0.39285714285714285,
+      "num_samples": 140,
+      "format": "gen",
+      "by_category": {
+        "circumfix": {
+          "num_samples": 20,
+          "exact_match": 0.5,
+          "contains_match": 0.5,
+          "prefix_match": 0.5
+        },
+        "infix": {
+          "num_samples": 40,
+          "exact_match": 0.225,
+          "contains_match": 0.525,
+          "prefix_match": 0.225
+        },
+        "prefix": {
+          "num_samples": 40,
+          "exact_match": 0.325,
+          "contains_match": 0.725,
+          "prefix_match": 0.7
+        },
+        "suffix": {
+          "num_samples": 40,
+          "exact_match": 0.2,
+          "contains_match": 0.525,
+          "prefix_match": 0.2
+        }
+      }
+    },
+    "pacute-composition-gen": {
+      "exact_match": 0.9036363636363637,
+      "contains_match": 0.9036363636363637,
+      "prefix_match": 0.9036363636363637,
+      "num_samples": 550,
+      "format": "gen",
+      "by_category": {
+        "character_counting": {
+          "num_samples": 100,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "character_finding": {
+          "num_samples": 50,
+          "exact_match": 0.94,
+          "contains_match": 0.94,
+          "prefix_match": 0.94
+        },
+        "diacritic_counting": {
+          "num_samples": 100,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "length_counting": {
+          "num_samples": 100,
+          "exact_match": 0.5,
+          "contains_match": 0.5,
+          "prefix_match": 0.5
+        },
+        "spelling": {
+          "num_samples": 100,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "uppercase_counting": {
+          "num_samples": 100,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        }
+      }
+    },
+    "pacute-manipulation-gen": {
+      "exact_match": 0.94125,
+      "contains_match": 0.9425,
+      "prefix_match": 0.94125,
+      "num_samples": 800,
+      "format": "gen",
+      "by_category": {
+        "deletion": {
+          "num_samples": 100,
+          "exact_match": 0.99,
+          "contains_match": 0.99,
+          "prefix_match": 0.99
+        },
+        "diacritic_normalization": {
+          "num_samples": 100,
+          "exact_match": 0.99,
+          "contains_match": 0.99,
+          "prefix_match": 0.99
+        },
+        "duplication": {
+          "num_samples": 100,
+          "exact_match": 0.9,
+          "contains_match": 0.9,
+          "prefix_match": 0.9
+        },
+        "insertion": {
+          "num_samples": 100,
+          "exact_match": 0.81,
+          "contains_match": 0.81,
+          "prefix_match": 0.81
+        },
+        "lowercasing": {
+          "num_samples": 100,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "permutation": {
+          "num_samples": 100,
+          "exact_match": 0.87,
+          "contains_match": 0.87,
+          "prefix_match": 0.87
+        },
+        "substitution": {
+          "num_samples": 100,
+          "exact_match": 0.97,
+          "contains_match": 0.98,
+          "prefix_match": 0.97
+        },
+        "uppercasing": {
+          "num_samples": 100,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        }
+      }
+    },
+    "pacute-morphological-extraction-gen": {
+      "exact_match": 0.74,
+      "contains_match": 0.7625,
+      "prefix_match": 0.75,
+      "num_samples": 400,
+      "format": "gen",
+      "by_category": {
+        "inflected_affix_extraction": {
+          "num_samples": 100,
+          "exact_match": 0.7,
+          "contains_match": 0.75,
+          "prefix_match": 0.73
+        },
+        "inflected_root_extraction": {
+          "num_samples": 100,
+          "exact_match": 0.85,
+          "contains_match": 0.88,
+          "prefix_match": 0.86
+        },
+        "reduplicant_extraction": {
+          "num_samples": 100,
+          "exact_match": 0.73,
+          "contains_match": 0.73,
+          "prefix_match": 0.73
+        },
+        "reduplicated_root_extraction": {
+          "num_samples": 100,
+          "exact_match": 0.68,
+          "contains_match": 0.69,
+          "prefix_match": 0.68
+        }
+      }
+    },
+    "pacute-morphological-production-gen": {
+      "exact_match": 0.54,
+      "contains_match": 0.54,
+      "prefix_match": 0.54,
+      "num_samples": 150,
+      "format": "gen",
+      "by_category": {
+        "inflected_form_production": {
+          "num_samples": 150,
+          "exact_match": 0.54,
+          "contains_match": 0.54,
+          "prefix_match": 0.54
+        }
+      }
+    },
+    "pacute-syllabification-gen": {
+      "exact_match": 0.58,
+      "contains_match": 0.605,
+      "prefix_match": 0.585,
+      "num_samples": 200,
+      "format": "gen",
+      "by_category": {
+        "stress_disambiguation": {
+          "num_samples": 100,
+          "exact_match": 0.63,
+          "contains_match": 0.68,
+          "prefix_match": 0.64
+        },
+        "stress_identification": {
+          "num_samples": 100,
+          "exact_match": 0.53,
+          "contains_match": 0.53,
+          "prefix_match": 0.53
+        }
+      }
+    }
+  }
+}

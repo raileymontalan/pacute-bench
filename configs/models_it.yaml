@@ -68,6 +68,27 @@ models:
     language_model_only: true
 
   # ============================================================================
+  # Google Gemma 3
+  # ============================================================================
+  gemma-3-4b-it:
+    path: google/gemma-3-4B-it
+    type: it
+    tp: 1
+    language_model_only: true
+
+  gemma-3-12b-it:
+    path: google/gemma-3-12B-it
+    type: it
+    tp: 1
+    language_model_only: true
+
+  gemma-3-27b-it:
+    path: google/gemma-3-27B-it
+    type: it
+    tp: 1
+    language_model_only: true
+
+  # ============================================================================
   # Google Gemma 4
   # Thinking is controlled per-request via extra_body (not at serve time).
   # reasoning_parser: gemma4 is needed for both thinking/non-thinking variants
@@ -134,16 +155,79 @@ models:
     attention_backend: auto
 
   # ============================================================================
+  # Qwen 3 Family
+  # ============================================================================
+  qwen3-4b-it:
+    path: Qwen/Qwen3-4B
+    type: it
+    tp: 1
+    chat_template_kwargs: '{"enable_thinking": false}'
+    language_model_only: true
+
+  qwen3-4b-it-thinking:
+    path: Qwen/Qwen3-4B
+    type: it
+    tp: 1
+    thinking: true
+    reasoning_parser: qwen3
+    language_model_only: true
+
+  qwen3-8b-it:
+    path: Qwen/Qwen3-8B
+    type: it
+    tp: 1
+    chat_template_kwargs: '{"enable_thinking": false}'
+    language_model_only: true
+
+  qwen3-8b-it-thinking:
+    path: Qwen/Qwen3-8B
+    type: it
+    tp: 1
+    thinking: true
+    reasoning_parser: qwen3
+    language_model_only: true
+
+  qwen3-14b-it:
+    path: Qwen/Qwen3-14B
+    type: it
+    tp: 1
+    chat_template_kwargs: '{"enable_thinking": false}'
+    language_model_only: true
+
+  qwen3-14b-it-thinking:
+    path: Qwen/Qwen3-14B
+    type: it
+    tp: 1
+    thinking: true
+    reasoning_parser: qwen3
+    language_model_only: true
+
+  qwen3-32b-it:
+    path: Qwen/Qwen3-32B
+    type: it
+    tp: 2
+    chat_template_kwargs: '{"enable_thinking": false}'
+    language_model_only: true
+
+  qwen3-32b-it-thinking:
+    path: Qwen/Qwen3-32B
+    type: it
+    tp: 2
+    thinking: true
+    reasoning_parser: qwen3
+    language_model_only: true
+
+  # ============================================================================
   # Qwen 3.6 Family
   # ============================================================================
-  qwen3.6-27b:
+  qwen3.6-27b-it:
     path: Qwen/Qwen3.6-27B
     type: it
     tp: 1
     chat_template_kwargs: '{"enable_thinking": false}'
     language_model_only: true
 
-  qwen3.6-27b-thinking:
+  qwen3.6-27b-it-thinking:
     path: Qwen/Qwen3.6-27B
     type: it
     tp: 1

@@ -1,7 +1,0 @@
-{
-  "hf_model_name": "openai/gpt-oss-20b",
-  "model_type": "it",
-  "thinking": true,
-  "benchmarks": {},
-  "timestamp": "20260522_070104"
-}

@@ -1,7 +1,0 @@
-{
-  "hf_model_name": "aisingapore/Qwen-SEA-LION-v4.5-27B-IT",
-  "model_type": "it",
-  "thinking": false,
-  "benchmarks": {},
-  "timestamp": "20260522_082640"
-}

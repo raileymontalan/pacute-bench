@@ -1,7 +1,0 @@
-{
-  "hf_model_name": "google/gemma-4-31B-it",
-  "model_type": "it",
-  "thinking": false,
-  "benchmarks": {},
-  "timestamp": "20260522_070059"
-}

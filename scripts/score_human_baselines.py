@@ -37,13 +37,6 @@ SHEET_TO_KEY = {v: k for k, v in {
     ("morphological_extraction", "gen"): "morph_extract_GEN",
     ("morphological_production", "mcq"): "morph_prod_MCQ",
     ("morphological_production", "gen"): "morph_prod_GEN",
-    ("hierarchical",             "mcq"): "hierarchical_MCQ",
-    ("hierarchical",             "gen"): "hierarchical_GEN",
-    ("langgame",                 "mcq"): "langgame_MCQ",
-    ("langgame",                 "gen"): "langgame_GEN",
-    ("multi_digit_addition",     "mcq"): "addition_MCQ",
-    ("multi_digit_addition",     "gen"): "addition_GEN",
-    ("cute",                     "gen"): "cute_GEN",
 }.items()}
 
 
@@ -363,6 +356,10 @@ def build_summary(per_annotator_scores, iaa):
     lines.append("## MCQ Benchmarks\n")
     lines.append("| Benchmark | Ann1 acc | Ann2 acc | Ann3 acc | Mean±Std | Fleiss κ | % agree |")
     lines.append("|---|---|---|---|---|---|---|")
+    mcq_all_accs = []
+    mcq_all_means = []
+    mcq_all_kappas = []
+    mcq_all_pcts = []
     for key in all_keys:
         bm, fmt = key
         if fmt != "mcq":
@@ -383,10 +380,28 @@ def build_summary(per_annotator_scores, iaa):
         pct_str   = f"{float(pct)*100:.1f}%" if isinstance(pct, float) else str(pct)
         ann_cols  = " | ".join(f"{a:.3f}" for a in accs)
         lines.append(f"| {bm} | {ann_cols} | {mean:.3f}±{std:.3f} | {kappa_str} | {pct_str} |")
+        mcq_all_accs.append(accs)
+        mcq_all_means.append(mean)
+        if isinstance(kappa, float):
+            mcq_all_kappas.append(kappa)
+        if isinstance(pct, float):
+            mcq_all_pcts.append(pct)
+    if mcq_all_accs:
+        n_ann = len(mcq_all_accs[0])
+        avg_accs = [sum(row[i] for row in mcq_all_accs) / len(mcq_all_accs) for i in range(n_ann)]
+        avg_mean = sum(mcq_all_means) / len(mcq_all_means)
+        avg_kappa_str = f"{sum(mcq_all_kappas)/len(mcq_all_kappas):.3f}" if mcq_all_kappas else "N/A"
+        avg_pct_str   = f"{sum(mcq_all_pcts)/len(mcq_all_pcts)*100:.1f}%" if mcq_all_pcts else "N/A"
+        avg_ann_cols  = " | ".join(f"{a:.3f}" for a in avg_accs)
+        lines.append(f"| **Average** | {avg_ann_cols} | {avg_mean:.3f} | {avg_kappa_str} | {avg_pct_str} |")
 
     lines.append("\n## GEN Benchmarks\n")
     lines.append("| Benchmark | Ann1 EM | Ann2 EM | Ann3 EM | Mean±Std | κ (binary) | raw agree% |")
     lines.append("|---|---|---|---|---|---|---|")
+    gen_all_ems = []
+    gen_all_means = []
+    gen_all_kappas = []
+    gen_all_pcts = []
     for key in all_keys:
         bm, fmt = key
         if fmt != "gen":
@@ -407,6 +422,20 @@ def build_summary(per_annotator_scores, iaa):
         pct_str   = f"{float(pct)*100:.1f}%" if isinstance(pct, float) else str(pct)
         ann_cols  = " | ".join(f"{e:.3f}" for e in ems)
         lines.append(f"| {bm} | {ann_cols} | {mean:.3f}±{std:.3f} | {kappa_str} | {pct_str} |")
+        gen_all_ems.append(ems)
+        gen_all_means.append(mean)
+        if isinstance(kappa, float):
+            gen_all_kappas.append(kappa)
+        if isinstance(pct, float):
+            gen_all_pcts.append(pct)
+    if gen_all_ems:
+        n_ann = len(gen_all_ems[0])
+        avg_ems = [sum(row[i] for row in gen_all_ems) / len(gen_all_ems) for i in range(n_ann)]
+        avg_mean = sum(gen_all_means) / len(gen_all_means)
+        avg_kappa_str = f"{sum(gen_all_kappas)/len(gen_all_kappas):.3f}" if gen_all_kappas else "N/A"
+        avg_pct_str   = f"{sum(gen_all_pcts)/len(gen_all_pcts)*100:.1f}%" if gen_all_pcts else "N/A"
+        avg_ann_cols  = " | ".join(f"{e:.3f}" for e in avg_ems)
+        lines.append(f"| **Average** | {avg_ann_cols} | {avg_mean:.3f} | {avg_kappa_str} | {avg_pct_str} |")
 
     return "\n".join(lines)
 

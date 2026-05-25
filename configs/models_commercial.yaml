@@ -45,8 +45,8 @@ models:
   # Anthropic (batch API)
   # ============================================================================
 
-  claude-opus-4-7:
-    path: claude-opus-4-7
+  claude-opus-4-6:
+    path: claude-opus-4-6
     type: it
     provider: anthropic
 

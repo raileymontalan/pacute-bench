@@ -1,7 +1,0 @@
-{
-  "hf_model_name": "mistralai/Mistral-Medium-3.5-128B",
-  "model_type": "it",
-  "thinking": true,
-  "benchmarks": {},
-  "timestamp": "20260522_082720"
-}

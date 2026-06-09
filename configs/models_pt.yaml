@@ -50,6 +50,13 @@ models:
   # ============================================================================
   # Google Gemma 4 Base
   # ============================================================================
+
+  gemma-2-2b:
+    path: google/gemma-2-2B
+    type: pt
+    tp: 1
+    language_model_only: true
+
   gemma-4-e2b:
     path: google/gemma-4-E2B
     type: pt

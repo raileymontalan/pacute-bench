@@ -1,0 +1,42 @@
+{
+  "hf_model_name": "deepseek/deepseek-v3.2-exp",
+  "model_type": "it",
+  "thinking": true,
+  "benchmarks": {
+    "pacute-affixation-gen": {
+      "num_samples": 140,
+      "exact_match": 0.5785714285714286,
+      "contains_match": 0.8285714285714286,
+      "prefix_match": 0.6714285714285714,
+      "format": "generative",
+      "by_category": {
+        "circumfix": {
+          "num_samples": 20,
+          "exact_match": 0.8,
+          "contains_match": 0.8,
+          "prefix_match": 0.8
+        },
+        "infix": {
+          "num_samples": 40,
+          "exact_match": 0.675,
+          "contains_match": 0.775,
+          "prefix_match": 0.675
+        },
+        "prefix": {
+          "num_samples": 40,
+          "exact_match": 0.575,
+          "contains_match": 0.9,
+          "prefix_match": 0.9
+        },
+        "suffix": {
+          "num_samples": 40,
+          "exact_match": 0.375,
+          "contains_match": 0.825,
+          "prefix_match": 0.375
+        }
+      },
+      "timestamp": "20260522_102537"
+    }
+  },
+  "timestamp": "20260522_102537"
+}

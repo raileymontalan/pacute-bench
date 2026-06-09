@@ -1,13 +1,12 @@
 # Commercial model configurations for evaluation via provider APIs.
 # OpenAI and Anthropic use batch APIs (50% cost reduction, results within 24h).
-# Google and xAI use real-time async generation (OpenAI-compatible endpoints).
+# Google uses real-time async generation (OpenAI-compatible endpoints).
 # MCQ benchmarks are NOT supported — only generative (-gen) benchmarks are run.
 #
 # Required environment variables (per provider):
 #   OPENAI_API_KEY     — for provider: openai
 #   ANTHROPIC_API_KEY  — for provider: anthropic
 #   GEMINI_API_KEY     — for provider: google
-#   XAI_API_KEY        — for provider: xai
 #
 # API key proxy (optional):
 #   If running through an organization-internal proxy, set the *_BASE_URL
@@ -35,7 +34,6 @@ models:
     type: it
     provider: openai-async
 
-  # Re-added for paper continuity (§Results cites its specific Affix-GEN EM score).
   gpt-5-mini:
     path: gpt-5-mini
     type: it
@@ -76,21 +74,15 @@ models:
     thinking: true  # Gemini 3.5 Flash emits internal reasoning tokens; needs ~8K max_tokens
 
   # ============================================================================
-  # OpenRouter additions: Chinese / non-OAI frontier + xAI gap-fill
+  # OpenRouter additions: Chinese / non-OAI frontier
   # All run via openai-async path with OPENAI_BASE_URL=$OPENROUTER_BASE_URL.
   # ============================================================================
-
-  qwen3-235b-thinking:
-    path: qwen/qwen3-235b-a22b-thinking-2507
-    type: it
-    provider: openai-async
-    thinking: true
 
   deepseek-v3.2:
     path: deepseek/deepseek-v3.2-exp
     type: it
     provider: openai-async
-    thinking: true  # safe budget — non-reasoning variant still occasionally verbose
+    thinking: true
 
   deepseek-r1:
     path: deepseek/deepseek-r1-0528
@@ -100,12 +92,6 @@ models:
 
   kimi-k2-thinking:
     path: moonshotai/kimi-k2-thinking
-    type: it
-    provider: openai-async
-    thinking: true
-
-  grok-4:
-    path: x-ai/grok-4.20
     type: it
     provider: openai-async
     thinking: true

@@ -140,7 +140,6 @@ class BatchEvaluator(BaseEvaluator):
         benchmark_name: str,
         max_samples: Optional[int] = None,
         check_existing: bool = True,
-        timestamp: Optional[str] = None,
     ) -> Optional[dict]:
         is_gen = BENCHMARK_FORMATS.get(benchmark_name, "mcq") == "gen"
         if not is_gen:
@@ -173,7 +172,7 @@ class BatchEvaluator(BaseEvaluator):
                 print("       Use --overwrite to re-run.")
                 return {"skipped": True, "inference_file": str(inference_file)}
 
-        return self._evaluate_generative(benchmark_items, benchmark_name, "gen", timestamp)
+        return self._evaluate_generative(benchmark_items, benchmark_name, "gen")
 
     # ──────────────────────────────────────────────────────────────────────────
     # Parallel batch evaluation — submit all at once, poll together
@@ -184,7 +183,6 @@ class BatchEvaluator(BaseEvaluator):
         benchmarks: list,
         max_samples: Optional[int] = None,
         check_existing: bool = True,
-        timestamp: Optional[str] = None,
     ) -> dict:
         """
         Submit every gen benchmark as a batch simultaneously, then poll all
@@ -268,7 +266,7 @@ class BatchEvaluator(BaseEvaluator):
                 if results_by_id is not None:
                     results[bench] = self._process_batch_results(
                         info["items"], results_by_id,
-                        info["answer_tag"], bench, "gen", timestamp,
+                        info["answer_tag"], bench, "gen",
                     )
                     self._delete_batch_state(bench)
                     completed.append(bench)
@@ -283,7 +281,7 @@ class BatchEvaluator(BaseEvaluator):
     # Single-benchmark dispatch
     # ──────────────────────────────────────────────────────────────────────────
 
-    def _evaluate_generative(self, items, benchmark_name, setting=None, timestamp=None):
+    def _evaluate_generative(self, items, benchmark_name, setting=None):
         """Submit one batch and block until it completes."""
         bench_prompt = self.benchmark_system_prompts.get(benchmark_name)
         effective_prompt = self.system_prompt if self.system_prompt is not None else bench_prompt
@@ -303,7 +301,7 @@ class BatchEvaluator(BaseEvaluator):
 
         self._delete_batch_state(benchmark_name)
         return self._process_batch_results(
-            items, results_by_id, answer_tag, benchmark_name, setting, timestamp
+            items, results_by_id, answer_tag, benchmark_name, setting
         )
 
     # ──────────────────────────────────────────────────────────────────────────
@@ -311,7 +309,7 @@ class BatchEvaluator(BaseEvaluator):
     # ──────────────────────────────────────────────────────────────────────────
 
     def _process_batch_results(
-        self, items, results_by_id: dict, answer_tag, benchmark_name, setting, timestamp
+        self, items, results_by_id: dict, answer_tag, benchmark_name, setting
     ) -> dict:
         exact = contains = prefix_m = 0
         detailed = []
@@ -360,5 +358,4 @@ class BatchEvaluator(BaseEvaluator):
             "by_category": self._by_category_gen(detailed),
             "detailed_results": detailed,
             "setting": setting,
-            "timestamp": timestamp,
         }

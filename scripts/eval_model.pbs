@@ -12,8 +12,7 @@
 
 #PBS -l walltime=12:00:00
 #PBS -j oe
-#PBS -q AISG_debug
-# Note: -o and -e (log directory) are passed dynamically by submit_evaluations.sh
+# Note: -q (queue) and -o/-e (log directory) are passed dynamically by submit_evaluations.sh
 
 # ── Defaults ─────────────────────────────────────────────────────────────────
 MODEL_NAME="${MODEL_NAME:-gpt2}"

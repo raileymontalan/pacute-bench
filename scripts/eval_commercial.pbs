@@ -1,5 +1,5 @@
 #!/bin/bash
-# PBS job script — evaluate a single commercial model (OpenAI/Anthropic/Gemini/xAI) via batch API.
+# PBS job script — evaluate a single commercial model (OpenAI/Anthropic/Gemini) via batch API.
 # No GPU required. Submits all requests as a batch, then polls until complete.
 # Do NOT run directly; submit via scripts/submit_evaluations.sh --commercial-only.
 #
@@ -13,8 +13,7 @@
 
 #PBS -l walltime=26:00:00
 #PBS -j oe
-#PBS -q AISG_debug
-# Note: -o and -e are set dynamically by submit_evaluations.sh
+# Note: -q (queue) and -o/-e (log directory) are set dynamically by submit_evaluations.sh
 
 MODEL_NAME="${MODEL_NAME:-claude-sonnet-4-6}"
 OVERWRITE="${OVERWRITE:-false}"

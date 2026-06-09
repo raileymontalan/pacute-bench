@@ -129,25 +129,6 @@ generative_instructions:
       <answer>ANSWER</answer>
       Replace ANSWER with the correctly inflected Filipino word.
 
-  pacute-affixation-gen:
-    answer_tag: "<answer>"
-    instruction: |-
-      You will be given a Filipino root word and an affix (prefix, suffix, infix, or circumfix).
-      Produce the correctly inflected form by attaching the affix to the root.
-
-      When attaching affixes, apply the appropriate morphophonemic changes:
-      - Nasal assimilation: a nasal-final prefix (mag-, mang-, pang-, etc.) assimilates to the
-        root-initial consonant (e.g., mang- + pili → mamili; mang- + sulat → manulat)
-      - Consonant deletion: the root-initial consonant may be dropped after nasal assimilation
-      - Vowel changes or other phonological adjustments required by the specific affix
-
-      Your answer is a single correctly spelled Filipino word.
-
-      Your output MUST strictly follow this XML format:
-      <reflection>Your 1-2 sentence reflection explaining how the affix attaches to the root and which morphophonemic changes (if any) you applied.</reflection>
-      <answer>ANSWER</answer>
-      Replace ANSWER with the correctly inflected Filipino word.
-
   # ---------------------------------------------------------------------------
   # Hierarchical — Filipino morphological attachment tasks (in Filipino)
   # ---------------------------------------------------------------------------

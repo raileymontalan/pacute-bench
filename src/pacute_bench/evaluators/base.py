@@ -48,20 +48,15 @@ BENCHMARK_FORMATS: dict = {
     "pacute-manipulation":        "mcq",
     "pacute-manipulation-mcq":    "mcq",
     "pacute-manipulation-gen":    "gen",
-    "pacute-syllabification":     "mcq",
-    "pacute-syllabification-mcq": "mcq",
-    "pacute-syllabification-gen": "gen",
-
     "pacute-morphological-extraction":     "mcq",
     "pacute-morphological-extraction-mcq": "mcq",
     "pacute-morphological-extraction-gen": "gen",
     "pacute-morphological-production":     "mcq",
     "pacute-morphological-production-mcq": "mcq",
     "pacute-morphological-production-gen": "gen",
-
-    "pacute-affixation":     "mcq",
-    "pacute-affixation-mcq": "mcq",
-    "pacute-affixation-gen": "gen",
+    "pacute-syllabification":     "mcq",
+    "pacute-syllabification-mcq": "mcq",
+    "pacute-syllabification-gen": "gen",
 }
 
 
@@ -119,7 +114,6 @@ class BaseEvaluator(ABC):
         benchmark_name: str,
         max_samples: Optional[int] = None,
         check_existing: bool = True,
-        timestamp: Optional[str] = None,
     ) -> Optional[dict]:
         """Evaluate the model on a single benchmark. Must be implemented by subclasses."""
 

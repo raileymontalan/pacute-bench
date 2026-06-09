@@ -28,7 +28,6 @@ import argparse
 import json
 import os
 import sys
-from datetime import datetime
 from pathlib import Path
 
 import yaml
@@ -226,7 +225,6 @@ def main() -> None:
         sys.exit(1)
 
     os.makedirs(args.output_dir, exist_ok=True)
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
     def filter_benchmarks(benchmarks: list[str], mode: str) -> list[str]:
         kept = []
@@ -310,7 +308,6 @@ def main() -> None:
                     benchmarks_for_model,
                     max_samples=args.max_samples,
                     check_existing=not args.overwrite,
-                    timestamp=timestamp,
                 )
                 for bench, results in bench_results.items():
                     if not results or results.get("skipped"):
@@ -336,7 +333,6 @@ def main() -> None:
                             benchmark_name=bench,
                             max_samples=args.max_samples,
                             check_existing=not args.overwrite,
-                            timestamp=timestamp,
                         )
                     except Exception as e:
                         import traceback
@@ -369,9 +365,9 @@ def main() -> None:
             # Save per-model JSON
             model_dir = Path(args.output_dir) / model_name
             model_dir.mkdir(parents=True, exist_ok=True)
-            model_file = model_dir / f"evaluation_results_{timestamp}.json"
+            model_file = model_dir / "evaluation_results.json"
             with open(model_file, "w", encoding="utf-8") as f:
-                json.dump({**all_results[model_name], "timestamp": timestamp},
+                json.dump({**all_results[model_name]},
                           f, indent=2, ensure_ascii=False)
             print(f"\n  Results saved → {model_file}")
 
@@ -383,7 +379,7 @@ def main() -> None:
             traceback.print_exc()
 
     # ---- combined results ---------------------------------------------------
-    combined_file = Path(args.output_dir) / f"evaluation_results_{timestamp}.json"
+    combined_file = Path(args.output_dir) / "evaluation_results.json"
     with open(combined_file, "w", encoding="utf-8") as f:
         json.dump(all_results, f, indent=2, ensure_ascii=False)
     print(f"\n{'='*80}")

@@ -16,7 +16,6 @@
 #SBATCH --mem=64G
 #SBATCH --gres=gpu:1
 #SBATCH --time=02:00:00
-#SBATCH --nodelist=smc-pod-[14,10,9,8,5,3]
 #SBATCH --output=logs/setup_%j.out
 #SBATCH --error=logs/setup_%j.out
 
@@ -25,8 +24,11 @@ cd $SLURM_SUBMIT_DIR
 
 mkdir -p logs
 
-module use "${MODULEFILES_PATH}"
-module swap cuda/13.0.3
+# Load CUDA modules if MODULEFILES_PATH is set in the environment
+if [[ -n "${MODULEFILES_PATH:-}" ]]; then
+    module use "$MODULEFILES_PATH"
+    module swap "${CUDA_MODULE:-cuda}" 2>/dev/null || true
+fi
 
 # Install uv if not present
 if ! command -v uv &> /dev/null; then

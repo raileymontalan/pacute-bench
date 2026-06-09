@@ -44,20 +44,15 @@ BENCHMARK_REGISTRY: dict = {
     "pacute-manipulation":      partial(load_pacute, categories=["manipulation"]),
     "pacute-manipulation-mcq":  partial(load_pacute, categories=["manipulation"], format="mcq"),
     "pacute-manipulation-gen":  partial(load_pacute, categories=["manipulation"], format="gen"),
-    "pacute-syllabification":       partial(load_pacute, categories=["syllabification"]),
-    "pacute-syllabification-mcq":   partial(load_pacute, categories=["syllabification"], format="mcq"),
-    "pacute-syllabification-gen":   partial(load_pacute, categories=["syllabification"], format="gen"),
     "pacute-morphological-extraction":     partial(load_pacute, categories=["morphological_extraction"]),
     "pacute-morphological-extraction-mcq": partial(load_pacute, categories=["morphological_extraction"], format="mcq"),
     "pacute-morphological-extraction-gen": partial(load_pacute, categories=["morphological_extraction"], format="gen"),
     "pacute-morphological-production":     partial(load_pacute, categories=["morphological_production"]),
     "pacute-morphological-production-mcq": partial(load_pacute, categories=["morphological_production"], format="mcq"),
     "pacute-morphological-production-gen": partial(load_pacute, categories=["morphological_production"], format="gen"),
-
-    # ── Affixation (legacy benchmark, not part of PACUTE group) ─────────────
-    "pacute-affixation":     partial(load_pacute, categories=["affixation"]),
-    "pacute-affixation-mcq": partial(load_pacute, categories=["affixation"], format="mcq"),
-    "pacute-affixation-gen": partial(load_pacute, categories=["affixation"], format="gen"),
+    "pacute-syllabification":       partial(load_pacute, categories=["syllabification"]),
+    "pacute-syllabification-mcq":   partial(load_pacute, categories=["syllabification"], format="mcq"),
+    "pacute-syllabification-gen":   partial(load_pacute, categories=["syllabification"], format="gen"),
 
     # ── Morphological (aliases → load_pacute) ────────────────────────────────
     "morphological":     partial(load_pacute, categories=["morphological_extraction", "morphological_production"]),

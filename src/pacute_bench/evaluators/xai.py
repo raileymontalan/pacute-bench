@@ -68,19 +68,19 @@ class XAIEvaluator(BatchEvaluator):
     # Async generation (always used — no batch API for xAI)
     # ──────────────────────────────────────────────────────────────────────────
 
-    def evaluate_benchmarks_parallel(self, benchmark_names, max_samples=None, check_existing=True, timestamp=None):
+    def evaluate_benchmarks_parallel(self, benchmark_names, max_samples=None, check_existing=True):
         """Run all benchmarks sequentially; each benchmark handles its own concurrency."""
         results = {}
         for bench in benchmark_names:
             r = self.evaluate_benchmark(
                 bench, max_samples=max_samples,
-                check_existing=check_existing, timestamp=timestamp,
+                check_existing=check_existing,
             )
             if r and not r.get("skipped"):
                 results[bench] = r
         return results
 
-    def _evaluate_generative(self, items, benchmark_name, setting=None, timestamp=None):
+    def _evaluate_generative(self, items, benchmark_name, setting=None):
         bench_prompt = self.benchmark_system_prompts.get(benchmark_name)
         effective_prompt = (
             self.system_prompt if self.system_prompt is not None else bench_prompt
@@ -90,7 +90,7 @@ class XAIEvaluator(BatchEvaluator):
             self._run_async(items, benchmark_name, effective_prompt)
         )
         return self._process_batch_results(
-            items, results_by_id, answer_tag, benchmark_name, setting, timestamp
+            items, results_by_id, answer_tag, benchmark_name, setting
         )
 
     async def _run_async(

@@ -5,10 +5,33 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pacute-bench"
 version = "0.1.0"
-description = "End-to-end evaluation suite for Filipino morphology benchmarks"
+description = "Diagnostic benchmark for Filipino morphological and phonological understanding in LLMs"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
+authors = [
+    { name = "Jann Railey Montalan", email = "railey@aisingapore.org" },
+    { name = "David Demitri Africa" },
+    { name = "Jimson Paulo Layacan" },
+    { name = "Richell Isaiah Flores" },
+    { name = "Ivan Yuri De Leon" },
+    { name = "Lance Calvin Gamboa" },
+]
+keywords = ["NLP", "Filipino", "morphology", "benchmark", "evaluation", "LLM"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+[project.urls]
+Homepage = "https://github.com/raileymontalan/pacute-bench"
+Repository = "https://github.com/raileymontalan/pacute-bench"
+Paper = "https://arxiv.org/abs/2506.XXXXX"
 dependencies = [
     "vllm==0.20.2",
     "torch==2.11.0",
@@ -18,6 +41,7 @@ dependencies = [
     "mistral-common>=1.11.0",
     "openai>=1.30",
     "anthropic>=0.40",
+    "google-genai>=0.8",
     "pandas>=2.0",
     "openpyxl>=3.1",
     "python-Levenshtein>=0.25",

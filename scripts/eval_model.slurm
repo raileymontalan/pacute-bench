@@ -1,6 +1,6 @@
 #!/bin/bash
 # SLURM job script — evaluate a single model on all benchmarks.
-# Do NOT run directly; submit via scripts/submit_evaluations_slurm.sh.
+# Do NOT run directly; submit via scripts/submit_evaluations.sh.
 #
 # Required env vars (set before sbatch, or via --export):
 #   MODEL_NAME   Short model key from configs/models_*.yaml  (e.g. qwen-2.5-7b-it)
@@ -22,7 +22,7 @@
 #SBATCH --time=12:00:00
 #SBATCH --output=logs/pb-eval_%j.out
 #SBATCH --error=logs/pb-eval_%j.out
-# Note: --output, --error, and --gres are overridden dynamically by submit_evaluations_slurm.sh
+# Note: --output, --error, and --gres are overridden dynamically by submit_evaluations.sh
 
 
 # ── Defaults ──────────────────────────────────────────────────────────────────
@@ -51,7 +51,7 @@ mkdir -p "$OUTPUT_DIR"
 # Load CUDA modules if MODULEFILES_PATH is defined in .env
 if [[ -n "${MODULEFILES_PATH:-}" ]]; then
     module use "$MODULEFILES_PATH"
-    module swap cuda/13.0.3 2>/dev/null || true
+    module swap "${CUDA_MODULE:-cuda}" 2>/dev/null || true
 fi
 
 source "$VENV_PATH/bin/activate"

@@ -12,7 +12,7 @@ pd.set_option("display.float_format", "{:.4f}".format)
 pd.set_option("display.max_colwidth", 40)
 
 REPO_ROOT = Path(__file__).parent.parent
-RESULTS_DIR = REPO_ROOT / "results-202605"
+RESULTS_DIR = REPO_ROOT / "results"
 TABLES_DIR = REPO_ROOT / "tables"
 TABLES_DIR.mkdir(exist_ok=True)
 

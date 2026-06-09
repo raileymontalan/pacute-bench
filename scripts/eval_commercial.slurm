@@ -1,7 +1,7 @@
 #!/bin/bash
-# SLURM job script — evaluate a single commercial model (OpenAI/Anthropic/Gemini/xAI) via batch API.
+# SLURM job script — evaluate a single commercial model (OpenAI/Anthropic/Gemini) via batch API.
 # No GPU required. Submits all requests as a batch, then polls until complete.
-# Do NOT run directly; submit via scripts/submit_evaluations_slurm.sh --commercial-only.
+# Do NOT run directly; submit via scripts/submit_evaluations.sh --commercial-only.
 #
 # Required env vars:
 #   MODEL_NAME   Key from configs/models_commercial.yaml  (e.g. claude-opus-4-6)
@@ -21,7 +21,7 @@
 #SBATCH --time=26:00:00
 #SBATCH --output=logs/pb-commercial_%j.out
 #SBATCH --error=logs/pb-commercial_%j.out
-# Note: --output/--error are overridden dynamically by submit_evaluations_slurm.sh
+# Note: --output/--error are overridden dynamically by submit_evaluations.sh
 
 MODEL_NAME="${MODEL_NAME:-claude-sonnet-4-6}"
 OVERWRITE="${OVERWRITE:-false}"

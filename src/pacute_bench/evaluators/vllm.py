@@ -218,7 +218,6 @@ class VLLMEvaluator(BaseEvaluator):
         benchmark_name: str,
         max_samples: Optional[int] = None,
         check_existing: bool = True,
-        timestamp: Optional[str] = None,
     ) -> Optional[dict]:
         """
         Evaluate the model on a single benchmark.
@@ -228,7 +227,6 @@ class VLLMEvaluator(BaseEvaluator):
             max_samples: Cap on number of items (``None`` = all).
             check_existing: Skip and return ``{"skipped": True}`` when inference
                 results already exist on disk.
-            timestamp: Timestamp string for output filenames.
 
         Returns:
             Result dict, ``{"skipped": True, ...}``, or ``None`` on error.
@@ -262,18 +260,18 @@ class VLLMEvaluator(BaseEvaluator):
 
         setting = "gen" if is_gen else "mcq"
         if is_gen:
-            return self._evaluate_generative(benchmark_items, benchmark_name, setting, timestamp)
+            return self._evaluate_generative(benchmark_items, benchmark_name, setting)
         else:
-            return self._evaluate_mcq(benchmark_items, benchmark_name, setting, timestamp)
+            return self._evaluate_mcq(benchmark_items, benchmark_name, setting)
 
     # ──────────────────────────────────────────────────────────────────────────
     # MCQ evaluation
     # ──────────────────────────────────────────────────────────────────────────
 
-    def _evaluate_mcq(self, items, benchmark_name, setting=None, timestamp=None):
-        return asyncio.run(self._async_mcq(items, benchmark_name, setting, timestamp))
+    def _evaluate_mcq(self, items, benchmark_name, setting=None):
+        return asyncio.run(self._async_mcq(items, benchmark_name, setting))
 
-    async def _async_mcq(self, items, benchmark_name, setting=None, timestamp=None):
+    async def _async_mcq(self, items, benchmark_name, setting=None):
         sem = asyncio.Semaphore(16)
         pbar = tqdm(total=len(items), desc=benchmark_name)
 
@@ -320,7 +318,6 @@ class VLLMEvaluator(BaseEvaluator):
             "by_category": self._by_category_mcq(detailed),
             "detailed_results": detailed,
             "setting": setting,
-            "timestamp": timestamp,
         })
         return results
 
@@ -328,10 +325,10 @@ class VLLMEvaluator(BaseEvaluator):
     # Generative evaluation
     # ──────────────────────────────────────────────────────────────────────────
 
-    def _evaluate_generative(self, items, benchmark_name, setting=None, timestamp=None):
-        return asyncio.run(self._async_gen(items, benchmark_name, setting, timestamp))
+    def _evaluate_generative(self, items, benchmark_name, setting=None):
+        return asyncio.run(self._async_gen(items, benchmark_name, setting))
 
-    async def _async_gen(self, items, benchmark_name, setting=None, timestamp=None):
+    async def _async_gen(self, items, benchmark_name, setting=None):
         bench_prompt = self.benchmark_system_prompts.get(benchmark_name)
         effective_prompt = (
             self.system_prompt if self.system_prompt is not None else bench_prompt
@@ -403,5 +400,4 @@ class VLLMEvaluator(BaseEvaluator):
             "by_category": self._by_category_gen(detailed),
             "detailed_results": detailed,
             "setting": setting,
-            "timestamp": timestamp,
         }

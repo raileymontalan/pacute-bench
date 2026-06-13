@@ -315,6 +315,54 @@
         }
       }
     },
+    "pacute-morphological-extraction-gen": {
+      "exact_match": 0.5975,
+      "contains_match": 0.64,
+      "prefix_match": 0.61,
+      "num_samples": 400,
+      "format": "gen",
+      "by_category": {
+        "inflected_affix_extraction": {
+          "num_samples": 100,
+          "exact_match": 0.5,
+          "contains_match": 0.54,
+          "prefix_match": 0.51
+        },
+        "inflected_root_extraction": {
+          "num_samples": 100,
+          "exact_match": 0.7,
+          "contains_match": 0.75,
+          "prefix_match": 0.73
+        },
+        "reduplicant_extraction": {
+          "num_samples": 100,
+          "exact_match": 0.61,
+          "contains_match": 0.63,
+          "prefix_match": 0.62
+        },
+        "reduplicated_root_extraction": {
+          "num_samples": 100,
+          "exact_match": 0.58,
+          "contains_match": 0.64,
+          "prefix_match": 0.58
+        }
+      }
+    },
+    "pacute-morphological-production-gen": {
+      "exact_match": 0.4533333333333333,
+      "contains_match": 0.4533333333333333,
+      "prefix_match": 0.4533333333333333,
+      "num_samples": 150,
+      "format": "gen",
+      "by_category": {
+        "inflected_form_production": {
+          "num_samples": 150,
+          "exact_match": 0.4533,
+          "contains_match": 0.4533,
+          "prefix_match": 0.4533
+        }
+      }
+    },
     "pacute-syllabification-gen": {
       "exact_match": 0.698,
       "contains_match": 0.742,

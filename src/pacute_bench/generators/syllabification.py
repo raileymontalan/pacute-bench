@@ -1,10 +1,12 @@
 """
 Syllabification Dataset Generation Module
 
-This module provides functionality for creating linguistic datasets focused on
-Filipino syllabification tasks, including stress classification, reduplication
-detection, and syllable counting with 'ng' digraph awareness. Supports both 
-multiple-choice questions (MCQ) and generative (GEN) formats.
+Generates Filipino syllabification tasks: stress classification, reduplication
+detection, and syllable counting with 'ng' digraph awareness. MCQ and GEN formats.
+
+Note: The PACUTE benchmark uses only the stress tasks (stress_identification,
+stress_disambiguation); reduplication and syllable-counting tasks are available
+in this module but filtered out during PACUTE generation.
 """
 
 import csv
@@ -686,8 +688,11 @@ def create_syllabification_dataset(
     """
     Create a complete syllabification dataset with various Filipino linguistic tasks.
     
-    This function generates a comprehensive dataset for testing Filipino syllabification
-    and phonological awareness skills. It creates multiple types of tasks including:
+    Create all Filipino syllabification tasks. The PACUTE benchmark uses only the
+    stress tasks (stress_identification, stress_disambiguation); reduplication and
+    syllable-counting rows are available here but filtered out during PACUTE generation.
+
+    Tasks generated:
     - Stress classification: Identify stress patterns on final syllables
     - Reduplication detection: Identify words with CV-reduplication
     - Syllable counting with 'ng': Count syllables correctly treating 'ng' as single sound
@@ -841,7 +846,7 @@ def create_syllabification_dataset(
                 "prompts": [mcq_row["prompts"]],
             })], ignore_index=True)
 
-        # General syllable counting tasks (longer words, minimum 9 characters)
+        # General syllable counting tasks (longer words, minimum 7 characters)
         syllables_long = _filter_by_word_length(syllables_df, MIN_WORD_LENGTH_GENERAL_SYLLABLE_COUNTING)
         general_sample_rows = syllables_long.head(num_samples) if freq_weight > 0 else syllables_long.sample(num_samples, random_state=random_seed)
         for _, row in general_sample_rows.iterrows():
@@ -936,7 +941,7 @@ def create_syllabification_dataset(
                 "label": [gen_row["label"]],
             })], ignore_index=True)
 
-        # General syllable counting tasks (GEN) - longer words, minimum 9 characters
+        # General syllable counting tasks (GEN) - longer words, minimum 7 characters
         syllables_long = _filter_by_word_length(syllables_df, MIN_WORD_LENGTH_GENERAL_SYLLABLE_COUNTING)
         general_sample_rows = syllables_long.head(num_samples) if freq_weight > 0 else syllables_long.sample(num_samples, random_state=random_seed)
         for _, row in general_sample_rows.iterrows():

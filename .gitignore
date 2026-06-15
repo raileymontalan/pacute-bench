@@ -56,6 +56,7 @@ multirun/
 # Logs
 logs/
 *.log
+*.out
 
 # Cache
 .cache/
@@ -74,5 +75,5 @@ temp/
 # Environment variables and secrets
 .env
 
-# Results - ignore all subfolders and files but keep the results/ directory itself
-results/*/
+# Results — gitignored by default; use `git add -f` to commit specific result files
+# results/*/

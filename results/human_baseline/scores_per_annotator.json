@@ -1,0 +1,896 @@
+{
+  "annotator1": {
+    "composition_mcq": {
+      "num_samples": 95,
+      "accuracy": 0.9053,
+      "by_category": {
+        "composition/character_counting_exactly": {
+          "num_samples": 10,
+          "accuracy": 0.8
+        },
+        "composition/character_counting_least": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "composition/character_counting_most": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "composition/character_finding": {
+          "num_samples": 5,
+          "accuracy": 1.0
+        },
+        "composition/diacritic_counting": {
+          "num_samples": 10,
+          "accuracy": 0.9
+        },
+        "composition/length_counting": {
+          "num_samples": 10,
+          "accuracy": 0.4
+        },
+        "composition/length_counting_least": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "composition/length_counting_most": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "composition/spelling": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "composition/uppercase_counting": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        }
+      }
+    },
+    "composition_gen": {
+      "num_samples": 55,
+      "exact_match": 0.9818,
+      "contains_match": 0.9818,
+      "prefix_match": 0.9818,
+      "by_category": {
+        "composition/character_counting": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "composition/character_finding": {
+          "num_samples": 5,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "composition/diacritic_counting": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "composition/length_counting": {
+          "num_samples": 10,
+          "exact_match": 0.9,
+          "contains_match": 0.9,
+          "prefix_match": 0.9
+        },
+        "composition/spelling": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "composition/uppercase_counting": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        }
+      }
+    },
+    "manipulation_mcq": {
+      "num_samples": 80,
+      "accuracy": 0.9875,
+      "by_category": {
+        "manipulation/deletion": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "manipulation/diacritic_normalization": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "manipulation/duplication": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "manipulation/insertion": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "manipulation/lowercasing": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "manipulation/permutation": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "manipulation/substitution": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "manipulation/uppercasing": {
+          "num_samples": 10,
+          "accuracy": 0.9
+        }
+      }
+    },
+    "manipulation_gen": {
+      "num_samples": 80,
+      "exact_match": 1.0,
+      "contains_match": 1.0,
+      "prefix_match": 1.0,
+      "by_category": {
+        "manipulation/deletion": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/diacritic_normalization": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/duplication": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/insertion": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/lowercasing": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/permutation": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/substitution": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/uppercasing": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        }
+      }
+    },
+    "syllabification_mcq": {
+      "num_samples": 20,
+      "accuracy": 0.6,
+      "by_category": {
+        "syllabification/stress_disambiguation": {
+          "num_samples": 10,
+          "accuracy": 0.4
+        },
+        "syllabification/stress_identification": {
+          "num_samples": 10,
+          "accuracy": 0.8
+        }
+      }
+    },
+    "syllabification_gen": {
+      "num_samples": 20,
+      "exact_match": 1.0,
+      "contains_match": 1.0,
+      "prefix_match": 1.0,
+      "by_category": {
+        "syllabification/stress_disambiguation": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "syllabification/stress_identification": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        }
+      }
+    },
+    "morphological_extraction_mcq": {
+      "num_samples": 40,
+      "accuracy": 0.975,
+      "by_category": {
+        "morphological_extraction/inflected_affix_extraction": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "morphological_extraction/inflected_root_extraction": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "morphological_extraction/reduplicant_extraction": {
+          "num_samples": 10,
+          "accuracy": 0.9
+        },
+        "morphological_extraction/reduplicated_root_extraction": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        }
+      }
+    },
+    "morphological_extraction_gen": {
+      "num_samples": 40,
+      "exact_match": 0.975,
+      "contains_match": 0.975,
+      "prefix_match": 0.975,
+      "by_category": {
+        "morphological_extraction/inflected_affix_extraction": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "morphological_extraction/inflected_root_extraction": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "morphological_extraction/reduplicant_extraction": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "morphological_extraction/reduplicated_root_extraction": {
+          "num_samples": 10,
+          "exact_match": 0.9,
+          "contains_match": 0.9,
+          "prefix_match": 0.9
+        }
+      }
+    },
+    "morphological_production_mcq": {
+      "num_samples": 15,
+      "accuracy": 0.9333,
+      "by_category": {
+        "morphological_production/inflected_form_production": {
+          "num_samples": 15,
+          "accuracy": 0.9333
+        }
+      }
+    },
+    "morphological_production_gen": {
+      "num_samples": 15,
+      "exact_match": 0.9333,
+      "contains_match": 0.9333,
+      "prefix_match": 0.9333,
+      "by_category": {
+        "morphological_production/inflected_form_production": {
+          "num_samples": 15,
+          "exact_match": 0.9333,
+          "contains_match": 0.9333,
+          "prefix_match": 0.9333
+        }
+      }
+    }
+  },
+  "annotator2": {
+    "composition_mcq": {
+      "num_samples": 95,
+      "accuracy": 0.9053,
+      "by_category": {
+        "composition/character_counting_exactly": {
+          "num_samples": 10,
+          "accuracy": 0.9
+        },
+        "composition/character_counting_least": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "composition/character_counting_most": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "composition/character_finding": {
+          "num_samples": 5,
+          "accuracy": 1.0
+        },
+        "composition/diacritic_counting": {
+          "num_samples": 10,
+          "accuracy": 0.9
+        },
+        "composition/length_counting": {
+          "num_samples": 10,
+          "accuracy": 0.3
+        },
+        "composition/length_counting_least": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "composition/length_counting_most": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "composition/spelling": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "composition/uppercase_counting": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        }
+      }
+    },
+    "composition_gen": {
+      "num_samples": 55,
+      "exact_match": 0.9818,
+      "contains_match": 0.9818,
+      "prefix_match": 0.9818,
+      "by_category": {
+        "composition/character_counting": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "composition/character_finding": {
+          "num_samples": 5,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "composition/diacritic_counting": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "composition/length_counting": {
+          "num_samples": 10,
+          "exact_match": 0.9,
+          "contains_match": 0.9,
+          "prefix_match": 0.9
+        },
+        "composition/spelling": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "composition/uppercase_counting": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        }
+      }
+    },
+    "manipulation_mcq": {
+      "num_samples": 80,
+      "accuracy": 0.9875,
+      "by_category": {
+        "manipulation/deletion": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "manipulation/diacritic_normalization": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "manipulation/duplication": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "manipulation/insertion": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "manipulation/lowercasing": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "manipulation/permutation": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "manipulation/substitution": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "manipulation/uppercasing": {
+          "num_samples": 10,
+          "accuracy": 0.9
+        }
+      }
+    },
+    "manipulation_gen": {
+      "num_samples": 80,
+      "exact_match": 1.0,
+      "contains_match": 1.0,
+      "prefix_match": 1.0,
+      "by_category": {
+        "manipulation/deletion": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/diacritic_normalization": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/duplication": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/insertion": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/lowercasing": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/permutation": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/substitution": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/uppercasing": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        }
+      }
+    },
+    "syllabification_mcq": {
+      "num_samples": 20,
+      "accuracy": 0.75,
+      "by_category": {
+        "syllabification/stress_disambiguation": {
+          "num_samples": 10,
+          "accuracy": 0.7
+        },
+        "syllabification/stress_identification": {
+          "num_samples": 10,
+          "accuracy": 0.8
+        }
+      }
+    },
+    "syllabification_gen": {
+      "num_samples": 20,
+      "exact_match": 0.95,
+      "contains_match": 0.95,
+      "prefix_match": 0.95,
+      "by_category": {
+        "syllabification/stress_disambiguation": {
+          "num_samples": 10,
+          "exact_match": 0.9,
+          "contains_match": 0.9,
+          "prefix_match": 0.9
+        },
+        "syllabification/stress_identification": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        }
+      }
+    },
+    "morphological_extraction_mcq": {
+      "num_samples": 40,
+      "accuracy": 0.85,
+      "by_category": {
+        "morphological_extraction/inflected_affix_extraction": {
+          "num_samples": 10,
+          "accuracy": 0.6
+        },
+        "morphological_extraction/inflected_root_extraction": {
+          "num_samples": 10,
+          "accuracy": 0.9
+        },
+        "morphological_extraction/reduplicant_extraction": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "morphological_extraction/reduplicated_root_extraction": {
+          "num_samples": 10,
+          "accuracy": 0.9
+        }
+      }
+    },
+    "morphological_extraction_gen": {
+      "num_samples": 40,
+      "exact_match": 0.875,
+      "contains_match": 0.875,
+      "prefix_match": 0.875,
+      "by_category": {
+        "morphological_extraction/inflected_affix_extraction": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "morphological_extraction/inflected_root_extraction": {
+          "num_samples": 10,
+          "exact_match": 0.9,
+          "contains_match": 0.9,
+          "prefix_match": 0.9
+        },
+        "morphological_extraction/reduplicant_extraction": {
+          "num_samples": 10,
+          "exact_match": 0.7,
+          "contains_match": 0.7,
+          "prefix_match": 0.7
+        },
+        "morphological_extraction/reduplicated_root_extraction": {
+          "num_samples": 10,
+          "exact_match": 0.9,
+          "contains_match": 0.9,
+          "prefix_match": 0.9
+        }
+      }
+    },
+    "morphological_production_mcq": {
+      "num_samples": 15,
+      "accuracy": 1.0,
+      "by_category": {
+        "morphological_production/inflected_form_production": {
+          "num_samples": 15,
+          "accuracy": 1.0
+        }
+      }
+    },
+    "morphological_production_gen": {
+      "num_samples": 15,
+      "exact_match": 0.8667,
+      "contains_match": 0.8667,
+      "prefix_match": 0.8667,
+      "by_category": {
+        "morphological_production/inflected_form_production": {
+          "num_samples": 15,
+          "exact_match": 0.8667,
+          "contains_match": 0.8667,
+          "prefix_match": 0.8667
+        }
+      }
+    }
+  },
+  "annotator3": {
+    "composition_mcq": {
+      "num_samples": 95,
+      "accuracy": 0.9684,
+      "by_category": {
+        "composition/character_counting_exactly": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "composition/character_counting_least": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "composition/character_counting_most": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "composition/character_finding": {
+          "num_samples": 5,
+          "accuracy": 1.0
+        },
+        "composition/diacritic_counting": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "composition/length_counting": {
+          "num_samples": 10,
+          "accuracy": 0.7
+        },
+        "composition/length_counting_least": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "composition/length_counting_most": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "composition/spelling": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "composition/uppercase_counting": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        }
+      }
+    },
+    "composition_gen": {
+      "num_samples": 55,
+      "exact_match": 0.9818,
+      "contains_match": 0.9818,
+      "prefix_match": 0.9818,
+      "by_category": {
+        "composition/character_counting": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "composition/character_finding": {
+          "num_samples": 5,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "composition/diacritic_counting": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "composition/length_counting": {
+          "num_samples": 10,
+          "exact_match": 0.9,
+          "contains_match": 0.9,
+          "prefix_match": 0.9
+        },
+        "composition/spelling": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "composition/uppercase_counting": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        }
+      }
+    },
+    "manipulation_mcq": {
+      "num_samples": 80,
+      "accuracy": 0.975,
+      "by_category": {
+        "manipulation/deletion": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "manipulation/diacritic_normalization": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "manipulation/duplication": {
+          "num_samples": 10,
+          "accuracy": 0.9
+        },
+        "manipulation/insertion": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "manipulation/lowercasing": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "manipulation/permutation": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "manipulation/substitution": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "manipulation/uppercasing": {
+          "num_samples": 10,
+          "accuracy": 0.9
+        }
+      }
+    },
+    "manipulation_gen": {
+      "num_samples": 80,
+      "exact_match": 1.0,
+      "contains_match": 1.0,
+      "prefix_match": 1.0,
+      "by_category": {
+        "manipulation/deletion": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/diacritic_normalization": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/duplication": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/insertion": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/lowercasing": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/permutation": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/substitution": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "manipulation/uppercasing": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        }
+      }
+    },
+    "syllabification_mcq": {
+      "num_samples": 20,
+      "accuracy": 0.95,
+      "by_category": {
+        "syllabification/stress_disambiguation": {
+          "num_samples": 10,
+          "accuracy": 0.9
+        },
+        "syllabification/stress_identification": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        }
+      }
+    },
+    "syllabification_gen": {
+      "num_samples": 20,
+      "exact_match": 0.95,
+      "contains_match": 0.95,
+      "prefix_match": 0.95,
+      "by_category": {
+        "syllabification/stress_disambiguation": {
+          "num_samples": 10,
+          "exact_match": 0.9,
+          "contains_match": 0.9,
+          "prefix_match": 0.9
+        },
+        "syllabification/stress_identification": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        }
+      }
+    },
+    "morphological_extraction_mcq": {
+      "num_samples": 40,
+      "accuracy": 1.0,
+      "by_category": {
+        "morphological_extraction/inflected_affix_extraction": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "morphological_extraction/inflected_root_extraction": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "morphological_extraction/reduplicant_extraction": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        },
+        "morphological_extraction/reduplicated_root_extraction": {
+          "num_samples": 10,
+          "accuracy": 1.0
+        }
+      }
+    },
+    "morphological_extraction_gen": {
+      "num_samples": 40,
+      "exact_match": 0.925,
+      "contains_match": 0.925,
+      "prefix_match": 0.925,
+      "by_category": {
+        "morphological_extraction/inflected_affix_extraction": {
+          "num_samples": 10,
+          "exact_match": 0.8,
+          "contains_match": 0.8,
+          "prefix_match": 0.8
+        },
+        "morphological_extraction/inflected_root_extraction": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "morphological_extraction/reduplicant_extraction": {
+          "num_samples": 10,
+          "exact_match": 1.0,
+          "contains_match": 1.0,
+          "prefix_match": 1.0
+        },
+        "morphological_extraction/reduplicated_root_extraction": {
+          "num_samples": 10,
+          "exact_match": 0.9,
+          "contains_match": 0.9,
+          "prefix_match": 0.9
+        }
+      }
+    },
+    "morphological_production_mcq": {
+      "num_samples": 15,
+      "accuracy": 1.0,
+      "by_category": {
+        "morphological_production/inflected_form_production": {
+          "num_samples": 15,
+          "accuracy": 1.0
+        }
+      }
+    },
+    "morphological_production_gen": {
+      "num_samples": 15,
+      "exact_match": 0.9333,
+      "contains_match": 0.9333,
+      "prefix_match": 0.9333,
+      "by_category": {
+        "morphological_production/inflected_form_production": {
+          "num_samples": 15,
+          "exact_match": 0.9333,
+          "contains_match": 0.9333,
+          "prefix_match": 0.9333
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "composition_gen": {
+    "n": 55,
+    "kappa_binary": 1.0,
+    "pct_exact_agree_raw": 0.9636,
+    "pct_exact_agree_bin": 1.0
+  },
+  "composition_mcq": {
+    "n": 95,
+    "kappa": 0.9152,
+    "pct_agree": 0.9053
+  },
+  "manipulation_gen": {
+    "n": 80,
+    "kappa_binary": 1.0,
+    "pct_exact_agree_raw": 0.9875,
+    "pct_exact_agree_bin": 1.0
+  },
+  "manipulation_mcq": {
+    "n": 80,
+    "kappa": 0.9888,
+    "pct_agree": 0.9875
+  },
+  "morphological_extraction_gen": {
+    "n": 40,
+    "kappa_binary": 0.7655,
+    "pct_exact_agree_raw": 0.75,
+    "pct_exact_agree_bin": 0.85
+  },
+  "morphological_extraction_mcq": {
+    "n": 40,
+    "kappa": 0.8423,
+    "pct_agree": 0.825
+  },
+  "morphological_production_gen": {
+    "n": 15,
+    "kappa_binary": 0.4512,
+    "pct_exact_agree_raw": 0.8667,
+    "pct_exact_agree_bin": 0.8667
+  },
+  "morphological_production_mcq": {
+    "n": 15,
+    "kappa": 0.9382,
+    "pct_agree": 0.9333
+  },
+  "syllabification_gen": {
+    "n": 20,
+    "kappa_binary": 0.4828,
+    "pct_exact_agree_raw": 0.95,
+    "pct_exact_agree_bin": 0.95
+  },
+  "syllabification_mcq": {
+    "n": 20,
+    "kappa": 0.5894,
+    "pct_agree": 0.6
+  }
+}

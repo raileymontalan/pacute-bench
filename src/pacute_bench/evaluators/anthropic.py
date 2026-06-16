@@ -195,7 +195,11 @@ class AnthropicEvaluator(BatchEvaluator):
         for result in self.client.messages.batches.results(batch_id):
             cid = result.custom_id
             if result.result.type == "succeeded":
-                text = result.result.message.content[0].text or ""
+                try:
+                    text = result.result.message.content[0].text or ""
+                except (IndexError, AttributeError, TypeError):
+                    print(f"  Warning: request {cid} had malformed response; recording empty result")
+                    text = ""
                 results_by_id[cid] = text.strip().lower()
             else:
                 print(f"  Warning: request {cid} failed: {result.result}")

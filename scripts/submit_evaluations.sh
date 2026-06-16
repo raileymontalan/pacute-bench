@@ -120,9 +120,9 @@ else
         [[ ! -f "$cfg" ]] && continue
         while IFS= read -r model; do
             ALL_MODELS+=("$model")
-        done < <(python3 -c "
-import yaml
-with open('$cfg') as f:
+        done < <(YAML_CFG="$cfg" python3 -c "
+import yaml, os
+with open(os.environ['YAML_CFG']) as f:
     data = yaml.safe_load(f)
 for name in data.get('models', {}):
     print(name)
@@ -133,34 +133,51 @@ fi
 # ── YAML helpers ──────────────────────────────────────────────────────────────
 get_model_path() {
     local name="$1"
-    python3 - <<PYEOF
-import yaml, sys
-for cfg in ['$PROJECT_ROOT/configs/models_pt.yaml', '$PROJECT_ROOT/configs/models_it.yaml', '$PROJECT_ROOT/configs/models_commercial.yaml']:
+    MODEL_NAME="$name" PROJECT_ROOT="$PROJECT_ROOT" python3 - <<'PYEOF'
+import yaml, sys, os
+name = os.environ['MODEL_NAME']
+project_root = os.environ.get('PROJECT_ROOT', '')
+for cfg_path in [
+    f'{project_root}/configs/models_pt.yaml',
+    f'{project_root}/configs/models_it.yaml',
+    f'{project_root}/configs/models_commercial.yaml',
+]:
     try:
-        data = yaml.safe_load(open(cfg))
-        info = data['models'].get('$name')
+        with open(cfg_path) as fh:
+            data = yaml.safe_load(fh)
+        info = data['models'].get(name)
         if info:
             print(info['path'])
             sys.exit(0)
-    except Exception:
+    except FileNotFoundError:
         pass
+    except Exception as exc:
+        print(f"Warning: {cfg_path}: {exc}", file=sys.stderr)
 sys.exit(1)
 PYEOF
 }
 
 get_model_tp() {
     local name="$1"
-    python3 - <<PYEOF
-import yaml, sys
-for cfg in ['$PROJECT_ROOT/configs/models_pt.yaml', '$PROJECT_ROOT/configs/models_it.yaml']:
+    MODEL_NAME="$name" PROJECT_ROOT="$PROJECT_ROOT" python3 - <<'PYEOF'
+import yaml, sys, os
+name = os.environ['MODEL_NAME']
+project_root = os.environ.get('PROJECT_ROOT', '')
+for cfg_path in [
+    f'{project_root}/configs/models_pt.yaml',
+    f'{project_root}/configs/models_it.yaml',
+]:
     try:
-        data = yaml.safe_load(open(cfg))
-        info = data['models'].get('$name')
+        with open(cfg_path) as fh:
+            data = yaml.safe_load(fh)
+        info = data['models'].get(name)
         if info:
             print(info.get('tp', 1))
             sys.exit(0)
-    except Exception:
+    except FileNotFoundError:
         pass
+    except Exception as exc:
+        print(f"Warning: {cfg_path}: {exc}", file=sys.stderr)
 print(1)
 PYEOF
 }

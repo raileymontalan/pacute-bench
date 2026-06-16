@@ -31,7 +31,7 @@ classifiers = [
 [project.urls]
 Homepage = "https://github.com/raileymontalan/pacute-bench"
 Repository = "https://github.com/raileymontalan/pacute-bench"
-Paper = "https://arxiv.org/abs/2506.XXXXX"
+Paper = "https://arxiv.org/abs/2606.15144"
 dependencies = [
     "vllm==0.20.2",
     "torch==2.11.0",

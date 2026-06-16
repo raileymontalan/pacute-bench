@@ -54,7 +54,14 @@ def load_pacute(
         count = 0
         with open(data_file, encoding="utf-8") as f:
             for line in f:
-                task = json.loads(line)
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    task = json.loads(line)
+                except json.JSONDecodeError as exc:
+                    print(f"Warning: skipping malformed line in {data_file}: {exc}")
+                    continue
                 task["_category"] = category
                 tasks.append(task)
                 count += 1

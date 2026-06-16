@@ -105,13 +105,21 @@ class XAIEvaluator(BatchEvaluator):
                 messages.append({"role": "system", "content": effective_prompt})
             messages.append({"role": "user", "content": str(prefix)})
             async with sem:
-                response = await self.async_client.chat.completions.create(
-                    model=self.model_id,
-                    messages=messages,
-                    max_tokens=token_limit,
-                    temperature=0.0,
-                )
-            content = response.choices[0].message.content or ""
+                try:
+                    response = await self.async_client.chat.completions.create(
+                        model=self.model_id,
+                        messages=messages,
+                        max_tokens=token_limit,
+                        temperature=0.0,
+                    )
+                except Exception as e:
+                    print(f"    [warn] {sample_id}: request failed ({type(e).__name__}: {e}); recording empty result")
+                    return sample_id, ""
+            try:
+                content = response.choices[0].message.content or ""
+            except (IndexError, AttributeError, TypeError):
+                print(f"    [warn] {sample_id}: malformed response (no choices); recording empty result")
+                content = ""
             return sample_id, content.strip().lower()
 
         tasks = [gen_one(str(item[3]), item[0]) for item in items]

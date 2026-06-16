@@ -261,7 +261,11 @@ class OpenAIEvaluator(BatchEvaluator):
             obj = json.loads(line)
             cid = obj["custom_id"]
             if obj["response"]["status_code"] == 200:
-                content = obj["response"]["body"]["choices"][0]["message"]["content"] or ""
+                try:
+                    content = obj["response"]["body"]["choices"][0]["message"]["content"] or ""
+                except (KeyError, IndexError, TypeError):
+                    print(f"  Warning: request {cid} had malformed response body; recording empty result")
+                    content = ""
                 results_by_id[cid] = content.strip().lower()
             else:
                 print(f"  Warning: request {cid} failed: {obj['response']}")

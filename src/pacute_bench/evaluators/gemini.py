@@ -125,6 +125,9 @@ class GeminiEvaluator(BatchEvaluator):
             try:
                 text = response.response.candidates[0].content.parts[0].text or ""
                 results_by_id[cid] = text.strip().lower()
+            except (IndexError, AttributeError, TypeError):
+                print(f"  Warning: request {cid} had empty or malformed response; recording empty result")
+                results_by_id[cid] = ""
             except Exception as exc:
                 print(f"  Warning: request {cid} failed: {exc}")
                 results_by_id[cid] = ""

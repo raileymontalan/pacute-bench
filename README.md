@@ -1,6 +1,6 @@
 # PACUTE — Filipino Morphology Benchmark
 
-[![arXiv](https://img.shields.io/badge/arXiv-2506.XXXXX-b31b1b.svg)](https://arxiv.org/abs/2506.XXXXX)
+[![arXiv](https://img.shields.io/badge/arXiv-2606.15144-b31b1b.svg)](https://arxiv.org/abs/2606.15144)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/)
 
@@ -525,8 +525,8 @@ If you use PACUTE in your research, please cite:
   author    = {Montalan, Jann Railey and Africa, David Demitri and Layacan, Jimson Paulo and
                Flores, Richell Isaiah and {De Leon}, Ivan Yuri and Gamboa, Lance Calvin},
   year      = {2025},
-  journal   = {arXiv preprint arXiv:2506.XXXXX},
-  url       = {https://arxiv.org/abs/2506.XXXXX},
+  journal   = {arXiv preprint arXiv:2606.15144},
+  url       = {https://arxiv.org/abs/2606.15144},
 }
 ```
 

@@ -92,6 +92,30 @@ generative_instructions:
       <answer>ANSWER</answer>
       Replace ANSWER with the single correct word or syllable.
 
+  # Ablation variant of pacute-syllabification-gen: identical task, with an
+  # added explicit hint that "ng" is a single sound/character, to test
+  # whether ng-digraph overcounting is a missing-knowledge failure (persists
+  # despite the hint) or an attention/salience failure (resolved by it).
+  pacute-syllabification-gen-nghint:
+    answer_tag: "<answer>"
+    instruction: |-
+      You will be given a question about Filipino word stress. Tasks include:
+      - Identifying which syllable of a target word carries the primary stress, given a sentence
+        context that disambiguates the meaning (stress_identification)
+      - Writing the correct diacritically-marked form of a word given a sentence context that
+        determines which stress pattern applies (stress_disambiguation)
+
+      For both tasks your answer is a single word (the stressed syllable or the diacritically-marked form).
+
+      IMPORTANT: In Filipino, the letter sequence "ng" represents a single sound (like English
+      "sing"). Treat "ng" as one sound/character when counting or dividing syllables, not as two
+      separate characters "n" and "g".
+
+      Your output MUST strictly follow this XML format:
+      <reflection>Your 1-2 sentence reflection explaining which stress pattern the sentence context implies and how you arrived at your answer.</reflection>
+      <answer>ANSWER</answer>
+      Replace ANSWER with the single correct word or syllable.
+
   pacute-morphological-extraction-gen:
     answer_tag: "<answer>"
     instruction: |-

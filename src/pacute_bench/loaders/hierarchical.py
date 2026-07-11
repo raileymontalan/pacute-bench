@@ -17,6 +17,7 @@ from pathlib import Path
 def load_hierarchical(
     format: str = "mcq",
     data_dir: str = "data/benchmarks",
+    language: str = "en",
     **kwargs,
 ):
     """
@@ -25,6 +26,14 @@ def load_hierarchical(
     Args:
         format: ``"mcq"`` or ``"gen"``.
         data_dir: Directory containing benchmark JSONL files.
+        language: ``"en"`` or ``"tl"``. Selects the ``prompt_en``/``prompt_tl``
+            instruction field. Defaults to ``"en"``, consistent with
+            ``load_pacute``. Previously defaulted to ``"tl"`` (a historical
+            inconsistency — all prior collected Hierarchical results were run
+            in Tagalog while the rest of PACUTE was run in English); pass
+            ``language="tl"`` explicitly (or use the ``-tl`` registry
+            variants) to reproduce those prior runs or to run the
+            cross-lingual ablation.
 
     Yields:
         (prefix, ground_truth, false_options, sample_id, category)
@@ -42,11 +51,13 @@ def load_hierarchical(
         for line in f:
             tasks.append(json.loads(line.strip()))
 
-    print(f"Hierarchical ({format}): Loaded {len(tasks)} tasks from {filepath}")
+    print(f"Hierarchical ({format}, language={language}): Loaded {len(tasks)} tasks from {filepath}")
     random.shuffle(tasks)
 
+    prompt_key = "prompt_tl" if language == "tl" else "prompt_en"
+
     for i, task in enumerate(tasks):
-        prefix = task.get("prompt_tl", task.get("question", ""))
+        prefix = task.get(prompt_key, task.get("question", ""))
         sample_id = task.get("id", f"hierarchical_{format}_{i:05d}")
 
         if format == "mcq":

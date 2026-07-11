@@ -467,6 +467,12 @@ pacute-bench/
 
 ---
 
+## Patok Tokenizer
+
+`src/pacute_bench/tokenization/` contains a standalone, runnable implementation of Patok, the morphology-aware expand/contract tokenizer used in the paper's continued-pretraining experiments. It's preprocessing-time only (no training loop, no cluster dependencies) — install the `tokenization` extra (`pip install -e ".[tokenization]"`) and see `src/pacute_bench/tokenization/README.md` for a usage example.
+
+---
+
 ## Human Baseline
 
 Human performance ceilings and inter-annotator agreement (IAA) were collected for the PACUTE benchmarks (composition, manipulation, syllabification, morphological extraction, morphological production) using three independent native Filipino speaker annotators.

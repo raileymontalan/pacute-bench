@@ -48,6 +48,21 @@ models:
     max_model_len: 1024
 
   # ============================================================================
+  # Goldfish (Filipino/Tagalog-monolingual; Chang et al. 2024, arXiv:2408.10441)
+  # Added as a Filipino-only-pretrained counterpart to GPT-2, which is
+  # English-centric and not trained on Filipino data. GPT-2's role in our
+  # results should be read as a "no-Filipino-exposure floor," not as a
+  # representative small model; Goldfish gives the corresponding
+  # "Filipino-exposed but low-resource-scale" data point.
+  # ============================================================================
+
+  goldfish-tgl-1000mb:
+    path: goldfish-models/tgl_latn_1000mb
+    type: pt
+    tp: 1
+    max_model_len: 1024
+
+  # ============================================================================
   # Google Gemma
   # ============================================================================
 

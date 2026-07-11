@@ -18,6 +18,7 @@ def load_pacute(
     categories: list = None,
     format: str = "mcq",
     data_dir: str = "data/benchmarks",
+    language: str = "en",
     **kwargs,
 ):
     """
@@ -30,6 +31,10 @@ def load_pacute(
              'morphological_extraction', 'morphological_production'].
         format: ``"mcq"`` or ``"gen"``.
         data_dir: Directory containing the benchmark JSONL files.
+        language: ``"en"`` or ``"tl"``. Selects the ``text_en``/``text_tl``
+            instruction field. Defaults to ``"en"``, matching
+            ``load_hierarchical``'s default. Use the explicit ``-en``/``-tl``
+            registry variants for a controlled cross-lingual comparison.
 
     Yields:
         (prefix, ground_truth, false_options, sample_id, subcategory)
@@ -75,10 +80,12 @@ def load_pacute(
     indices = list(range(len(tasks)))
     random.shuffle(indices)
 
+    text_key = "text_tl" if language == "tl" else "text_en"
+
     for i in indices:
         task = tasks[i]
         prompt_data = task["prompts"][0]
-        prefix = prompt_data["text_en"]
+        prefix = prompt_data[text_key]
         sample_id = task.get("id", f"pacute_{format}_{i:05d}")
 
         if format == "gen":

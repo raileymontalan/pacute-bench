@@ -105,6 +105,10 @@ def latest_result_file(model_dir: Path) -> Path | None:
     for f in files:
         if json.loads(f.read_text()).get("benchmarks"):
             return f
+    # Fall back to the non-timestamped file
+    plain = model_dir / "evaluation_results.json"
+    if plain.exists() and json.loads(plain.read_text()).get("benchmarks"):
+        return plain
     return None
 
 

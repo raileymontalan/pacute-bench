@@ -239,8 +239,11 @@ models:
     path: mistralai/Mistral-Small-4-119B-2603
     type: it
     tp: 2
+    language_model_only: true
+    load_format: auto
     attention_backend: FLASH_ATTN_MLA
-    max_num_batched_tokens: 16384
+    max_model_len: 262144
+    enforce_eager: true
 
   mistral-small-4-119b-it-thinking:
     path: mistralai/Mistral-Small-4-119B-2603
@@ -248,8 +251,11 @@ models:
     tp: 2
     thinking: true
     reasoning_parser: mistral
+    language_model_only: true
+    load_format: auto
     attention_backend: FLASH_ATTN_MLA
-    max_num_batched_tokens: 16384
+    max_model_len: 262144
+    enforce_eager: true
 
   # ============================================================================
   # OpenAI OSS
@@ -260,18 +266,13 @@ models:
     tp: 1
     thinking: true
     disable_prefix_caching: true
-    max_cudagraph_capture_size: 2048
-    max_num_batched_tokens: 8192
 
   gpt-oss-120b:
     path: openai/gpt-oss-120b
     type: it
-    tp: 8
+    tp: 1
     thinking: true
-    enforce_eager: true
     disable_prefix_caching: true
-    max_cudagraph_capture_size: 2048
-    max_num_batched_tokens: 8192
 
   # ============================================================================
   # Phi-4 Family

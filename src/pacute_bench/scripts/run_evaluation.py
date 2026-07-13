@@ -301,6 +301,15 @@ def main() -> None:
                 )
 
             model_results: dict = {}
+            # Seed from existing results so partial re-runs don't wipe other benchmarks.
+            _existing_file = Path(args.output_dir) / model_name / "evaluation_results.json"
+            if _existing_file.exists():
+                try:
+                    with open(_existing_file, encoding="utf-8") as _f:
+                        _existing = json.load(_f)
+                    model_results.update(_existing.get("benchmarks", {}))
+                except Exception:
+                    pass
 
             if provider:
                 # Commercial models: submit all batches at once, poll concurrently.
@@ -393,7 +402,7 @@ def main() -> None:
     for mname, mdata in all_results.items():
         for bname, res in mdata["benchmarks"].items():
             fmt = res.get("format", "mcq")
-            if fmt == "generative":
+            if fmt in ("generative", "gen"):
                 metric = f"EM={res['exact_match']:.3f}"
             else:
                 metric = f"Acc={res['accuracy']:.3f}  F1={res['f1_score']:.3f}"

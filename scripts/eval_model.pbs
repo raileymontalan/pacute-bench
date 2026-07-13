@@ -47,6 +47,7 @@ SITE_PACKAGES=$(python3 -c 'import site; print(site.getsitepackages()[0])')
 export LD_LIBRARY_PATH="${SITE_PACKAGES}/nvidia/cudnn/lib:${SITE_PACKAGES}/nvidia/cusparselt/lib:${SITE_PACKAGES}/nvidia/nccl/lib:${SITE_PACKAGES}/nvidia/nvshmem/lib:${LD_LIBRARY_PATH:-}"
 export PYTORCH_CUDA_ALLOC_CONF="expandable_segments:True"
 export VLLM_USE_DEEP_GEMM=0
+_JOBNUM="${PBS_JOBID%%.*}"
 
 # Install package into the active venv
 uv pip install -e "$PROJECT_ROOT" --quiet
@@ -94,6 +95,7 @@ for cfg in ['configs/models_pt.yaml', 'configs/models_it.yaml']:
             print('COMPILATION_CONFIG=' + shlex.quote(str(info.get('compilation_config', ''))))
             print('MAX_CUDAGRAPH_CAPTURE_SIZE=' + shlex.quote(str(info.get('max_cudagraph_capture_size', ''))))
             print('MAX_NUM_BATCHED_TOKENS=' + shlex.quote(str(info.get('max_num_batched_tokens', ''))))
+            print('STRUCTURED_OUTPUTS_CONFIG=' + shlex.quote(str(info.get('structured_outputs_config', ''))))
             sys.exit(0)
     except Exception:
         pass
@@ -129,8 +131,8 @@ _JOBNUM="${PBS_JOBID%%.*}"
 VLLM_LOG="${LOGS_PATH}/vllm/${_JOBNUM}-${MODEL_NAME}.log"
 mkdir -p "${LOGS_PATH}/vllm"
 
-# Increase engine startup timeout so large models (e.g. 671B DeepSeek) don't time out
-export VLLM_ENGINE_CORE_CLIENT_TIMEOUT=3600
+# Increase engine startup timeout so large models (e.g. 119B Mistral) don't time out
+export VLLM_ENGINE_READY_TIMEOUT_S=3600
 
 VLLM_SERVE_ARGS=(
     "$MODEL_PATH"
@@ -157,12 +159,13 @@ _ATTN="${ATTENTION_BACKEND:-FLASH_ATTN}"
 [[ "${DISABLE_CUSTOM_ALL_REDUCE:-}" == "true" ]] && VLLM_SERVE_ARGS+=(--disable-custom-all-reduce)
 [[ -n "${TOKENIZER_MODE:-}" ]]               && VLLM_SERVE_ARGS+=(--tokenizer_mode "$TOKENIZER_MODE")
 [[ -n "${CONFIG_FORMAT:-}" ]]                && VLLM_SERVE_ARGS+=(--config_format "$CONFIG_FORMAT")
-[[ -n "${LOAD_FORMAT:-}" ]]                  && VLLM_SERVE_ARGS+=(--load_format "$LOAD_FORMAT")
+VLLM_SERVE_ARGS+=(--load_format "${LOAD_FORMAT:-instanttensor}")
 [[ -n "${KV_CACHE_DTYPE:-}" ]]               && VLLM_SERVE_ARGS+=(--kv-cache-dtype "$KV_CACHE_DTYPE")
 [[ -n "${BLOCK_SIZE:-}" ]]                   && VLLM_SERVE_ARGS+=(--block-size "$BLOCK_SIZE")
 [[ -n "${COMPILATION_CONFIG:-}" ]]           && VLLM_SERVE_ARGS+=(--compilation-config "$COMPILATION_CONFIG")
 [[ -n "${MAX_CUDAGRAPH_CAPTURE_SIZE:-}" ]]   && VLLM_SERVE_ARGS+=(--max-cudagraph-capture-size "$MAX_CUDAGRAPH_CAPTURE_SIZE")
 [[ -n "${MAX_NUM_BATCHED_TOKENS:-}" ]]       && VLLM_SERVE_ARGS+=(--max-num-batched-tokens "$MAX_NUM_BATCHED_TOKENS")
+[[ -n "${STRUCTURED_OUTPUTS_CONFIG:-}" ]]   && VLLM_SERVE_ARGS+=(--structured-outputs-config "$STRUCTURED_OUTPUTS_CONFIG")
 
 echo "Starting vLLM: $MODEL_PATH (TP=$N_GPUS, port=$VLLM_PORT, max_model_len=$MAX_MODEL_LEN)"
 vllm serve "${VLLM_SERVE_ARGS[@]}" > "$VLLM_LOG" 2>&1 &
@@ -171,7 +174,8 @@ VLLM_PID=$!
 cleanup() {
     if [[ -n "${VLLM_PID:-}" ]]; then
         echo "Stopping vLLM server (PID $VLLM_PID)…"
-        kill "$VLLM_PID" 2>/dev/null || true
+        # Kill entire process group so TP worker children don't hang cleanup.
+        kill -TERM -"$VLLM_PID" 2>/dev/null || kill "$VLLM_PID" 2>/dev/null || true
         wait "$VLLM_PID" 2>/dev/null || true
     fi
 }
@@ -180,7 +184,7 @@ trap cleanup EXIT INT TERM
 # ── Wait for /health endpoint ────────────────────────────────────────────────
 VLLM_URL="http://localhost:${VLLM_PORT}"
 echo -n "Waiting for vLLM server"
-ELAPSED=0; TIMEOUT=600
+ELAPSED=0; TIMEOUT=7200
 until curl -sf "${VLLM_URL}/health" > /dev/null 2>&1; do
     sleep 5; ELAPSED=$((ELAPSED + 5))
     echo -n "."

@@ -60,7 +60,9 @@ models:
     path: goldfish-models/tgl_latn_1000mb
     type: pt
     tp: 1
-    max_model_len: 1024
+    max_model_len: 512
+    tokenizer_mode: slow
+    load_format: auto
 
   # ============================================================================
   # Google Gemma
@@ -77,6 +79,7 @@ models:
     type: pt
     tp: 1
     language_model_only: true
+    enforce_eager: true
 
   gemma-4-e4b:
     path: google/gemma-4-E4B

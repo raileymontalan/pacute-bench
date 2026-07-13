@@ -7,8 +7,27 @@ name = "pacute-bench"
 version = "0.1.0"
 description = "Diagnostic benchmark for Filipino morphological and phonological understanding in LLMs"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 license = { text = "MIT" }
+dependencies = [
+    "torch>=2.5",
+    "torchaudio",
+    "torchvision",
+    "vllm>=0.23",
+    "transformers>=4.40",
+    "mistral-common>=1.11.0",
+    "openai>=1.30",
+    "anthropic>=0.40",
+    "google-genai>=0.8",
+    "pandas>=2.0",
+    "openpyxl>=3.1",
+    "python-Levenshtein>=0.25",
+    "tqdm>=4.65",
+    "pyyaml>=6.0",
+    "numpy>=2.0",
+    "datasets>=2.20",
+    "instanttensor>=0.1.5",
+]
 authors = [
     { name = "Jann Railey Montalan", email = "railey@aisingapore.org" },
     { name = "David Demitri Africa" },
@@ -24,32 +43,14 @@ classifiers = [
     "Intended Audience :: Science/Research",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
 ]
 
 [project.urls]
 Homepage = "https://github.com/raileymontalan/pacute-bench"
 Repository = "https://github.com/raileymontalan/pacute-bench"
 Paper = "https://arxiv.org/abs/2606.15144"
-dependencies = [
-    "vllm==0.20.2",
-    "torch==2.11.0",
-    "torchaudio==2.11.0",
-    "torchvision==0.26.0",
-    "transformers==5.5.4",
-    "mistral-common>=1.11.0",
-    "openai>=1.30",
-    "anthropic>=0.40",
-    "google-genai>=0.8",
-    "pandas>=2.0",
-    "openpyxl>=3.1",
-    "python-Levenshtein>=0.25",
-    "tqdm>=4.65",
-    "pyyaml>=6.0",
-    "numpy>=2.0",
-    "datasets>=2.20",
-]
 
 [project.optional-dependencies]
 dev = [
@@ -66,3 +67,15 @@ where = ["src"]
 [project.scripts]
 pacute-generate = "pacute_bench.scripts.generate_benchmarks:main"
 pacute-eval = "pacute_bench.scripts.run_evaluation:main"
+
+[[tool.uv.index]]
+name = "pytorch-cu129"
+url = "https://download.pytorch.org/whl/cu129"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu129" }
+torchvision = { index = "pytorch-cu129" }
+torchaudio = { index = "pytorch-cu129" }
+vllm = { url = "https://github.com/vllm-project/vllm/releases/download/v0.23.0/vllm-0.23.0+cu129-cp38-abi3-manylinux_2_28_x86_64.whl" }
+instanttensor = { git = "https://github.com/scitix/InstantTensor" }

@@ -97,8 +97,17 @@ for cfg in ['configs/models_pt.yaml', 'configs/models_it.yaml']:
             print('ATTENTION_BACKEND=' + shlex.quote(str(info.get('attention_backend', ''))))
             print('ENFORCE_EAGER=' + str(info.get('enforce_eager', False)).lower())
             print('DISABLE_PREFIX_CACHING=' + str(info.get('disable_prefix_caching', False)).lower())
+            print('DISABLE_CUSTOM_ALL_REDUCE=' + str(info.get('disable_custom_all_reduce', False)).lower())
+            print('TOKENIZER_MODE=' + shlex.quote(str(info.get('tokenizer_mode', ''))))
+            print('CONFIG_FORMAT=' + shlex.quote(str(info.get('config_format', ''))))
+            print('LOAD_FORMAT=' + shlex.quote(str(info.get('load_format', ''))))
+            print('DATA_PARALLEL_SIZE=' + shlex.quote(str(info.get('data_parallel_size', ''))))
+            print('KV_CACHE_DTYPE=' + shlex.quote(str(info.get('kv_cache_dtype', ''))))
+            print('BLOCK_SIZE=' + shlex.quote(str(info.get('block_size', ''))))
+            print('COMPILATION_CONFIG=' + shlex.quote(str(info.get('compilation_config', ''))))
             print('MAX_CUDAGRAPH_CAPTURE_SIZE=' + shlex.quote(str(info.get('max_cudagraph_capture_size', ''))))
             print('MAX_NUM_BATCHED_TOKENS=' + shlex.quote(str(info.get('max_num_batched_tokens', ''))))
+            print('STRUCTURED_OUTPUTS_CONFIG=' + shlex.quote(str(info.get('structured_outputs_config', ''))))
             sys.exit(0)
     except Exception:
         pass
@@ -122,22 +131,32 @@ echo "Language model only     : $LANGUAGE_MODEL_ONLY"
 echo "Reasoning parser plugin : ${REASONING_PARSER_PLUGIN:-(none)}"
 echo "Chat template kwargs    : ${CHAT_TEMPLATE_KWARGS:-(none)}"
 echo "Max model len           : $MAX_MODEL_LEN"
+echo "Enforce eager           : $ENFORCE_EAGER"
+echo "Disable custom allreduce: $DISABLE_CUSTOM_ALL_REDUCE"
+echo "Tokenizer mode          : ${TOKENIZER_MODE:-(none)}"
+echo "KV cache dtype          : ${KV_CACHE_DTYPE:-(none)}"
+echo "Block size              : ${BLOCK_SIZE:-(none)}"
+[[ -n "${DATA_PARALLEL_SIZE:-}" ]] && echo "Data parallel size      : $DATA_PARALLEL_SIZE"
 
 # ── Start vLLM server ─────────────────────────────────────────────────────────
 VLLM_LOG="${LOGS_PATH}/vllm/${SLURM_JOB_ID}-${MODEL_NAME}.log"
 mkdir -p "${LOGS_PATH}/vllm"
 
 
-export VLLM_ENGINE_CORE_CLIENT_TIMEOUT=3600
+export VLLM_ENGINE_READY_TIMEOUT_S=3600
 
 VLLM_SERVE_ARGS=(
     "$MODEL_PATH"
     --port "$VLLM_PORT"
-    --tensor-parallel-size "$N_GPUS"
     --max-model-len "$MAX_MODEL_LEN"
     --gpu-memory-utilization 0.85
     --trust-remote-code
 )
+if [[ -n "${DATA_PARALLEL_SIZE:-}" ]]; then
+    VLLM_SERVE_ARGS+=(--tensor-parallel-size 1 --data-parallel-size "$DATA_PARALLEL_SIZE")
+else
+    VLLM_SERVE_ARGS+=(--tensor-parallel-size "$N_GPUS")
+fi
 [[ "${DISABLE_PREFIX_CACHING:-}" == "true" ]] && VLLM_SERVE_ARGS+=(--no-enable-prefix-caching) \
     || VLLM_SERVE_ARGS+=(--enable-prefix-caching)
 # FLASH_ATTN is the cluster default; models with partial multimodal attention (e.g. Gemma4 26B-A4B)
@@ -149,9 +168,17 @@ _ATTN="${ATTENTION_BACKEND:-FLASH_ATTN}"
 [[ -n "${CHAT_TEMPLATE_KWARGS:-}" ]]    && VLLM_SERVE_ARGS+=(--default-chat-template-kwargs "$CHAT_TEMPLATE_KWARGS")
 [[ "${ENABLE_EXPERT_PARALLEL:-}" == "true" ]] && VLLM_SERVE_ARGS+=(--enable-expert-parallel)
 [[ "${LANGUAGE_MODEL_ONLY:-}" == "true" ]]   && VLLM_SERVE_ARGS+=(--language-model-only)
-[[ "${ENFORCE_EAGER:-}" == "true" ]]         && VLLM_SERVE_ARGS+=(--enforce-eager)
+[[ "${ENFORCE_EAGER:-}" == "true" ]]             && VLLM_SERVE_ARGS+=(--enforce-eager)
+[[ "${DISABLE_CUSTOM_ALL_REDUCE:-}" == "true" ]] && VLLM_SERVE_ARGS+=(--disable-custom-all-reduce)
+[[ -n "${TOKENIZER_MODE:-}" ]]               && VLLM_SERVE_ARGS+=(--tokenizer_mode "$TOKENIZER_MODE")
+[[ -n "${CONFIG_FORMAT:-}" ]]                && VLLM_SERVE_ARGS+=(--config_format "$CONFIG_FORMAT")
+VLLM_SERVE_ARGS+=(--load_format "${LOAD_FORMAT:-instanttensor}")
+[[ -n "${KV_CACHE_DTYPE:-}" ]]               && VLLM_SERVE_ARGS+=(--kv-cache-dtype "$KV_CACHE_DTYPE")
+[[ -n "${BLOCK_SIZE:-}" ]]                   && VLLM_SERVE_ARGS+=(--block-size "$BLOCK_SIZE")
+[[ -n "${COMPILATION_CONFIG:-}" ]]           && VLLM_SERVE_ARGS+=(--compilation-config "$COMPILATION_CONFIG")
 [[ -n "${MAX_CUDAGRAPH_CAPTURE_SIZE:-}" ]]   && VLLM_SERVE_ARGS+=(--max-cudagraph-capture-size "$MAX_CUDAGRAPH_CAPTURE_SIZE")
 [[ -n "${MAX_NUM_BATCHED_TOKENS:-}" ]]       && VLLM_SERVE_ARGS+=(--max-num-batched-tokens "$MAX_NUM_BATCHED_TOKENS")
+[[ -n "${STRUCTURED_OUTPUTS_CONFIG:-}" ]]   && VLLM_SERVE_ARGS+=(--structured-outputs-config "$STRUCTURED_OUTPUTS_CONFIG")
 
 echo "Starting vLLM: $MODEL_PATH (TP=$N_GPUS, port=$VLLM_PORT, max_model_len=$MAX_MODEL_LEN)"
 vllm serve "${VLLM_SERVE_ARGS[@]}" > "$VLLM_LOG" 2>&1 &
@@ -160,7 +187,8 @@ VLLM_PID=$!
 cleanup() {
     if [[ -n "${VLLM_PID:-}" ]]; then
         echo "Stopping vLLM server (PID $VLLM_PID)…"
-        kill "$VLLM_PID" 2>/dev/null || true
+        # Kill entire process group so TP worker children don't hang cleanup.
+        kill -TERM -"$VLLM_PID" 2>/dev/null || kill "$VLLM_PID" 2>/dev/null || true
         wait "$VLLM_PID" 2>/dev/null || true
     fi
 }
@@ -169,7 +197,7 @@ trap cleanup EXIT INT TERM
 # ── Wait for /health endpoint ─────────────────────────────────────────────────
 VLLM_URL="http://localhost:${VLLM_PORT}"
 echo -n "Waiting for vLLM server"
-ELAPSED=0; TIMEOUT=600
+ELAPSED=0; TIMEOUT=1800
 until curl -sf "${VLLM_URL}/health" > /dev/null 2>&1; do
     if ! kill -0 "$VLLM_PID" 2>/dev/null; then
         echo " DIED — see $VLLM_LOG" >&2; exit 1

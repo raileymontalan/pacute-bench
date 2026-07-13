@@ -1,0 +1,42 @@
+#!/bin/bash
+#
+# One-time pacute-bench environment setup on a GPU node (PBS).
+#
+# Run this once before submitting evaluation jobs. It installs
+# the Python venv with vLLM on a GPU node so CUDA compilation
+# works correctly against the cluster driver.
+#
+# Usage:
+#   qsub -q <queue> scripts/setup_env.pbs
+
+#PBS -N setup
+#PBS -l select=1:ncpus=8:mem=64gb:ngpus=1
+#PBS -l walltime=02:00:00
+#PBS -j oe
+#PBS -o logs/
+
+set -euo pipefail
+cd "$PBS_O_WORKDIR"
+
+mkdir -p logs
+exec > "logs/${PBS_JOBID%%.*}-${PBS_JOBNAME}.log" 2>&1
+
+echo "[$(date)] Job $PBS_JOBID started on $(hostname)"
+
+# ── Load Python 3.12 and CUDA before uv sync ─────────────────────────────────
+module load python/3.12.3
+module load cuda12.9/toolkit/12.9.1
+
+echo "[$(date)] CUDA_HOME=${CUDA_HOME:-unset}"
+echo "[$(date)] nvcc: $(nvcc --version 2>&1 | head -1)"
+
+# ── Install / sync uv environment ─────────────────────────────────────────────
+echo "[$(date)] Running uv sync..."
+uv sync
+
+# ── Verify vLLM install ───────────────────────────────────────────────────────
+echo "[$(date)] Verifying vLLM install..."
+.venv/bin/python -c "import vllm; print(f'vLLM {vllm.__version__} OK')"
+
+echo "[$(date)] Setup complete. Virtual environment is ready at .venv/"
+echo "Set VENV_PATH=\$PROJECT_ROOT/.venv in your .env before submitting eval jobs."

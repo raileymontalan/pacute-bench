@@ -57,6 +57,23 @@ BENCHMARK_FORMATS: dict = {
     "pacute-syllabification":     "mcq",
     "pacute-syllabification-mcq": "mcq",
     "pacute-syllabification-gen": "gen",
+
+    # Cross-lingual (TL item text) variants
+    "hierarchical-mcq-tl": "mcq",
+    "hierarchical-gen-tl": "gen",
+    "pacute-composition-mcq-tl":              "mcq",
+    "pacute-composition-gen-tl":              "gen",
+    "pacute-manipulation-mcq-tl":             "mcq",
+    "pacute-manipulation-gen-tl":             "gen",
+    "pacute-morphological-extraction-mcq-tl": "mcq",
+    "pacute-morphological-extraction-gen-tl": "gen",
+    "pacute-morphological-production-mcq-tl": "mcq",
+    "pacute-morphological-production-gen-tl": "gen",
+    "pacute-syllabification-mcq-tl":          "mcq",
+    "pacute-syllabification-gen-tl":          "gen",
+
+    # ng-hint ablation
+    "pacute-syllabification-gen-nghint": "gen",
 }
 
 
